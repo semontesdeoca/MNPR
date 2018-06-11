@@ -1,0 +1,197 @@
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// quadEdgeBlur.ogsfx (GLSL)
+// Brief: Edge softening effect
+// Contributors: Yee Xin Chiew, Santiago Montesdeoca
+////////////////////////////////////////////////////////////////////////////////////////////////////
+//             _              _     _            
+//     ___  __| | __ _  ___  | |__ | |_   _ _ __ 
+//    / _ \/ _` |/ _` |/ _ \ | '_ \| | | | | '__|
+//   |  __/ (_| | (_| |  __/ | |_) | | |_| | |   
+//    \___|\__,_|\__, |\___| |_.__/|_|\__,_|_|   
+//               |___/                           
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// This shader provides blurring operations for edge softening effect in charcoal stylization.
+////////////////////////////////////////////////////////////////////////////////////////////////////
+#include "../include/quadCommon.ogsfh"
+
+// TEXTURES
+uniform Texture2D gEdgeBlurTex;
+uniform Texture2D gControlTex;
+uniform Texture2D gStylizationTex;
+uniform Texture2D gOffsetTex;
+
+
+// SAMPLERS
+uniform sampler2D gEdgeBlurTexSampler = sampler_state {
+    Texture = <gEdgeBlurTex>;
+};
+
+uniform sampler2D gControlTexSampler = sampler_state {
+    Texture = <gControlTex>;
+};
+
+uniform sampler2D gStylizationTexSampler = sampler_state {
+    Texture = <gStylizationTex>;
+};
+
+uniform sampler2D gOffsetTexSampler = sampler_state {
+    Texture = <gOffsetTex>;
+};
+
+attribute fragmentOutputMRT {
+	vec4 blurOutput : COLOR0;
+	vec4 edgeOutput : COLOR1;
+};
+
+
+// VARIABLES
+// Discrete gaussian weights of a 15x15 kernel (sigma 7)
+uniform float gaussianWeights[15] = { 0.048277,	0.055112,	0.061647,	0.067566,	0.07256,	0.076352,	0.078721,	0.079527,	0.078721,	0.076352,	0.07256,	0.067566,	0.061647,	0.055112,	0.048277};
+
+
+
+//     __                  _   _                 
+//    / _|_   _ _ __   ___| |_(_) ___  _ __  ___ 
+//   | |_| | | | '_ \ / __| __| |/ _ \| '_ \/ __|
+//   |  _| |_| | | | | (__| |_| | (_) | | | \__ \
+//   |_|  \__,_|_| |_|\___|\__|_|\___/|_| |_|___/
+//
+GLSLShader Shared_functions {
+
+	// GAUSSIAN WEIGHT
+	float gaussianWeight(float x, float sigma) {
+		float weight = 0.15915*exp(-0.5*x*x / (sigma*sigma)) / sigma;
+		//float weight = pow((6.283185*sigma*sigma), -0.5) * exp((-0.5*x*x) / (sigma*sigma));
+		return weight;
+	}
+
+	//             _              _     _            
+	//     ___  __| | __ _  ___  | |__ | |_   _ _ __ 
+	//    / _ \/ _` |/ _` |/ _ \ | '_ \| | | | | '__|
+	//   |  __/ (_| | (_| |  __/ | |_) | | |_| | |   
+	//    \___|\__,_|\__, |\___| |_.__/|_|\__,_|_|   
+	//               |___/                           
+	
+	// Contributors: Yee Xin Chiew, Santiago Montesdeoca
+	// Gaussian blur operation for creating softened edges
+	void edgeBlur(vec2 uv, vec2 dir){
+
+		vec4 stylizationTex = texture(gStylizationTexSampler, uv);
+		vec2 ctrlIntensity = texture(gControlTexSampler, uv).xy; // controlTargetEdges
+		
+		vec4 edgeTex = texture(gEdgeBlurTexSampler, uv);
+		vec2 edges = edgeTex.xy;
+
+		// For contour drawing (using dynamic kernel)
+		float edgeWidthCtrl = texture(gControlTexSampler, uv).g;
+
+		float width = edgeWidthCtrl * 10;
+		int kernelRadius = int(width);
+		float normalizer = 1.0 / kernelRadius;
+		float sigma = kernelRadius / 2.0;
+		
+		float weight = gaussianWeight(0.0, sigma);
+		float contour = 0;
+		if (dir.x > 0) {
+			contour = edgeTex.g * weight;
+		}
+		float normDivisor = weight;
+
+		vec2 gTexel = vec2(1.0f) / gScreenSize;
+
+		for (int o = 1; o < kernelRadius; o++) {
+			float edgeTexR = texture(gEdgeBlurTexSampler, clamp(uv + vec2(o*gTexel*dir),0,1)).g;
+			float edgeTexL = texture(gEdgeBlurTexSampler, clamp(uv + vec2(-o*gTexel*dir),0,1)).g;
+			edgeTexR = pow(edgeTexR, 5.0) * 5.0;
+			edgeTexL = pow(edgeTexL, 5.0) * 5.0;
+			weight = gaussianWeight(o, sigma);
+			contour += weight * (edgeTexR + edgeTexL);
+			normDivisor += weight * 2;
+		}
+		contour = (contour / normDivisor);
+
+		// For edge softening (using fixed kernel)
+		if (dir.x > 0) {
+			edges = pow(edges, vec2(5.0));
+		}
+
+		vec4 c = vec4(0, 0, 0, 0);
+		vec4 e = vec4(0, 0, 0, 0);
+		
+		for (int k = -7; k < 8; k++) {
+			vec2 destUV = clamp(uv + vec2(k*gTexel*dir),0,1);
+			vec4 destStylizationTex = texture(gStylizationTexSampler, destUV);
+			vec2 destEdge = texture(gEdgeBlurTexSampler, destUV).xy;
+			float destCtrlRed = texture(gControlTexSampler, destUV).r;
+
+			float blendedEdgeR = destEdge.x; 
+			if (dir.x > 0) {
+				blendedEdgeR = pow(blendedEdgeR, 5.0) * 5.0;
+				blendedEdgeR = lerp(0.0f, destCtrlRed, blendedEdgeR);
+			}
+
+			float weight = gaussianWeights[k + 7];
+			vec4 offsetTex = texture(gOffsetTexSampler, destUV);
+			c += destStylizationTex * weight;
+			e += vec4(blendedEdgeR * weight, 0, 0, edgeTex.a);
+		}
+
+		// Retain the solid edges from edge tex
+		// e += vec4(lerp(0.0f, edges.x, ctrlIntensity.x) * 2.0, contour, 0, 0);
+		e += vec4(0, contour, 0, 0);
+		blurOutput = c;
+		edgeOutput = e;
+	}
+}
+
+
+
+//    _                _                _        _ 
+//   | |__   ___  _ __(_)_______  _ __ | |_ __ _| |
+//   | '_ \ / _ \| '__| |_  / _ \| '_ \| __/ _` | |
+//   | | | | (_) | |  | |/ / (_) | | | | || (_| | |
+//   |_| |_|\___/|_|  |_/___\___/|_| |_|\__\__,_|_|
+//    
+GLSLShader blurHorizontal {
+	void main() {
+		edgeBlur(uv, vec2(1, 0));
+	}
+}
+
+
+
+//                   _   _           _ 
+//   __   _____ _ __| |_(_) ___ __ _| |
+//   \ \ / / _ \ '__| __| |/ __/ _` | |
+//    \ V /  __/ |  | |_| | (_| (_| | |
+//     \_/ \___|_|   \__|_|\___\__,_|_|
+//                                     
+GLSLShader blurVertical {
+	void main() {
+		edgeBlur(uv, vec2(0, 1));
+	}
+}
+
+
+
+//    _            _           _                       
+//   | |_ ___  ___| |__  _ __ (_) __ _ _   _  ___  ___ 
+//   | __/ _ \/ __| '_ \| '_ \| |/ _` | | | |/ _ \/ __|
+//   | ||  __/ (__| | | | | | | | (_| | |_| |  __/\__ \
+//    \__\___|\___|_| |_|_| |_|_|\__, |\__,_|\___||___/
+//                                  |_|                
+// HORIZONTAL BLUR
+technique edgeBlurH {
+	pass p0 {
+        VertexShader(in appDataSampler, out vertexOutputSampler) = quadVertSampler;
+        PixelShader(in vertexOutputSampler, out fragmentOutputMRT) = { Shared_functions, blurHorizontal };
+  }
+}
+
+// VERTICAL BLUR
+technique edgeBlurV {
+	pass p0 {
+        VertexShader(in appDataSampler, out vertexOutputSampler) = quadVertSampler;
+        PixelShader(in vertexOutputSampler, out fragmentOutputMRT) = { Shared_functions, blurVertical };
+  }
+}

@@ -1,0 +1,116 @@
+{
+    "textures": {
+        "Specular_Map_File": "", 
+        "Albedo_Texture_File": "", 
+        "Normal_Map_file": null
+    }, 
+    "name": "green", 
+    "screenshot": "D:\\Dropbox\\DEV\\MNPR-framework\\matPresets\\green.jpg", 
+    "settings": {
+        "Specular-In-Transparent": false, 
+        "Specularity": true, 
+        "maxLights": 3, 
+        "Flip-Back-Faces": false, 
+        "vtxControls": false, 
+        "specularModel": "1", 
+        "reflectanceModel": "0", 
+        "Shadow": true, 
+        "Transparent": false
+    }, 
+    "graph": "mnpr_uber", 
+    "procSettings": {
+        "Blending_3D_MNPR": true, 
+        "Shape_3D_MNPR": true, 
+        "Application_Procedural_MNPR": true, 
+        "Shape_Procedural_MNPR": true, 
+        "Edge_3D_MNPR": true, 
+        "vIncline_Procedural_MNPR": true, 
+        "Edge_Procedural_MNPR": true, 
+        "Density_3D_MNPR": true, 
+        "Variation_3D_MNPR": true, 
+        "Detail_3D_MNPR": true, 
+        "uIncline_3D_MNPR": true, 
+        "Detail_Procedural_MNPR": true, 
+        "vIncline_3D_MNPR": true, 
+        "uIncline_Procedural_MNPR": true, 
+        "Transition_3D_MNPR": true, 
+        "Variation_Procedural_MNPR": true, 
+        "Density_Procedural_MNPR": true, 
+        "Application_3D_MNPR": true, 
+        "Transition_Procedural_MNPR": false, 
+        "Blending_Procedural_MNPR": false, 
+        "Distortion_Procedural_MNPR": true, 
+        "Distortion_3D_MNPR": true
+    }, 
+    "attributes": {
+        "Density_Shift_MNPR": 0.0, 
+        "Highlight_Transparency": 0.0, 
+        "Specular_Transparency": 0.0, 
+        "Dilute_ColorR": 1.0, 
+        "diffuse_Factor": 0.20000000298023224, 
+        "Application_Shift_MNPR": 0.7099999785423279, 
+        "invert_U": false, 
+        "uIncline_Intensity_MNPR": 10.0, 
+        "invert_V": false, 
+        "Albedo_Texture": false, 
+        "Shade_Wrap": 0.0, 
+        "Specular_Diffusion": 1.0, 
+        "Vertical_Roll_Off": 0.05373291298747063, 
+        "Dilute_ColorB": 1.0, 
+        "Density_Scale_MNPR": 1.0, 
+        "Dilute_ColorG": 1.0, 
+        "Shade_Override": true, 
+        "Color_TintR": 0.34139999747276306, 
+        "Application_Intensity_MNPR": 28.80000877380371, 
+        "Distortion_Shift_MNPR": 0.0, 
+        "World_Scale_MNPR": 1.0, 
+        "Color_TintG": 0.7253999710083008, 
+        "Color_TintB": 0.34139999747276306, 
+        "Color_Tint": [
+            [
+                0.34139999747276306, 
+                0.7253999710083008, 
+                0.34139999747276306
+            ]
+        ], 
+        "Variation_Scale_MNPR": 1.0, 
+        "Highlight_Roll_Off": 0.0, 
+        "Specular_Map": false, 
+        "Variation_Intensity_MNPR": 10.0, 
+        "Bump_Depth": 1.0, 
+        "Shade_ColorR": 0.0, 
+        "Shade_Color": [
+            [
+                0.0, 
+                0.0, 
+                0.0
+            ]
+        ], 
+        "Dilute_Color": [
+            [
+                1.0, 
+                1.0, 
+                1.0
+            ]
+        ], 
+        "Variation_Shift_MNPR": 0.0, 
+        "Distortion_Scale_MNPR": 0.9599999785423279, 
+        "Dilute_Area": 1.0, 
+        "Shade_ColorB": 0.0, 
+        "Shade_ColorG": 0.0, 
+        "Cangiante": 0.20000000298023224, 
+        "vIncline_Scale_MNPR": 1.0, 
+        "Normal_Map": false, 
+        "Application_Scale_MNPR": 1.0, 
+        "Dilute_Paint": 0.800000011920929, 
+        "uIncline_Scale_MNPR": 1.0, 
+        "Horizontal_Roll_Off": 0.34146299958229065, 
+        "vIncline_Intensity_MNPR": 10.0, 
+        "Cangiante_Area": 1.0, 
+        "uIncline_Shift_MNPR": 0.0, 
+        "Density_Intensity_MNPR": 17.000032424926758, 
+        "vIncline_Shift_MNPR": 0.0, 
+        "Distortion_Intensity_MNPR": 0.0
+    }, 
+    "type": "ShaderfxShader"
+}

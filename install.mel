@@ -1,0 +1,42 @@
+/////////////////////////////////////////////////////////////////////////////////////
+//
+// File: install.mel
+// Description:
+//      Installation script for MNPR
+// Author: Santiago E. Montesdeoca
+// Website: http://artineering.io
+// Contributor: Pierre Benard
+//
+// Instructions:
+//      Drag and drop this file into the Maya viewport to install dependencies
+//
+/////////////////////////////////////////////////////////////////////////////////////
+{ // avoid global namespace clashing
+
+  // add scripts path to PYTHONPATH
+  string $fileDir = `installScriptLocation`;
+  python ("import sys");
+  string $pyPaths[] = python ("sys.path");
+  int $times = stringArrayCount ($fileDir, $pyPaths);
+  string $scriptsDir = $fileDir + "scripts/";
+  if ( stringArrayCount ($scriptsDir, $pyPaths) == 0 ) {
+      //print "Adding current path to PYTHONPATH";
+      python ("sys.path.insert(0, '" + $scriptsDir + "')") ;
+  }
+
+  python ("import mnpr_setup");
+  python ("reload(mnpr_setup)");
+  python ("mnpr_setup.run('" + $fileDir + "')");
+
+  global proc string installScriptLocation () {
+      string $whatIs=`whatIs installScriptLocation`;
+      // $whatIs "Mel procedure found in: C:/Users/...."
+      string $fullPath=`substring $whatIs 25 999`;
+      string $buffer[];
+      int $numTok=`tokenize $fullPath "/" $buffer`;
+      int $numLetters=size($fullPath);
+      int $numLettersLastFolder=size($buffer[$numTok-1]);
+      string $scriptLocation=`substring $fullPath 1 ($numLetters-$numLettersLastFolder)`;
+      return $scriptLocation;
+  }
+}

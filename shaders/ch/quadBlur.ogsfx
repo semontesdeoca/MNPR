@@ -1,0 +1,141 @@
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// quadBlur.ogsfx (GLSL)
+// Brief: Blurring algorithms for charcoal mixing effect
+// Contributors: Yee Xin Chiew, Santiago Montesdeoca
+////////////////////////////////////////////////////////////////////////////////////////////////////
+//    _     _                 _             
+//   | |__ | |_   _ _ __ _ __(_)_ __   __ _ 
+//   | '_ \| | | | | '__| '__| | '_ \ / _` |
+//   | |_) | | |_| | |  | |  | | | | | (_| |
+//   |_.__/|_|\__,_|_|  |_|  |_|_| |_|\__, |
+//                                    |___/ 
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// This shader provides the blurring operations needed to create the mixing effect in 
+// charcoal stylization
+////////////////////////////////////////////////////////////////////////////////////////////////////
+#include "../include/quadCommon.ogsfh"
+
+// TEXTURES
+uniform Texture2D gOffsetTex;
+uniform Texture2D gControlTex;
+uniform Texture2D gStylizationTex;
+
+
+// SAMPLERS
+uniform sampler2D gOffsetTexSampler = sampler_state {
+    Texture = <gOffsetTex>;
+};
+
+uniform sampler2D gControlTexSampler = sampler_state {
+    Texture = <gControlTex>;
+};
+
+uniform sampler2D gStylizationTexSampler = sampler_state {
+    Texture = <gStylizationTex>;
+};
+
+
+
+//     __                  _   _                 
+//    / _|_   _ _ __   ___| |_(_) ___  _ __  ___ 
+//   | |_| | | | '_ \ / __| __| |/ _ \| '_ \/ __|
+//   |  _| |_| | | | | (__| |_| | (_) | | | \__ \
+//   |_|  \__,_|_| |_|\___|\__|_|\___/|_| |_|___/
+//
+GLSLShader Shared_functions {
+
+	// GAUSSIAN WEIGHT
+	float gaussianWeight(float x, float sigma) {
+		float weight = 0.15915*exp(-0.5*x*x / (sigma*sigma)) / sigma;
+		return weight;
+	}
+
+
+	// BLUR BY OFFSET
+	// Contributors: Yee Xin Chiew, Santiago Montesdeoca
+	// Blur the entire stylization tex based on value in offset target
+	vec4 offsetBlur(vec2 uv, vec2 dir) {
+
+		float offsetCtrl = texture(gOffsetTexSampler, uv).r;
+		vec4 stylizationTex = texture(gStylizationTexSampler, uv);
+		
+		// Use a dynamic kernel
+		int kernelRadius = int((2 - offsetCtrl) * 30);
+		float normalizer = 1.0 / kernelRadius;
+		float sigma = kernelRadius / 2.0;
+
+		float weight = gaussianWeight(0.0, sigma);
+		vec4 sTex = stylizationTex * weight;
+		float normDivisor = weight;
+		vec2 gTexel = vec2(1.0f) / gScreenSize;
+		for (int o = 1; o < kernelRadius; o++) {
+			vec2 rUV = clamp(uv + vec2(o*gTexel*dir),0,1);
+			vec2 lUV = clamp(uv + vec2(-o*gTexel*dir),0,1);
+			vec4 texR = texture(gStylizationTexSampler, rUV);
+			vec4 texL = texture(gStylizationTexSampler, lUV);
+
+			float granuR = texture(gControlTexSampler, rUV).g; // granulation
+			float granuL = texture(gControlTexSampler, lUV).g; // granulation
+
+			weight = gaussianWeight(o, sigma);
+			sTex += weight * (texR + texL);
+			normDivisor += weight * 2;
+		}
+		sTex = (sTex / normDivisor);
+		
+		return sTex;
+	}
+}
+
+
+
+//    _                _                _        _ 
+//   | |__   ___  _ __(_)_______  _ __ | |_ __ _| |
+//   | '_ \ / _ \| '__| |_  / _ \| '_ \| __/ _` | |
+//   | | | | (_) | |  | |/ / (_) | | | | || (_| | |
+//   |_| |_|\___/|_|  |_/___\___/|_| |_|\__\__,_|_|
+//     
+GLSLShader blurOffsetH {
+	void main() {
+		result = offsetBlur(uv, vec2(1, 0));
+	}
+}
+
+
+
+//                   _   _           _ 
+//   __   _____ _ __| |_(_) ___ __ _| |
+//   \ \ / / _ \ '__| __| |/ __/ _` | |
+//    \ V /  __/ |  | |_| | (_| (_| | |
+//     \_/ \___|_|   \__|_|\___\__,_|_|
+//    
+GLSLShader blurOffsetV {
+	void main() {
+		result = offsetBlur(uv, vec2(0, 1));
+	}
+}
+
+
+
+//    _            _           _                       
+//   | |_ ___  ___| |__  _ __ (_) __ _ _   _  ___  ___ 
+//   | __/ _ \/ __| '_ \| '_ \| |/ _` | | | |/ _ \/ __|
+//   | ||  __/ (__| | | | | | | | (_| | |_| |  __/\__ \
+//    \__\___|\___|_| |_|_| |_|_|\__, |\__,_|\___||___/
+//                                  |_|                
+// 
+// HORIZONTAL BLUR
+technique blurH {
+	pass p0 {
+        VertexShader(in appDataSampler, out vertexOutputSampler) = quadVertSampler;
+        PixelShader(in vertexOutputSampler, out fragmentOutput) = { Shared_functions, blurOffsetH };
+  }
+}
+
+// VERTICAL BLUR
+technique blurV {
+	pass p0 {
+        VertexShader(in appDataSampler, out vertexOutputSampler) = quadVertSampler;
+        PixelShader(in vertexOutputSampler, out fragmentOutput) = { Shared_functions, blurOffsetV };
+  }
+}

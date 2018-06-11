@@ -1,0 +1,116 @@
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// quadCharcoal.ogsfx (GLSL)
+// Brief: Charcoal effect
+// Contributors: Yee Xin Chiew, Santiago Montesdeoca
+////////////////////////////////////////////////////////////////////////////////////////////////////
+//         _                               _ 
+//     ___| |__   __ _ _ __ ___ ___   __ _| |
+//    / __| '_ \ / _` | '__/ __/ _ \ / _` | |
+//   | (__| | | | (_| | | | (_| (_) | (_| | |
+//    \___|_| |_|\__,_|_|  \___\___/ \__,_|_|
+//                                           
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// Renders the charcoal effect based on height map of paper substrate
+////////////////////////////////////////////////////////////////////////////////////////////////////
+#include "../include/quadCommon.ogsfh"
+
+// TEXTURES
+uniform Texture2D gSubstrateTex;  // substrate texture (paper, canvas, etc)
+uniform Texture2D gStylizationTex;
+uniform Texture2D gBlendTex;
+uniform Texture2D gLightingTex;
+uniform Texture2D gCtrlPigmentTex;
+
+
+// SAMPLERS
+uniform sampler2D gSubstrateTexSampler = sampler_state {
+    Texture = <gSubstrateTex>;
+};
+
+uniform sampler2D gStylizationTexSampler = sampler_state {
+    Texture = <gStylizationTex>;
+};
+
+uniform sampler2D gBlendTexSampler = sampler_state {
+    Texture = <gBlendTex>;
+};
+
+uniform sampler2D gLightingTexSampler = sampler_state {
+    Texture = <gLightingTex>;
+};
+
+uniform sampler2D gCtrlPigmentTexSampler = sampler_state {
+    Texture = <gCtrlPigmentTex>;
+};
+
+
+// VARIABLES
+// engine settings
+uniform float gDryMediaThreshold = 5.0f;
+uniform float gSubstrateRoughness;
+uniform vec3 gSubstrateColor = {1.0, 1.0, 1.0};
+
+
+
+//        _                                 _ _       
+//     __| |_ __ _   _   _ __ ___   ___  __| (_) __ _ 
+//    / _` | '__| | | | | '_ ` _ \ / _ \/ _` | |/ _` |
+//   | (_| | |  | |_| | | | | | | |  __/ (_| | | (_| |
+//    \__,_|_|   \__, | |_| |_| |_|\___|\__,_|_|\__,_|
+//               |___/                                
+
+// Contributors: Yee Xin Chiew, Santiago Montesdeoca
+// Charcoal effect
+GLSLShader dryMediaFrag {
+	void main() {
+        vec3 finalResult;
+	
+		// get pixel value
+		ivec2 loc = ivec2(gl_FragCoord.xy);  // coordinates for post-processing
+		vec4 renderTex = texelFetch(gStylizationTexSampler, loc, 0);
+
+        if (length(renderTex.rgb-gSubstrateColor) > 0.01) {
+            float heightMap = texelFetch(gSubstrateTexSampler,loc,0).b;
+            heightMap = 0.5 + ((heightMap - 0.5) * gSubstrateRoughness);
+
+            // 1) How much drybrush is applied depends on lighting
+            float applicationLight = luminance(texelFetch(gLightingTexSampler,loc,0).rgb);
+
+            // 2) If drybrush/granulation is applied
+            float applicationCtrl = -texture(gCtrlPigmentTexSampler, uv).g;  // invert (drybrush ctrl is negative)
+
+            // Calculate application
+            float application = clamp(applicationCtrl + applicationLight,0,1);
+
+            float dryDiff = heightMap - (application);
+
+            if (dryDiff > 0) {
+                // heightmap is higher than application ->  peaks will be colored
+                finalResult = pow(renderTex.rgb, vec3((1 - gDryMediaThreshold) + (dryDiff * 2)));
+            } else {
+                // valleys won't be colored
+                finalResult = lerp(renderTex.rgb, gSubstrateColor, -dryDiff * (gDryMediaThreshold*5.0));
+            }
+
+            result = vec4(finalResult, renderTex.a);
+        } else {
+            result = renderTex;
+        }
+    }
+}
+
+
+
+//    _            _           _                       
+//   | |_ ___  ___| |__  _ __ (_) __ _ _   _  ___  ___ 
+//   | __/ _ \/ __| '_ \| '_ \| |/ _` | | | |/ _ \/ __|
+//   | ||  __/ (__| | | | | | | | (_| | |_| |  __/\__ \
+//    \__\___|\___|_| |_|_| |_|_|\__, |\__,_|\___||___/
+//                                  |_|                
+// DRY MEDIA EFFECT
+technique dryMedia {
+	pass p0 {
+        VertexShader(in appDataSampler, out vertexOutputSampler) = quadVertSampler;
+        PixelShader(in vertexOutputSampler, out fragmentOutput) = { Common_Pixel_Functions, dryMediaFrag };
+  }
+}

@@ -1,0 +1,89 @@
+{
+    "textures": {
+        "Albedo_Texture_File": null,
+        "Normal_Map_File": null
+    },
+    "name": "_default",
+    "screenshot": "C:\\Users\\Santiago\\Desktop\\MNPR\\matPresets\\_default.jpg",
+    "settings": {
+        "Specularity": false,
+        "maxLights": 3,
+        "Flip-Back-Faces": false,
+        "vtxControls": false,
+        "reflectanceModel": "0",
+        "Shadow": true,
+        "Transparent": false
+    },
+    "graph": "mnpr_uber",
+    "procSettings": {
+        "Blending_3D_MNPR": true,
+        "Shape_3D_MNPR": true,
+        "Application_Procedural_MNPR": false,
+        "Shape_Procedural_MNPR": false,
+        "Edge_3D_MNPR": true,
+        "vIncline_Procedural_MNPR": false,
+        "Edge_Procedural_MNPR": false,
+        "Density_3D_MNPR": true,
+        "Variation_3D_MNPR": true,
+        "Detail_3D_MNPR": true,
+        "uIncline_3D_MNPR": true,
+        "Detail_Procedural_MNPR": false,
+        "vIncline_3D_MNPR": true,
+        "uIncline_Procedural_MNPR": false,
+        "Transition_3D_MNPR": true, 
+        "Variation_Procedural_MNPR": false,
+        "Density_Procedural_MNPR": false,
+        "Application_3D_MNPR": true,
+        "Transition_Procedural_MNPR": false,
+        "Blending_Procedural_MNPR": false,
+        "Distortion_Procedural_MNPR": false,
+        "Distortion_3D_MNPR": true
+    },
+    "attributes": {
+        "Highlight_Transparency": 0.0,
+        "Dilute_ColorR": 1.0,
+        "Shade_Wrap": 0.0,
+        "Albedo_Texture": false,
+        "Dilute_ColorB": 1.0,
+        "Dilute_ColorG": 1.0,
+        "Shade_Override": false,
+        "Color_TintR": 0.11697199940681458,
+        "Color_TintG": 0.6724569797515869,
+        "Color_TintB": 0.879610002040863,
+        "Color_Tint": [
+            [
+                0.11697199940681458,
+                0.6724569797515869,
+                0.879610002040863
+            ]
+        ],
+        "Highlight_Roll_Off": 0.0,
+        "Bump_Depth": 1.0,
+        "Shade_ColorR": 0.0,
+        "Shade_Color": [
+            [
+                0.0,
+                0.0,
+                0.0
+            ]
+        ],
+        "Dilute_Color": [
+            [
+                1.0,
+                1.0,
+                1.0
+            ]
+        ],
+        "Dilute_Area": 1.0,
+        "Shade_ColorB": 0.0,
+        "Shade_ColorG": 0.0,
+        "Cangiante": 0.20000000298023224,
+        "Normal_Map": false,
+        "Dilute_Paint": 0.800000011920929,
+        "Diffuse_Factor": 0.20000000298023224,
+        "Invert_U": false,
+        "Invert_V": false,
+        "Cangiante_Area": 1.0
+    },
+    "type": "ShaderfxShader"
+}

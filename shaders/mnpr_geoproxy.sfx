@@ -1,0 +1,6159 @@
+SFX_WIN
+Version=28
+GroupVersion=-1.000000
+Advanced=0
+HelpID=0
+ParentMaterial=0
+NumberOfNodes=306
+#NT=20001 0
+	PC=5
+	posx=1 v=2003 589.981140
+	posy=1 v=2003 -126.567955
+	config=2 e=0 v=5012 1
+	shadername=2 e=1 v=5000 C:/Users/santy/Dropbox/DEV/MNPR-framework/shaders/sfx/puber.fx
+	saveshadertodisk=2 e=0 v=5015 
+	group=3
+	ISC=3
+		SVT=2002 2002 3 0 0 
+		SVT=5001 5016 1 0 0 
+		SVT=5001 5003 2 0 0 
+	OSC=0
+#NT=20002 0
+	PC=3
+	name=1 v=5000 painterlyTechnique
+	posx=1 v=2003 246.955292
+	posy=1 v=2003 -41.683727
+	group=3
+	ISC=1
+		SVT=5001 5004 1 0 0 
+	OSC=1
+		SVT=5001 5003 2 
+		CC=1
+			C=1 0 2 0 2 2 0
+			CPC=0
+#NT=20117 0
+	PC=6
+	name=1 v=5000 maxLights
+	posx=1 v=2003 246.375458
+	posy=1 v=2003 -221.997009
+	value=2 e=1 v=2002 0
+	uiorder=2 e=0 v=2002 100
+	uigroup=2 e=1 v=5000 Reflectance
+	group=3
+	ISC=0
+	OSC=1
+		SVT=2002 2002 1 
+		CC=1
+			C=2 0 1 0 0 3 0
+			CPC=0
+#NT=10100 0
+	PC=42
+	name=1 v=5000 Material
+	posx=1 v=2003 -1482.654541
+	posy=1 v=2003 -314.123535
+	grpnodecolor=1 v=5012 4
+	grpPosX=1 v=2003 -2322.000000
+	grpPosY=1 v=2003 69.500000
+	value_maxLights=2 e=1 v=2002 0
+	value_BoolValue=2 e=1 v=2001 1
+	value_Density_3D_MNPR=2 e=1 v=2001 1
+	value_Density_Procedural_MNPR=2 e=1 v=2001 0
+	value_Detail_3D_MNPR=2 e=1 v=2001 1
+	shadername_HwShader=2 e=1 v=5000 C:/Users/santy/Dropbox/DEV/MNPR-framework/shaders/sfx/puber.fx
+	value_Distortion_3D_MNPR=2 e=1 v=2001 1
+	value_Distortion_Procedural_MNPR=2 e=1 v=2001 0
+	value_Edge_3D_MNPR=2 e=1 v=2001 1
+	value_Edge_Procedural_MNPR=2 e=1 v=2001 0
+	value_Feathering=2 e=1 v=2003 0.000000
+	value_Shape_3D_MNPR=2 e=1 v=2001 1
+	value_Shape_Procedural_MNPR=2 e=1 v=2001 0
+	value_Transition_3D_MNPR=2 e=1 v=2001 1
+	value_Transition_Procedural_MNPR=2 e=1 v=2001 0
+	uigroup_maxLights=2 e=1 v=5000 Reflectance
+	value_Variation_3D_MNPR=2 e=1 v=2001 1
+	value_Variation_Procedural_MNPR=2 e=1 v=2001 0
+	value_uIncline_Procedural_MNPR=2 e=1 v=2001 0
+	value_uIncline_3D_MNPR=2 e=1 v=2001 1
+	value_Detail_Procedural_MNPR=2 e=1 v=2001 0
+	value_vIncline_3D_MNPR=2 e=1 v=2001 1
+	value_vIncline_Procedural_MNPR=2 e=1 v=2001 0
+	value_vtxControls=2 e=1 v=2001 0
+	value_Application_3D_MNPR=2 e=1 v=2001 1
+	value_Application_Procedural_MNPR=2 e=1 v=2001 0
+	value_Blending_3D_MNPR=2 e=1 v=2001 1
+	value_Blending_Procedural_MNPR=2 e=1 v=2001 0
+	uvindex_UVs=2 e=2 v=2002 0
+	uvsetname_UVs=2 e=3 v=5000 
+	perinstanceunshared_UVs=2 e=4 v=2001 0
+	valueX_Tile=2 e=5 v=2003 5.000000
+	valueY_Tile=2 e=6 v=2003 5.000000
+	valueX_Offset=2 e=7 v=2003 0.000000
+	valueY_Offset=2 e=8 v=2003 0.000000
+	value_Brightness=2 e=10 v=2003 10.000000
+	group=-1
+	ISC=2
+		SVT=5001 2003 0 0 0 Alpha Mask
+		SVT=1001 1002 0 0 0 
+	OSC=2
+		SVT=5001 2003 0 Alpha Mask
+		CC=1
+			C=3 0 0 32 0 0 0
+			CPC=0
+		SVT=1001 1002 0 
+		CC=0
+#NT=10101 0
+	PC=2
+	posx=1 v=2003 1481.000000
+	posy=1 v=2003 69.500000
+	group=3
+	ISC=0
+	OSC=0
+#NT=10100 0
+	PC=22
+	name=1 v=5000 Cookie_Map
+	version=1 v=2003 1.910000
+	posx=1 v=2003 -2018.079834
+	posy=1 v=2003 -126.349213
+	submenuname=1 v=5000 Textures
+	bitmapnodeindex=1 v=2002 64
+	helpid=1 v=2002 19
+	grpnodecolor=1 v=5012 6
+	grpPosX=1 v=2003 -1103.290039
+	grpPosY=1 v=2003 -17.517900
+	defineinheader_MyTexture=2 e=1 v=2001 1
+	texturepath_MyTexture=2 e=1 v=5000 
+	uvindex_UVs=2 e=2 v=2002 0
+	uvsetname_UVs=2 e=3 v=5000 
+	autoPreviewTexture_MyTexture=2 e=4 v=2001 1
+	perinstanceunshared_UVs=2 e=4 v=2001 0
+	texturenodename_MyTexture=2 e=5 v=5000 Alpha_Texture_File
+	addressu_Sampler=2 e=7 v=5012 0
+	addressv_Sampler=2 e=8 v=5012 0
+	addressw_Sampler=2 e=9 v=5012 0
+	uigroup_MyTexture=2 e=13 v=5000 Transparency
+	uiorder_MyTexture=2 e=13 v=2002 3
+	group=17
+	ISC=3
+		SVT=5001 3001 0 0 0 _UV
+		SVT=5001 2003 0 0 0 
+		SVT=1001 1002 0 0 0 
+	OSC=3
+		SVT=5001 3001 0 _UV
+		CC=1
+			C=5 0 0 9 1 2 0
+			CPC=0
+		SVT=5001 2003 0 
+		CC=1
+			C=5 1 0 7 2 3 0
+			CPC=0
+		SVT=1001 1002 0 
+		CC=0
+#NT=20028 0
+	PC=11
+	posx=1 v=2003 -561.902893
+	posy=1 v=2003 49.223560
+	fullpathinshader=2 e=4 v=2001 0
+	exposetoui=2 e=3 v=2001 1
+	autoPreviewTexture=2 e=4 v=2001 1
+	defineinheader=2 e=1 v=2001 1
+	texturenodename=2 e=5 v=5000 Alpha_Texture_File
+	mipmaplevels=2 e=5 v=2002 -1
+	uveditororder=2 e=12 v=2002 -1
+	uiorder=2 e=13 v=2002 3
+	uigroup=2 e=13 v=5000 Transparency
+	group=5
+	ISC=3
+		SVT=2002 2002 1 0 0 
+		SVT=2002 2002 3 0 0 
+		SVT=2002 2002 4 0 0 
+	OSC=1
+		SVT=5001 5011 2 
+		CC=2
+			C=6 0 2 7 0 1 0
+			CPC=0
+			C=6 0 2 8 0 3 0
+			CPC=0
+#NT=20029 0
+	PC=2
+	posx=1 v=2003 -17.002613
+	posy=1 v=2003 39.977585
+	group=5
+	ISC=7
+		SVT=5001 5011 1 0 0 
+		SVT=5001 3001 2 0 0 
+		SVT=5001 2003 3 0 0 
+		SVT=5001 5013 4 0 0 
+		SVT=5001 2002 11 0 0 
+		SVT=5001 2002 12 0 0 
+		SVT=2002 2002 13 0 0 
+	OSC=6
+		SVT=5001 3003 5 
+		CC=0
+		SVT=5001 3002 6 
+		CC=1
+			C=7 1 6 19 0 0 0
+			CPC=0
+		SVT=5001 2003 7 
+		CC=0
+		SVT=5001 2003 8 
+		CC=0
+		SVT=5001 2003 9 
+		CC=0
+		SVT=5001 2003 10 
+		CC=0
+#NT=20092 0
+	PC=9
+	name=1 v=5000 Sampler
+	note=1 v=5000 Texture input required for OpenGL / HLSL3
+	posx=1 v=2003 -271.676971
+	posy=1 v=2003 102.526917
+	filter=2 e=6 v=5012 0
+	addressu=2 e=7 v=5012 0
+	addressv=2 e=8 v=5012 0
+	addressw=2 e=9 v=5012 0
+	bordercolor=2 e=10 v=3003 0.000000,0.000000,0.000000,0.000000
+	group=5
+	ISC=2
+		SVT=5001 5011 3 0 0 
+		SVT=2002 2002 2 0 0 
+	OSC=1
+		SVT=5001 5013 1 
+		CC=1
+			C=8 0 1 7 3 4 0
+			CPC=0
+#NT=20109 0
+	PC=3
+	name=1 v=5000 AifBempty
+	posx=1 v=2003 -277.582306
+	posy=1 v=2003 -101.893929
+	group=5
+	ISC=2
+		SVT=5001 3001 1 0 0 
+		SVT=5001 3001 2 0 0 
+	OSC=1
+		SVT=5001 3001 3 
+		CC=1
+			C=9 0 3 7 1 2 0
+			CPC=0
+#NT=10101 0
+	PC=2
+	posx=1 v=2003 1052.390015
+	posy=1 v=2003 3.846410
+	group=5
+	ISC=2
+		SVT=5001 2003 0 0 0 Luminance
+		SVT=1001 1002 0 0 0 
+	OSC=2
+		SVT=5001 2003 0 Luminance
+		CC=2
+			C=10 0 0 302 0 1 0
+			CPC=0
+			C=10 0 0 303 2 3 0
+			CPC=0
+		SVT=1001 1002 0 
+		CC=0
+#NT=10100 1 UV Set-Hw Shader Nodes-Inputs Common
+	PC=14
+	name=1 v=5000 _UVSet
+	version=1 v=2003 1.690000
+	posx=1 v=2003 -494.911987
+	posy=1 v=2003 -171.755005
+	classname=1 v=5000 UV Set
+	submenuname=1 v=5000 Inputs Common
+	bitmapnodeindex=1 v=2002 65
+	helpid=1 v=2002 23
+	grpnodecolor=1 v=5012 5
+	grpPosX=1 v=2003 -450.000000
+	grpPosY=1 v=2003 -221.667007
+	uvindex_UVs=2 e=2 v=2002 0
+	uvsetname_UVs=2 e=3 v=5000 
+	perinstanceunshared_UVs=2 e=4 v=2001 0
+	group=5
+	ISC=4
+		SVT=2002 2002 0 0 0 
+		SVT=5000 5000 0 0 0 
+		SVT=2001 2001 0 0 0 
+		SVT=1001 1002 0 0 0 
+	OSC=3
+		SVT=5001 3003 0 _UVWZ
+		CC=0
+		SVT=5001 3001 0 _UV
+		CC=1
+			C=11 1 0 9 0 1 0
+			CPC=0
+		SVT=5001 1002 0 
+		CC=0
+#NT=20159 0
+	PC=2
+	posx=1 v=2003 -770.376343
+	posy=1 v=2003 180.014389
+	group=5
+	ISC=0
+	OSC=1
+		SVT=2002 2002 1 
+		CC=3
+			C=12 0 1 8 1 2 0
+			CPC=0
+			C=12 0 1 6 2 4 0
+			CPC=0
+			C=12 0 1 7 6 13 0
+			CPC=0
+#NT=20175 0
+	PC=3
+	posx=1 v=2003 -266.115997
+	posy=1 v=2003 303.997009
+	text=1 v=5000 color tm_texture(string path, float U, float V, int swrap, int twrap, string alphaParam, float a)\n{\n    string swrapParam;\n    string twrapParam;\n\n    if(swrap == 0)\n        swrapParam = "periodic";\n    else if(swrap == 1)\n        swrapParam = "clamp";\n    else if(swrap == 2)\n        swrapParam = "mirror";\n    else \n        swrapParam = "black";\n\n    if(twrap == 0)\n        twrapParam = "periodic";\n    else if(twrap == 1)\n        twrapParam = "clamp";\n    else if(twrap == 2)\n        twrapParam = "mirror";\n    else\n        twrapParam = "black";\n\n    color map = texture(path, U, -V+1, alphaParam, a, "swrap", swrapParam, "twrap", twrapParam);\n    return map;\n}\n\ntm_texture( [[ PROP = texturepath_MyTexture ]], [[ INPUT = UV.x ? u ]], [[ INPUT = UV.y ? -v+1 ]], [[ PROP = addressu_Sampler ]], [[ PROP = addressv_Sampler ]] )
+	group=5
+	ISC=0
+	OSC=0
+#NT=20088 0
+	PC=7
+	name=1 v=5000 Cookie_Mask
+	posx=1 v=2003 -1633.809326
+	posy=1 v=2003 -278.809662
+	collapsed=1 v=2001 1
+	value=2 e=0 v=2001 0
+	defineinheader=2 e=0 v=2001 1
+	uigroup=2 e=0 v=5000 Transparency
+	group=17
+	ISC=0
+	OSC=1
+		SVT=5001 2001 1 
+		CC=1
+			C=14 0 1 15 0 1 0
+			CPC=0
+#NT=20163 0
+	PC=3
+	name=1 v=5000 ifCookieMask
+	posx=1 v=2003 -1433.604736
+	posy=1 v=2003 -224.071686
+	group=17
+	ISC=4
+		SVT=5001 2001 1 0 0 
+		SVT=5001 2003 2 0 0 
+		SVT=5001 2003 3 0 0 
+		SVT=5001 1003 5 0 0 
+	OSC=1
+		SVT=5001 2003 4 
+		CC=1
+			C=15 0 4 18 0 0 0
+			CPC=0
+#NT=20017 0
+	PC=3
+	name=1 v=5000 NoAlpha
+	posx=1 v=2003 -1623.333618
+	posy=1 v=2003 -84.444504
+	group=17
+	ISC=0
+	OSC=1
+		SVT=5001 2003 1 
+		CC=1
+			C=16 0 1 15 2 3 0
+			CPC=0
+#NT=10100 0
+	PC=17
+	name=1 v=5000 Cookie_Texture
+	posx=1 v=2003 -1865.835205
+	posy=1 v=2003 -323.027893
+	grpPosX=1 v=2003 -1833.000000
+	grpPosY=1 v=2003 -145.500000
+	defineinheader_MyTexture=2 e=1 v=2001 1
+	texturepath_MyTexture=2 e=1 v=5000 
+	uvindex_UVs=2 e=2 v=2002 0
+	uvsetname_UVs=2 e=3 v=5000 
+	autoPreviewTexture_MyTexture=2 e=4 v=2001 1
+	perinstanceunshared_UVs=2 e=4 v=2001 0
+	texturenodename_MyTexture=2 e=5 v=5000 Alpha_Texture_File
+	addressu_Sampler=2 e=7 v=5012 0
+	addressv_Sampler=2 e=8 v=5012 0
+	addressw_Sampler=2 e=9 v=5012 0
+	uiorder_MyTexture=2 e=13 v=2002 3
+	uigroup_MyTexture=2 e=13 v=5000 Transparency
+	group=-1
+	ISC=0
+	OSC=0
+#NT=10101 0
+	PC=2
+	posx=1 v=2003 -1233.000000
+	posy=1 v=2003 -145.500000
+	group=17
+	ISC=2
+		SVT=5001 2003 0 0 0 
+		SVT=1001 1002 0 0 0 
+	OSC=2
+		SVT=5001 2003 0 
+		CC=1
+			C=18 0 0 3 0 0 0
+			CPC=0
+		SVT=1001 1002 0 
+		CC=0
+#NT=10100 1 Desaturate Color-Hw Shader Nodes-Lighting
+	PC=11
+	name=1 v=5000 _DesaturateColor
+	version=1 v=2003 1.660000
+	posx=1 v=2003 203.557602
+	posy=1 v=2003 120.602798
+	classname=1 v=5000 Desaturate Color
+	submenuname=1 v=5000 Lighting
+	bitmapnodeindex=1 v=2002 2
+	helpid=1 v=2002 7
+	grpnodecolor=1 v=5012 7
+	grpPosX=1 v=2003 -478.424988
+	grpPosY=1 v=2003 -90.372597
+	group=5
+	ISC=2
+		SVT=5001 3002 0 0 0 _Color
+		SVT=5001 1002 0 0 0 
+	OSC=2
+		SVT=5001 2003 0 _DesaturateColor
+		CC=1
+			C=19 0 0 10 0 0 0
+			CPC=0
+		SVT=5001 1002 0 
+		CC=0
+#NT=20003 0
+	PC=2
+	posx=1 v=2003 6.420590
+	posy=1 v=2003 -180.726089
+	group=3
+	ISC=7
+		SVT=5001 5014 1 0 0 
+		SVT=5001 5005 2 0 0 
+		SVT=5001 5007 3 0 0 
+		SVT=5001 5008 4 0 0 
+		SVT=5001 5009 5 0 0 
+		SVT=5001 5011 7 0 0 
+		SVT=5001 5011 8 0 0 
+	OSC=1
+		SVT=5001 5004 6 
+		CC=1
+			C=20 0 6 1 0 1 0
+			CPC=0
+#NT=20005 0
+	PC=7
+	posx=1 v=2003 -244.928680
+	posy=1 v=2003 -324.178833
+	defaultoptions=2 e=0 v=5012 1
+	blendenable=1 v=5012 1
+	destblend=1 v=5012 5
+	srcblendalpha=1 v=5012 0
+	destblendalpha=1 v=5012 5
+	group=3
+	ISC=5
+		SVT=2001 2001 2 0 0 
+		SVT=2002 2002 3 0 0 
+		SVT=2001 2001 4 0 0 
+		SVT=2001 2001 5 0 0 
+		SVT=2001 2001 6 0 0 
+	OSC=1
+		SVT=5001 5014 1 
+		CC=1
+			C=21 0 1 20 0 1 0
+			CPC=0
+#NT=20141 0
+	PC=2
+	posx=1 v=2003 -247.790466
+	posy=1 v=2003 27.934372
+	group=3
+	ISC=2
+		SVT=5001 3003 1 0 0 
+		SVT=5001 2003 3 0 0 
+	OSC=1
+		SVT=5001 5009 2 
+		CC=1
+			C=22 0 2 20 4 5 0
+			CPC=0
+#NT=20017 0
+	PC=4
+	posx=1 v=2003 -741.113892
+	posy=1 v=2003 -9.203522
+	collapsed=1 v=2001 1
+	value=2 e=0 v=2003 0.000000
+	group=3
+	ISC=0
+	OSC=1
+		SVT=5001 2003 1 
+		CC=12
+			C=23 0 1 24 0 1 0
+			CPC=0
+			C=23 0 1 24 1 2 0
+			CPC=0
+			C=23 0 1 24 3 4 0
+			CPC=0
+			C=23 0 1 25 0 1 0
+			CPC=0
+			C=23 0 1 25 1 2 0
+			CPC=0
+			C=23 0 1 25 3 4 0
+			CPC=0
+			C=23 0 1 25 5 6 0
+			CPC=0
+			C=23 0 1 24 5 6 0
+			CPC=0
+			C=23 0 1 28 0 1 0
+			CPC=0
+			C=23 0 1 28 1 2 0
+			CPC=0
+			C=23 0 1 28 3 4 0
+			CPC=0
+			C=23 0 1 28 5 6 0
+			CPC=0
+#NT=20020 0
+	PC=4
+	name=1 v=5000 colorTarget
+	posx=1 v=2003 -531.765137
+	posy=1 v=2003 -100.211517
+	collapsed=1 v=2001 1
+	group=3
+	ISC=6
+		SVT=5001 2003 1 0 0 
+		SVT=5001 2003 2 0 0 
+		SVT=5001 3001 3 0 0 
+		SVT=5001 2003 4 0 0 
+		SVT=5001 3002 5 0 0 
+		SVT=5001 2003 6 0 0 
+	OSC=3
+		SVT=5001 3001 7 
+		CC=0
+		SVT=5001 3002 8 
+		CC=0
+		SVT=5001 3003 9 
+		CC=1
+			C=24 2 9 22 0 1 0
+			CPC=0
+#NT=20020 0
+	PC=4
+	name=1 v=5000 diffuseTarget
+	posx=1 v=2003 -532.273865
+	posy=1 v=2003 -9.531525
+	collapsed=1 v=2001 1
+	group=3
+	ISC=6
+		SVT=5001 2003 1 0 0 
+		SVT=5001 2003 2 0 0 
+		SVT=5001 3001 3 0 0 
+		SVT=5001 2003 4 0 0 
+		SVT=5001 3002 5 0 0 
+		SVT=5001 2003 6 0 0 
+	OSC=3
+		SVT=5001 3001 7 
+		CC=0
+		SVT=5001 3002 8 
+		CC=0
+		SVT=5001 3003 9 
+		CC=1
+			C=25 2 9 22 0 1 1
+			CPC=0
+#NT=10100 1 Vertex Shader Grp-Hw Shader Nodes-Core
+	PC=12
+	name=1 v=5000 VertexShader
+	version=1 v=2003 1.030000
+	posx=1 v=2003 -247.582184
+	posy=1 v=2003 -127.847351
+	classname=1 v=5000 Vertex Shader Grp
+	submenuname=1 v=5000 Core
+	bitmapnodeindex=1 v=2002 2
+	isadvanced=1 v=2001 1
+	helpid=1 v=2002 46
+	grpnodecolor=1 v=5012 5
+	grpPosX=1 v=2003 -816.164001
+	grpPosY=1 v=2003 -139.130997
+	group=3
+	ISC=2
+		SVT=5001 3002 0 0 0 _ObjectVertexPosition
+		SVT=5001 1002 0 0 0 
+	OSC=2
+		SVT=5001 5005 0 
+		CC=1
+			C=26 0 0 20 1 2 0
+			CPC=0
+		SVT=5001 1002 0 
+		CC=0
+#NT=20116 0
+	PC=2
+	posx=1 v=2003 -523.166626
+	posy=1 v=2003 -337.984039
+	group=3
+	ISC=0
+	OSC=2
+		SVT=2001 2001 1 
+		CC=3
+			C=27 0 1 21 3 5 0
+			CPC=0
+			C=27 0 1 21 4 6 0
+			CPC=0
+			C=27 0 1 21 0 2 0
+			CPC=0
+		SVT=2001 2001 2 
+		CC=0
+#NT=20020 0
+	PC=4
+	name=1 v=5000 specularTarget
+	posx=1 v=2003 -529.599976
+	posy=1 v=2003 82.873138
+	collapsed=1 v=2001 1
+	group=3
+	ISC=6
+		SVT=5001 2003 1 0 0 
+		SVT=5001 2003 2 0 0 
+		SVT=5001 3001 3 0 0 
+		SVT=5001 2003 4 0 0 
+		SVT=5001 3002 5 0 0 
+		SVT=5001 2003 6 0 0 
+	OSC=3
+		SVT=5001 3001 7 
+		CC=0
+		SVT=5001 3002 8 
+		CC=0
+		SVT=5001 3003 9 
+		CC=1
+			C=28 2 9 22 0 1 2
+			CPC=0
+#NT=20011 0
+	PC=5
+	name=1 v=5000 Color_Tint
+	posx=1 v=2003 -1147.500000
+	posy=1 v=2003 -176.250000
+	color=2 e=0 v=3003 1.000000,1.000000,1.000000,1.000000
+	defineinheader=2 e=0 v=2001 1
+	group=3
+	ISC=0
+	OSC=6
+		SVT=5001 3003 1 
+		CC=0
+		SVT=5001 3002 2 
+		CC=1
+			C=29 1 2 31 0 1 0
+			CPC=0
+		SVT=5001 2003 3 
+		CC=0
+		SVT=5001 2003 4 
+		CC=0
+		SVT=5001 2003 5 
+		CC=0
+		SVT=5001 2003 6 
+		CC=0
+#NT=20112 0
+	PC=3
+	posx=1 v=2003 -758.750000
+	posy=1 v=2003 -121.250000
+	collapsed=1 v=2001 1
+	group=3
+	ISC=1
+		SVT=5001 3002 1 0 0 
+	OSC=1
+		SVT=5001 3002 2 
+		CC=1
+			C=30 0 2 24 4 5 0
+			CPC=0
+#NT=20123 0
+	PC=3
+	posx=1 v=2003 -951.250000
+	posy=1 v=2003 -120.000000
+	collapsed=1 v=2001 1
+	group=3
+	ISC=1
+		SVT=5001 3002 1 0 0 
+	OSC=1
+		SVT=5001 3002 2 
+		CC=1
+			C=31 0 2 30 0 1 0
+			CPC=0
+#NT=10100 0
+	PC=41
+	name=1 v=5000 controlSets
+	note=1 v=5000 Stylization Control Parameters
+	posx=1 v=2003 -520.109558
+	posy=1 v=2003 213.046753
+	classname=1 v=5000 Vertex Control Sets
+	categoryname=1 v=5000 Painterly Uber Shader
+	submenuname=1 v=5000 Core
+	grpPosX=1 v=2003 -439.000000
+	grpPosY=1 v=2003 1368.500000
+	value_Density_3D_MNPR=2 e=1 v=2001 1
+	value_Density_Procedural_MNPR=2 e=1 v=2001 0
+	value_Detail_3D_MNPR=2 e=1 v=2001 1
+	value_Detail_Procedural_MNPR=2 e=1 v=2001 0
+	value_Distortion_3D_MNPR=2 e=1 v=2001 1
+	value_Distortion_Procedural_MNPR=2 e=1 v=2001 0
+	value_Edge_3D_MNPR=2 e=1 v=2001 1
+	value_Edge_Procedural_MNPR=2 e=1 v=2001 0
+	value_Feathering=2 e=1 v=2003 0.000000
+	value_Shape_3D_MNPR=2 e=1 v=2001 1
+	value_Shape_Procedural_MNPR=2 e=1 v=2001 0
+	value_Transition_3D_MNPR=2 e=1 v=2001 1
+	value_Transition_Procedural_MNPR=2 e=1 v=2001 0
+	value_Blending_Procedural_MNPR=2 e=1 v=2001 0
+	value_Variation_Procedural_MNPR=2 e=1 v=2001 0
+	value_uIncline_3D_MNPR=2 e=1 v=2001 1
+	value_uIncline_Procedural_MNPR=2 e=1 v=2001 0
+	value_vIncline_3D_MNPR=2 e=1 v=2001 1
+	value_vIncline_Procedural_MNPR=2 e=1 v=2001 0
+	value_vtxControls=2 e=1 v=2001 0
+	value_Application_3D_MNPR=2 e=1 v=2001 1
+	value_Application_Procedural_MNPR=2 e=1 v=2001 0
+	value_Blending_3D_MNPR=2 e=1 v=2001 1
+	value_Variation_3D_MNPR=2 e=1 v=2001 1
+	uvindex_UVs=2 e=2 v=2002 0
+	uvsetname_UVs=2 e=3 v=5000 
+	perinstanceunshared_UVs=2 e=4 v=2001 0
+	valueX_Tile=2 e=5 v=2003 5.000000
+	valueY_Tile=2 e=6 v=2003 5.000000
+	valueX_Offset=2 e=7 v=2003 0.000000
+	valueY_Offset=2 e=8 v=2003 0.000000
+	value_Brightness=2 e=10 v=2003 10.000000
+	group=3
+	ISC=2
+		SVT=5001 2003 0 0 0 Alpha
+		SVT=1001 1002 0 0 0 
+	OSC=2
+		SVT=5001 2003 0 Alpha
+		CC=4
+			C=32 0 0 280 1 2 0
+			CPC=0
+			C=32 0 0 281 1 2 0
+			CPC=0
+			C=32 0 0 282 1 2 0
+			CPC=0
+			C=32 0 0 283 1 2 0
+			CPC=0
+		SVT=1001 1002 0 
+		CC=0
+#NT=20013 0
+	PC=4
+	name=1 v=5000 controlSetA
+	posx=1 v=2003 -718.745972
+	posy=1 v=2003 1072.650024
+	colorsetname=2 e=0 v=5000 controlSetA
+	group=32
+	ISC=3
+		SVT=2002 2002 3 0 0 
+		SVT=2001 2001 5 0 0 
+		SVT=5000 5000 6 0 0 
+	OSC=3
+		SVT=5001 5000 4 
+		CC=0
+		SVT=5001 3003 1 
+		CC=1
+			C=33 1 1 34 1 2 0
+			CPC=0
+		SVT=5001 3002 2 
+		CC=0
+#NT=20015 0
+	PC=5
+	name=1 v=5000 texcoordCtrlSetA
+	posx=1 v=2003 -488.347900
+	posy=1 v=2003 1072.097778
+	semantic=1 v=5000 COLOR
+	semantictype=1 v=5012 6
+	group=32
+	ISC=2
+		SVT=5001 5000 1 0 0 
+		SVT=5001 3003 2 0 0 
+	OSC=1
+		SVT=5001 3003 3 
+		CC=1
+			C=34 0 3 40 0 1 0
+			CPC=0
+#NT=20013 0
+	PC=4
+	name=1 v=5000 controlSetB
+	posx=1 v=2003 -722.940979
+	posy=1 v=2003 1307.407593
+	colorsetname=2 e=0 v=5000 controlSetB
+	group=32
+	ISC=3
+		SVT=2002 2002 3 0 0 
+		SVT=2001 2001 5 0 0 
+		SVT=5000 5000 6 0 0 
+	OSC=3
+		SVT=5001 5000 4 
+		CC=0
+		SVT=5001 3003 1 
+		CC=1
+			C=35 1 1 36 1 2 0
+			CPC=0
+		SVT=5001 3002 2 
+		CC=0
+#NT=20015 0
+	PC=5
+	name=1 v=5000 texcoordCtrlSetB
+	posx=1 v=2003 -494.677124
+	posy=1 v=2003 1305.362183
+	semantic=1 v=5000 COLOR
+	semantictype=1 v=5012 6
+	group=32
+	ISC=2
+		SVT=5001 5000 1 0 0 
+		SVT=5001 3003 2 0 0 
+	OSC=1
+		SVT=5001 3003 3 
+		CC=1
+			C=36 0 3 42 0 1 0
+			CPC=0
+#NT=20013 0
+	PC=4
+	name=1 v=5000 controlSetC
+	posx=1 v=2003 -710.710815
+	posy=1 v=2003 1542.573364
+	colorsetname=2 e=0 v=5000 controlSetC
+	group=32
+	ISC=3
+		SVT=2002 2002 3 0 0 
+		SVT=2001 2001 5 0 0 
+		SVT=5000 5000 6 0 0 
+	OSC=3
+		SVT=5001 5000 4 
+		CC=0
+		SVT=5001 3003 1 
+		CC=1
+			C=37 1 1 38 1 2 0
+			CPC=0
+		SVT=5001 3002 2 
+		CC=0
+#NT=20015 0
+	PC=5
+	name=1 v=5000 texcoordCtrlSetC
+	posx=1 v=2003 -491.197021
+	posy=1 v=2003 1546.383423
+	semantic=1 v=5000 COLOR
+	semantictype=1 v=5012 6
+	group=32
+	ISC=2
+		SVT=5001 5000 1 0 0 
+		SVT=5001 3003 2 0 0 
+	OSC=1
+		SVT=5001 3003 3 
+		CC=1
+			C=38 0 3 43 0 1 0
+			CPC=0
+#NT=10101 0
+	PC=3
+	name=1 v=5000 Node
+	posx=1 v=2003 186.000000
+	posy=1 v=2003 1368.500000
+	group=32
+	ISC=5
+		SVT=5001 3003 0 0 0 Pigment Control Target
+		SVT=5001 3003 0 0 0 Substrate Control Target
+		SVT=5001 3003 0 0 0 Edge Control Target
+		SVT=5001 3003 0 0 0 Abstraction Control Target
+		SVT=1001 1002 0 0 0 
+	OSC=5
+		SVT=5001 3003 0 Pigment Control Target
+		CC=1
+			C=39 0 0 22 0 1 3
+			CPC=0
+		SVT=5001 3003 0 Substrate Control Target
+		CC=1
+			C=39 1 0 22 0 1 4
+			CPC=0
+		SVT=5001 3003 0 Edge Control Target
+		CC=1
+			C=39 2 0 22 0 1 5
+			CPC=0
+		SVT=5001 3003 0 Abstraction Control Target
+		CC=1
+			C=39 3 0 22 0 1 6
+			CPC=0
+		SVT=1001 1002 0 
+		CC=0
+#NT=20108 0
+	PC=2
+	posx=1 v=2003 -46.866501
+	posy=1 v=2003 1067.930054
+	group=32
+	ISC=1
+		SVT=5001 3003 1 0 0 
+	OSC=6
+		SVT=5001 2003 2 
+		CC=0
+		SVT=5001 2003 3 
+		CC=0
+		SVT=5001 3001 4 
+		CC=0
+		SVT=5001 2003 5 
+		CC=0
+		SVT=5001 3002 6 
+		CC=1
+			C=40 4 6 45 1 0 0
+			CPC=0
+		SVT=5001 2003 7 
+		CC=1
+			C=40 5 7 41 0 1 0
+			CPC=0
+#NT=20020 0
+	PC=4
+	name=1 v=5000 abstractionTarget
+	note=1 v=5000 Made from parameters in alpha channels of vertex contrtol sets
+	posx=1 v=2003 187.843369
+	posy=1 v=2003 1770.418335
+	group=32
+	ISC=6
+		SVT=5001 2003 1 0 0 
+		SVT=5001 2003 2 0 0 
+		SVT=5001 3001 3 0 0 
+		SVT=5001 2003 4 0 0 
+		SVT=5001 3002 5 0 0 
+		SVT=5001 2003 6 0 0 
+	OSC=3
+		SVT=5001 3001 7 
+		CC=0
+		SVT=5001 3002 8 
+		CC=1
+			C=41 1 8 45 4 0 0
+			CPC=0
+		SVT=5001 3003 9 
+		CC=0
+#NT=20108 0
+	PC=2
+	posx=1 v=2003 -47.301601
+	posy=1 v=2003 1309.680054
+	group=32
+	ISC=1
+		SVT=5001 3003 1 0 0 
+	OSC=6
+		SVT=5001 2003 2 
+		CC=0
+		SVT=5001 2003 3 
+		CC=0
+		SVT=5001 3001 4 
+		CC=0
+		SVT=5001 2003 5 
+		CC=0
+		SVT=5001 3002 6 
+		CC=1
+			C=42 4 6 45 2 0 0
+			CPC=0
+		SVT=5001 2003 7 
+		CC=1
+			C=42 5 7 41 1 2 0
+			CPC=0
+#NT=20108 0
+	PC=2
+	posx=1 v=2003 -49.750008
+	posy=1 v=2003 1544.567017
+	group=32
+	ISC=1
+		SVT=5001 3003 1 0 0 
+	OSC=6
+		SVT=5001 2003 2 
+		CC=0
+		SVT=5001 2003 3 
+		CC=0
+		SVT=5001 3001 4 
+		CC=0
+		SVT=5001 2003 5 
+		CC=0
+		SVT=5001 3002 6 
+		CC=1
+			C=43 4 6 45 3 0 0
+			CPC=0
+		SVT=5001 2003 7 
+		CC=1
+			C=43 5 7 41 3 4 0
+			CPC=0
+#NT=20116 0
+	PC=5
+	name=1 v=5000 vtxControls
+	posx=1 v=2003 196.311096
+	posy=1 v=2003 1069.610718
+	value=2 e=1 v=2001 0
+	exposesetting=1 v=2001 1
+	group=32
+	ISC=0
+	OSC=2
+		SVT=2001 2001 1 
+		CC=1
+			C=44 0 1 45 0 0 0
+			CPC=0
+		SVT=2001 2001 2 
+		CC=0
+#NT=10100 0
+	PC=35
+	name=1 v=5000 Procedural_Control
+	posx=1 v=2003 456.560486
+	posy=1 v=2003 1357.603882
+	grpPosX=1 v=2003 -982.000000
+	grpPosY=1 v=2003 879.500000
+	value_Distortion_Procedural_MNPR=2 e=1 v=2001 0
+	value_Edge_3D_MNPR=2 e=1 v=2001 1
+	value_Edge_Procedural_MNPR=2 e=1 v=2001 0
+	value_Shape_3D_MNPR=2 e=1 v=2001 1
+	value_Shape_Procedural_MNPR=2 e=1 v=2001 0
+	value_Transition_3D_MNPR=2 e=1 v=2001 1
+	value_Transition_Procedural_MNPR=2 e=1 v=2001 0
+	value_Variation_3D_MNPR=2 e=1 v=2001 1
+	value_Variation_Procedural_MNPR=2 e=1 v=2001 0
+	value_uIncline_3D_MNPR=2 e=1 v=2001 1
+	value_uIncline_Procedural_MNPR=2 e=1 v=2001 0
+	value_vIncline_3D_MNPR=2 e=1 v=2001 1
+	value_Detail_3D_MNPR=2 e=1 v=2001 1
+	value_Application_3D_MNPR=2 e=1 v=2001 1
+	value_Application_Procedural_MNPR=2 e=1 v=2001 0
+	value_Blending_3D_MNPR=2 e=1 v=2001 1
+	value_Blending_Procedural_MNPR=2 e=1 v=2001 0
+	value_Density_3D_MNPR=2 e=1 v=2001 1
+	value_Density_Procedural_MNPR=2 e=1 v=2001 0
+	value_Detail_Procedural_MNPR=2 e=1 v=2001 0
+	value_Distortion_3D_MNPR=2 e=1 v=2001 1
+	value_vIncline_Procedural_MNPR=2 e=1 v=2001 0
+	uvindex_UVs=2 e=2 v=2002 0
+	uvsetname_UVs=2 e=3 v=5000 
+	perinstanceunshared_UVs=2 e=4 v=2001 0
+	valueX_Tile=2 e=5 v=2003 5.000000
+	valueY_Tile=2 e=6 v=2003 5.000000
+	valueX_Offset=2 e=7 v=2003 0.000000
+	valueY_Offset=2 e=8 v=2003 0.000000
+	value_Brightness=2 e=10 v=2003 10.000000
+	group=32
+	ISC=6
+		SVT=2001 2001 0 0 0 Vertex Control
+		SVT=5001 3002 0 0 0 Pigment Target
+		SVT=5001 3002 0 0 0 Substrate Target
+		SVT=5001 3002 0 0 0 Edge Target
+		SVT=5001 3002 0 0 0 Abstraction Target
+		SVT=1001 1002 0 0 0 
+	OSC=6
+		SVT=2001 2001 0 Vertex Control
+		CC=4
+			C=45 0 0 46 0 1 0
+			CPC=0
+			C=45 0 0 51 0 1 0
+			CPC=0
+			C=45 0 0 52 0 1 0
+			CPC=0
+			C=45 0 0 53 0 1 0
+			CPC=0
+		SVT=5001 3002 0 Pigment Target
+		CC=1
+			C=45 1 0 46 1 2 0
+			CPC=0
+		SVT=5001 3002 0 Substrate Target
+		CC=1
+			C=45 2 0 51 1 2 0
+			CPC=0
+		SVT=5001 3002 0 Edge Target
+		CC=1
+			C=45 3 0 52 1 2 0
+			CPC=0
+		SVT=5001 3002 0 Abstraction Target
+		CC=1
+			C=45 4 0 53 1 2 0
+			CPC=0
+		SVT=1001 1002 0 
+		CC=0
+#NT=20093 0
+	PC=3
+	posx=1 v=2003 -189.447479
+	posy=1 v=2003 1235.730469
+	collapsed=1 v=2001 1
+	group=45
+	ISC=3
+		SVT=2001 2001 1 0 0 
+		SVT=5001 3002 2 0 0 
+		SVT=5001 3002 3 0 0 
+	OSC=1
+		SVT=5001 3002 4 
+		CC=1
+			C=46 0 4 49 0 1 0
+			CPC=0
+#NT=10101 0
+	PC=2
+	posx=1 v=2003 533.000000
+	posy=1 v=2003 879.500000
+	group=45
+	ISC=5
+		SVT=5001 3002 0 0 0 Pigment Target
+		SVT=5001 3002 0 0 0 Substrate Target
+		SVT=5001 3002 0 0 0 Edge Target
+		SVT=5001 3002 0 0 0 Abstraction Target
+		SVT=1001 1002 0 0 0 
+	OSC=5
+		SVT=5001 3002 0 Pigment Target
+		CC=1
+			C=47 0 0 280 0 1 0
+			CPC=0
+		SVT=5001 3002 0 Substrate Target
+		CC=1
+			C=47 1 0 281 0 1 0
+			CPC=0
+		SVT=5001 3002 0 Edge Target
+		CC=1
+			C=47 2 0 282 0 1 0
+			CPC=0
+		SVT=5001 3002 0 Abstraction Target
+		CC=1
+			C=47 3 0 283 0 1 0
+			CPC=0
+		SVT=1001 1002 0 
+		CC=0
+#NT=20011 0
+	PC=4
+	posx=1 v=2003 -507.929749
+	posy=1 v=2003 1234.526245
+	collapsed=1 v=2001 1
+	color=2 e=0 v=3003 0.000000,0.000000,0.000000,1.000000
+	group=45
+	ISC=0
+	OSC=6
+		SVT=5001 3003 1 
+		CC=0
+		SVT=5001 3002 2 
+		CC=4
+			C=48 1 2 46 2 3 0
+			CPC=0
+			C=48 1 2 51 2 3 0
+			CPC=0
+			C=48 1 2 52 2 3 0
+			CPC=0
+			C=48 1 2 53 2 3 0
+			CPC=0
+		SVT=5001 2003 3 
+		CC=0
+		SVT=5001 2003 4 
+		CC=0
+		SVT=5001 2003 5 
+		CC=0
+		SVT=5001 2003 6 
+		CC=0
+#NT=20108 0
+	PC=4
+	name=1 v=5000 pigmentTargetComponents
+	posx=1 v=2003 45.146847
+	posy=1 v=2003 1235.963867
+	collapsed=1 v=2001 1
+	group=45
+	ISC=1
+		SVT=5001 3002 1 0 0 
+	OSC=6
+		SVT=5001 2003 2 
+		CC=1
+			C=49 0 2 99 0 0 0
+			CPC=0
+		SVT=5001 2003 3 
+		CC=1
+			C=49 1 3 81 0 0 0
+			CPC=0
+		SVT=5001 3001 4 
+		CC=0
+		SVT=5001 2003 5 
+		CC=1
+			C=49 3 5 54 0 0 0
+			CPC=0
+		SVT=5001 3002 6 
+		CC=0
+		SVT=5001 2003 7 
+		CC=0
+#NT=20020 0
+	PC=4
+	name=1 v=5000 pigmentTargetConstruct
+	posx=1 v=2003 748.869690
+	posy=1 v=2003 1266.571899
+	collapsed=1 v=2001 1
+	group=45
+	ISC=6
+		SVT=5001 2003 1 0 0 
+		SVT=5001 2003 2 0 0 
+		SVT=5001 3001 3 0 0 
+		SVT=5001 2003 4 0 0 
+		SVT=5001 3002 5 0 0 
+		SVT=5001 2003 6 0 0 
+	OSC=3
+		SVT=5001 3001 7 
+		CC=0
+		SVT=5001 3002 8 
+		CC=1
+			C=50 1 8 47 0 0 0
+			CPC=0
+		SVT=5001 3003 9 
+		CC=0
+#NT=20093 0
+	PC=3
+	posx=1 v=2003 -187.335632
+	posy=1 v=2003 1450.348755
+	collapsed=1 v=2001 1
+	group=45
+	ISC=3
+		SVT=2001 2001 1 0 0 
+		SVT=5001 3002 2 0 0 
+		SVT=5001 3002 3 0 0 
+	OSC=1
+		SVT=5001 3002 4 
+		CC=1
+			C=51 0 4 135 0 1 0
+			CPC=0
+#NT=20093 0
+	PC=2
+	posx=1 v=2003 -177.641190
+	posy=1 v=2003 1672.715576
+	group=45
+	ISC=3
+		SVT=2001 2001 1 0 0 
+		SVT=5001 3002 2 0 0 
+		SVT=5001 3002 3 0 0 
+	OSC=1
+		SVT=5001 3002 4 
+		CC=1
+			C=52 0 4 139 0 1 0
+			CPC=0
+#NT=20093 0
+	PC=2
+	posx=1 v=2003 -174.221878
+	posy=1 v=2003 1902.462280
+	group=45
+	ISC=3
+		SVT=2001 2001 1 0 0 
+		SVT=5001 3002 2 0 0 
+		SVT=5001 3002 3 0 0 
+	OSC=1
+		SVT=5001 3002 4 
+		CC=1
+			C=53 0 4 140 0 1 0
+			CPC=0
+#NT=10100 0
+	PC=16
+	name=1 v=5000 Density_Procedural
+	posx=1 v=2003 444.307129
+	posy=1 v=2003 1351.641724
+	collapsed=1 v=2001 1
+	grpPosX=1 v=2003 -1089.000000
+	grpPosY=1 v=2003 719.500000
+	value_Density_3D_MNPR=2 e=1 v=2001 1
+	value_Density_Procedural_MNPR=2 e=1 v=2001 0
+	uvindex_UVs=2 e=2 v=2002 0
+	uvsetname_UVs=2 e=3 v=5000 
+	perinstanceunshared_UVs=2 e=4 v=2001 0
+	valueX_Tile=2 e=5 v=2003 5.000000
+	valueY_Tile=2 e=6 v=2003 5.000000
+	valueX_Offset=2 e=7 v=2003 0.000000
+	valueY_Offset=2 e=8 v=2003 0.000000
+	value_Brightness=2 e=10 v=2003 10.000000
+	group=45
+	ISC=4
+		SVT=5001 2003 0 0 0 Density
+		SVT=5001 3001 0 0 0 _UV
+		SVT=5001 3002 0 0 0 World Position
+		SVT=1001 1002 0 0 0 
+	OSC=4
+		SVT=5001 2003 0 Density
+		CC=2
+			C=54 0 0 63 0 1 0
+			CPC=0
+			C=54 0 0 67 1 2 0
+			CPC=0
+		SVT=5001 3001 0 _UV
+		CC=1
+			C=54 1 0 57 0 1 0
+			CPC=0
+		SVT=5001 3002 0 World Position
+		CC=1
+			C=54 2 0 61 0 1 0
+			CPC=0
+		SVT=1001 1002 0 
+		CC=0
+#NT=10100 1 Simplex Noise 2D-Hw Shader Nodes-Patterns
+	PC=19
+	name=1 v=5000 SimplexNoise2D
+	version=1 v=2003 1.080000
+	posx=1 v=2003 -53.133297
+	posy=1 v=2003 751.822754
+	previewswatch=1 v=2002 1
+	classname=1 v=5000 Simplex Noise 2D
+	submenuname=1 v=5000 Patterns
+	helpid=1 v=2002 79
+	grpnodecolor=1 v=5012 3
+	grpPosX=1 v=2003 -765.916992
+	grpPosY=1 v=2003 32.194099
+	uvindex_UVs=2 e=2 v=2002 0
+	uvsetname_UVs=2 e=3 v=5000 
+	perinstanceunshared_UVs=2 e=4 v=2001 0
+	valueX_Tile=2 e=5 v=2003 5.000000
+	valueY_Tile=2 e=6 v=2003 5.000000
+	valueX_Offset=2 e=7 v=2003 0.000000
+	valueY_Offset=2 e=8 v=2003 0.000000
+	value_Brightness=2 e=10 v=2003 130.000000
+	group=54
+	ISC=3
+		SVT=5001 3001 0 0 0 _UV
+		SVT=5001 2003 0 0 0 Brightness
+		SVT=1001 1002 0 0 0 
+	OSC=2
+		SVT=5001 2003 0 Noise
+		CC=1
+			C=55 0 0 64 1 2 0
+			CPC=0
+		SVT=1001 1002 0 
+		CC=0
+#NT=10100 1 Simplex Noise 3D-Hw Shader Nodes-Patterns
+	PC=19
+	name=1 v=5000 SimplexNoise3D
+	version=1 v=2003 1.081000
+	posx=1 v=2003 -51.595898
+	posy=1 v=2003 908.453125
+	previewswatch=1 v=2002 1
+	classname=1 v=5000 Simplex Noise 3D
+	submenuname=1 v=5000 Patterns
+	helpid=1 v=2002 79
+	grpnodecolor=1 v=5012 3
+	grpPosX=1 v=2003 -765.916992
+	grpPosY=1 v=2003 32.194099
+	uvindex_UVs=2 e=2 v=2002 0
+	uvsetname_UVs=2 e=3 v=5000 
+	perinstanceunshared_UVs=2 e=4 v=2001 0
+	valueX_Tile=2 e=5 v=2003 5.000000
+	valueY_Tile=2 e=6 v=2003 5.000000
+	valueX_Offset=2 e=7 v=2003 0.000000
+	valueY_Offset=2 e=8 v=2003 0.000000
+	value_Brightness=2 e=10 v=2003 10.000000
+	group=54
+	ISC=4
+		SVT=5001 3001 0 0 0 _UV
+		SVT=5001 2003 0 0 0 Time
+		SVT=5001 2003 0 0 0 Brightness
+		SVT=1001 1002 0 0 0 
+	OSC=2
+		SVT=5001 2003 0 Noise
+		CC=1
+			C=56 0 0 64 2 3 0
+			CPC=0
+		SVT=1001 1002 0 
+		CC=0
+#NT=20016 0
+	PC=2
+	posx=1 v=2003 -689.207458
+	posy=1 v=2003 487.082001
+	group=54
+	ISC=2
+		SVT=5001 3001 1 0 0 
+		SVT=5001 2003 2 0 0 
+	OSC=1
+		SVT=5001 3001 3 
+		CC=1
+			C=57 0 3 55 0 0 0
+			CPC=0
+#NT=20017 0
+	PC=6
+	name=1 v=5000 Density_Scale_MNPR
+	posx=1 v=2003 -887.549072
+	posy=1 v=2003 592.166748
+	defineinheader=2 e=0 v=2001 1
+	uiorder=2 e=0 v=2002 10
+	uigroup=2 e=0 v=5000 Stylization ( procedural )
+	group=54
+	ISC=0
+	OSC=1
+		SVT=5001 2003 1 
+		CC=2
+			C=58 0 1 57 1 2 0
+			CPC=0
+			C=58 0 1 61 1 2 0
+			CPC=0
+#NT=20017 0
+	PC=7
+	name=1 v=5000 Density_Intensity_MNPR
+	posx=1 v=2003 -276.420471
+	posy=1 v=2003 842.415161
+	value=2 e=0 v=2003 10.000000
+	defineinheader=2 e=0 v=2001 1
+	uiorder=2 e=0 v=2002 11
+	uigroup=2 e=0 v=5000 Stylization ( procedural )
+	group=54
+	ISC=0
+	OSC=1
+		SVT=5001 2003 1 
+		CC=2
+			C=59 0 1 55 1 0 0
+			CPC=0
+			C=59 0 1 56 2 0 0
+			CPC=0
+#NT=20108 0
+	PC=3
+	posx=1 v=2003 -271.755432
+	posy=1 v=2003 952.470703
+	collapsed=1 v=2001 1
+	group=54
+	ISC=1
+		SVT=5001 3002 1 0 0 
+	OSC=6
+		SVT=5001 2003 2 
+		CC=0
+		SVT=5001 2003 3 
+		CC=0
+		SVT=5001 3001 4 
+		CC=1
+			C=60 2 4 56 0 0 0
+			CPC=0
+		SVT=5001 2003 5 
+		CC=1
+			C=60 3 5 56 1 0 0
+			CPC=0
+		SVT=5001 3002 6 
+		CC=0
+		SVT=5001 2003 7 
+		CC=0
+#NT=20016 0
+	PC=2
+	posx=1 v=2003 -683.647095
+	posy=1 v=2003 705.726990
+	group=54
+	ISC=2
+		SVT=5001 3002 1 0 0 
+		SVT=5001 2003 2 0 0 
+	OSC=1
+		SVT=5001 3002 3 
+		CC=1
+			C=61 0 3 60 0 1 0
+			CPC=0
+#NT=10101 0
+	PC=3
+	posx=1 v=2003 149.000000
+	posy=1 v=2003 719.500000
+	collapsed=1 v=2001 1
+	group=54
+	ISC=2
+		SVT=5001 2003 0 0 0 
+		SVT=1001 1002 0 0 0 
+	OSC=2
+		SVT=5001 2003 0 
+		CC=1
+			C=62 0 0 50 3 4 0
+			CPC=0
+		SVT=1001 1002 0 
+		CC=0
+#NT=20026 0
+	PC=3
+	name=1 v=5000 addControl
+	posx=1 v=2003 565.367737
+	posy=1 v=2003 568.884583
+	group=54
+	ISC=2
+		SVT=5001 2003 1 0 0 
+		SVT=5001 2003 2 0 0 
+	OSC=1
+		SVT=5001 2003 3 
+		CC=1
+			C=63 0 3 67 2 3 0
+			CPC=0
+#NT=20093 0
+	PC=3
+	name=1 v=5000 If_3D
+	posx=1 v=2003 168.085098
+	posy=1 v=2003 672.198181
+	group=54
+	ISC=3
+		SVT=2001 2001 1 0 0 
+		SVT=5001 2003 2 0 0 
+		SVT=5001 2003 3 0 0 
+	OSC=1
+		SVT=5001 2003 4 
+		CC=1
+			C=64 0 4 68 0 0 0
+			CPC=0
+#NT=20116 0
+	PC=3
+	name=1 v=5000 Density_3D_MNPR
+	posx=1 v=2003 -284.082062
+	posy=1 v=2003 467.051453
+	group=54
+	ISC=0
+	OSC=2
+		SVT=2001 2001 1 
+		CC=0
+		SVT=2001 2001 2 
+		CC=1
+			C=65 1 2 64 0 1 0
+			CPC=0
+#NT=20116 0
+	PC=4
+	name=1 v=5000 Density_Procedural_MNPR
+	posx=1 v=2003 -291.474487
+	posy=1 v=2003 163.594467
+	value=2 e=1 v=2001 0
+	group=54
+	ISC=0
+	OSC=2
+		SVT=2001 2001 1 
+		CC=0
+		SVT=2001 2001 2 
+		CC=1
+			C=66 1 2 67 0 1 0
+			CPC=0
+#NT=20093 0
+	PC=3
+	name=1 v=5000 If_Procedural
+	posx=1 v=2003 766.253784
+	posy=1 v=2003 390.068939
+	group=54
+	ISC=3
+		SVT=2001 2001 1 0 0 
+		SVT=5001 2003 2 0 0 
+		SVT=5001 2003 3 0 0 
+	OSC=1
+		SVT=5001 2003 4 
+		CC=1
+			C=67 0 4 62 0 0 0
+			CPC=0
+#NT=10100 0
+	PC=5
+	name=1 v=5000 Shift
+	posx=1 v=2003 372.292206
+	posy=1 v=2003 718.445129
+	grpPosX=1 v=2003 41.000000
+	grpPosY=1 v=2003 946.500000
+	group=54
+	ISC=2
+		SVT=5001 2003 0 0 0 
+		SVT=1001 1002 0 0 0 
+	OSC=2
+		SVT=5001 2003 0 
+		CC=1
+			C=68 0 0 70 0 1 0
+			CPC=0
+		SVT=1001 1002 0 
+		CC=0
+#NT=20017 0
+	PC=7
+	name=1 v=5000 Density_Shift_MNPR
+	posx=1 v=2003 241.676056
+	posy=1 v=2003 1027.967041
+	value=2 e=0 v=2003 0.000000
+	defineinheader=2 e=0 v=2001 1
+	uiorder=2 e=0 v=2002 12
+	uigroup=2 e=0 v=5000 Stylization ( procedural )
+	group=68
+	ISC=0
+	OSC=1
+		SVT=5001 2003 1 
+		CC=1
+			C=69 0 1 70 1 2 0
+			CPC=0
+#NT=20026 0
+	PC=3
+	name=1 v=5000 Shift_Op
+	posx=1 v=2003 480.642944
+	posy=1 v=2003 866.073059
+	group=68
+	ISC=2
+		SVT=5001 2003 1 0 0 
+		SVT=5001 2003 2 0 0 
+	OSC=1
+		SVT=5001 2003 3 
+		CC=1
+			C=70 0 3 71 0 0 0
+			CPC=0
+#NT=10101 0
+	PC=2
+	posx=1 v=2003 680.000000
+	posy=1 v=2003 946.500000
+	group=68
+	ISC=2
+		SVT=5001 2003 0 0 0 
+		SVT=1001 1002 0 0 0 
+	OSC=2
+		SVT=5001 2003 0 
+		CC=1
+			C=71 0 0 63 1 2 0
+			CPC=0
+		SVT=1001 1002 0 
+		CC=0
+#NT=20016 0
+	PC=3
+	name=1 v=5000 Scale_2D
+	posx=1 v=2003 -22.193987
+	posy=1 v=2003 2161.180420
+	group=45
+	ISC=2
+		SVT=5001 3001 1 0 0 
+		SVT=5001 2003 2 0 0 
+	OSC=1
+		SVT=5001 3001 3 
+		CC=11
+			C=72 0 3 54 1 0 0
+			CPC=0
+			C=72 0 3 81 1 0 0
+			CPC=0
+			C=72 0 3 99 1 0 0
+			CPC=0
+			C=72 0 3 117 1 0 0
+			CPC=0
+			C=72 0 3 141 1 0 0
+			CPC=0
+			C=72 0 3 159 1 0 0
+			CPC=0
+			C=72 0 3 177 2 0 0
+			CPC=0
+			C=72 0 3 203 1 0 0
+			CPC=0
+			C=72 0 3 221 1 0 0
+			CPC=0
+			C=72 0 3 239 1 0 0
+			CPC=0
+			C=72 0 3 257 1 0 0
+			CPC=0
+#NT=20017 0
+	PC=5
+	name=1 v=5000 World_Scale_MNPR
+	posx=1 v=2003 -288.999939
+	posy=1 v=2003 2176.887939
+	defineinheader=2 e=0 v=2001 1
+	uigroup=2 e=0 v=5000 Stylization ( procedural )
+	group=45
+	ISC=0
+	OSC=1
+		SVT=5001 2003 1 
+		CC=2
+			C=73 0 1 72 1 2 0
+			CPC=0
+			C=73 0 1 74 1 2 0
+			CPC=0
+#NT=20016 0
+	PC=3
+	name=1 v=5000 Scale_3D
+	posx=1 v=2003 -22.300283
+	posy=1 v=2003 2302.622559
+	group=45
+	ISC=2
+		SVT=5001 3002 1 0 0 
+		SVT=5001 2003 2 0 0 
+	OSC=1
+		SVT=5001 3002 3 
+		CC=11
+			C=74 0 3 54 2 0 0
+			CPC=0
+			C=74 0 3 81 2 0 0
+			CPC=0
+			C=74 0 3 99 2 0 0
+			CPC=0
+			C=74 0 3 117 2 0 0
+			CPC=0
+			C=74 0 3 141 2 0 0
+			CPC=0
+			C=74 0 3 159 2 0 0
+			CPC=0
+			C=74 0 3 177 3 0 0
+			CPC=0
+			C=74 0 3 203 2 0 0
+			CPC=0
+			C=74 0 3 221 2 0 0
+			CPC=0
+			C=74 0 3 239 2 0 0
+			CPC=0
+			C=74 0 3 257 2 0 0
+			CPC=0
+#NT=10100 0
+	PC=8
+	name=1 v=5000 Inputs
+	posx=1 v=2003 -287.063629
+	posy=1 v=2003 2285.583008
+	grpPosX=1 v=2003 -846.000000
+	grpPosY=1 v=2003 2202.000000
+	uvindex_UVs=2 e=2 v=2002 0
+	uvsetname_UVs=2 e=3 v=5000 
+	perinstanceunshared_UVs=2 e=4 v=2001 0
+	group=45
+	ISC=0
+	OSC=0
+#NT=10100 1 UV Set-Hw Shader Nodes-Inputs Common
+	PC=14
+	name=1 v=5000 _UVSet
+	version=1 v=2003 1.690000
+	posx=1 v=2003 -431.140869
+	posy=1 v=2003 2303.713135
+	classname=1 v=5000 UV Set
+	submenuname=1 v=5000 Inputs Common
+	bitmapnodeindex=1 v=2002 65
+	helpid=1 v=2002 23
+	grpnodecolor=1 v=5012 5
+	grpPosX=1 v=2003 -450.000000
+	grpPosY=1 v=2003 -221.667007
+	uvindex_UVs=2 e=2 v=2002 0
+	uvsetname_UVs=2 e=3 v=5000 
+	perinstanceunshared_UVs=2 e=4 v=2001 0
+	group=75
+	ISC=4
+		SVT=2002 2002 0 0 0 
+		SVT=5000 5000 0 0 0 
+		SVT=2001 2001 0 0 0 
+		SVT=1001 1002 0 0 0 
+	OSC=3
+		SVT=5001 3003 0 _UVWZ
+		CC=0
+		SVT=5001 3001 0 _UV
+		CC=1
+			C=76 1 0 80 0 0 0
+			CPC=0
+		SVT=5001 1002 0 
+		CC=0
+#NT=10100 1 Vertex World Position-Hw Shader Nodes-Inputs Common
+	PC=11
+	name=1 v=5000 _VertexWorldPos
+	version=1 v=2003 1.610000
+	posx=1 v=2003 -646.268433
+	posy=1 v=2003 2101.900391
+	classname=1 v=5000 Vertex World Position
+	submenuname=1 v=5000 Inputs Common
+	bitmapnodeindex=1 v=2002 66
+	helpid=1 v=2002 27
+	grpnodecolor=1 v=5012 5
+	grpPosX=1 v=2003 -1050.369995
+	grpPosY=1 v=2003 -104.477997
+	group=75
+	ISC=0
+	OSC=3
+		SVT=5001 3003 0 _VertexWorldPosition
+		CC=0
+		SVT=5001 3002 0 
+		CC=1
+			C=77 1 0 78 0 1 0
+			CPC=0
+		SVT=5001 1002 0 
+		CC=0
+#NT=20016 0
+	PC=3
+	name=1 v=5000 Scale_World
+	posx=1 v=2003 -439.029602
+	posy=1 v=2003 2148.680176
+	group=75
+	ISC=2
+		SVT=5001 3002 1 0 0 
+		SVT=5001 2003 2 0 0 
+	OSC=1
+		SVT=5001 3002 3 
+		CC=1
+			C=78 0 3 80 1 0 0
+			CPC=0
+#NT=20017 0
+	PC=4
+	name=1 v=5000 Scale_Constant
+	posx=1 v=2003 -645.549683
+	posy=1 v=2003 2235.964355
+	value=2 e=0 v=2003 0.250000
+	group=75
+	ISC=0
+	OSC=1
+		SVT=5001 2003 1 
+		CC=1
+			C=79 0 1 78 1 2 0
+			CPC=0
+#NT=10101 0
+	PC=2
+	posx=1 v=2003 -231.000000
+	posy=1 v=2003 2202.000000
+	group=75
+	ISC=3
+		SVT=5001 3001 0 0 0 twoD
+		SVT=5001 3002 0 0 0 threeD
+		SVT=1001 1002 0 0 0 
+	OSC=3
+		SVT=5001 3001 0 twoD
+		CC=1
+			C=80 0 0 72 0 1 0
+			CPC=0
+		SVT=5001 3002 0 threeD
+		CC=1
+			C=80 1 0 74 0 1 0
+			CPC=0
+		SVT=1001 1002 0 
+		CC=0
+#NT=10100 0
+	PC=16
+	name=1 v=5000 Application_Procedural
+	posx=1 v=2003 440.701935
+	posy=1 v=2003 1258.687378
+	collapsed=1 v=2001 1
+	grpPosX=1 v=2003 -1089.000000
+	grpPosY=1 v=2003 719.500000
+	value_Application_3D_MNPR=2 e=1 v=2001 1
+	value_Application_Procedural_MNPR=2 e=1 v=2001 0
+	uvindex_UVs=2 e=2 v=2002 0
+	uvsetname_UVs=2 e=3 v=5000 
+	perinstanceunshared_UVs=2 e=4 v=2001 0
+	valueX_Tile=2 e=5 v=2003 5.000000
+	valueY_Tile=2 e=6 v=2003 5.000000
+	valueX_Offset=2 e=7 v=2003 0.000000
+	valueY_Offset=2 e=8 v=2003 0.000000
+	value_Brightness=2 e=10 v=2003 10.000000
+	group=45
+	ISC=4
+		SVT=5001 2003 0 0 0 Application
+		SVT=5001 3001 0 0 0 _UV
+		SVT=5001 3002 0 0 0 World Position
+		SVT=1001 1002 0 0 0 
+	OSC=4
+		SVT=5001 2003 0 Application
+		CC=2
+			C=81 0 0 90 0 1 0
+			CPC=0
+			C=81 0 0 94 1 2 0
+			CPC=0
+		SVT=5001 3001 0 _UV
+		CC=1
+			C=81 1 0 84 0 1 0
+			CPC=0
+		SVT=5001 3002 0 World Position
+		CC=1
+			C=81 2 0 88 0 1 0
+			CPC=0
+		SVT=1001 1002 0 
+		CC=0
+#NT=10100 1 Simplex Noise 2D-Hw Shader Nodes-Patterns
+	PC=19
+	name=1 v=5000 SimplexNoise2D
+	version=1 v=2003 1.080000
+	posx=1 v=2003 -53.133297
+	posy=1 v=2003 751.822754
+	previewswatch=1 v=2002 1
+	classname=1 v=5000 Simplex Noise 2D
+	submenuname=1 v=5000 Patterns
+	helpid=1 v=2002 79
+	grpnodecolor=1 v=5012 3
+	grpPosX=1 v=2003 -765.916992
+	grpPosY=1 v=2003 32.194099
+	uvindex_UVs=2 e=2 v=2002 0
+	uvsetname_UVs=2 e=3 v=5000 
+	perinstanceunshared_UVs=2 e=4 v=2001 0
+	valueX_Tile=2 e=5 v=2003 5.000000
+	valueY_Tile=2 e=6 v=2003 5.000000
+	valueX_Offset=2 e=7 v=2003 0.000000
+	valueY_Offset=2 e=8 v=2003 0.000000
+	value_Brightness=2 e=10 v=2003 130.000000
+	group=81
+	ISC=3
+		SVT=5001 3001 0 0 0 _UV
+		SVT=5001 2003 0 0 0 Brightness
+		SVT=1001 1002 0 0 0 
+	OSC=2
+		SVT=5001 2003 0 Noise
+		CC=1
+			C=82 0 0 91 1 2 0
+			CPC=0
+		SVT=1001 1002 0 
+		CC=0
+#NT=10100 1 Simplex Noise 3D-Hw Shader Nodes-Patterns
+	PC=19
+	name=1 v=5000 SimplexNoise3D
+	version=1 v=2003 1.081000
+	posx=1 v=2003 -51.595898
+	posy=1 v=2003 908.453125
+	previewswatch=1 v=2002 1
+	classname=1 v=5000 Simplex Noise 3D
+	submenuname=1 v=5000 Patterns
+	helpid=1 v=2002 79
+	grpnodecolor=1 v=5012 3
+	grpPosX=1 v=2003 -765.916992
+	grpPosY=1 v=2003 32.194099
+	uvindex_UVs=2 e=2 v=2002 0
+	uvsetname_UVs=2 e=3 v=5000 
+	perinstanceunshared_UVs=2 e=4 v=2001 0
+	valueX_Tile=2 e=5 v=2003 5.000000
+	valueY_Tile=2 e=6 v=2003 5.000000
+	valueX_Offset=2 e=7 v=2003 0.000000
+	valueY_Offset=2 e=8 v=2003 0.000000
+	value_Brightness=2 e=10 v=2003 10.000000
+	group=81
+	ISC=4
+		SVT=5001 3001 0 0 0 _UV
+		SVT=5001 2003 0 0 0 Time
+		SVT=5001 2003 0 0 0 Brightness
+		SVT=1001 1002 0 0 0 
+	OSC=2
+		SVT=5001 2003 0 Noise
+		CC=1
+			C=83 0 0 91 2 3 0
+			CPC=0
+		SVT=1001 1002 0 
+		CC=0
+#NT=20016 0
+	PC=2
+	posx=1 v=2003 -689.207458
+	posy=1 v=2003 487.082001
+	group=81
+	ISC=2
+		SVT=5001 3001 1 0 0 
+		SVT=5001 2003 2 0 0 
+	OSC=1
+		SVT=5001 3001 3 
+		CC=1
+			C=84 0 3 82 0 0 0
+			CPC=0
+#NT=20017 0
+	PC=6
+	name=1 v=5000 Application_Scale_MNPR
+	posx=1 v=2003 -887.549072
+	posy=1 v=2003 592.166748
+	defineinheader=2 e=0 v=2001 1
+	uiorder=2 e=0 v=2002 5
+	uigroup=2 e=0 v=5000 Stylization ( procedural )
+	group=81
+	ISC=0
+	OSC=1
+		SVT=5001 2003 1 
+		CC=2
+			C=85 0 1 84 1 2 0
+			CPC=0
+			C=85 0 1 88 1 2 0
+			CPC=0
+#NT=20017 0
+	PC=7
+	name=1 v=5000 Application_Intensity_MNPR
+	posx=1 v=2003 -276.420471
+	posy=1 v=2003 842.415161
+	value=2 e=0 v=2003 10.000000
+	defineinheader=2 e=0 v=2001 1
+	uiorder=2 e=0 v=2002 6
+	uigroup=2 e=0 v=5000 Stylization ( procedural )
+	group=81
+	ISC=0
+	OSC=1
+		SVT=5001 2003 1 
+		CC=2
+			C=86 0 1 82 1 0 0
+			CPC=0
+			C=86 0 1 83 2 0 0
+			CPC=0
+#NT=20108 0
+	PC=3
+	posx=1 v=2003 -271.755432
+	posy=1 v=2003 952.470703
+	collapsed=1 v=2001 1
+	group=81
+	ISC=1
+		SVT=5001 3002 1 0 0 
+	OSC=6
+		SVT=5001 2003 2 
+		CC=0
+		SVT=5001 2003 3 
+		CC=0
+		SVT=5001 3001 4 
+		CC=1
+			C=87 2 4 83 0 0 0
+			CPC=0
+		SVT=5001 2003 5 
+		CC=1
+			C=87 3 5 83 1 0 0
+			CPC=0
+		SVT=5001 3002 6 
+		CC=0
+		SVT=5001 2003 7 
+		CC=0
+#NT=20016 0
+	PC=2
+	posx=1 v=2003 -683.647095
+	posy=1 v=2003 705.726990
+	group=81
+	ISC=2
+		SVT=5001 3002 1 0 0 
+		SVT=5001 2003 2 0 0 
+	OSC=1
+		SVT=5001 3002 3 
+		CC=1
+			C=88 0 3 87 0 1 0
+			CPC=0
+#NT=10101 0
+	PC=3
+	posx=1 v=2003 149.000000
+	posy=1 v=2003 719.500000
+	collapsed=1 v=2001 1
+	group=81
+	ISC=2
+		SVT=5001 2003 0 0 0 
+		SVT=1001 1002 0 0 0 
+	OSC=2
+		SVT=5001 2003 0 
+		CC=1
+			C=89 0 0 50 1 2 0
+			CPC=0
+		SVT=1001 1002 0 
+		CC=0
+#NT=20026 0
+	PC=3
+	name=1 v=5000 addControl
+	posx=1 v=2003 602.500610
+	posy=1 v=2003 563.598938
+	group=81
+	ISC=2
+		SVT=5001 2003 1 0 0 
+		SVT=5001 2003 2 0 0 
+	OSC=1
+		SVT=5001 2003 3 
+		CC=1
+			C=90 0 3 94 2 3 0
+			CPC=0
+#NT=20093 0
+	PC=3
+	name=1 v=5000 If_3D
+	posx=1 v=2003 232.628937
+	posy=1 v=2003 686.828125
+	group=81
+	ISC=3
+		SVT=2001 2001 1 0 0 
+		SVT=5001 2003 2 0 0 
+		SVT=5001 2003 3 0 0 
+	OSC=1
+		SVT=5001 2003 4 
+		CC=1
+			C=91 0 4 95 0 0 0
+			CPC=0
+#NT=20116 0
+	PC=3
+	name=1 v=5000 Application_3D_MNPR
+	posx=1 v=2003 -284.082062
+	posy=1 v=2003 467.051453
+	group=81
+	ISC=0
+	OSC=2
+		SVT=2001 2001 1 
+		CC=0
+		SVT=2001 2001 2 
+		CC=1
+			C=92 1 2 91 0 1 0
+			CPC=0
+#NT=20116 0
+	PC=4
+	name=1 v=5000 Application_Procedural_MNPR
+	posx=1 v=2003 -291.474487
+	posy=1 v=2003 163.594467
+	value=2 e=1 v=2001 0
+	group=81
+	ISC=0
+	OSC=2
+		SVT=2001 2001 1 
+		CC=0
+		SVT=2001 2001 2 
+		CC=1
+			C=93 1 2 94 0 1 0
+			CPC=0
+#NT=20093 0
+	PC=3
+	name=1 v=5000 If_Procedural
+	posx=1 v=2003 821.205688
+	posy=1 v=2003 362.749817
+	group=81
+	ISC=3
+		SVT=2001 2001 1 0 0 
+		SVT=5001 2003 2 0 0 
+		SVT=5001 2003 3 0 0 
+	OSC=1
+		SVT=5001 2003 4 
+		CC=1
+			C=94 0 4 89 0 0 0
+			CPC=0
+#NT=10100 0
+	PC=5
+	name=1 v=5000 Shift
+	posx=1 v=2003 420.446259
+	posy=1 v=2003 732.368286
+	grpPosX=1 v=2003 41.000000
+	grpPosY=1 v=2003 946.500000
+	group=81
+	ISC=2
+		SVT=5001 2003 0 0 0 
+		SVT=1001 1002 0 0 0 
+	OSC=2
+		SVT=5001 2003 0 
+		CC=1
+			C=95 0 0 98 0 1 0
+			CPC=0
+		SVT=1001 1002 0 
+		CC=0
+#NT=10101 0
+	PC=2
+	posx=1 v=2003 680.000000
+	posy=1 v=2003 946.500000
+	group=95
+	ISC=2
+		SVT=5001 2003 0 0 0 
+		SVT=1001 1002 0 0 0 
+	OSC=2
+		SVT=5001 2003 0 
+		CC=1
+			C=96 0 0 90 1 2 0
+			CPC=0
+		SVT=1001 1002 0 
+		CC=0
+#NT=20017 0
+	PC=11
+	name=1 v=5000 Application_Shift_MNPR
+	posx=1 v=2003 241.676056
+	posy=1 v=2003 1027.967041
+	value=2 e=0 v=2003 0.000000
+	defineinheader=2 e=0 v=2001 1
+	uiorder=2 e=0 v=2002 7
+	uigroup=2 e=0 v=5000 Stylization ( procedural )
+	uimin=2 e=0 v=2003 -1.000000
+	uisoftmin=2 e=0 v=2003 -1.000000
+	uimax=2 e=0 v=2003 1.000000
+	uisoftmax=2 e=0 v=2003 1.000000
+	group=95
+	ISC=0
+	OSC=1
+		SVT=5001 2003 1 
+		CC=1
+			C=97 0 1 98 1 2 0
+			CPC=0
+#NT=20026 0
+	PC=3
+	name=1 v=5000 Shift_Op
+	posx=1 v=2003 480.642944
+	posy=1 v=2003 866.073059
+	group=95
+	ISC=2
+		SVT=5001 2003 1 0 0 
+		SVT=5001 2003 2 0 0 
+	OSC=1
+		SVT=5001 2003 3 
+		CC=1
+			C=98 0 3 96 0 0 0
+			CPC=0
+#NT=10100 0
+	PC=16
+	name=1 v=5000 Variation_Procedural
+	posx=1 v=2003 437.905548
+	posy=1 v=2003 1166.300293
+	collapsed=1 v=2001 1
+	grpPosX=1 v=2003 -1089.000000
+	grpPosY=1 v=2003 719.500000
+	value_Variation_3D_MNPR=2 e=1 v=2001 1
+	value_Variation_Procedural_MNPR=2 e=1 v=2001 0
+	uvindex_UVs=2 e=2 v=2002 0
+	uvsetname_UVs=2 e=3 v=5000 
+	perinstanceunshared_UVs=2 e=4 v=2001 0
+	valueX_Tile=2 e=5 v=2003 5.000000
+	valueY_Tile=2 e=6 v=2003 5.000000
+	valueX_Offset=2 e=7 v=2003 0.000000
+	valueY_Offset=2 e=8 v=2003 0.000000
+	value_Brightness=2 e=10 v=2003 10.000000
+	group=45
+	ISC=4
+		SVT=5001 2003 0 0 0 Variation
+		SVT=5001 3001 0 0 0 _UV
+		SVT=5001 3002 0 0 0 World Position
+		SVT=1001 1002 0 0 0 
+	OSC=4
+		SVT=5001 2003 0 Variation
+		CC=2
+			C=99 0 0 108 0 1 0
+			CPC=0
+			C=99 0 0 112 1 2 0
+			CPC=0
+		SVT=5001 3001 0 _UV
+		CC=1
+			C=99 1 0 102 0 1 0
+			CPC=0
+		SVT=5001 3002 0 World Position
+		CC=1
+			C=99 2 0 106 0 1 0
+			CPC=0
+		SVT=1001 1002 0 
+		CC=0
+#NT=10100 1 Simplex Noise 2D-Hw Shader Nodes-Patterns
+	PC=19
+	name=1 v=5000 SimplexNoise2D
+	version=1 v=2003 1.080000
+	posx=1 v=2003 -53.133297
+	posy=1 v=2003 751.822754
+	previewswatch=1 v=2002 1
+	classname=1 v=5000 Simplex Noise 2D
+	submenuname=1 v=5000 Patterns
+	helpid=1 v=2002 79
+	grpnodecolor=1 v=5012 3
+	grpPosX=1 v=2003 -765.916992
+	grpPosY=1 v=2003 32.194099
+	uvindex_UVs=2 e=2 v=2002 0
+	uvsetname_UVs=2 e=3 v=5000 
+	perinstanceunshared_UVs=2 e=4 v=2001 0
+	valueX_Tile=2 e=5 v=2003 5.000000
+	valueY_Tile=2 e=6 v=2003 5.000000
+	valueX_Offset=2 e=7 v=2003 0.000000
+	valueY_Offset=2 e=8 v=2003 0.000000
+	value_Brightness=2 e=10 v=2003 130.000000
+	group=99
+	ISC=3
+		SVT=5001 3001 0 0 0 _UV
+		SVT=5001 2003 0 0 0 Brightness
+		SVT=1001 1002 0 0 0 
+	OSC=2
+		SVT=5001 2003 0 Noise
+		CC=1
+			C=100 0 0 109 1 2 0
+			CPC=0
+		SVT=1001 1002 0 
+		CC=0
+#NT=10100 1 Simplex Noise 3D-Hw Shader Nodes-Patterns
+	PC=19
+	name=1 v=5000 SimplexNoise3D
+	version=1 v=2003 1.081000
+	posx=1 v=2003 -51.595898
+	posy=1 v=2003 908.453125
+	previewswatch=1 v=2002 1
+	classname=1 v=5000 Simplex Noise 3D
+	submenuname=1 v=5000 Patterns
+	helpid=1 v=2002 79
+	grpnodecolor=1 v=5012 3
+	grpPosX=1 v=2003 -765.916992
+	grpPosY=1 v=2003 32.194099
+	uvindex_UVs=2 e=2 v=2002 0
+	uvsetname_UVs=2 e=3 v=5000 
+	perinstanceunshared_UVs=2 e=4 v=2001 0
+	valueX_Tile=2 e=5 v=2003 5.000000
+	valueY_Tile=2 e=6 v=2003 5.000000
+	valueX_Offset=2 e=7 v=2003 0.000000
+	valueY_Offset=2 e=8 v=2003 0.000000
+	value_Brightness=2 e=10 v=2003 10.000000
+	group=99
+	ISC=4
+		SVT=5001 3001 0 0 0 _UV
+		SVT=5001 2003 0 0 0 Time
+		SVT=5001 2003 0 0 0 Brightness
+		SVT=1001 1002 0 0 0 
+	OSC=2
+		SVT=5001 2003 0 Noise
+		CC=1
+			C=101 0 0 109 2 3 0
+			CPC=0
+		SVT=1001 1002 0 
+		CC=0
+#NT=20016 0
+	PC=2
+	posx=1 v=2003 -689.207458
+	posy=1 v=2003 487.082001
+	group=99
+	ISC=2
+		SVT=5001 3001 1 0 0 
+		SVT=5001 2003 2 0 0 
+	OSC=1
+		SVT=5001 3001 3 
+		CC=1
+			C=102 0 3 100 0 0 0
+			CPC=0
+#NT=20017 0
+	PC=6
+	name=1 v=5000 Variation_Scale_MNPR
+	posx=1 v=2003 -887.549072
+	posy=1 v=2003 592.166748
+	defineinheader=2 e=0 v=2001 1
+	uiorder=2 e=0 v=2002 1
+	uigroup=2 e=0 v=5000 Stylization ( procedural )
+	group=99
+	ISC=0
+	OSC=1
+		SVT=5001 2003 1 
+		CC=2
+			C=103 0 1 102 1 2 0
+			CPC=0
+			C=103 0 1 106 1 2 0
+			CPC=0
+#NT=20017 0
+	PC=7
+	name=1 v=5000 Variation_Intensity_MNPR
+	posx=1 v=2003 -276.420471
+	posy=1 v=2003 842.415161
+	value=2 e=0 v=2003 10.000000
+	defineinheader=2 e=0 v=2001 1
+	uiorder=2 e=0 v=2002 2
+	uigroup=2 e=0 v=5000 Stylization ( procedural )
+	group=99
+	ISC=0
+	OSC=1
+		SVT=5001 2003 1 
+		CC=2
+			C=104 0 1 100 1 0 0
+			CPC=0
+			C=104 0 1 101 2 0 0
+			CPC=0
+#NT=20108 0
+	PC=3
+	posx=1 v=2003 -271.755432
+	posy=1 v=2003 952.470703
+	collapsed=1 v=2001 1
+	group=99
+	ISC=1
+		SVT=5001 3002 1 0 0 
+	OSC=6
+		SVT=5001 2003 2 
+		CC=0
+		SVT=5001 2003 3 
+		CC=0
+		SVT=5001 3001 4 
+		CC=1
+			C=105 2 4 101 0 0 0
+			CPC=0
+		SVT=5001 2003 5 
+		CC=1
+			C=105 3 5 101 1 0 0
+			CPC=0
+		SVT=5001 3002 6 
+		CC=0
+		SVT=5001 2003 7 
+		CC=0
+#NT=20016 0
+	PC=2
+	posx=1 v=2003 -683.647095
+	posy=1 v=2003 705.726990
+	group=99
+	ISC=2
+		SVT=5001 3002 1 0 0 
+		SVT=5001 2003 2 0 0 
+	OSC=1
+		SVT=5001 3002 3 
+		CC=1
+			C=106 0 3 105 0 1 0
+			CPC=0
+#NT=10101 0
+	PC=3
+	posx=1 v=2003 149.000000
+	posy=1 v=2003 719.500000
+	collapsed=1 v=2001 1
+	group=99
+	ISC=2
+		SVT=5001 2003 0 0 0 
+		SVT=1001 1002 0 0 0 
+	OSC=2
+		SVT=5001 2003 0 
+		CC=1
+			C=107 0 0 50 0 1 0
+			CPC=0
+		SVT=1001 1002 0 
+		CC=0
+#NT=20026 0
+	PC=3
+	name=1 v=5000 addControl
+	posx=1 v=2003 537.180237
+	posy=1 v=2003 591.475952
+	group=99
+	ISC=2
+		SVT=5001 2003 1 0 0 
+		SVT=5001 2003 2 0 0 
+	OSC=1
+		SVT=5001 2003 3 
+		CC=1
+			C=108 0 3 112 2 3 0
+			CPC=0
+#NT=20093 0
+	PC=3
+	name=1 v=5000 If_3D
+	posx=1 v=2003 156.628937
+	posy=1 v=2003 688.828125
+	group=99
+	ISC=3
+		SVT=2001 2001 1 0 0 
+		SVT=5001 2003 2 0 0 
+		SVT=5001 2003 3 0 0 
+	OSC=1
+		SVT=5001 2003 4 
+		CC=1
+			C=109 0 4 113 0 0 0
+			CPC=0
+#NT=20116 0
+	PC=3
+	name=1 v=5000 Variation_3D_MNPR
+	posx=1 v=2003 -284.082062
+	posy=1 v=2003 467.051453
+	group=99
+	ISC=0
+	OSC=2
+		SVT=2001 2001 1 
+		CC=0
+		SVT=2001 2001 2 
+		CC=1
+			C=110 1 2 109 0 1 0
+			CPC=0
+#NT=20116 0
+	PC=4
+	name=1 v=5000 Variation_Procedural_MNPR
+	posx=1 v=2003 -291.474487
+	posy=1 v=2003 163.594467
+	value=2 e=1 v=2001 0
+	group=99
+	ISC=0
+	OSC=2
+		SVT=2001 2001 1 
+		CC=0
+		SVT=2001 2001 2 
+		CC=1
+			C=111 1 2 112 0 1 0
+			CPC=0
+#NT=20093 0
+	PC=3
+	name=1 v=5000 If_Procedural
+	posx=1 v=2003 671.659363
+	posy=1 v=2003 353.686493
+	group=99
+	ISC=3
+		SVT=2001 2001 1 0 0 
+		SVT=5001 2003 2 0 0 
+		SVT=5001 2003 3 0 0 
+	OSC=1
+		SVT=5001 2003 4 
+		CC=1
+			C=112 0 4 107 0 0 0
+			CPC=0
+#NT=10100 0
+	PC=5
+	name=1 v=5000 Shift
+	posx=1 v=2003 339.292175
+	posy=1 v=2003 723.445068
+	grpPosX=1 v=2003 41.000000
+	grpPosY=1 v=2003 946.500000
+	group=99
+	ISC=2
+		SVT=5001 2003 0 0 0 
+		SVT=1001 1002 0 0 0 
+	OSC=2
+		SVT=5001 2003 0 
+		CC=1
+			C=113 0 0 116 0 1 0
+			CPC=0
+		SVT=1001 1002 0 
+		CC=0
+#NT=10101 0
+	PC=2
+	posx=1 v=2003 680.000000
+	posy=1 v=2003 946.500000
+	group=113
+	ISC=2
+		SVT=5001 2003 0 0 0 
+		SVT=1001 1002 0 0 0 
+	OSC=2
+		SVT=5001 2003 0 
+		CC=1
+			C=114 0 0 108 1 2 0
+			CPC=0
+		SVT=1001 1002 0 
+		CC=0
+#NT=20017 0
+	PC=11
+	name=1 v=5000 Variation_Shift_MNPR
+	posx=1 v=2003 241.676056
+	posy=1 v=2003 1027.967041
+	value=2 e=0 v=2003 0.000000
+	defineinheader=2 e=0 v=2001 1
+	uiorder=2 e=0 v=2002 3
+	uigroup=2 e=0 v=5000 Stylization ( procedural )
+	uimin=2 e=0 v=2003 -1.000000
+	uisoftmin=2 e=0 v=2003 -1.000000
+	uimax=2 e=0 v=2003 1.000000
+	uisoftmax=2 e=0 v=2003 1.000000
+	group=113
+	ISC=0
+	OSC=1
+		SVT=5001 2003 1 
+		CC=1
+			C=115 0 1 116 1 2 0
+			CPC=0
+#NT=20026 0
+	PC=3
+	name=1 v=5000 Shift_Op
+	posx=1 v=2003 480.642944
+	posy=1 v=2003 866.073059
+	group=113
+	ISC=2
+		SVT=5001 2003 1 0 0 
+		SVT=5001 2003 2 0 0 
+	OSC=1
+		SVT=5001 2003 3 
+		CC=1
+			C=116 0 3 114 0 0 0
+			CPC=0
+#NT=10100 0
+	PC=16
+	name=1 v=5000 Distortion_Procedural
+	posx=1 v=2003 445.083496
+	posy=1 v=2003 1448.078003
+	collapsed=1 v=2001 1
+	grpPosX=1 v=2003 -1089.000000
+	grpPosY=1 v=2003 719.500000
+	value_Distortion_3D_MNPR=2 e=1 v=2001 1
+	value_Distortion_Procedural_MNPR=2 e=1 v=2001 0
+	uvindex_UVs=2 e=2 v=2002 0
+	uvsetname_UVs=2 e=3 v=5000 
+	perinstanceunshared_UVs=2 e=4 v=2001 0
+	valueX_Tile=2 e=5 v=2003 5.000000
+	valueY_Tile=2 e=6 v=2003 5.000000
+	valueX_Offset=2 e=7 v=2003 0.000000
+	valueY_Offset=2 e=8 v=2003 0.000000
+	value_Brightness=2 e=10 v=2003 10.000000
+	group=45
+	ISC=4
+		SVT=5001 2003 0 0 0 Distortion
+		SVT=5001 3001 0 0 0 _UV
+		SVT=5001 3002 0 0 0 World Position
+		SVT=1001 1002 0 0 0 
+	OSC=4
+		SVT=5001 2003 0 Distortion
+		CC=2
+			C=117 0 0 126 0 1 0
+			CPC=0
+			C=117 0 0 130 1 2 0
+			CPC=0
+		SVT=5001 3001 0 _UV
+		CC=1
+			C=117 1 0 120 0 1 0
+			CPC=0
+		SVT=5001 3002 0 World Position
+		CC=1
+			C=117 2 0 124 0 1 0
+			CPC=0
+		SVT=1001 1002 0 
+		CC=0
+#NT=10100 1 Simplex Noise 2D-Hw Shader Nodes-Patterns
+	PC=19
+	name=1 v=5000 SimplexNoise2D
+	version=1 v=2003 1.080000
+	posx=1 v=2003 -53.133297
+	posy=1 v=2003 751.822754
+	previewswatch=1 v=2002 1
+	classname=1 v=5000 Simplex Noise 2D
+	submenuname=1 v=5000 Patterns
+	helpid=1 v=2002 79
+	grpnodecolor=1 v=5012 3
+	grpPosX=1 v=2003 -765.916992
+	grpPosY=1 v=2003 32.194099
+	uvindex_UVs=2 e=2 v=2002 0
+	uvsetname_UVs=2 e=3 v=5000 
+	perinstanceunshared_UVs=2 e=4 v=2001 0
+	valueX_Tile=2 e=5 v=2003 5.000000
+	valueY_Tile=2 e=6 v=2003 5.000000
+	valueX_Offset=2 e=7 v=2003 0.000000
+	valueY_Offset=2 e=8 v=2003 0.000000
+	value_Brightness=2 e=10 v=2003 130.000000
+	group=117
+	ISC=3
+		SVT=5001 3001 0 0 0 _UV
+		SVT=5001 2003 0 0 0 Brightness
+		SVT=1001 1002 0 0 0 
+	OSC=2
+		SVT=5001 2003 0 Noise
+		CC=1
+			C=118 0 0 127 1 2 0
+			CPC=0
+		SVT=1001 1002 0 
+		CC=0
+#NT=10100 1 Simplex Noise 3D-Hw Shader Nodes-Patterns
+	PC=19
+	name=1 v=5000 SimplexNoise3D
+	version=1 v=2003 1.081000
+	posx=1 v=2003 -51.595898
+	posy=1 v=2003 908.453125
+	previewswatch=1 v=2002 1
+	classname=1 v=5000 Simplex Noise 3D
+	submenuname=1 v=5000 Patterns
+	helpid=1 v=2002 79
+	grpnodecolor=1 v=5012 3
+	grpPosX=1 v=2003 -765.916992
+	grpPosY=1 v=2003 32.194099
+	uvindex_UVs=2 e=2 v=2002 0
+	uvsetname_UVs=2 e=3 v=5000 
+	perinstanceunshared_UVs=2 e=4 v=2001 0
+	valueX_Tile=2 e=5 v=2003 5.000000
+	valueY_Tile=2 e=6 v=2003 5.000000
+	valueX_Offset=2 e=7 v=2003 0.000000
+	valueY_Offset=2 e=8 v=2003 0.000000
+	value_Brightness=2 e=10 v=2003 10.000000
+	group=117
+	ISC=4
+		SVT=5001 3001 0 0 0 _UV
+		SVT=5001 2003 0 0 0 Time
+		SVT=5001 2003 0 0 0 Brightness
+		SVT=1001 1002 0 0 0 
+	OSC=2
+		SVT=5001 2003 0 Noise
+		CC=1
+			C=119 0 0 127 2 3 0
+			CPC=0
+		SVT=1001 1002 0 
+		CC=0
+#NT=20016 0
+	PC=2
+	posx=1 v=2003 -689.207458
+	posy=1 v=2003 487.082001
+	group=117
+	ISC=2
+		SVT=5001 3001 1 0 0 
+		SVT=5001 2003 2 0 0 
+	OSC=1
+		SVT=5001 3001 3 
+		CC=1
+			C=120 0 3 118 0 0 0
+			CPC=0
+#NT=20017 0
+	PC=6
+	name=1 v=5000 Distortion_Scale_MNPR
+	posx=1 v=2003 -887.549072
+	posy=1 v=2003 592.166748
+	defineinheader=2 e=0 v=2001 1
+	uiorder=2 e=0 v=2002 15
+	uigroup=2 e=0 v=5000 Stylization ( procedural )
+	group=117
+	ISC=0
+	OSC=1
+		SVT=5001 2003 1 
+		CC=2
+			C=121 0 1 120 1 2 0
+			CPC=0
+			C=121 0 1 124 1 2 0
+			CPC=0
+#NT=20017 0
+	PC=7
+	name=1 v=5000 Distortion_Intensity_MNPR
+	posx=1 v=2003 -276.420471
+	posy=1 v=2003 842.415161
+	value=2 e=0 v=2003 10.000000
+	defineinheader=2 e=0 v=2001 1
+	uiorder=2 e=0 v=2002 16
+	uigroup=2 e=0 v=5000 Stylization ( procedural )
+	group=117
+	ISC=0
+	OSC=1
+		SVT=5001 2003 1 
+		CC=2
+			C=122 0 1 118 1 0 0
+			CPC=0
+			C=122 0 1 119 2 0 0
+			CPC=0
+#NT=20108 0
+	PC=3
+	posx=1 v=2003 -271.755432
+	posy=1 v=2003 952.470703
+	collapsed=1 v=2001 1
+	group=117
+	ISC=1
+		SVT=5001 3002 1 0 0 
+	OSC=6
+		SVT=5001 2003 2 
+		CC=0
+		SVT=5001 2003 3 
+		CC=0
+		SVT=5001 3001 4 
+		CC=1
+			C=123 2 4 119 0 0 0
+			CPC=0
+		SVT=5001 2003 5 
+		CC=1
+			C=123 3 5 119 1 0 0
+			CPC=0
+		SVT=5001 3002 6 
+		CC=0
+		SVT=5001 2003 7 
+		CC=0
+#NT=20016 0
+	PC=2
+	posx=1 v=2003 -683.647095
+	posy=1 v=2003 705.726990
+	group=117
+	ISC=2
+		SVT=5001 3002 1 0 0 
+		SVT=5001 2003 2 0 0 
+	OSC=1
+		SVT=5001 3002 3 
+		CC=1
+			C=124 0 3 123 0 1 0
+			CPC=0
+#NT=10101 0
+	PC=3
+	posx=1 v=2003 149.000000
+	posy=1 v=2003 719.500000
+	collapsed=1 v=2001 1
+	group=117
+	ISC=2
+		SVT=5001 2003 0 0 0 
+		SVT=1001 1002 0 0 0 
+	OSC=2
+		SVT=5001 2003 0 
+		CC=1
+			C=125 0 0 136 0 1 0
+			CPC=0
+		SVT=1001 1002 0 
+		CC=0
+#NT=20026 0
+	PC=3
+	name=1 v=5000 addControl
+	posx=1 v=2003 612.180115
+	posy=1 v=2003 591.476013
+	group=117
+	ISC=2
+		SVT=5001 2003 1 0 0 
+		SVT=5001 2003 2 0 0 
+	OSC=1
+		SVT=5001 2003 3 
+		CC=1
+			C=126 0 3 130 2 3 0
+			CPC=0
+#NT=20093 0
+	PC=3
+	name=1 v=5000 If_3D
+	posx=1 v=2003 232.628937
+	posy=1 v=2003 686.828125
+	group=117
+	ISC=3
+		SVT=2001 2001 1 0 0 
+		SVT=5001 2003 2 0 0 
+		SVT=5001 2003 3 0 0 
+	OSC=1
+		SVT=5001 2003 4 
+		CC=1
+			C=127 0 4 131 0 0 0
+			CPC=0
+#NT=20116 0
+	PC=3
+	name=1 v=5000 Distortion_3D_MNPR
+	posx=1 v=2003 -284.082062
+	posy=1 v=2003 467.051453
+	group=117
+	ISC=0
+	OSC=2
+		SVT=2001 2001 1 
+		CC=0
+		SVT=2001 2001 2 
+		CC=1
+			C=128 1 2 127 0 1 0
+			CPC=0
+#NT=20116 0
+	PC=4
+	name=1 v=5000 Distortion_Procedural_MNPR
+	posx=1 v=2003 -291.474487
+	posy=1 v=2003 163.594467
+	value=2 e=1 v=2001 0
+	group=117
+	ISC=0
+	OSC=2
+		SVT=2001 2001 1 
+		CC=0
+		SVT=2001 2001 2 
+		CC=1
+			C=129 1 2 130 0 1 0
+			CPC=0
+#NT=20093 0
+	PC=3
+	name=1 v=5000 If_Procedural
+	posx=1 v=2003 815.826111
+	posy=1 v=2003 427.019867
+	group=117
+	ISC=3
+		SVT=2001 2001 1 0 0 
+		SVT=5001 2003 2 0 0 
+		SVT=5001 2003 3 0 0 
+	OSC=1
+		SVT=5001 2003 4 
+		CC=1
+			C=130 0 4 125 0 0 0
+			CPC=0
+#NT=10100 0
+	PC=5
+	name=1 v=5000 Shift
+	posx=1 v=2003 421.958771
+	posy=1 v=2003 783.778564
+	grpPosX=1 v=2003 41.000000
+	grpPosY=1 v=2003 946.500000
+	group=117
+	ISC=2
+		SVT=5001 2003 0 0 0 
+		SVT=1001 1002 0 0 0 
+	OSC=2
+		SVT=5001 2003 0 
+		CC=1
+			C=131 0 0 134 0 1 0
+			CPC=0
+		SVT=1001 1002 0 
+		CC=0
+#NT=10101 0
+	PC=2
+	posx=1 v=2003 680.000000
+	posy=1 v=2003 946.500000
+	group=131
+	ISC=2
+		SVT=5001 2003 0 0 0 
+		SVT=1001 1002 0 0 0 
+	OSC=2
+		SVT=5001 2003 0 
+		CC=1
+			C=132 0 0 126 1 2 0
+			CPC=0
+		SVT=1001 1002 0 
+		CC=0
+#NT=20017 0
+	PC=11
+	name=1 v=5000 Distortion_Shift_MNPR
+	posx=1 v=2003 241.676056
+	posy=1 v=2003 1027.967041
+	value=2 e=0 v=2003 0.000000
+	defineinheader=2 e=0 v=2001 1
+	uiorder=2 e=0 v=2002 17
+	uigroup=2 e=0 v=5000 Stylization ( procedural )
+	uimin=2 e=0 v=2003 -1.000000
+	uisoftmin=2 e=0 v=2003 -1.000000
+	uimax=2 e=0 v=2003 1.000000
+	uisoftmax=2 e=0 v=2003 1.000000
+	group=131
+	ISC=0
+	OSC=1
+		SVT=5001 2003 1 
+		CC=1
+			C=133 0 1 134 1 2 0
+			CPC=0
+#NT=20026 0
+	PC=3
+	name=1 v=5000 Shift_Op
+	posx=1 v=2003 480.642944
+	posy=1 v=2003 866.073059
+	group=131
+	ISC=2
+		SVT=5001 2003 1 0 0 
+		SVT=5001 2003 2 0 0 
+	OSC=1
+		SVT=5001 2003 3 
+		CC=1
+			C=134 0 3 132 0 0 0
+			CPC=0
+#NT=20108 0
+	PC=4
+	name=1 v=5000 substrateTargetComponents
+	posx=1 v=2003 52.762077
+	posy=1 v=2003 1450.222534
+	collapsed=1 v=2001 1
+	group=45
+	ISC=1
+		SVT=5001 3002 1 0 0 
+	OSC=6
+		SVT=5001 2003 2 
+		CC=1
+			C=135 0 2 117 0 0 0
+			CPC=0
+		SVT=5001 2003 3 
+		CC=1
+			C=135 1 3 141 0 0 0
+			CPC=0
+		SVT=5001 3001 4 
+		CC=0
+		SVT=5001 2003 5 
+		CC=1
+			C=135 3 5 159 0 0 0
+			CPC=0
+		SVT=5001 3002 6 
+		CC=0
+		SVT=5001 2003 7 
+		CC=0
+#NT=20020 0
+	PC=4
+	name=1 v=5000 substrateTargetConstruct
+	posx=1 v=2003 750.954407
+	posy=1 v=2003 1507.545288
+	collapsed=1 v=2001 1
+	group=45
+	ISC=6
+		SVT=5001 2003 1 0 0 
+		SVT=5001 2003 2 0 0 
+		SVT=5001 3001 3 0 0 
+		SVT=5001 2003 4 0 0 
+		SVT=5001 3002 5 0 0 
+		SVT=5001 2003 6 0 0 
+	OSC=3
+		SVT=5001 3001 7 
+		CC=0
+		SVT=5001 3002 8 
+		CC=1
+			C=136 1 8 47 1 0 0
+			CPC=0
+		SVT=5001 3003 9 
+		CC=0
+#NT=20020 0
+	PC=4
+	name=1 v=5000 edgeTargetConstruct
+	posx=1 v=2003 760.503784
+	posy=1 v=2003 1800.971191
+	collapsed=1 v=2001 1
+	group=45
+	ISC=6
+		SVT=5001 2003 1 0 0 
+		SVT=5001 2003 2 0 0 
+		SVT=5001 3001 3 0 0 
+		SVT=5001 2003 4 0 0 
+		SVT=5001 3002 5 0 0 
+		SVT=5001 2003 6 0 0 
+	OSC=3
+		SVT=5001 3001 7 
+		CC=0
+		SVT=5001 3002 8 
+		CC=1
+			C=137 1 8 47 2 0 0
+			CPC=0
+		SVT=5001 3003 9 
+		CC=0
+#NT=20020 0
+	PC=4
+	name=1 v=5000 abstractionTargetConstruct
+	posx=1 v=2003 761.202820
+	posy=1 v=2003 1988.104248
+	collapsed=1 v=2001 1
+	group=45
+	ISC=6
+		SVT=5001 2003 1 0 0 
+		SVT=5001 2003 2 0 0 
+		SVT=5001 3001 3 0 0 
+		SVT=5001 2003 4 0 0 
+		SVT=5001 3002 5 0 0 
+		SVT=5001 2003 6 0 0 
+	OSC=3
+		SVT=5001 3001 7 
+		CC=0
+		SVT=5001 3002 8 
+		CC=1
+			C=138 1 8 47 3 0 0
+			CPC=0
+		SVT=5001 3003 9 
+		CC=0
+#NT=20108 0
+	PC=3
+	name=1 v=5000 edgeTargetComponents
+	posx=1 v=2003 45.906685
+	posy=1 v=2003 1721.210571
+	group=45
+	ISC=1
+		SVT=5001 3002 1 0 0 
+	OSC=6
+		SVT=5001 2003 2 
+		CC=1
+			C=139 0 2 177 0 0 0
+			CPC=0
+		SVT=5001 2003 3 
+		CC=1
+			C=139 1 3 177 1 0 0
+			CPC=0
+		SVT=5001 3001 4 
+		CC=0
+		SVT=5001 2003 5 
+		CC=1
+			C=139 3 5 203 0 0 0
+			CPC=0
+		SVT=5001 3002 6 
+		CC=0
+		SVT=5001 2003 7 
+		CC=0
+#NT=20108 0
+	PC=3
+	name=1 v=5000 abstractionTargetComponents
+	posx=1 v=2003 56.417542
+	posy=1 v=2003 1935.076294
+	group=45
+	ISC=1
+		SVT=5001 3002 1 0 0 
+	OSC=6
+		SVT=5001 2003 2 
+		CC=1
+			C=140 0 2 221 0 0 0
+			CPC=0
+		SVT=5001 2003 3 
+		CC=1
+			C=140 1 3 239 0 0 0
+			CPC=0
+		SVT=5001 3001 4 
+		CC=0
+		SVT=5001 2003 5 
+		CC=1
+			C=140 3 5 257 0 0 0
+			CPC=0
+		SVT=5001 3002 6 
+		CC=0
+		SVT=5001 2003 7 
+		CC=0
+#NT=10100 0
+	PC=16
+	name=1 v=5000 uIncline_Procedural
+	posx=1 v=2003 444.998749
+	posy=1 v=2003 1542.799438
+	collapsed=1 v=2001 1
+	grpPosX=1 v=2003 -1089.000000
+	grpPosY=1 v=2003 719.500000
+	value_uIncline_3D_MNPR=2 e=1 v=2001 1
+	value_uIncline_Procedural_MNPR=2 e=1 v=2001 0
+	uvindex_UVs=2 e=2 v=2002 0
+	uvsetname_UVs=2 e=3 v=5000 
+	perinstanceunshared_UVs=2 e=4 v=2001 0
+	valueX_Tile=2 e=5 v=2003 5.000000
+	valueY_Tile=2 e=6 v=2003 5.000000
+	valueX_Offset=2 e=7 v=2003 0.000000
+	valueY_Offset=2 e=8 v=2003 0.000000
+	value_Brightness=2 e=10 v=2003 10.000000
+	group=45
+	ISC=4
+		SVT=5001 2003 0 0 0 U incline
+		SVT=5001 3001 0 0 0 _UV
+		SVT=5001 3002 0 0 0 World Position
+		SVT=1001 1002 0 0 0 
+	OSC=4
+		SVT=5001 2003 0 U incline
+		CC=2
+			C=141 0 0 150 0 1 0
+			CPC=0
+			C=141 0 0 154 1 2 0
+			CPC=0
+		SVT=5001 3001 0 _UV
+		CC=1
+			C=141 1 0 144 0 1 0
+			CPC=0
+		SVT=5001 3002 0 World Position
+		CC=1
+			C=141 2 0 148 0 1 0
+			CPC=0
+		SVT=1001 1002 0 
+		CC=0
+#NT=10100 1 Simplex Noise 2D-Hw Shader Nodes-Patterns
+	PC=19
+	name=1 v=5000 SimplexNoise2D
+	version=1 v=2003 1.080000
+	posx=1 v=2003 -53.133297
+	posy=1 v=2003 751.822754
+	previewswatch=1 v=2002 1
+	classname=1 v=5000 Simplex Noise 2D
+	submenuname=1 v=5000 Patterns
+	helpid=1 v=2002 79
+	grpnodecolor=1 v=5012 3
+	grpPosX=1 v=2003 -765.916992
+	grpPosY=1 v=2003 32.194099
+	uvindex_UVs=2 e=2 v=2002 0
+	uvsetname_UVs=2 e=3 v=5000 
+	perinstanceunshared_UVs=2 e=4 v=2001 0
+	valueX_Tile=2 e=5 v=2003 5.000000
+	valueY_Tile=2 e=6 v=2003 5.000000
+	valueX_Offset=2 e=7 v=2003 0.000000
+	valueY_Offset=2 e=8 v=2003 0.000000
+	value_Brightness=2 e=10 v=2003 130.000000
+	group=141
+	ISC=3
+		SVT=5001 3001 0 0 0 _UV
+		SVT=5001 2003 0 0 0 Brightness
+		SVT=1001 1002 0 0 0 
+	OSC=2
+		SVT=5001 2003 0 Noise
+		CC=1
+			C=142 0 0 151 1 2 0
+			CPC=0
+		SVT=1001 1002 0 
+		CC=0
+#NT=10100 1 Simplex Noise 3D-Hw Shader Nodes-Patterns
+	PC=19
+	name=1 v=5000 SimplexNoise3D
+	version=1 v=2003 1.081000
+	posx=1 v=2003 -51.595898
+	posy=1 v=2003 908.453125
+	previewswatch=1 v=2002 1
+	classname=1 v=5000 Simplex Noise 3D
+	submenuname=1 v=5000 Patterns
+	helpid=1 v=2002 79
+	grpnodecolor=1 v=5012 3
+	grpPosX=1 v=2003 -765.916992
+	grpPosY=1 v=2003 32.194099
+	uvindex_UVs=2 e=2 v=2002 0
+	uvsetname_UVs=2 e=3 v=5000 
+	perinstanceunshared_UVs=2 e=4 v=2001 0
+	valueX_Tile=2 e=5 v=2003 5.000000
+	valueY_Tile=2 e=6 v=2003 5.000000
+	valueX_Offset=2 e=7 v=2003 0.000000
+	valueY_Offset=2 e=8 v=2003 0.000000
+	value_Brightness=2 e=10 v=2003 10.000000
+	group=141
+	ISC=4
+		SVT=5001 3001 0 0 0 _UV
+		SVT=5001 2003 0 0 0 Time
+		SVT=5001 2003 0 0 0 Brightness
+		SVT=1001 1002 0 0 0 
+	OSC=2
+		SVT=5001 2003 0 Noise
+		CC=1
+			C=143 0 0 151 2 3 0
+			CPC=0
+		SVT=1001 1002 0 
+		CC=0
+#NT=20016 0
+	PC=2
+	posx=1 v=2003 -689.207458
+	posy=1 v=2003 487.082001
+	group=141
+	ISC=2
+		SVT=5001 3001 1 0 0 
+		SVT=5001 2003 2 0 0 
+	OSC=1
+		SVT=5001 3001 3 
+		CC=1
+			C=144 0 3 142 0 0 0
+			CPC=0
+#NT=20017 0
+	PC=6
+	name=1 v=5000 uIncline_Scale_MNPR
+	posx=1 v=2003 -887.549072
+	posy=1 v=2003 592.166748
+	defineinheader=2 e=0 v=2001 1
+	uiorder=2 e=0 v=2002 20
+	uigroup=2 e=0 v=5000 Stylization ( procedural )
+	group=141
+	ISC=0
+	OSC=1
+		SVT=5001 2003 1 
+		CC=2
+			C=145 0 1 144 1 2 0
+			CPC=0
+			C=145 0 1 148 1 2 0
+			CPC=0
+#NT=20017 0
+	PC=7
+	name=1 v=5000 uIncline_Intensity_MNPR
+	posx=1 v=2003 -276.420471
+	posy=1 v=2003 842.415161
+	value=2 e=0 v=2003 10.000000
+	defineinheader=2 e=0 v=2001 1
+	uiorder=2 e=0 v=2002 21
+	uigroup=2 e=0 v=5000 Stylization ( procedural )
+	group=141
+	ISC=0
+	OSC=1
+		SVT=5001 2003 1 
+		CC=2
+			C=146 0 1 142 1 0 0
+			CPC=0
+			C=146 0 1 143 2 0 0
+			CPC=0
+#NT=20108 0
+	PC=3
+	posx=1 v=2003 -271.755432
+	posy=1 v=2003 952.470703
+	collapsed=1 v=2001 1
+	group=141
+	ISC=1
+		SVT=5001 3002 1 0 0 
+	OSC=6
+		SVT=5001 2003 2 
+		CC=0
+		SVT=5001 2003 3 
+		CC=0
+		SVT=5001 3001 4 
+		CC=1
+			C=147 2 4 143 0 0 0
+			CPC=0
+		SVT=5001 2003 5 
+		CC=1
+			C=147 3 5 143 1 0 0
+			CPC=0
+		SVT=5001 3002 6 
+		CC=0
+		SVT=5001 2003 7 
+		CC=0
+#NT=20016 0
+	PC=2
+	posx=1 v=2003 -683.647095
+	posy=1 v=2003 705.726990
+	group=141
+	ISC=2
+		SVT=5001 3002 1 0 0 
+		SVT=5001 2003 2 0 0 
+	OSC=1
+		SVT=5001 3002 3 
+		CC=1
+			C=148 0 3 147 0 1 0
+			CPC=0
+#NT=10101 0
+	PC=3
+	posx=1 v=2003 149.000000
+	posy=1 v=2003 719.500000
+	collapsed=1 v=2001 1
+	group=141
+	ISC=2
+		SVT=5001 2003 0 0 0 
+		SVT=1001 1002 0 0 0 
+	OSC=2
+		SVT=5001 2003 0 
+		CC=1
+			C=149 0 0 136 1 2 0
+			CPC=0
+		SVT=1001 1002 0 
+		CC=0
+#NT=20026 0
+	PC=3
+	name=1 v=5000 addControl
+	posx=1 v=2003 596.346924
+	posy=1 v=2003 584.809326
+	group=141
+	ISC=2
+		SVT=5001 2003 1 0 0 
+		SVT=5001 2003 2 0 0 
+	OSC=1
+		SVT=5001 2003 3 
+		CC=1
+			C=150 0 3 154 2 3 0
+			CPC=0
+#NT=20093 0
+	PC=3
+	name=1 v=5000 If_3D
+	posx=1 v=2003 232.628937
+	posy=1 v=2003 686.828125
+	group=141
+	ISC=3
+		SVT=2001 2001 1 0 0 
+		SVT=5001 2003 2 0 0 
+		SVT=5001 2003 3 0 0 
+	OSC=1
+		SVT=5001 2003 4 
+		CC=1
+			C=151 0 4 155 0 0 0
+			CPC=0
+#NT=20116 0
+	PC=3
+	name=1 v=5000 uIncline_3D_MNPR
+	posx=1 v=2003 -284.082062
+	posy=1 v=2003 467.051453
+	group=141
+	ISC=0
+	OSC=2
+		SVT=2001 2001 1 
+		CC=0
+		SVT=2001 2001 2 
+		CC=1
+			C=152 1 2 151 0 1 0
+			CPC=0
+#NT=20116 0
+	PC=4
+	name=1 v=5000 uIncline_Procedural_MNPR
+	posx=1 v=2003 -291.474487
+	posy=1 v=2003 163.594467
+	value=2 e=1 v=2001 0
+	group=141
+	ISC=0
+	OSC=2
+		SVT=2001 2001 1 
+		CC=0
+		SVT=2001 2001 2 
+		CC=1
+			C=153 1 2 154 0 1 0
+			CPC=0
+#NT=20093 0
+	PC=3
+	name=1 v=5000 If_Procedural
+	posx=1 v=2003 671.659363
+	posy=1 v=2003 353.686493
+	group=141
+	ISC=3
+		SVT=2001 2001 1 0 0 
+		SVT=5001 2003 2 0 0 
+		SVT=5001 2003 3 0 0 
+	OSC=1
+		SVT=5001 2003 4 
+		CC=1
+			C=154 0 4 149 0 0 0
+			CPC=0
+#NT=10100 0
+	PC=5
+	name=1 v=5000 Shift
+	posx=1 v=2003 419.458527
+	posy=1 v=2003 732.944885
+	grpPosX=1 v=2003 41.000000
+	grpPosY=1 v=2003 946.500000
+	group=141
+	ISC=2
+		SVT=5001 2003 0 0 0 
+		SVT=1001 1002 0 0 0 
+	OSC=2
+		SVT=5001 2003 0 
+		CC=1
+			C=155 0 0 158 0 1 0
+			CPC=0
+		SVT=1001 1002 0 
+		CC=0
+#NT=10101 0
+	PC=2
+	posx=1 v=2003 680.000000
+	posy=1 v=2003 946.500000
+	group=155
+	ISC=2
+		SVT=5001 2003 0 0 0 
+		SVT=1001 1002 0 0 0 
+	OSC=2
+		SVT=5001 2003 0 
+		CC=1
+			C=156 0 0 150 1 2 0
+			CPC=0
+		SVT=1001 1002 0 
+		CC=0
+#NT=20017 0
+	PC=11
+	name=1 v=5000 uIncline_Shift_MNPR
+	posx=1 v=2003 241.676056
+	posy=1 v=2003 1027.967041
+	value=2 e=0 v=2003 0.000000
+	defineinheader=2 e=0 v=2001 1
+	uiorder=2 e=0 v=2002 22
+	uigroup=2 e=0 v=5000 Stylization ( procedural )
+	uimin=2 e=0 v=2003 -1.000000
+	uisoftmin=2 e=0 v=2003 -1.000000
+	uimax=2 e=0 v=2003 1.000000
+	uisoftmax=2 e=0 v=2003 1.000000
+	group=155
+	ISC=0
+	OSC=1
+		SVT=5001 2003 1 
+		CC=1
+			C=157 0 1 158 1 2 0
+			CPC=0
+#NT=20026 0
+	PC=3
+	name=1 v=5000 Shift_Op
+	posx=1 v=2003 480.642944
+	posy=1 v=2003 866.073059
+	group=155
+	ISC=2
+		SVT=5001 2003 1 0 0 
+		SVT=5001 2003 2 0 0 
+	OSC=1
+		SVT=5001 2003 3 
+		CC=1
+			C=158 0 3 156 0 0 0
+			CPC=0
+#NT=10100 0
+	PC=16
+	name=1 v=5000 vIncline_Procedural
+	posx=1 v=2003 448.324005
+	posy=1 v=2003 1637.195923
+	collapsed=1 v=2001 1
+	grpPosX=1 v=2003 -1089.000000
+	grpPosY=1 v=2003 719.500000
+	value_vIncline_3D_MNPR=2 e=1 v=2001 1
+	value_vIncline_Procedural_MNPR=2 e=1 v=2001 0
+	uvindex_UVs=2 e=2 v=2002 0
+	uvsetname_UVs=2 e=3 v=5000 
+	perinstanceunshared_UVs=2 e=4 v=2001 0
+	valueX_Tile=2 e=5 v=2003 5.000000
+	valueY_Tile=2 e=6 v=2003 5.000000
+	valueX_Offset=2 e=7 v=2003 0.000000
+	valueY_Offset=2 e=8 v=2003 0.000000
+	value_Brightness=2 e=10 v=2003 10.000000
+	group=45
+	ISC=4
+		SVT=5001 2003 0 0 0 V incline
+		SVT=5001 3001 0 0 0 _UV
+		SVT=5001 3002 0 0 0 World Position
+		SVT=1001 1002 0 0 0 
+	OSC=4
+		SVT=5001 2003 0 V incline
+		CC=2
+			C=159 0 0 168 0 1 0
+			CPC=0
+			C=159 0 0 172 1 2 0
+			CPC=0
+		SVT=5001 3001 0 _UV
+		CC=1
+			C=159 1 0 162 0 1 0
+			CPC=0
+		SVT=5001 3002 0 World Position
+		CC=1
+			C=159 2 0 166 0 1 0
+			CPC=0
+		SVT=1001 1002 0 
+		CC=0
+#NT=10100 1 Simplex Noise 2D-Hw Shader Nodes-Patterns
+	PC=19
+	name=1 v=5000 SimplexNoise2D
+	version=1 v=2003 1.080000
+	posx=1 v=2003 -53.133297
+	posy=1 v=2003 751.822754
+	previewswatch=1 v=2002 1
+	classname=1 v=5000 Simplex Noise 2D
+	submenuname=1 v=5000 Patterns
+	helpid=1 v=2002 79
+	grpnodecolor=1 v=5012 3
+	grpPosX=1 v=2003 -765.916992
+	grpPosY=1 v=2003 32.194099
+	uvindex_UVs=2 e=2 v=2002 0
+	uvsetname_UVs=2 e=3 v=5000 
+	perinstanceunshared_UVs=2 e=4 v=2001 0
+	valueX_Tile=2 e=5 v=2003 5.000000
+	valueY_Tile=2 e=6 v=2003 5.000000
+	valueX_Offset=2 e=7 v=2003 0.000000
+	valueY_Offset=2 e=8 v=2003 0.000000
+	value_Brightness=2 e=10 v=2003 130.000000
+	group=159
+	ISC=3
+		SVT=5001 3001 0 0 0 _UV
+		SVT=5001 2003 0 0 0 Brightness
+		SVT=1001 1002 0 0 0 
+	OSC=2
+		SVT=5001 2003 0 Noise
+		CC=1
+			C=160 0 0 169 1 2 0
+			CPC=0
+		SVT=1001 1002 0 
+		CC=0
+#NT=10100 1 Simplex Noise 3D-Hw Shader Nodes-Patterns
+	PC=19
+	name=1 v=5000 SimplexNoise3D
+	version=1 v=2003 1.081000
+	posx=1 v=2003 -51.595898
+	posy=1 v=2003 908.453125
+	previewswatch=1 v=2002 1
+	classname=1 v=5000 Simplex Noise 3D
+	submenuname=1 v=5000 Patterns
+	helpid=1 v=2002 79
+	grpnodecolor=1 v=5012 3
+	grpPosX=1 v=2003 -765.916992
+	grpPosY=1 v=2003 32.194099
+	uvindex_UVs=2 e=2 v=2002 0
+	uvsetname_UVs=2 e=3 v=5000 
+	perinstanceunshared_UVs=2 e=4 v=2001 0
+	valueX_Tile=2 e=5 v=2003 5.000000
+	valueY_Tile=2 e=6 v=2003 5.000000
+	valueX_Offset=2 e=7 v=2003 0.000000
+	valueY_Offset=2 e=8 v=2003 0.000000
+	value_Brightness=2 e=10 v=2003 10.000000
+	group=159
+	ISC=4
+		SVT=5001 3001 0 0 0 _UV
+		SVT=5001 2003 0 0 0 Time
+		SVT=5001 2003 0 0 0 Brightness
+		SVT=1001 1002 0 0 0 
+	OSC=2
+		SVT=5001 2003 0 Noise
+		CC=1
+			C=161 0 0 169 2 3 0
+			CPC=0
+		SVT=1001 1002 0 
+		CC=0
+#NT=20016 0
+	PC=2
+	posx=1 v=2003 -689.207458
+	posy=1 v=2003 487.082001
+	group=159
+	ISC=2
+		SVT=5001 3001 1 0 0 
+		SVT=5001 2003 2 0 0 
+	OSC=1
+		SVT=5001 3001 3 
+		CC=1
+			C=162 0 3 160 0 0 0
+			CPC=0
+#NT=20017 0
+	PC=6
+	name=1 v=5000 vIncline_Scale_MNPR
+	posx=1 v=2003 -887.549072
+	posy=1 v=2003 592.166748
+	defineinheader=2 e=0 v=2001 1
+	uiorder=2 e=0 v=2002 25
+	uigroup=2 e=0 v=5000 Stylization ( procedural )
+	group=159
+	ISC=0
+	OSC=1
+		SVT=5001 2003 1 
+		CC=2
+			C=163 0 1 162 1 2 0
+			CPC=0
+			C=163 0 1 166 1 2 0
+			CPC=0
+#NT=20017 0
+	PC=7
+	name=1 v=5000 vIncline_Intensity_MNPR
+	posx=1 v=2003 -276.420471
+	posy=1 v=2003 842.415161
+	value=2 e=0 v=2003 10.000000
+	defineinheader=2 e=0 v=2001 1
+	uiorder=2 e=0 v=2002 26
+	uigroup=2 e=0 v=5000 Stylization ( procedural )
+	group=159
+	ISC=0
+	OSC=1
+		SVT=5001 2003 1 
+		CC=2
+			C=164 0 1 160 1 0 0
+			CPC=0
+			C=164 0 1 161 2 0 0
+			CPC=0
+#NT=20108 0
+	PC=3
+	posx=1 v=2003 -271.755432
+	posy=1 v=2003 952.470703
+	collapsed=1 v=2001 1
+	group=159
+	ISC=1
+		SVT=5001 3002 1 0 0 
+	OSC=6
+		SVT=5001 2003 2 
+		CC=0
+		SVT=5001 2003 3 
+		CC=0
+		SVT=5001 3001 4 
+		CC=1
+			C=165 2 4 161 0 0 0
+			CPC=0
+		SVT=5001 2003 5 
+		CC=1
+			C=165 3 5 161 1 0 0
+			CPC=0
+		SVT=5001 3002 6 
+		CC=0
+		SVT=5001 2003 7 
+		CC=0
+#NT=20016 0
+	PC=2
+	posx=1 v=2003 -683.647095
+	posy=1 v=2003 705.726990
+	group=159
+	ISC=2
+		SVT=5001 3002 1 0 0 
+		SVT=5001 2003 2 0 0 
+	OSC=1
+		SVT=5001 3002 3 
+		CC=1
+			C=166 0 3 165 0 1 0
+			CPC=0
+#NT=10101 0
+	PC=3
+	posx=1 v=2003 149.000000
+	posy=1 v=2003 719.500000
+	collapsed=1 v=2001 1
+	group=159
+	ISC=2
+		SVT=5001 2003 0 0 0 
+		SVT=1001 1002 0 0 0 
+	OSC=2
+		SVT=5001 2003 0 
+		CC=1
+			C=167 0 0 136 3 4 0
+			CPC=0
+		SVT=1001 1002 0 
+		CC=0
+#NT=20026 0
+	PC=4
+	name=1 v=5000 addControl
+	posx=1 v=2003 566.346863
+	posy=1 v=2003 588.976013
+	collapsed=1 v=2001 1
+	group=159
+	ISC=2
+		SVT=5001 2003 1 0 0 
+		SVT=5001 2003 2 0 0 
+	OSC=1
+		SVT=5001 2003 3 
+		CC=1
+			C=168 0 3 172 2 3 0
+			CPC=0
+#NT=20093 0
+	PC=3
+	name=1 v=5000 If_3D
+	posx=1 v=2003 170.962387
+	posy=1 v=2003 689.328064
+	group=159
+	ISC=3
+		SVT=2001 2001 1 0 0 
+		SVT=5001 2003 2 0 0 
+		SVT=5001 2003 3 0 0 
+	OSC=1
+		SVT=5001 2003 4 
+		CC=1
+			C=169 0 4 173 0 0 0
+			CPC=0
+#NT=20116 0
+	PC=3
+	name=1 v=5000 vIncline_3D_MNPR
+	posx=1 v=2003 -284.082062
+	posy=1 v=2003 467.051453
+	group=159
+	ISC=0
+	OSC=2
+		SVT=2001 2001 1 
+		CC=0
+		SVT=2001 2001 2 
+		CC=1
+			C=170 1 2 169 0 1 0
+			CPC=0
+#NT=20116 0
+	PC=4
+	name=1 v=5000 vIncline_Procedural_MNPR
+	posx=1 v=2003 -291.474487
+	posy=1 v=2003 163.594467
+	value=2 e=1 v=2001 0
+	group=159
+	ISC=0
+	OSC=2
+		SVT=2001 2001 1 
+		CC=0
+		SVT=2001 2001 2 
+		CC=1
+			C=171 1 2 172 0 1 0
+			CPC=0
+#NT=20093 0
+	PC=3
+	name=1 v=5000 If_Procedural
+	posx=1 v=2003 671.659363
+	posy=1 v=2003 353.686493
+	group=159
+	ISC=3
+		SVT=2001 2001 1 0 0 
+		SVT=5001 2003 2 0 0 
+		SVT=5001 2003 3 0 0 
+	OSC=1
+		SVT=5001 2003 4 
+		CC=1
+			C=172 0 4 167 0 0 0
+			CPC=0
+#NT=10100 0
+	PC=6
+	name=1 v=5000 Shift
+	posx=1 v=2003 371.958588
+	posy=1 v=2003 777.944397
+	collapsed=1 v=2001 1
+	grpPosX=1 v=2003 41.000000
+	grpPosY=1 v=2003 946.500000
+	group=159
+	ISC=2
+		SVT=5001 2003 0 0 0 
+		SVT=1001 1002 0 0 0 
+	OSC=2
+		SVT=5001 2003 0 
+		CC=1
+			C=173 0 0 176 0 1 0
+			CPC=0
+		SVT=1001 1002 0 
+		CC=0
+#NT=10101 0
+	PC=3
+	posx=1 v=2003 680.000000
+	posy=1 v=2003 946.500000
+	collapsed=1 v=2001 1
+	group=173
+	ISC=2
+		SVT=5001 2003 0 0 0 
+		SVT=1001 1002 0 0 0 
+	OSC=2
+		SVT=5001 2003 0 
+		CC=1
+			C=174 0 0 168 1 2 0
+			CPC=0
+		SVT=1001 1002 0 
+		CC=0
+#NT=20017 0
+	PC=11
+	name=1 v=5000 vIncline_Shift_MNPR
+	posx=1 v=2003 241.676056
+	posy=1 v=2003 1027.967041
+	value=2 e=0 v=2003 0.000000
+	defineinheader=2 e=0 v=2001 1
+	uiorder=2 e=0 v=2002 27
+	uigroup=2 e=0 v=5000 Stylization ( procedural )
+	uimin=2 e=0 v=2003 -1.000000
+	uisoftmin=2 e=0 v=2003 -1.000000
+	uimax=2 e=0 v=2003 1.000000
+	uisoftmax=2 e=0 v=2003 1.000000
+	group=173
+	ISC=0
+	OSC=1
+		SVT=5001 2003 1 
+		CC=1
+			C=175 0 1 176 1 2 0
+			CPC=0
+#NT=20026 0
+	PC=3
+	name=1 v=5000 Shift_Op
+	posx=1 v=2003 480.642944
+	posy=1 v=2003 866.073059
+	group=173
+	ISC=2
+		SVT=5001 2003 1 0 0 
+		SVT=5001 2003 2 0 0 
+	OSC=1
+		SVT=5001 2003 3 
+		CC=1
+			C=176 0 3 174 0 0 0
+			CPC=0
+#NT=10100 0
+	PC=16
+	name=1 v=5000 edge_Procedural
+	posx=1 v=2003 449.685089
+	posy=1 v=2003 1739.158203
+	collapsed=1 v=2001 1
+	grpPosX=1 v=2003 -1089.000000
+	grpPosY=1 v=2003 719.500000
+	value_Edge_3D_MNPR=2 e=1 v=2001 1
+	value_Edge_Procedural_MNPR=2 e=1 v=2001 0
+	uvindex_UVs=2 e=2 v=2002 0
+	uvsetname_UVs=2 e=3 v=5000 
+	perinstanceunshared_UVs=2 e=4 v=2001 0
+	valueX_Tile=2 e=5 v=2003 5.000000
+	valueY_Tile=2 e=6 v=2003 5.000000
+	valueX_Offset=2 e=7 v=2003 0.000000
+	valueY_Offset=2 e=8 v=2003 0.000000
+	value_Brightness=2 e=10 v=2003 10.000000
+	group=45
+	ISC=5
+		SVT=5001 2003 0 0 0 Edge Intensity
+		SVT=5001 2003 0 0 0 Edge Width
+		SVT=5001 3001 0 0 0 _UV
+		SVT=5001 3002 0 0 0 World Position
+		SVT=1001 1002 0 0 0 
+	OSC=5
+		SVT=5001 2003 0 Edge Intensity
+		CC=1
+			C=177 0 0 195 0 1 0
+			CPC=0
+		SVT=5001 2003 0 Edge Width
+		CC=1
+			C=177 1 0 195 1 2 0
+			CPC=0
+		SVT=5001 3001 0 _UV
+		CC=1
+			C=177 2 0 180 0 1 0
+			CPC=0
+		SVT=5001 3002 0 World Position
+		CC=1
+			C=177 3 0 183 0 1 0
+			CPC=0
+		SVT=1001 1002 0 
+		CC=0
+#NT=10100 1 Simplex Noise 2D-Hw Shader Nodes-Patterns
+	PC=19
+	name=1 v=5000 SimplexNoise2D
+	version=1 v=2003 1.080000
+	posx=1 v=2003 -53.133297
+	posy=1 v=2003 751.822754
+	previewswatch=1 v=2002 1
+	classname=1 v=5000 Simplex Noise 2D
+	submenuname=1 v=5000 Patterns
+	helpid=1 v=2002 79
+	grpnodecolor=1 v=5012 3
+	grpPosX=1 v=2003 -765.916992
+	grpPosY=1 v=2003 32.194099
+	uvindex_UVs=2 e=2 v=2002 0
+	uvsetname_UVs=2 e=3 v=5000 
+	perinstanceunshared_UVs=2 e=4 v=2001 0
+	valueX_Tile=2 e=5 v=2003 5.000000
+	valueY_Tile=2 e=6 v=2003 5.000000
+	valueX_Offset=2 e=7 v=2003 0.000000
+	valueY_Offset=2 e=8 v=2003 0.000000
+	value_Brightness=2 e=10 v=2003 130.000000
+	group=177
+	ISC=3
+		SVT=5001 3001 0 0 0 _UV
+		SVT=5001 2003 0 0 0 Brightness
+		SVT=1001 1002 0 0 0 
+	OSC=2
+		SVT=5001 2003 0 Noise
+		CC=1
+			C=178 0 0 191 0 1 0
+			CPC=0
+		SVT=1001 1002 0 
+		CC=0
+#NT=10100 1 Simplex Noise 3D-Hw Shader Nodes-Patterns
+	PC=19
+	name=1 v=5000 SimplexNoise3D
+	version=1 v=2003 1.081000
+	posx=1 v=2003 -51.595898
+	posy=1 v=2003 908.453125
+	previewswatch=1 v=2002 1
+	classname=1 v=5000 Simplex Noise 3D
+	submenuname=1 v=5000 Patterns
+	helpid=1 v=2002 79
+	grpnodecolor=1 v=5012 3
+	grpPosX=1 v=2003 -765.916992
+	grpPosY=1 v=2003 32.194099
+	uvindex_UVs=2 e=2 v=2002 0
+	uvsetname_UVs=2 e=3 v=5000 
+	perinstanceunshared_UVs=2 e=4 v=2001 0
+	valueX_Tile=2 e=5 v=2003 5.000000
+	valueY_Tile=2 e=6 v=2003 5.000000
+	valueX_Offset=2 e=7 v=2003 0.000000
+	valueY_Offset=2 e=8 v=2003 0.000000
+	value_Brightness=2 e=10 v=2003 10.000000
+	group=177
+	ISC=4
+		SVT=5001 3001 0 0 0 _UV
+		SVT=5001 2003 0 0 0 Time
+		SVT=5001 2003 0 0 0 Brightness
+		SVT=1001 1002 0 0 0 
+	OSC=2
+		SVT=5001 2003 0 Noise
+		CC=1
+			C=179 0 0 193 0 1 0
+			CPC=0
+		SVT=1001 1002 0 
+		CC=0
+#NT=20016 0
+	PC=2
+	posx=1 v=2003 -689.207458
+	posy=1 v=2003 487.082001
+	group=177
+	ISC=2
+		SVT=5001 3001 1 0 0 
+		SVT=5001 2003 2 0 0 
+	OSC=1
+		SVT=5001 3001 3 
+		CC=2
+			C=180 0 3 178 0 0 0
+			CPC=0
+			C=180 0 3 189 0 0 0
+			CPC=0
+#NT=20017 0
+	PC=7
+	name=1 v=5000 Edge_Intensity_MNPR
+	posx=1 v=2003 -276.420471
+	posy=1 v=2003 842.415161
+	value=2 e=0 v=2003 10.000000
+	defineinheader=2 e=0 v=2001 1
+	uiorder=2 e=0 v=2002 31
+	uigroup=2 e=0 v=5000 Stylization ( procedural )
+	group=177
+	ISC=0
+	OSC=1
+		SVT=5001 2003 1 
+		CC=2
+			C=181 0 1 178 1 0 0
+			CPC=0
+			C=181 0 1 179 2 0 0
+			CPC=0
+#NT=20108 0
+	PC=4
+	name=1 v=5000 worldXYZ
+	posx=1 v=2003 -275.352509
+	posy=1 v=2003 1016.019653
+	collapsed=1 v=2001 1
+	group=177
+	ISC=1
+		SVT=5001 3002 1 0 0 
+	OSC=6
+		SVT=5001 2003 2 
+		CC=0
+		SVT=5001 2003 3 
+		CC=0
+		SVT=5001 3001 4 
+		CC=2
+			C=182 2 4 179 0 0 0
+			CPC=0
+			C=182 2 4 190 0 0 0
+			CPC=0
+		SVT=5001 2003 5 
+		CC=2
+			C=182 3 5 179 1 0 0
+			CPC=0
+			C=182 3 5 190 1 0 0
+			CPC=0
+		SVT=5001 3002 6 
+		CC=0
+		SVT=5001 2003 7 
+		CC=0
+#NT=20016 0
+	PC=2
+	posx=1 v=2003 -683.647095
+	posy=1 v=2003 705.726990
+	group=177
+	ISC=2
+		SVT=5001 3002 1 0 0 
+		SVT=5001 2003 2 0 0 
+	OSC=1
+		SVT=5001 3002 3 
+		CC=1
+			C=183 0 3 182 0 1 0
+			CPC=0
+#NT=10101 0
+	PC=3
+	posx=1 v=2003 149.000000
+	posy=1 v=2003 719.500000
+	collapsed=1 v=2001 1
+	group=177
+	ISC=3
+		SVT=5001 2003 0 0 0 Edge Intensity
+		SVT=5001 2003 0 0 0 Edge Width
+		SVT=1001 1002 0 0 0 
+	OSC=3
+		SVT=5001 2003 0 Edge Intensity
+		CC=1
+			C=184 0 0 137 0 1 0
+			CPC=0
+		SVT=5001 2003 0 Edge Width
+		CC=1
+			C=184 1 0 137 1 2 0
+			CPC=0
+		SVT=1001 1002 0 
+		CC=0
+#NT=20116 0
+	PC=3
+	name=1 v=5000 Edge_3D_MNPR
+	posx=1 v=2003 209.693512
+	posy=1 v=2003 632.932678
+	group=177
+	ISC=0
+	OSC=2
+		SVT=2001 2001 1 
+		CC=0
+		SVT=2001 2001 2 
+		CC=1
+			C=185 1 2 192 0 1 0
+			CPC=0
+#NT=20116 0
+	PC=4
+	name=1 v=5000 Edge_Procedural_MNPR
+	posx=1 v=2003 1041.998047
+	posy=1 v=2003 424.959473
+	value=2 e=1 v=2001 0
+	group=177
+	ISC=0
+	OSC=2
+		SVT=2001 2001 1 
+		CC=0
+		SVT=2001 2001 2 
+		CC=1
+			C=186 1 2 196 0 1 0
+			CPC=0
+#NT=20017 0
+	PC=6
+	name=1 v=5000 Edge_Scale_MNPR
+	posx=1 v=2003 -933.994202
+	posy=1 v=2003 604.326599
+	defineinheader=2 e=0 v=2001 1
+	uiorder=2 e=0 v=2002 30
+	uigroup=2 e=0 v=5000 Stylization ( procedural )
+	group=177
+	ISC=0
+	OSC=1
+		SVT=5001 2003 1 
+		CC=2
+			C=187 0 1 180 1 2 0
+			CPC=0
+			C=187 0 1 183 1 2 0
+			CPC=0
+#NT=20017 0
+	PC=7
+	name=1 v=5000 Width_Intensity_MNPR
+	posx=1 v=2003 -274.589203
+	posy=1 v=2003 1158.290405
+	value=2 e=0 v=2003 10.000000
+	defineinheader=2 e=0 v=2001 1
+	uiorder=2 e=0 v=2002 32
+	uigroup=2 e=0 v=5000 Stylization ( procedural )
+	group=177
+	ISC=0
+	OSC=1
+		SVT=5001 2003 1 
+		CC=2
+			C=188 0 1 189 1 0 0
+			CPC=0
+			C=188 0 1 190 2 0 0
+			CPC=0
+#NT=10100 1 Simplex Noise 2D-Hw Shader Nodes-Patterns
+	PC=19
+	name=1 v=5000 SimplexNoise2D
+	version=1 v=2003 1.080000
+	posx=1 v=2003 -52.904411
+	posy=1 v=2003 1089.034546
+	previewswatch=1 v=2002 1
+	classname=1 v=5000 Simplex Noise 2D
+	submenuname=1 v=5000 Patterns
+	helpid=1 v=2002 79
+	grpnodecolor=1 v=5012 3
+	grpPosX=1 v=2003 -765.916992
+	grpPosY=1 v=2003 32.194099
+	uvindex_UVs=2 e=2 v=2002 0
+	uvsetname_UVs=2 e=3 v=5000 
+	perinstanceunshared_UVs=2 e=4 v=2001 0
+	valueX_Tile=2 e=5 v=2003 5.000000
+	valueY_Tile=2 e=6 v=2003 5.000000
+	valueX_Offset=2 e=7 v=2003 0.000000
+	valueY_Offset=2 e=8 v=2003 0.000000
+	value_Brightness=2 e=10 v=2003 130.000000
+	group=177
+	ISC=3
+		SVT=5001 3001 0 0 0 _UV
+		SVT=5001 2003 0 0 0 Brightness
+		SVT=1001 1002 0 0 0 
+	OSC=2
+		SVT=5001 2003 0 Noise
+		CC=1
+			C=189 0 0 191 1 2 0
+			CPC=0
+		SVT=1001 1002 0 
+		CC=0
+#NT=10100 1 Simplex Noise 3D-Hw Shader Nodes-Patterns
+	PC=19
+	name=1 v=5000 SimplexNoise3D
+	version=1 v=2003 1.081000
+	posx=1 v=2003 -51.367001
+	posy=1 v=2003 1245.664795
+	previewswatch=1 v=2002 1
+	classname=1 v=5000 Simplex Noise 3D
+	submenuname=1 v=5000 Patterns
+	helpid=1 v=2002 79
+	grpnodecolor=1 v=5012 3
+	grpPosX=1 v=2003 -765.916992
+	grpPosY=1 v=2003 32.194099
+	uvindex_UVs=2 e=2 v=2002 0
+	uvsetname_UVs=2 e=3 v=5000 
+	perinstanceunshared_UVs=2 e=4 v=2001 0
+	valueX_Tile=2 e=5 v=2003 5.000000
+	valueY_Tile=2 e=6 v=2003 5.000000
+	valueX_Offset=2 e=7 v=2003 0.000000
+	valueY_Offset=2 e=8 v=2003 0.000000
+	value_Brightness=2 e=10 v=2003 10.000000
+	group=177
+	ISC=4
+		SVT=5001 3001 0 0 0 _UV
+		SVT=5001 2003 0 0 0 Time
+		SVT=5001 2003 0 0 0 Brightness
+		SVT=1001 1002 0 0 0 
+	OSC=2
+		SVT=5001 2003 0 Noise
+		CC=1
+			C=190 0 0 193 1 2 0
+			CPC=0
+		SVT=1001 1002 0 
+		CC=0
+#NT=20020 0
+	PC=3
+	name=1 v=5000 noise2D
+	posx=1 v=2003 213.495346
+	posy=1 v=2003 842.920166
+	group=177
+	ISC=6
+		SVT=5001 2003 1 0 0 
+		SVT=5001 2003 2 0 0 
+		SVT=5001 3001 3 0 0 
+		SVT=5001 2003 4 0 0 
+		SVT=5001 3002 5 0 0 
+		SVT=5001 2003 6 0 0 
+	OSC=3
+		SVT=5001 3001 7 
+		CC=1
+			C=191 0 7 192 1 2 0
+			CPC=0
+		SVT=5001 3002 8 
+		CC=0
+		SVT=5001 3003 9 
+		CC=0
+#NT=20093 0
+	PC=3
+	name=1 v=5000 if_3D
+	posx=1 v=2003 470.033325
+	posy=1 v=2003 646.202515
+	group=177
+	ISC=3
+		SVT=2001 2001 1 0 0 
+		SVT=5001 3001 2 0 0 
+		SVT=5001 3001 3 0 0 
+	OSC=1
+		SVT=5001 3001 4 
+		CC=1
+			C=192 0 4 198 0 0 0
+			CPC=0
+#NT=20020 0
+	PC=3
+	name=1 v=5000 noise3D
+	posx=1 v=2003 219.162338
+	posy=1 v=2003 1102.852051
+	group=177
+	ISC=6
+		SVT=5001 2003 1 0 0 
+		SVT=5001 2003 2 0 0 
+		SVT=5001 3001 3 0 0 
+		SVT=5001 2003 4 0 0 
+		SVT=5001 3002 5 0 0 
+		SVT=5001 2003 6 0 0 
+	OSC=3
+		SVT=5001 3001 7 
+		CC=1
+			C=193 0 7 192 2 3 0
+			CPC=0
+		SVT=5001 3002 8 
+		CC=0
+		SVT=5001 3003 9 
+		CC=0
+#NT=20026 0
+	PC=3
+	name=1 v=5000 AddControl
+	posx=1 v=2003 1046.083862
+	posy=1 v=2003 658.439392
+	group=177
+	ISC=2
+		SVT=5001 3001 1 0 0 
+		SVT=5001 3001 2 0 0 
+	OSC=1
+		SVT=5001 3001 3 
+		CC=1
+			C=194 0 3 196 2 3 0
+			CPC=0
+#NT=20020 0
+	PC=4
+	name=1 v=5000 floatwify
+	posx=1 v=2003 -268.842682
+	posy=1 v=2003 332.094635
+	collapsed=1 v=2001 1
+	group=177
+	ISC=6
+		SVT=5001 2003 1 0 0 
+		SVT=5001 2003 2 0 0 
+		SVT=5001 3001 3 0 0 
+		SVT=5001 2003 4 0 0 
+		SVT=5001 3002 5 0 0 
+		SVT=5001 2003 6 0 0 
+	OSC=3
+		SVT=5001 3001 7 
+		CC=2
+			C=195 0 7 194 0 1 0
+			CPC=0
+			C=195 0 7 196 1 2 0
+			CPC=0
+		SVT=5001 3002 8 
+		CC=0
+		SVT=5001 3003 9 
+		CC=0
+#NT=20093 0
+	PC=2
+	posx=1 v=2003 1283.503784
+	posy=1 v=2003 662.912354
+	group=177
+	ISC=3
+		SVT=2001 2001 1 0 0 
+		SVT=5001 3001 2 0 0 
+		SVT=5001 3001 3 0 0 
+	OSC=1
+		SVT=5001 3001 4 
+		CC=1
+			C=196 0 4 197 0 1 0
+			CPC=0
+#NT=20108 0
+	PC=2
+	posx=1 v=2003 1557.069214
+	posy=1 v=2003 712.284668
+	group=177
+	ISC=1
+		SVT=5001 3001 1 0 0 
+	OSC=6
+		SVT=5001 2003 2 
+		CC=1
+			C=197 0 2 184 0 0 0
+			CPC=0
+		SVT=5001 2003 3 
+		CC=1
+			C=197 1 3 184 1 0 0
+			CPC=0
+		SVT=5001 3001 4 
+		CC=0
+		SVT=5001 2003 5 
+		CC=0
+		SVT=5001 3002 6 
+		CC=0
+		SVT=5001 2003 7 
+		CC=0
+#NT=10100 0
+	PC=6
+	name=1 v=5000 Shift
+	posx=1 v=2003 728.562988
+	posy=1 v=2003 725.902283
+	collapsed=1 v=2001 1
+	grpPosX=1 v=2003 41.000000
+	grpPosY=1 v=2003 946.500000
+	group=177
+	ISC=2
+		SVT=5001 3001 0 0 0 
+		SVT=1001 1002 0 0 0 
+	OSC=2
+		SVT=5001 3001 0 
+		CC=1
+			C=198 0 0 201 0 1 0
+			CPC=0
+		SVT=1001 1002 0 
+		CC=0
+#NT=10101 0
+	PC=3
+	posx=1 v=2003 680.000000
+	posy=1 v=2003 946.500000
+	collapsed=1 v=2001 1
+	group=198
+	ISC=2
+		SVT=5001 3001 0 0 0 
+		SVT=1001 1002 0 0 0 
+	OSC=2
+		SVT=5001 3001 0 
+		CC=1
+			C=199 0 0 194 1 2 0
+			CPC=0
+		SVT=1001 1002 0 
+		CC=0
+#NT=20017 0
+	PC=11
+	name=1 v=5000 Edge_Shift_MNPR
+	posx=1 v=2003 49.506958
+	posy=1 v=2003 1062.084961
+	value=2 e=0 v=2003 0.000000
+	defineinheader=2 e=0 v=2001 1
+	uiorder=2 e=0 v=2002 33
+	uigroup=2 e=0 v=5000 Stylization ( procedural )
+	uimin=2 e=0 v=2003 -1.000000
+	uisoftmin=2 e=0 v=2003 -1.000000
+	uimax=2 e=0 v=2003 1.000000
+	uisoftmax=2 e=0 v=2003 1.000000
+	group=198
+	ISC=0
+	OSC=1
+		SVT=5001 2003 1 
+		CC=2
+			C=200 0 1 202 0 1 0
+			CPC=0
+			C=200 0 1 202 1 2 0
+			CPC=0
+#NT=20026 0
+	PC=3
+	name=1 v=5000 Shift_Op
+	posx=1 v=2003 480.642944
+	posy=1 v=2003 866.073059
+	group=198
+	ISC=2
+		SVT=5001 3001 1 0 0 
+		SVT=5001 3001 2 0 0 
+	OSC=1
+		SVT=5001 3001 3 
+		CC=1
+			C=201 0 3 199 0 0 0
+			CPC=0
+#NT=20020 0
+	PC=2
+	posx=1 v=2003 264.411621
+	posy=1 v=2003 1050.920410
+	group=198
+	ISC=6
+		SVT=5001 2003 1 0 0 
+		SVT=5001 2003 2 0 0 
+		SVT=5001 3001 3 0 0 
+		SVT=5001 2003 4 0 0 
+		SVT=5001 3002 5 0 0 
+		SVT=5001 2003 6 0 0 
+	OSC=3
+		SVT=5001 3001 7 
+		CC=1
+			C=202 0 7 201 1 2 0
+			CPC=0
+		SVT=5001 3002 8 
+		CC=0
+		SVT=5001 3003 9 
+		CC=0
+#NT=10100 0
+	PC=16
+	name=1 v=5000 Transition_Procedural
+	posx=1 v=2003 451.573242
+	posy=1 v=2003 1841.641724
+	collapsed=1 v=2001 1
+	grpPosX=1 v=2003 -1089.000000
+	grpPosY=1 v=2003 719.500000
+	value_Transition_3D_MNPR=2 e=1 v=2001 1
+	value_Transition_Procedural_MNPR=2 e=1 v=2001 0
+	uvindex_UVs=2 e=2 v=2002 0
+	uvsetname_UVs=2 e=3 v=5000 
+	perinstanceunshared_UVs=2 e=4 v=2001 0
+	valueX_Tile=2 e=5 v=2003 5.000000
+	valueY_Tile=2 e=6 v=2003 5.000000
+	valueX_Offset=2 e=7 v=2003 0.000000
+	valueY_Offset=2 e=8 v=2003 0.000000
+	value_Brightness=2 e=10 v=2003 10.000000
+	group=45
+	ISC=4
+		SVT=5001 2003 0 0 0 Edge Fidelity
+		SVT=5001 3001 0 0 0 _UV
+		SVT=5001 3002 0 0 0 World Position
+		SVT=1001 1002 0 0 0 
+	OSC=4
+		SVT=5001 2003 0 Edge Fidelity
+		CC=2
+			C=203 0 0 212 0 1 0
+			CPC=0
+			C=203 0 0 216 1 2 0
+			CPC=0
+		SVT=5001 3001 0 _UV
+		CC=1
+			C=203 1 0 206 0 1 0
+			CPC=0
+		SVT=5001 3002 0 World Position
+		CC=1
+			C=203 2 0 210 0 1 0
+			CPC=0
+		SVT=1001 1002 0 
+		CC=0
+#NT=10100 1 Simplex Noise 2D-Hw Shader Nodes-Patterns
+	PC=18
+	name=1 v=5000 SimplexNoise2D
+	version=1 v=2003 1.080000
+	posx=1 v=2003 -53.133297
+	posy=1 v=2003 751.822754
+	classname=1 v=5000 Simplex Noise 2D
+	submenuname=1 v=5000 Patterns
+	helpid=1 v=2002 79
+	grpnodecolor=1 v=5012 3
+	grpPosX=1 v=2003 -765.916992
+	grpPosY=1 v=2003 32.194099
+	uvindex_UVs=2 e=2 v=2002 0
+	uvsetname_UVs=2 e=3 v=5000 
+	perinstanceunshared_UVs=2 e=4 v=2001 0
+	valueX_Tile=2 e=5 v=2003 5.000000
+	valueY_Tile=2 e=6 v=2003 5.000000
+	valueX_Offset=2 e=7 v=2003 0.000000
+	valueY_Offset=2 e=8 v=2003 0.000000
+	value_Brightness=2 e=10 v=2003 130.000000
+	group=203
+	ISC=3
+		SVT=5001 3001 0 0 0 _UV
+		SVT=5001 2003 0 0 0 Brightness
+		SVT=1001 1002 0 0 0 
+	OSC=2
+		SVT=5001 2003 0 Noise
+		CC=1
+			C=204 0 0 213 1 2 0
+			CPC=0
+		SVT=1001 1002 0 
+		CC=0
+#NT=10100 1 Simplex Noise 3D-Hw Shader Nodes-Patterns
+	PC=18
+	name=1 v=5000 SimplexNoise3D
+	version=1 v=2003 1.081000
+	posx=1 v=2003 -51.595898
+	posy=1 v=2003 908.453125
+	classname=1 v=5000 Simplex Noise 3D
+	submenuname=1 v=5000 Patterns
+	helpid=1 v=2002 79
+	grpnodecolor=1 v=5012 3
+	grpPosX=1 v=2003 -765.916992
+	grpPosY=1 v=2003 32.194099
+	uvindex_UVs=2 e=2 v=2002 0
+	uvsetname_UVs=2 e=3 v=5000 
+	perinstanceunshared_UVs=2 e=4 v=2001 0
+	valueX_Tile=2 e=5 v=2003 5.000000
+	valueY_Tile=2 e=6 v=2003 5.000000
+	valueX_Offset=2 e=7 v=2003 0.000000
+	valueY_Offset=2 e=8 v=2003 0.000000
+	value_Brightness=2 e=10 v=2003 10.000000
+	group=203
+	ISC=4
+		SVT=5001 3001 0 0 0 _UV
+		SVT=5001 2003 0 0 0 Time
+		SVT=5001 2003 0 0 0 Brightness
+		SVT=1001 1002 0 0 0 
+	OSC=2
+		SVT=5001 2003 0 Noise
+		CC=1
+			C=205 0 0 213 2 3 0
+			CPC=0
+		SVT=1001 1002 0 
+		CC=0
+#NT=20016 0
+	PC=2
+	posx=1 v=2003 -689.207458
+	posy=1 v=2003 487.082001
+	group=203
+	ISC=2
+		SVT=5001 3001 1 0 0 
+		SVT=5001 2003 2 0 0 
+	OSC=1
+		SVT=5001 3001 3 
+		CC=1
+			C=206 0 3 204 0 0 0
+			CPC=0
+#NT=20017 0
+	PC=6
+	name=1 v=5000 Transition_Scale_MNPR
+	posx=1 v=2003 -887.549072
+	posy=1 v=2003 592.166748
+	defineinheader=2 e=0 v=2001 1
+	uiorder=2 e=0 v=2002 35
+	uigroup=2 e=0 v=5000 Stylization ( procedural )
+	group=203
+	ISC=0
+	OSC=1
+		SVT=5001 2003 1 
+		CC=2
+			C=207 0 1 206 1 2 0
+			CPC=0
+			C=207 0 1 210 1 2 0
+			CPC=0
+#NT=20017 0
+	PC=7
+	name=1 v=5000 Transition_Intensity_MNPR
+	posx=1 v=2003 -276.420471
+	posy=1 v=2003 842.415161
+	value=2 e=0 v=2003 10.000000
+	defineinheader=2 e=0 v=2001 1
+	uiorder=2 e=0 v=2002 36
+	uigroup=2 e=0 v=5000 Stylization ( procedural )
+	group=203
+	ISC=0
+	OSC=1
+		SVT=5001 2003 1 
+		CC=2
+			C=208 0 1 204 1 0 0
+			CPC=0
+			C=208 0 1 205 2 0 0
+			CPC=0
+#NT=20108 0
+	PC=3
+	posx=1 v=2003 -271.755432
+	posy=1 v=2003 952.470703
+	collapsed=1 v=2001 1
+	group=203
+	ISC=1
+		SVT=5001 3002 1 0 0 
+	OSC=6
+		SVT=5001 2003 2 
+		CC=0
+		SVT=5001 2003 3 
+		CC=0
+		SVT=5001 3001 4 
+		CC=1
+			C=209 2 4 205 0 0 0
+			CPC=0
+		SVT=5001 2003 5 
+		CC=1
+			C=209 3 5 205 1 0 0
+			CPC=0
+		SVT=5001 3002 6 
+		CC=0
+		SVT=5001 2003 7 
+		CC=0
+#NT=20016 0
+	PC=2
+	posx=1 v=2003 -683.647095
+	posy=1 v=2003 705.726990
+	group=203
+	ISC=2
+		SVT=5001 3002 1 0 0 
+		SVT=5001 2003 2 0 0 
+	OSC=1
+		SVT=5001 3002 3 
+		CC=1
+			C=210 0 3 209 0 1 0
+			CPC=0
+#NT=10101 0
+	PC=3
+	posx=1 v=2003 149.000000
+	posy=1 v=2003 719.500000
+	collapsed=1 v=2001 1
+	group=203
+	ISC=2
+		SVT=5001 2003 0 0 0 
+		SVT=1001 1002 0 0 0 
+	OSC=2
+		SVT=5001 2003 0 
+		CC=1
+			C=211 0 0 137 3 4 0
+			CPC=0
+		SVT=1001 1002 0 
+		CC=0
+#NT=20026 0
+	PC=3
+	name=1 v=5000 addControl
+	posx=1 v=2003 536.403381
+	posy=1 v=2003 597.835266
+	group=203
+	ISC=2
+		SVT=5001 2003 1 0 0 
+		SVT=5001 2003 2 0 0 
+	OSC=1
+		SVT=5001 2003 3 
+		CC=1
+			C=212 0 3 216 2 3 0
+			CPC=0
+#NT=20093 0
+	PC=3
+	name=1 v=5000 If_3D
+	posx=1 v=2003 178.017273
+	posy=1 v=2003 686.828125
+	group=203
+	ISC=3
+		SVT=2001 2001 1 0 0 
+		SVT=5001 2003 2 0 0 
+		SVT=5001 2003 3 0 0 
+	OSC=1
+		SVT=5001 2003 4 
+		CC=1
+			C=213 0 4 217 0 0 0
+			CPC=0
+#NT=20116 0
+	PC=3
+	name=1 v=5000 Transition_3D_MNPR
+	posx=1 v=2003 -284.082062
+	posy=1 v=2003 467.051453
+	group=203
+	ISC=0
+	OSC=2
+		SVT=2001 2001 1 
+		CC=0
+		SVT=2001 2001 2 
+		CC=1
+			C=214 1 2 213 0 1 0
+			CPC=0
+#NT=20116 0
+	PC=4
+	name=1 v=5000 Transition_Procedural_MNPR
+	posx=1 v=2003 -291.474487
+	posy=1 v=2003 163.594467
+	value=2 e=1 v=2001 0
+	group=203
+	ISC=0
+	OSC=2
+		SVT=2001 2001 1 
+		CC=0
+		SVT=2001 2001 2 
+		CC=1
+			C=215 1 2 216 0 1 0
+			CPC=0
+#NT=20093 0
+	PC=3
+	name=1 v=5000 If_Procedural
+	posx=1 v=2003 671.659363
+	posy=1 v=2003 353.686493
+	group=203
+	ISC=3
+		SVT=2001 2001 1 0 0 
+		SVT=5001 2003 2 0 0 
+		SVT=5001 2003 3 0 0 
+	OSC=1
+		SVT=5001 2003 4 
+		CC=1
+			C=216 0 4 211 0 0 0
+			CPC=0
+#NT=10100 0
+	PC=5
+	name=1 v=5000 Shift
+	posx=1 v=2003 363.156342
+	posy=1 v=2003 733.454590
+	grpPosX=1 v=2003 41.000000
+	grpPosY=1 v=2003 946.500000
+	group=203
+	ISC=2
+		SVT=5001 2003 0 0 0 
+		SVT=1001 1002 0 0 0 
+	OSC=2
+		SVT=5001 2003 0 
+		CC=1
+			C=217 0 0 220 0 1 0
+			CPC=0
+		SVT=1001 1002 0 
+		CC=0
+#NT=10101 0
+	PC=2
+	posx=1 v=2003 680.000000
+	posy=1 v=2003 946.500000
+	group=217
+	ISC=2
+		SVT=5001 2003 0 0 0 
+		SVT=1001 1002 0 0 0 
+	OSC=2
+		SVT=5001 2003 0 
+		CC=1
+			C=218 0 0 212 1 2 0
+			CPC=0
+		SVT=1001 1002 0 
+		CC=0
+#NT=20017 0
+	PC=11
+	name=1 v=5000 Transition_Shift_MNPR
+	posx=1 v=2003 241.676056
+	posy=1 v=2003 1027.967041
+	value=2 e=0 v=2003 0.000000
+	defineinheader=2 e=0 v=2001 1
+	uiorder=2 e=0 v=2002 37
+	uigroup=2 e=0 v=5000 Stylization ( procedural )
+	uimin=2 e=0 v=2003 -1.000000
+	uisoftmin=2 e=0 v=2003 -1.000000
+	uimax=2 e=0 v=2003 1.000000
+	uisoftmax=2 e=0 v=2003 1.000000
+	group=217
+	ISC=0
+	OSC=1
+		SVT=5001 2003 1 
+		CC=1
+			C=219 0 1 220 1 2 0
+			CPC=0
+#NT=20026 0
+	PC=3
+	name=1 v=5000 Shift_Op
+	posx=1 v=2003 480.642944
+	posy=1 v=2003 866.073059
+	group=217
+	ISC=2
+		SVT=5001 2003 1 0 0 
+		SVT=5001 2003 2 0 0 
+	OSC=1
+		SVT=5001 2003 3 
+		CC=1
+			C=220 0 3 218 0 0 0
+			CPC=0
+#NT=10100 0
+	PC=16
+	name=1 v=5000 detail_Procedural
+	posx=1 v=2003 453.659210
+	posy=1 v=2003 1935.206299
+	collapsed=1 v=2001 1
+	grpPosX=1 v=2003 -1089.000000
+	grpPosY=1 v=2003 719.500000
+	value_Detail_3D_MNPR=2 e=1 v=2001 1
+	value_Detail_Procedural_MNPR=2 e=1 v=2001 0
+	uvindex_UVs=2 e=2 v=2002 0
+	uvsetname_UVs=2 e=3 v=5000 
+	perinstanceunshared_UVs=2 e=4 v=2001 0
+	valueX_Tile=2 e=5 v=2003 5.000000
+	valueY_Tile=2 e=6 v=2003 5.000000
+	valueX_Offset=2 e=7 v=2003 0.000000
+	valueY_Offset=2 e=8 v=2003 0.000000
+	value_Brightness=2 e=10 v=2003 10.000000
+	group=45
+	ISC=4
+		SVT=5001 2003 0 0 0 Detail
+		SVT=5001 3001 0 0 0 _UV
+		SVT=5001 3002 0 0 0 World Position
+		SVT=1001 1002 0 0 0 
+	OSC=4
+		SVT=5001 2003 0 Detail
+		CC=2
+			C=221 0 0 230 0 1 0
+			CPC=0
+			C=221 0 0 234 1 2 0
+			CPC=0
+		SVT=5001 3001 0 _UV
+		CC=1
+			C=221 1 0 224 0 1 0
+			CPC=0
+		SVT=5001 3002 0 World Position
+		CC=1
+			C=221 2 0 228 0 1 0
+			CPC=0
+		SVT=1001 1002 0 
+		CC=0
+#NT=10100 1 Simplex Noise 2D-Hw Shader Nodes-Patterns
+	PC=19
+	name=1 v=5000 SimplexNoise2D
+	version=1 v=2003 1.080000
+	posx=1 v=2003 -53.133297
+	posy=1 v=2003 751.822754
+	previewswatch=1 v=2002 1
+	classname=1 v=5000 Simplex Noise 2D
+	submenuname=1 v=5000 Patterns
+	helpid=1 v=2002 79
+	grpnodecolor=1 v=5012 3
+	grpPosX=1 v=2003 -765.916992
+	grpPosY=1 v=2003 32.194099
+	uvindex_UVs=2 e=2 v=2002 0
+	uvsetname_UVs=2 e=3 v=5000 
+	perinstanceunshared_UVs=2 e=4 v=2001 0
+	valueX_Tile=2 e=5 v=2003 5.000000
+	valueY_Tile=2 e=6 v=2003 5.000000
+	valueX_Offset=2 e=7 v=2003 0.000000
+	valueY_Offset=2 e=8 v=2003 0.000000
+	value_Brightness=2 e=10 v=2003 130.000000
+	group=221
+	ISC=3
+		SVT=5001 3001 0 0 0 _UV
+		SVT=5001 2003 0 0 0 Brightness
+		SVT=1001 1002 0 0 0 
+	OSC=2
+		SVT=5001 2003 0 Noise
+		CC=1
+			C=222 0 0 231 1 2 0
+			CPC=0
+		SVT=1001 1002 0 
+		CC=0
+#NT=10100 1 Simplex Noise 3D-Hw Shader Nodes-Patterns
+	PC=19
+	name=1 v=5000 SimplexNoise3D
+	version=1 v=2003 1.081000
+	posx=1 v=2003 -51.595898
+	posy=1 v=2003 908.453125
+	previewswatch=1 v=2002 1
+	classname=1 v=5000 Simplex Noise 3D
+	submenuname=1 v=5000 Patterns
+	helpid=1 v=2002 79
+	grpnodecolor=1 v=5012 3
+	grpPosX=1 v=2003 -765.916992
+	grpPosY=1 v=2003 32.194099
+	uvindex_UVs=2 e=2 v=2002 0
+	uvsetname_UVs=2 e=3 v=5000 
+	perinstanceunshared_UVs=2 e=4 v=2001 0
+	valueX_Tile=2 e=5 v=2003 5.000000
+	valueY_Tile=2 e=6 v=2003 5.000000
+	valueX_Offset=2 e=7 v=2003 0.000000
+	valueY_Offset=2 e=8 v=2003 0.000000
+	value_Brightness=2 e=10 v=2003 10.000000
+	group=221
+	ISC=4
+		SVT=5001 3001 0 0 0 _UV
+		SVT=5001 2003 0 0 0 Time
+		SVT=5001 2003 0 0 0 Brightness
+		SVT=1001 1002 0 0 0 
+	OSC=2
+		SVT=5001 2003 0 Noise
+		CC=1
+			C=223 0 0 231 2 3 0
+			CPC=0
+		SVT=1001 1002 0 
+		CC=0
+#NT=20016 0
+	PC=2
+	posx=1 v=2003 -689.207458
+	posy=1 v=2003 487.082001
+	group=221
+	ISC=2
+		SVT=5001 3001 1 0 0 
+		SVT=5001 2003 2 0 0 
+	OSC=1
+		SVT=5001 3001 3 
+		CC=1
+			C=224 0 3 222 0 0 0
+			CPC=0
+#NT=20017 0
+	PC=6
+	name=1 v=5000 Detail_Scale_MNPR
+	posx=1 v=2003 -887.549072
+	posy=1 v=2003 592.166748
+	defineinheader=2 e=0 v=2001 1
+	uiorder=2 e=0 v=2002 40
+	uigroup=2 e=0 v=5000 Stylization ( procedural )
+	group=221
+	ISC=0
+	OSC=1
+		SVT=5001 2003 1 
+		CC=2
+			C=225 0 1 224 1 2 0
+			CPC=0
+			C=225 0 1 228 1 2 0
+			CPC=0
+#NT=20017 0
+	PC=7
+	name=1 v=5000 Detail_Intensity_MNPR
+	posx=1 v=2003 -276.420471
+	posy=1 v=2003 842.415161
+	value=2 e=0 v=2003 10.000000
+	defineinheader=2 e=0 v=2001 1
+	uiorder=2 e=0 v=2002 41
+	uigroup=2 e=0 v=5000 Stylization ( procedural )
+	group=221
+	ISC=0
+	OSC=1
+		SVT=5001 2003 1 
+		CC=2
+			C=226 0 1 222 1 0 0
+			CPC=0
+			C=226 0 1 223 2 0 0
+			CPC=0
+#NT=20108 0
+	PC=3
+	posx=1 v=2003 -271.755432
+	posy=1 v=2003 952.470703
+	collapsed=1 v=2001 1
+	group=221
+	ISC=1
+		SVT=5001 3002 1 0 0 
+	OSC=6
+		SVT=5001 2003 2 
+		CC=0
+		SVT=5001 2003 3 
+		CC=0
+		SVT=5001 3001 4 
+		CC=1
+			C=227 2 4 223 0 0 0
+			CPC=0
+		SVT=5001 2003 5 
+		CC=1
+			C=227 3 5 223 1 0 0
+			CPC=0
+		SVT=5001 3002 6 
+		CC=0
+		SVT=5001 2003 7 
+		CC=0
+#NT=20016 0
+	PC=2
+	posx=1 v=2003 -683.647095
+	posy=1 v=2003 705.726990
+	group=221
+	ISC=2
+		SVT=5001 3002 1 0 0 
+		SVT=5001 2003 2 0 0 
+	OSC=1
+		SVT=5001 3002 3 
+		CC=1
+			C=228 0 3 227 0 1 0
+			CPC=0
+#NT=10101 0
+	PC=3
+	posx=1 v=2003 149.000000
+	posy=1 v=2003 719.500000
+	collapsed=1 v=2001 1
+	group=221
+	ISC=2
+		SVT=5001 2003 0 0 0 
+		SVT=1001 1002 0 0 0 
+	OSC=2
+		SVT=5001 2003 0 
+		CC=1
+			C=229 0 0 138 0 1 0
+			CPC=0
+		SVT=1001 1002 0 
+		CC=0
+#NT=20026 0
+	PC=3
+	name=1 v=5000 addControl
+	posx=1 v=2003 693.846863
+	posy=1 v=2003 570.365112
+	group=221
+	ISC=2
+		SVT=5001 2003 1 0 0 
+		SVT=5001 2003 2 0 0 
+	OSC=1
+		SVT=5001 2003 3 
+		CC=1
+			C=230 0 3 234 2 3 0
+			CPC=0
+#NT=20093 0
+	PC=3
+	name=1 v=5000 If_3D
+	posx=1 v=2003 232.628937
+	posy=1 v=2003 686.828125
+	group=221
+	ISC=3
+		SVT=2001 2001 1 0 0 
+		SVT=5001 2003 2 0 0 
+		SVT=5001 2003 3 0 0 
+	OSC=1
+		SVT=5001 2003 4 
+		CC=1
+			C=231 0 4 235 0 0 0
+			CPC=0
+#NT=20116 0
+	PC=3
+	name=1 v=5000 Detail_3D_MNPR
+	posx=1 v=2003 -284.082062
+	posy=1 v=2003 467.051453
+	group=221
+	ISC=0
+	OSC=2
+		SVT=2001 2001 1 
+		CC=0
+		SVT=2001 2001 2 
+		CC=1
+			C=232 1 2 231 0 1 0
+			CPC=0
+#NT=20116 0
+	PC=4
+	name=1 v=5000 Detail_Procedural_MNPR
+	posx=1 v=2003 -291.474487
+	posy=1 v=2003 163.594467
+	value=2 e=1 v=2001 0
+	group=221
+	ISC=0
+	OSC=2
+		SVT=2001 2001 1 
+		CC=0
+		SVT=2001 2001 2 
+		CC=1
+			C=233 1 2 234 0 1 0
+			CPC=0
+#NT=20093 0
+	PC=3
+	name=1 v=5000 If_Procedural
+	posx=1 v=2003 872.770630
+	posy=1 v=2003 330.353088
+	group=221
+	ISC=3
+		SVT=2001 2001 1 0 0 
+		SVT=5001 2003 2 0 0 
+		SVT=5001 2003 3 0 0 
+	OSC=1
+		SVT=5001 2003 4 
+		CC=1
+			C=234 0 4 229 0 0 0
+			CPC=0
+#NT=10100 0
+	PC=5
+	name=1 v=5000 Shift
+	posx=1 v=2003 442.776001
+	posy=1 v=2003 732.764343
+	grpPosX=1 v=2003 41.000000
+	grpPosY=1 v=2003 946.500000
+	group=221
+	ISC=2
+		SVT=5001 2003 0 0 0 
+		SVT=1001 1002 0 0 0 
+	OSC=2
+		SVT=5001 2003 0 
+		CC=1
+			C=235 0 0 238 0 1 0
+			CPC=0
+		SVT=1001 1002 0 
+		CC=0
+#NT=10101 0
+	PC=2
+	posx=1 v=2003 680.000000
+	posy=1 v=2003 946.500000
+	group=235
+	ISC=2
+		SVT=5001 2003 0 0 0 
+		SVT=1001 1002 0 0 0 
+	OSC=2
+		SVT=5001 2003 0 
+		CC=1
+			C=236 0 0 230 1 2 0
+			CPC=0
+		SVT=1001 1002 0 
+		CC=0
+#NT=20017 0
+	PC=11
+	name=1 v=5000 Detail_Shift_MNPR
+	posx=1 v=2003 241.676056
+	posy=1 v=2003 1027.967041
+	value=2 e=0 v=2003 0.000000
+	defineinheader=2 e=0 v=2001 1
+	uiorder=2 e=0 v=2002 42
+	uigroup=2 e=0 v=5000 Stylization ( procedural )
+	uimin=2 e=0 v=2003 -1.000000
+	uisoftmin=2 e=0 v=2003 -1.000000
+	uimax=2 e=0 v=2003 1.000000
+	uisoftmax=2 e=0 v=2003 1.000000
+	group=235
+	ISC=0
+	OSC=1
+		SVT=5001 2003 1 
+		CC=1
+			C=237 0 1 238 1 2 0
+			CPC=0
+#NT=20026 0
+	PC=3
+	name=1 v=5000 Shift_Op
+	posx=1 v=2003 480.642944
+	posy=1 v=2003 866.073059
+	group=235
+	ISC=2
+		SVT=5001 2003 1 0 0 
+		SVT=5001 2003 2 0 0 
+	OSC=1
+		SVT=5001 2003 3 
+		CC=1
+			C=238 0 3 236 0 0 0
+			CPC=0
+#NT=10100 0
+	PC=16
+	name=1 v=5000 shape_Procedural
+	posx=1 v=2003 453.745117
+	posy=1 v=2003 2032.301392
+	collapsed=1 v=2001 1
+	grpPosX=1 v=2003 -1089.000000
+	grpPosY=1 v=2003 719.500000
+	value_Shape_3D_MNPR=2 e=1 v=2001 1
+	value_Shape_Procedural_MNPR=2 e=1 v=2001 0
+	uvindex_UVs=2 e=2 v=2002 0
+	uvsetname_UVs=2 e=3 v=5000 
+	perinstanceunshared_UVs=2 e=4 v=2001 0
+	valueX_Tile=2 e=5 v=2003 5.000000
+	valueY_Tile=2 e=6 v=2003 5.000000
+	valueX_Offset=2 e=7 v=2003 0.000000
+	valueY_Offset=2 e=8 v=2003 0.000000
+	value_Brightness=2 e=10 v=2003 10.000000
+	group=45
+	ISC=4
+		SVT=5001 2003 0 0 0 Shape
+		SVT=5001 3001 0 0 0 _UV
+		SVT=5001 3002 0 0 0 World Position
+		SVT=1001 1002 0 0 0 
+	OSC=4
+		SVT=5001 2003 0 Shape
+		CC=2
+			C=239 0 0 248 0 1 0
+			CPC=0
+			C=239 0 0 252 1 2 0
+			CPC=0
+		SVT=5001 3001 0 _UV
+		CC=1
+			C=239 1 0 242 0 1 0
+			CPC=0
+		SVT=5001 3002 0 World Position
+		CC=1
+			C=239 2 0 246 0 1 0
+			CPC=0
+		SVT=1001 1002 0 
+		CC=0
+#NT=10100 1 Simplex Noise 2D-Hw Shader Nodes-Patterns
+	PC=19
+	name=1 v=5000 SimplexNoise2D
+	version=1 v=2003 1.080000
+	posx=1 v=2003 -53.133297
+	posy=1 v=2003 751.822754
+	previewswatch=1 v=2002 1
+	classname=1 v=5000 Simplex Noise 2D
+	submenuname=1 v=5000 Patterns
+	helpid=1 v=2002 79
+	grpnodecolor=1 v=5012 3
+	grpPosX=1 v=2003 -765.916992
+	grpPosY=1 v=2003 32.194099
+	uvindex_UVs=2 e=2 v=2002 0
+	uvsetname_UVs=2 e=3 v=5000 
+	perinstanceunshared_UVs=2 e=4 v=2001 0
+	valueX_Tile=2 e=5 v=2003 5.000000
+	valueY_Tile=2 e=6 v=2003 5.000000
+	valueX_Offset=2 e=7 v=2003 0.000000
+	valueY_Offset=2 e=8 v=2003 0.000000
+	value_Brightness=2 e=10 v=2003 130.000000
+	group=239
+	ISC=3
+		SVT=5001 3001 0 0 0 _UV
+		SVT=5001 2003 0 0 0 Brightness
+		SVT=1001 1002 0 0 0 
+	OSC=2
+		SVT=5001 2003 0 Noise
+		CC=1
+			C=240 0 0 249 1 2 0
+			CPC=0
+		SVT=1001 1002 0 
+		CC=0
+#NT=10100 1 Simplex Noise 3D-Hw Shader Nodes-Patterns
+	PC=19
+	name=1 v=5000 SimplexNoise3D
+	version=1 v=2003 1.081000
+	posx=1 v=2003 -51.595898
+	posy=1 v=2003 908.453125
+	previewswatch=1 v=2002 1
+	classname=1 v=5000 Simplex Noise 3D
+	submenuname=1 v=5000 Patterns
+	helpid=1 v=2002 79
+	grpnodecolor=1 v=5012 3
+	grpPosX=1 v=2003 -765.916992
+	grpPosY=1 v=2003 32.194099
+	uvindex_UVs=2 e=2 v=2002 0
+	uvsetname_UVs=2 e=3 v=5000 
+	perinstanceunshared_UVs=2 e=4 v=2001 0
+	valueX_Tile=2 e=5 v=2003 5.000000
+	valueY_Tile=2 e=6 v=2003 5.000000
+	valueX_Offset=2 e=7 v=2003 0.000000
+	valueY_Offset=2 e=8 v=2003 0.000000
+	value_Brightness=2 e=10 v=2003 10.000000
+	group=239
+	ISC=4
+		SVT=5001 3001 0 0 0 _UV
+		SVT=5001 2003 0 0 0 Time
+		SVT=5001 2003 0 0 0 Brightness
+		SVT=1001 1002 0 0 0 
+	OSC=2
+		SVT=5001 2003 0 Noise
+		CC=1
+			C=241 0 0 249 2 3 0
+			CPC=0
+		SVT=1001 1002 0 
+		CC=0
+#NT=20016 0
+	PC=2
+	posx=1 v=2003 -689.207458
+	posy=1 v=2003 487.082001
+	group=239
+	ISC=2
+		SVT=5001 3001 1 0 0 
+		SVT=5001 2003 2 0 0 
+	OSC=1
+		SVT=5001 3001 3 
+		CC=1
+			C=242 0 3 240 0 0 0
+			CPC=0
+#NT=20017 0
+	PC=6
+	name=1 v=5000 Shape_Scale_MNPR
+	posx=1 v=2003 -887.549072
+	posy=1 v=2003 592.166748
+	defineinheader=2 e=0 v=2001 1
+	uiorder=2 e=0 v=2002 45
+	uigroup=2 e=0 v=5000 Stylization ( procedural )
+	group=239
+	ISC=0
+	OSC=1
+		SVT=5001 2003 1 
+		CC=2
+			C=243 0 1 242 1 2 0
+			CPC=0
+			C=243 0 1 246 1 2 0
+			CPC=0
+#NT=20017 0
+	PC=7
+	name=1 v=5000 Shape_Intensity_MNPR
+	posx=1 v=2003 -276.420471
+	posy=1 v=2003 842.415161
+	value=2 e=0 v=2003 10.000000
+	defineinheader=2 e=0 v=2001 1
+	uiorder=2 e=0 v=2002 46
+	uigroup=2 e=0 v=5000 Stylization ( procedural )
+	group=239
+	ISC=0
+	OSC=1
+		SVT=5001 2003 1 
+		CC=2
+			C=244 0 1 240 1 0 0
+			CPC=0
+			C=244 0 1 241 2 0 0
+			CPC=0
+#NT=20108 0
+	PC=3
+	posx=1 v=2003 -271.755432
+	posy=1 v=2003 952.470703
+	collapsed=1 v=2001 1
+	group=239
+	ISC=1
+		SVT=5001 3002 1 0 0 
+	OSC=6
+		SVT=5001 2003 2 
+		CC=0
+		SVT=5001 2003 3 
+		CC=0
+		SVT=5001 3001 4 
+		CC=1
+			C=245 2 4 241 0 0 0
+			CPC=0
+		SVT=5001 2003 5 
+		CC=1
+			C=245 3 5 241 1 0 0
+			CPC=0
+		SVT=5001 3002 6 
+		CC=0
+		SVT=5001 2003 7 
+		CC=0
+#NT=20016 0
+	PC=2
+	posx=1 v=2003 -683.647095
+	posy=1 v=2003 705.726990
+	group=239
+	ISC=2
+		SVT=5001 3002 1 0 0 
+		SVT=5001 2003 2 0 0 
+	OSC=1
+		SVT=5001 3002 3 
+		CC=1
+			C=246 0 3 245 0 1 0
+			CPC=0
+#NT=10101 0
+	PC=3
+	posx=1 v=2003 149.000000
+	posy=1 v=2003 719.500000
+	collapsed=1 v=2001 1
+	group=239
+	ISC=2
+		SVT=5001 2003 0 0 0 
+		SVT=1001 1002 0 0 0 
+	OSC=2
+		SVT=5001 2003 0 
+		CC=1
+			C=247 0 0 138 1 2 0
+			CPC=0
+		SVT=1001 1002 0 
+		CC=0
+#NT=20026 0
+	PC=3
+	name=1 v=5000 addControl
+	posx=1 v=2003 646.271362
+	posy=1 v=2003 577.839600
+	group=239
+	ISC=2
+		SVT=5001 2003 1 0 0 
+		SVT=5001 2003 2 0 0 
+	OSC=1
+		SVT=5001 2003 3 
+		CC=1
+			C=248 0 3 252 2 3 0
+			CPC=0
+#NT=20093 0
+	PC=3
+	name=1 v=5000 If_3D
+	posx=1 v=2003 232.628937
+	posy=1 v=2003 686.828125
+	group=239
+	ISC=3
+		SVT=2001 2001 1 0 0 
+		SVT=5001 2003 2 0 0 
+		SVT=5001 2003 3 0 0 
+	OSC=1
+		SVT=5001 2003 4 
+		CC=1
+			C=249 0 4 253 0 0 0
+			CPC=0
+#NT=20116 0
+	PC=3
+	name=1 v=5000 Shape_3D_MNPR
+	posx=1 v=2003 -284.082062
+	posy=1 v=2003 467.051453
+	group=239
+	ISC=0
+	OSC=2
+		SVT=2001 2001 1 
+		CC=0
+		SVT=2001 2001 2 
+		CC=1
+			C=250 1 2 249 0 1 0
+			CPC=0
+#NT=20116 0
+	PC=4
+	name=1 v=5000 Shape_Procedural_MNPR
+	posx=1 v=2003 -291.474487
+	posy=1 v=2003 163.594467
+	value=2 e=1 v=2001 0
+	group=239
+	ISC=0
+	OSC=2
+		SVT=2001 2001 1 
+		CC=0
+		SVT=2001 2001 2 
+		CC=1
+			C=251 1 2 252 0 1 0
+			CPC=0
+#NT=20093 0
+	PC=3
+	name=1 v=5000 If_Procedural
+	posx=1 v=2003 853.477478
+	posy=1 v=2003 340.959229
+	group=239
+	ISC=3
+		SVT=2001 2001 1 0 0 
+		SVT=5001 2003 2 0 0 
+		SVT=5001 2003 3 0 0 
+	OSC=1
+		SVT=5001 2003 4 
+		CC=1
+			C=252 0 4 247 0 0 0
+			CPC=0
+#NT=10100 0
+	PC=5
+	name=1 v=5000 Shift
+	posx=1 v=2003 436.655823
+	posy=1 v=2003 724.990479
+	grpPosX=1 v=2003 41.000000
+	grpPosY=1 v=2003 946.500000
+	group=239
+	ISC=2
+		SVT=5001 2003 0 0 0 
+		SVT=1001 1002 0 0 0 
+	OSC=2
+		SVT=5001 2003 0 
+		CC=1
+			C=253 0 0 256 0 1 0
+			CPC=0
+		SVT=1001 1002 0 
+		CC=0
+#NT=10101 0
+	PC=2
+	posx=1 v=2003 680.000000
+	posy=1 v=2003 946.500000
+	group=253
+	ISC=2
+		SVT=5001 2003 0 0 0 
+		SVT=1001 1002 0 0 0 
+	OSC=2
+		SVT=5001 2003 0 
+		CC=1
+			C=254 0 0 248 1 2 0
+			CPC=0
+		SVT=1001 1002 0 
+		CC=0
+#NT=20017 0
+	PC=11
+	name=1 v=5000 Shape_Shift_MNPR
+	posx=1 v=2003 241.676056
+	posy=1 v=2003 1027.967041
+	value=2 e=0 v=2003 0.000000
+	defineinheader=2 e=0 v=2001 1
+	uiorder=2 e=0 v=2002 47
+	uigroup=2 e=0 v=5000 Stylization ( procedural )
+	uimin=2 e=0 v=2003 -1.000000
+	uisoftmin=2 e=0 v=2003 -1.000000
+	uimax=2 e=0 v=2003 1.000000
+	uisoftmax=2 e=0 v=2003 1.000000
+	group=253
+	ISC=0
+	OSC=1
+		SVT=5001 2003 1 
+		CC=1
+			C=255 0 1 256 1 2 0
+			CPC=0
+#NT=20026 0
+	PC=3
+	name=1 v=5000 Shift_Op
+	posx=1 v=2003 480.642944
+	posy=1 v=2003 866.073059
+	group=253
+	ISC=2
+		SVT=5001 2003 1 0 0 
+		SVT=5001 2003 2 0 0 
+	OSC=1
+		SVT=5001 2003 3 
+		CC=1
+			C=256 0 3 254 0 0 0
+			CPC=0
+#NT=10100 0
+	PC=16
+	name=1 v=5000 blending_Procedural
+	posx=1 v=2003 454.534882
+	posy=1 v=2003 2127.421875
+	collapsed=1 v=2001 1
+	grpPosX=1 v=2003 -1089.000000
+	grpPosY=1 v=2003 719.500000
+	value_Blending_3D_MNPR=2 e=1 v=2001 1
+	value_Blending_Procedural_MNPR=2 e=1 v=2001 0
+	uvindex_UVs=2 e=2 v=2002 0
+	uvsetname_UVs=2 e=3 v=5000 
+	perinstanceunshared_UVs=2 e=4 v=2001 0
+	valueX_Tile=2 e=5 v=2003 5.000000
+	valueY_Tile=2 e=6 v=2003 5.000000
+	valueX_Offset=2 e=7 v=2003 0.000000
+	valueY_Offset=2 e=8 v=2003 0.000000
+	value_Brightness=2 e=10 v=2003 10.000000
+	group=45
+	ISC=4
+		SVT=5001 2003 0 0 0 Blending
+		SVT=5001 3001 0 0 0 _UV
+		SVT=5001 3002 0 0 0 World Position
+		SVT=1001 1002 0 0 0 
+	OSC=4
+		SVT=5001 2003 0 Blending
+		CC=2
+			C=257 0 0 266 0 1 0
+			CPC=0
+			C=257 0 0 270 1 2 0
+			CPC=0
+		SVT=5001 3001 0 _UV
+		CC=1
+			C=257 1 0 260 0 1 0
+			CPC=0
+		SVT=5001 3002 0 World Position
+		CC=1
+			C=257 2 0 264 0 1 0
+			CPC=0
+		SVT=1001 1002 0 
+		CC=0
+#NT=10100 1 Simplex Noise 2D-Hw Shader Nodes-Patterns
+	PC=19
+	name=1 v=5000 SimplexNoise2D
+	version=1 v=2003 1.080000
+	posx=1 v=2003 -53.133297
+	posy=1 v=2003 751.822754
+	previewswatch=1 v=2002 1
+	classname=1 v=5000 Simplex Noise 2D
+	submenuname=1 v=5000 Patterns
+	helpid=1 v=2002 79
+	grpnodecolor=1 v=5012 3
+	grpPosX=1 v=2003 -765.916992
+	grpPosY=1 v=2003 32.194099
+	uvindex_UVs=2 e=2 v=2002 0
+	uvsetname_UVs=2 e=3 v=5000 
+	perinstanceunshared_UVs=2 e=4 v=2001 0
+	valueX_Tile=2 e=5 v=2003 5.000000
+	valueY_Tile=2 e=6 v=2003 5.000000
+	valueX_Offset=2 e=7 v=2003 0.000000
+	valueY_Offset=2 e=8 v=2003 0.000000
+	value_Brightness=2 e=10 v=2003 130.000000
+	group=257
+	ISC=3
+		SVT=5001 3001 0 0 0 _UV
+		SVT=5001 2003 0 0 0 Brightness
+		SVT=1001 1002 0 0 0 
+	OSC=2
+		SVT=5001 2003 0 Noise
+		CC=1
+			C=258 0 0 267 1 2 0
+			CPC=0
+		SVT=1001 1002 0 
+		CC=0
+#NT=10100 1 Simplex Noise 3D-Hw Shader Nodes-Patterns
+	PC=20
+	name=1 v=5000 SimplexNoise3D
+	version=1 v=2003 1.081000
+	posx=1 v=2003 -51.595898
+	posy=1 v=2003 908.453125
+	collapsed=1 v=2001 1
+	previewswatch=1 v=2002 1
+	classname=1 v=5000 Simplex Noise 3D
+	submenuname=1 v=5000 Patterns
+	helpid=1 v=2002 79
+	grpnodecolor=1 v=5012 3
+	grpPosX=1 v=2003 -765.916992
+	grpPosY=1 v=2003 32.194099
+	uvindex_UVs=2 e=2 v=2002 0
+	uvsetname_UVs=2 e=3 v=5000 
+	perinstanceunshared_UVs=2 e=4 v=2001 0
+	valueX_Tile=2 e=5 v=2003 5.000000
+	valueY_Tile=2 e=6 v=2003 5.000000
+	valueX_Offset=2 e=7 v=2003 0.000000
+	valueY_Offset=2 e=8 v=2003 0.000000
+	value_Brightness=2 e=10 v=2003 10.000000
+	group=257
+	ISC=4
+		SVT=5001 3001 0 0 0 _UV
+		SVT=5001 2003 0 0 0 Time
+		SVT=5001 2003 0 0 0 Brightness
+		SVT=1001 1002 0 0 0 
+	OSC=2
+		SVT=5001 2003 0 Noise
+		CC=1
+			C=259 0 0 267 2 3 0
+			CPC=0
+		SVT=1001 1002 0 
+		CC=0
+#NT=20016 0
+	PC=2
+	posx=1 v=2003 -689.207458
+	posy=1 v=2003 487.082001
+	group=257
+	ISC=2
+		SVT=5001 3001 1 0 0 
+		SVT=5001 2003 2 0 0 
+	OSC=1
+		SVT=5001 3001 3 
+		CC=1
+			C=260 0 3 258 0 0 0
+			CPC=0
+#NT=20017 0
+	PC=6
+	name=1 v=5000 Blending_Scale_MNPR
+	posx=1 v=2003 -887.549072
+	posy=1 v=2003 592.166748
+	defineinheader=2 e=0 v=2001 1
+	uiorder=2 e=0 v=2002 50
+	uigroup=2 e=0 v=5000 Stylization ( procedural )
+	group=257
+	ISC=0
+	OSC=1
+		SVT=5001 2003 1 
+		CC=2
+			C=261 0 1 260 1 2 0
+			CPC=0
+			C=261 0 1 264 1 2 0
+			CPC=0
+#NT=20017 0
+	PC=7
+	name=1 v=5000 Blending_Intensity_MNPR
+	posx=1 v=2003 -276.420471
+	posy=1 v=2003 842.415161
+	value=2 e=0 v=2003 10.000000
+	defineinheader=2 e=0 v=2001 1
+	uiorder=2 e=0 v=2002 51
+	uigroup=2 e=0 v=5000 Stylization ( procedural )
+	group=257
+	ISC=0
+	OSC=1
+		SVT=5001 2003 1 
+		CC=2
+			C=262 0 1 258 1 0 0
+			CPC=0
+			C=262 0 1 259 2 0 0
+			CPC=0
+#NT=20108 0
+	PC=3
+	posx=1 v=2003 -271.755432
+	posy=1 v=2003 952.470703
+	collapsed=1 v=2001 1
+	group=257
+	ISC=1
+		SVT=5001 3002 1 0 0 
+	OSC=6
+		SVT=5001 2003 2 
+		CC=0
+		SVT=5001 2003 3 
+		CC=0
+		SVT=5001 3001 4 
+		CC=1
+			C=263 2 4 259 0 0 0
+			CPC=0
+		SVT=5001 2003 5 
+		CC=1
+			C=263 3 5 259 1 0 0
+			CPC=0
+		SVT=5001 3002 6 
+		CC=0
+		SVT=5001 2003 7 
+		CC=0
+#NT=20016 0
+	PC=2
+	posx=1 v=2003 -683.647095
+	posy=1 v=2003 705.726990
+	group=257
+	ISC=2
+		SVT=5001 3002 1 0 0 
+		SVT=5001 2003 2 0 0 
+	OSC=1
+		SVT=5001 3002 3 
+		CC=1
+			C=264 0 3 263 0 1 0
+			CPC=0
+#NT=10101 0
+	PC=3
+	posx=1 v=2003 149.000000
+	posy=1 v=2003 719.500000
+	collapsed=1 v=2001 1
+	group=257
+	ISC=2
+		SVT=5001 2003 0 0 0 
+		SVT=1001 1002 0 0 0 
+	OSC=2
+		SVT=5001 2003 0 
+		CC=1
+			C=265 0 0 138 3 4 0
+			CPC=0
+		SVT=1001 1002 0 
+		CC=0
+#NT=20026 0
+	PC=4
+	name=1 v=5000 addControl
+	posx=1 v=2003 609.907532
+	posy=1 v=2003 625.112366
+	collapsed=1 v=2001 1
+	group=257
+	ISC=2
+		SVT=5001 2003 1 0 0 
+		SVT=5001 2003 2 0 0 
+	OSC=1
+		SVT=5001 2003 3 
+		CC=1
+			C=266 0 3 270 2 3 0
+			CPC=0
+#NT=20093 0
+	PC=3
+	name=1 v=5000 If_3D
+	posx=1 v=2003 232.628937
+	posy=1 v=2003 686.828125
+	group=257
+	ISC=3
+		SVT=2001 2001 1 0 0 
+		SVT=5001 2003 2 0 0 
+		SVT=5001 2003 3 0 0 
+	OSC=1
+		SVT=5001 2003 4 
+		CC=1
+			C=267 0 4 271 0 0 0
+			CPC=0
+#NT=20116 0
+	PC=3
+	name=1 v=5000 Blending_3D_MNPR
+	posx=1 v=2003 -284.082062
+	posy=1 v=2003 467.051453
+	group=257
+	ISC=0
+	OSC=2
+		SVT=2001 2001 1 
+		CC=0
+		SVT=2001 2001 2 
+		CC=1
+			C=268 1 2 267 0 1 0
+			CPC=0
+#NT=20116 0
+	PC=4
+	name=1 v=5000 Blending_Procedural_MNPR
+	posx=1 v=2003 -291.474487
+	posy=1 v=2003 163.594467
+	value=2 e=1 v=2001 0
+	group=257
+	ISC=0
+	OSC=2
+		SVT=2001 2001 1 
+		CC=0
+		SVT=2001 2001 2 
+		CC=1
+			C=269 1 2 270 0 1 0
+			CPC=0
+#NT=20093 0
+	PC=3
+	name=1 v=5000 If_Procedural
+	posx=1 v=2003 844.386658
+	posy=1 v=2003 435.504669
+	group=257
+	ISC=3
+		SVT=2001 2001 1 0 0 
+		SVT=5001 2003 2 0 0 
+		SVT=5001 2003 3 0 0 
+	OSC=1
+		SVT=5001 2003 4 
+		CC=1
+			C=270 0 4 265 0 0 0
+			CPC=0
+#NT=10100 0
+	PC=6
+	name=1 v=5000 Shift
+	posx=1 v=2003 411.201233
+	posy=1 v=2003 773.172546
+	collapsed=1 v=2001 1
+	grpPosX=1 v=2003 41.000000
+	grpPosY=1 v=2003 946.500000
+	group=257
+	ISC=2
+		SVT=5001 2003 0 0 0 
+		SVT=1001 1002 0 0 0 
+	OSC=2
+		SVT=5001 2003 0 
+		CC=1
+			C=271 0 0 274 0 1 0
+			CPC=0
+		SVT=1001 1002 0 
+		CC=0
+#NT=10101 0
+	PC=3
+	posx=1 v=2003 680.000000
+	posy=1 v=2003 946.500000
+	collapsed=1 v=2001 1
+	group=271
+	ISC=2
+		SVT=5001 2003 0 0 0 
+		SVT=1001 1002 0 0 0 
+	OSC=2
+		SVT=5001 2003 0 
+		CC=1
+			C=272 0 0 266 1 2 0
+			CPC=0
+		SVT=1001 1002 0 
+		CC=0
+#NT=20017 0
+	PC=11
+	name=1 v=5000 Blending_Shift_MNPR
+	posx=1 v=2003 241.676056
+	posy=1 v=2003 1027.967041
+	value=2 e=0 v=2003 0.000000
+	defineinheader=2 e=0 v=2001 1
+	uiorder=2 e=0 v=2002 52
+	uigroup=2 e=0 v=5000 Stylization ( procedural )
+	uimin=2 e=0 v=2003 -1.000000
+	uisoftmin=2 e=0 v=2003 -1.000000
+	uimax=2 e=0 v=2003 1.000000
+	uisoftmax=2 e=0 v=2003 1.000000
+	group=271
+	ISC=0
+	OSC=1
+		SVT=5001 2003 1 
+		CC=1
+			C=273 0 1 274 1 2 0
+			CPC=0
+#NT=20026 0
+	PC=3
+	name=1 v=5000 Shift_Op
+	posx=1 v=2003 480.642944
+	posy=1 v=2003 866.073059
+	group=271
+	ISC=2
+		SVT=5001 2003 1 0 0 
+		SVT=5001 2003 2 0 0 
+	OSC=1
+		SVT=5001 2003 3 
+		CC=1
+			C=274 0 3 272 0 0 0
+			CPC=0
+#NT=20020 0
+	PC=3
+	posx=1 v=2003 1068.927124
+	posy=1 v=2003 1351.903442
+	collapsed=1 v=2001 1
+	group=32
+	ISC=6
+		SVT=5001 2003 1 0 0 
+		SVT=5001 2003 2 0 0 
+		SVT=5001 3001 3 0 0 
+		SVT=5001 2003 4 0 0 
+		SVT=5001 3002 5 0 0 
+		SVT=5001 2003 6 0 0 
+	OSC=3
+		SVT=5001 3001 7 
+		CC=0
+		SVT=5001 3002 8 
+		CC=0
+		SVT=5001 3003 9 
+		CC=1
+			C=275 2 9 39 0 0 0
+			CPC=0
+#NT=20020 0
+	PC=3
+	posx=1 v=2003 1067.371216
+	posy=1 v=2003 1444.349487
+	collapsed=1 v=2001 1
+	group=32
+	ISC=6
+		SVT=5001 2003 1 0 0 
+		SVT=5001 2003 2 0 0 
+		SVT=5001 3001 3 0 0 
+		SVT=5001 2003 4 0 0 
+		SVT=5001 3002 5 0 0 
+		SVT=5001 2003 6 0 0 
+	OSC=3
+		SVT=5001 3001 7 
+		CC=0
+		SVT=5001 3002 8 
+		CC=0
+		SVT=5001 3003 9 
+		CC=1
+			C=276 2 9 39 1 0 0
+			CPC=0
+#NT=20020 0
+	PC=3
+	posx=1 v=2003 1067.372559
+	posy=1 v=2003 1538.793091
+	collapsed=1 v=2001 1
+	group=32
+	ISC=6
+		SVT=5001 2003 1 0 0 
+		SVT=5001 2003 2 0 0 
+		SVT=5001 3001 3 0 0 
+		SVT=5001 2003 4 0 0 
+		SVT=5001 3002 5 0 0 
+		SVT=5001 2003 6 0 0 
+	OSC=3
+		SVT=5001 3001 7 
+		CC=0
+		SVT=5001 3002 8 
+		CC=0
+		SVT=5001 3003 9 
+		CC=1
+			C=277 2 9 39 2 0 0
+			CPC=0
+#NT=20020 0
+	PC=3
+	posx=1 v=2003 1069.593506
+	posy=1 v=2003 1633.237915
+	collapsed=1 v=2001 1
+	group=32
+	ISC=6
+		SVT=5001 2003 1 0 0 
+		SVT=5001 2003 2 0 0 
+		SVT=5001 3001 3 0 0 
+		SVT=5001 2003 4 0 0 
+		SVT=5001 3002 5 0 0 
+		SVT=5001 2003 6 0 0 
+	OSC=3
+		SVT=5001 3001 7 
+		CC=0
+		SVT=5001 3002 8 
+		CC=0
+		SVT=5001 3003 9 
+		CC=1
+			C=278 2 9 39 3 0 0
+			CPC=0
+#NT=20017 0
+	PC=5
+	name=1 v=5000 noAlpha
+	posx=1 v=2003 866.363525
+	posy=1 v=2003 1242.090820
+	collapsed=1 v=2001 1
+	value=2 e=0 v=2003 0.000000
+	group=32
+	ISC=0
+	OSC=1
+		SVT=5001 2003 1 
+		CC=4
+			C=279 0 1 275 5 6 0
+			CPC=0
+			C=279 0 1 276 5 6 0
+			CPC=0
+			C=279 0 1 277 5 6 0
+			CPC=0
+			C=279 0 1 278 5 6 0
+			CPC=0
+#NT=20016 0
+	PC=4
+	name=1 v=5000 preMultiplyCtrl
+	posx=1 v=2003 665.449402
+	posy=1 v=2003 1350.588867
+	collapsed=1 v=2001 1
+	group=32
+	ISC=2
+		SVT=5001 3002 1 0 0 
+		SVT=5001 2003 2 0 0 
+	OSC=1
+		SVT=5001 3002 3 
+		CC=1
+			C=280 0 3 298 1 2 0
+			CPC=0
+#NT=20016 0
+	PC=4
+	name=1 v=5000 preMultiplyCtrl
+	posx=1 v=2003 667.450012
+	posy=1 v=2003 1446.147095
+	collapsed=1 v=2001 1
+	group=32
+	ISC=2
+		SVT=5001 3002 1 0 0 
+		SVT=5001 2003 2 0 0 
+	OSC=1
+		SVT=5001 3002 3 
+		CC=1
+			C=281 0 3 299 1 2 0
+			CPC=0
+#NT=20016 0
+	PC=4
+	name=1 v=5000 preMultiplyCtrl
+	posx=1 v=2003 668.005981
+	posy=1 v=2003 1541.369263
+	collapsed=1 v=2001 1
+	group=32
+	ISC=2
+		SVT=5001 3002 1 0 0 
+		SVT=5001 2003 2 0 0 
+	OSC=1
+		SVT=5001 3002 3 
+		CC=1
+			C=282 0 3 300 1 2 0
+			CPC=0
+#NT=20016 0
+	PC=4
+	name=1 v=5000 preMultiplyCtrl
+	posx=1 v=2003 670.561218
+	posy=1 v=2003 1635.147095
+	collapsed=1 v=2001 1
+	group=32
+	ISC=2
+		SVT=5001 3002 1 0 0 
+		SVT=5001 2003 2 0 0 
+	OSC=1
+		SVT=5001 3002 3 
+		CC=1
+			C=283 0 3 301 1 2 0
+			CPC=0
+#NT=20167 0
+	PC=5
+	name=1 v=5000 graphName
+	note=1 v=5000 DO NOT TOUCH
+	posx=1 v=2003 -1490.248779
+	posy=1 v=2003 -618.799255
+	value=2 e=0 v=5000 mnpr_geoproxy
+	group=-1
+	ISC=0
+	OSC=1
+		SVT=5000 5000 1 
+		CC=0
+#NT=10100 0
+	PC=13
+	name=1 v=5000 feathering
+	version=1 v=2003 1.290000
+	posx=1 v=2003 667.390808
+	posy=1 v=2003 1237.233887
+	collapsed=1 v=2001 1
+	submenuname=1 v=5000 Lighting
+	bitmapnodeindex=1 v=2002 63
+	isadvanced=1 v=2001 1
+	helpid=1 v=2002 9
+	grpnodecolor=1 v=5012 7
+	grpPosX=1 v=2003 -586.885986
+	grpPosY=1 v=2003 -75.409897
+	value_Feathering=2 e=1 v=2003 0.000000
+	group=32
+	ISC=3
+		SVT=5001 3002 0 0 0 _Normal
+		SVT=5001 3002 0 0 0 _CameraVector
+		SVT=5001 1002 0 0 0 
+	OSC=3
+		SVT=5001 3002 0 _Normal
+		CC=1
+			C=285 0 0 295 1 2 0
+			CPC=0
+		SVT=5001 3002 0 _CameraVector
+		CC=1
+			C=285 1 0 293 1 2 0
+			CPC=0
+		SVT=5001 1002 0 
+		CC=0
+#NT=10101 0
+	PC=3
+	posx=1 v=2003 399.917999
+	posy=1 v=2003 58.147499
+	collapsed=1 v=2001 1
+	group=285
+	ISC=2
+		SVT=5001 2003 0 0 0 _FresnelMultiplier
+		SVT=1001 1002 0 0 0 
+	OSC=2
+		SVT=5001 2003 0 _FresnelMultiplier
+		CC=4
+			C=286 0 0 298 0 1 0
+			CPC=0
+			C=286 0 0 299 0 1 0
+			CPC=0
+			C=286 0 0 300 0 1 0
+			CPC=0
+			C=286 0 0 301 0 1 0
+			CPC=0
+		SVT=5001 1002 0 
+		CC=0
+#NT=10100 0
+	PC=6
+	name=1 v=5000 Feathering
+	posx=1 v=2003 108.598999
+	posy=1 v=2003 -48.640800
+	isfunction=1 v=2001 1
+	functiondonotaddshaderdatastruct=1 v=2001 1
+	value_Feathering=2 e=1 v=2003 0.000000
+	group=285
+	ISC=3
+		SVT=5001 3002 0 0 0 _CameraVector
+		SVT=5001 3002 0 0 0 _Normal
+		SVT=5001 1002 0 0 0 
+	OSC=3
+		SVT=5001 3002 0 _CameraVector
+		CC=1
+			C=287 0 0 288 0 1 0
+			CPC=0
+		SVT=5001 3002 0 _Normal
+		CC=1
+			C=287 1 0 288 1 2 0
+			CPC=0
+		SVT=5001 1002 0 
+		CC=0
+#NT=20018 0
+	PC=2
+	posx=1 v=2003 370.000000
+	posy=1 v=2003 4.999990
+	group=287
+	ISC=2
+		SVT=5001 3002 1 0 0 
+		SVT=5001 3002 2 0 0 
+	OSC=1
+		SVT=5001 2003 3 
+		CC=1
+			C=288 0 3 291 0 1 0
+			CPC=0
+#NT=20055 0
+	PC=2
+	posx=1 v=2003 787.999023
+	posy=1 v=2003 134.666687
+	group=287
+	ISC=2
+		SVT=5001 2003 1 0 0 
+		SVT=5001 2003 2 0 0 
+	OSC=1
+		SVT=5001 2003 3 
+		CC=1
+			C=289 0 3 292 0 0 0
+			CPC=0
+#NT=20017 0
+	PC=6
+	name=1 v=5000 Feathering
+	posx=1 v=2003 569.832703
+	posy=1 v=2003 197.833313
+	value=2 e=1 v=2003 0.000000
+	defineinheader=2 e=0 v=2001 1
+	exposetoui=1 v=2001 1
+	group=287
+	ISC=0
+	OSC=1
+		SVT=5001 2003 1 
+		CC=1
+			C=290 0 1 289 1 2 0
+			CPC=0
+#NT=20023 0
+	PC=3
+	note=1 v=5000 Prevent negative values
+	posx=1 v=2003 569.666809
+	posy=1 v=2003 36.166702
+	group=287
+	ISC=1
+		SVT=5001 2003 1 0 0 
+	OSC=1
+		SVT=5001 2003 2 
+		CC=1
+			C=291 0 2 289 0 1 0
+			CPC=0
+#NT=10101 0
+	PC=2
+	posx=1 v=2003 1683.050049
+	posy=1 v=2003 41.350300
+	group=287
+	ISC=2
+		SVT=5001 2003 0 0 0 _FresnelMultiplier
+		SVT=1001 1002 0 0 0 
+	OSC=2
+		SVT=5001 2003 0 _FresnelMultiplier
+		CC=1
+			C=292 0 0 286 0 0 0
+			CPC=0
+		SVT=1001 1002 0 
+		CC=0
+#NT=20109 0
+	PC=2
+	posx=1 v=2003 -124.156998
+	posy=1 v=2003 -131.492996
+	group=285
+	ISC=2
+		SVT=5001 3002 1 0 0 
+		SVT=5001 3002 2 0 0 
+	OSC=1
+		SVT=5001 3002 3 
+		CC=1
+			C=293 0 3 287 0 0 0
+			CPC=0
+#NT=10100 1 Camera Vector-Hw Shader Nodes-Inputs Common
+	PC=12
+	name=1 v=5000 _CameraVec
+	version=1 v=2003 1.660000
+	posx=1 v=2003 -344.319000
+	posy=1 v=2003 -135.975006
+	collapsed=1 v=2001 1
+	classname=1 v=5000 Camera Vector
+	submenuname=1 v=5000 Inputs Common
+	bitmapnodeindex=1 v=2002 67
+	helpid=1 v=2002 2
+	grpnodecolor=1 v=5012 5
+	grpPosX=1 v=2003 -753.731995
+	grpPosY=1 v=2003 -123.134003
+	group=285
+	ISC=0
+	OSC=3
+		SVT=5001 3002 0 _CameraVector
+		CC=0
+		SVT=5001 3002 0 _Normalized
+		CC=1
+			C=294 1 0 293 0 1 0
+			CPC=0
+		SVT=5001 1002 0 
+		CC=0
+#NT=20109 0
+	PC=2
+	posx=1 v=2003 -125.747002
+	posy=1 v=2003 33.871101
+	group=285
+	ISC=2
+		SVT=5001 3002 1 0 0 
+		SVT=5001 3002 2 0 0 
+	OSC=1
+		SVT=5001 3002 3 
+		CC=1
+			C=295 0 3 287 1 0 0
+			CPC=0
+#NT=10100 1 Vertex World Normal-Hw Shader Nodes-Inputs Common
+	PC=12
+	name=1 v=5000 _WorldNormal
+	version=1 v=2003 1.660000
+	posx=1 v=2003 -355.919006
+	posy=1 v=2003 8.393090
+	collapsed=1 v=2001 1
+	classname=1 v=5000 Vertex World Normal
+	submenuname=1 v=5000 Inputs Common
+	bitmapnodeindex=1 v=2002 60
+	helpid=1 v=2002 26
+	grpnodecolor=1 v=5012 5
+	grpPosX=1 v=2003 -947.760986
+	grpPosY=1 v=2003 -80.223900
+	group=285
+	ISC=0
+	OSC=3
+		SVT=5001 3002 0 _WorldNormal
+		CC=1
+			C=296 0 0 295 0 1 0
+			CPC=0
+		SVT=5001 3003 0 _WorldNormalVertShader
+		CC=0
+		SVT=5001 1002 0 
+		CC=0
+#NT=20175 0
+	PC=3
+	posx=1 v=2003 62.500000
+	posy=1 v=2003 -161.250000
+	text=1 v=5000 float FresnelClassiqueFunction(color Normal, color CameraVector)\n{\n    color _N;\n    if(Normal != 0)\n        _N = Normal;\n    else\n        _N = color(N);\n    \n    color _C;\n    if(CameraVector != 0)\n        _C = CameraVector;\n    else\n        _C = color(-I);\n\n    float SatOp = clamp(dot(vector(_C), vector(_N)), 0.0, 1.0);\n    float SubOp = (1.0 - SatOp);\n    return SubOp;\n}\n\nFresnelClassiqueFunction( [[ INPUT = Normal ? 0 ]], [[ INPUT = CameraVector ? 0]] )\n
+	group=285
+	ISC=0
+	OSC=0
+#NT=20016 0
+	PC=4
+	name=1 v=5000 featherMul
+	posx=1 v=2003 864.833374
+	posy=1 v=2003 1350.167480
+	collapsed=1 v=2001 1
+	group=32
+	ISC=2
+		SVT=5001 2003 1 0 0 
+		SVT=5001 3002 2 0 0 
+	OSC=1
+		SVT=5001 3002 3 
+		CC=1
+			C=298 0 3 275 4 5 0
+			CPC=0
+#NT=20016 0
+	PC=4
+	name=1 v=5000 featherMul
+	posx=1 v=2003 864.833374
+	posy=1 v=2003 1449.167480
+	collapsed=1 v=2001 1
+	group=32
+	ISC=2
+		SVT=5001 2003 1 0 0 
+		SVT=5001 3002 2 0 0 
+	OSC=1
+		SVT=5001 3002 3 
+		CC=1
+			C=299 0 3 276 4 5 0
+			CPC=0
+#NT=20016 0
+	PC=4
+	name=1 v=5000 featherMul
+	posx=1 v=2003 865.833374
+	posy=1 v=2003 1543.167480
+	collapsed=1 v=2001 1
+	group=32
+	ISC=2
+		SVT=5001 2003 1 0 0 
+		SVT=5001 3002 2 0 0 
+	OSC=1
+		SVT=5001 3002 3 
+		CC=1
+			C=300 0 3 277 4 5 0
+			CPC=0
+#NT=20016 0
+	PC=4
+	name=1 v=5000 featherMul
+	posx=1 v=2003 870.833374
+	posy=1 v=2003 1636.167480
+	collapsed=1 v=2001 1
+	group=32
+	ISC=2
+		SVT=5001 2003 1 0 0 
+		SVT=5001 3002 2 0 0 
+	OSC=1
+		SVT=5001 3002 3 
+		CC=1
+			C=301 0 3 278 4 5 0
+			CPC=0
+#NT=20123 0
+	PC=3
+	posx=1 v=2003 -1844.916748
+	posy=1 v=2003 -175.666779
+	collapsed=1 v=2001 1
+	group=17
+	ISC=1
+		SVT=5001 2003 1 0 0 
+	OSC=1
+		SVT=5001 2003 2 
+		CC=1
+			C=302 0 2 303 1 2 0
+			CPC=0
+#NT=20163 0
+	PC=4
+	name=1 v=5000 IfCookieInvert
+	posx=1 v=2003 -1625.666138
+	posy=1 v=2003 -173.166656
+	collapsed=1 v=2001 1
+	group=17
+	ISC=4
+		SVT=5001 2001 1 0 0 
+		SVT=5001 2003 2 0 0 
+		SVT=5001 2003 3 0 0 
+		SVT=5001 1003 5 0 0 
+	OSC=1
+		SVT=5001 2003 4 
+		CC=1
+			C=303 0 4 15 1 2 0
+			CPC=0
+#NT=20088 0
+	PC=8
+	name=1 v=5000 Invert_Cookie
+	posx=1 v=2003 -1840.166748
+	posy=1 v=2003 -284.916412
+	collapsed=1 v=2001 1
+	value=2 e=0 v=2001 0
+	defineinheader=2 e=0 v=2001 1
+	uiorder=2 e=0 v=2002 1
+	uigroup=2 e=0 v=5000 Transparency
+	group=17
+	ISC=0
+	OSC=1
+		SVT=5001 2001 1 
+		CC=1
+			C=304 0 1 303 0 1 0
+			CPC=0
+#NT=20017 0
+	PC=4
+	name=1 v=5000 GraphVersion
+	note=1 v=5000 DO NOT TOUCH
+	posx=1 v=2003 -1487.000000
+	posy=1 v=2003 -483.000000
+	group=-1
+	ISC=0
+	OSC=1
+		SVT=5001 2003 1 
+		CC=0

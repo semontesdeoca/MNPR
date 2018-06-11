@@ -1,0 +1,64 @@
+{
+    "attributes": {
+        "mnprConfig.contrast": 1.0, 
+        "mnprConfig.substrateColor": [
+            [
+                1.0, 
+                1.0, 
+                1.0
+            ]
+        ], 
+        "mnprConfig.renderScale": 1, 
+        "mnprConfig.caching": false, 
+        "mnprConfig.brightness": 1.0, 
+        "mnprConfig.style": 2, 
+        "mnprConfig.substrateDistortion": 10.0, 
+        "mnprConfig.depthRange": [
+            [
+                8.0, 
+                50.0
+            ]
+        ], 
+        "mnprConfig.isHistoricallyInteresting": 2, 
+        "mnprConfig.depthRangeMin": 8.0, 
+        "mnprConfig.substrateTexture": "ingres_Dailer-Rowney_2k.jpg", 
+        "mnprConfig.nodeState": 0, 
+        "mnprConfig.substrateRoughness": 1.3496503829956055, 
+        "mnprConfig.atmosphereRangeMin": 25.0, 
+        "mnprConfig.substrateShading": 0.5, 
+        "mnprConfig.colorDepth": 1, 
+        "mnprConfig.substrateColorB": 1.0, 
+        "mnprConfig.substrateColorG": 1.0, 
+        "mnprConfig.substrateLightDir": 225.0, 
+        "mnprConfig.evaluate": true, 
+        "mnprConfig.atmosphereRangeMax": 300.0, 
+        "mnprConfig.substrateColorR": 1.0, 
+        "mnprConfig.frozen": false, 
+        "mnprConfig.substrateLightTilt": 45.0, 
+        "mnprConfig.dryMediaThreshold": 0.5, 
+        "mnprConfig.atmosphereTint": [
+            [
+                1.0, 
+                1.0, 
+                1.0
+            ]
+        ], 
+        "mnprConfig.antialiasing": 0, 
+        "mnprConfig.atmosphereTintR": 1.0, 
+        "mnprConfig.depthRangeMax": 50.0, 
+        "mnprConfig.binMembership": null, 
+        "mnprConfig.substrateUpdate": 0.0, 
+        "mnprConfig.atmosphereRange": [
+            [
+                25.0, 
+                300.0
+            ]
+        ], 
+        "mnprConfig.atmosphereTintG": 1.0, 
+        "mnprConfig.saturation": 0.0, 
+        "mnprConfig.substrateScale": 1.0, 
+        "mnprConfig.atmosphereTintB": 1.0
+    }, 
+    "name": "_charcoal", 
+    "screenshot": "_charcoal.jpg"
+}

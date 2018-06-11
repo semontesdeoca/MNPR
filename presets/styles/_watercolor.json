@@ -1,0 +1,70 @@
+{
+    "attributes": {
+        "mnprConfig.contrast": 1.0, 
+        "mnprConfig.substrateColor": [
+            [
+                1.0, 
+                1.0, 
+                1.0
+            ]
+        ], 
+        "mnprConfig.maxGapsOverlapsWidth": 3, 
+        "mnprConfig.edgeDarkeningWidth": 3, 
+        "mnprConfig.renderScale": 1, 
+        "mnprConfig.caching": false, 
+        "mnprConfig.brightness": 1.0, 
+        "mnprConfig.style": 1, 
+        "mnprConfig.bleedingRadius": 10, 
+        "mnprConfig.substrateDistortion": 1.0, 
+        "mnprConfig.edgeDarkeningIntensity": 1.0, 
+        "mnprConfig.depthRange": [
+            [
+                8.0, 
+                50.0
+            ]
+        ], 
+        "mnprConfig.isHistoricallyInteresting": 2, 
+        "mnprConfig.depthRangeMin": 8.0, 
+        "mnprConfig.substrateTexture": "rough_default_2k.jpg", 
+        "mnprConfig.nodeState": 0, 
+        "mnprConfig.substrateRoughness": 1.0, 
+        "mnprConfig.atmosphereRangeMin": 25.0, 
+        "mnprConfig.drybrushThreshold": 5.0, 
+        "mnprConfig.substrateShading": 0.5, 
+        "mnprConfig.pigmentDensity": 5.0, 
+        "mnprConfig.colorDepth": 1, 
+        "mnprConfig.substrateColorB": 1.0, 
+        "mnprConfig.substrateColorG": 1.0, 
+        "mnprConfig.substrateLightDir": 180.0, 
+        "mnprConfig.evaluate": true, 
+        "mnprConfig.atmosphereRangeMax": 300.0, 
+        "mnprConfig.substrateColorR": 1.0, 
+        "mnprConfig.frozen": false, 
+        "mnprConfig.substrateLightTilt": 45.0, 
+        "mnprConfig.atmosphereTint": [
+            [
+                1.0, 
+                1.0, 
+                1.0
+            ]
+        ], 
+        "mnprConfig.bleedingThreshold": 0.00019999999494757503, 
+        "mnprConfig.antialiasing": 1, 
+        "mnprConfig.atmosphereTintR": 1.0, 
+        "mnprConfig.depthRangeMax": 50.0, 
+        "mnprConfig.binMembership": null, 
+        "mnprConfig.substrateUpdate": 0.0, 
+        "mnprConfig.atmosphereRange": [
+            [
+                25.0, 
+                300.0
+            ]
+        ], 
+        "mnprConfig.atmosphereTintG": 1.0, 
+        "mnprConfig.saturation": 1.0, 
+        "mnprConfig.substrateScale": 1.0, 
+        "mnprConfig.atmosphereTintB": 1.0
+    }, 
+    "name": "_watercolor", 
+    "screenshot": "_watercolor.jpg"
+}

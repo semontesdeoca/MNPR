@@ -1,0 +1,1482 @@
+//PrototypeC (Watercolor shader)
+//by Santiago Montesdeoca
+//11 JAN - present
+
+
+
+// #include "include\\Common.ogfxh"
+#define PI 3.1415926
+#define SMAX 99999
+
+/*******************************************/
+/************* MAYA paremeters *************/
+/*******************************************/
+
+
+
+/************* State *************/
+//defines how to render
+//default solid witout culling
+// RasterizerState DisableCulling {
+// 	CullMode = NONE;
+// };
+
+// //for wireframe technique
+// RasterizerState WireframeCullFront {
+// 		CullMode = Front;
+// 		FillMode = WIREFRAME;
+// };
+
+// /************* Samplers *************/
+// //how textures will be sampled
+// //texture sampler
+// SamplerState ColorSampler {
+// 	Filter = ANISOTROPIC;
+// 	//Filter = MIN_MAG_MIP_LINEAR; //ENABLE FOR PERFORMANCE
+// 	AddressU = WRAP;
+// 	AddressV = WRAP;
+// };
+// //shadow sampler???                                                                     ***
+// SamplerState SamplerShadowDepth {
+// 	Filter = MIN_MAG_MIP_LINEAR;
+// 	AddressU = Border;
+// 	AddressV = Border;
+// 	BorderColor = vec4(1.0f, 1.0f, 1.0f, 1.0f);
+// };
+
+
+/*******************************************************************************/
+//
+//  888888888888
+//       88                                  ,d
+//       88                                  88
+//       88        ,adPPYba,  8b,     ,d8  MM88MMM  88       88  8b,dPPYba,   ,adPPYba,  ,adPPYba,
+//       88       a8P_____88   `Y8, ,8P'     88     88       88  88P'   "Y8  a8P_____88  I8[    ""
+//       88       8PP"""""""     )888(       88     88       88  88          8PP"""""""   `"Y8ba,
+//       88       "8b,   ,aa   ,d8" "8b,     88,    "8a,   ,a88  88          "8b,   ,aa  aa    ]8I
+//       88        `"Ybbd8"'  8P'     `Y8    "Y888   `"YbbdP'Y8  88           `"Ybbd8"'  `"YbbdP"'
+//
+/*******************************************************************************/
+//defines texture attributes
+uniform Texture2D _MainTex : DIFFUSE <
+	string UIGroup = "Shading";
+	string UIWidget = "FilePicker";
+	string ResourceName = "";
+	string UIName =  "Color Texture File";
+	string ResourceType = "2D";
+	int UIOrder = 5;
+	int UVEditorOrder = 1;
+>;
+
+uniform sampler2D _MainTexSampler = sampler_state
+{
+	Texture = <_MainTex>;
+	TEXTURE_MIN_FILTER = LINEAR_MIPMAP_LINEAR;
+	TEXTURE_MAG_FILTER = LINEAR;
+	TEXTURE_WRAP_S = REPEAT;
+	TEXTURE_WRAP_T = REPEAT;
+	TEXTURE_WRAP_R = REPEAT;
+};
+
+uniform Texture2D _NormalTex <
+	string UIGroup = "Shading";
+	string UIWidget = "FilePicker";
+	string ResourceName = "";
+	string UIName =  "Normal Map File";
+	string ResourceType = "2D";
+	int UIOrder = 20;
+	int UVEditorOrder = 3;
+>;
+
+uniform sampler2D _NormalTexSampler = sampler_state
+{
+	Texture = <_NormalTex>;
+	TEXTURE_MIN_FILTER = LINEAR;
+	TEXTURE_MAG_FILTER = LINEAR;
+	TEXTURE_WRAP_S = REPEAT;
+	TEXTURE_WRAP_T = REPEAT;
+	TEXTURE_WRAP_R = REPEAT;
+};
+
+uniform Texture2D _SpecTex <
+	string UIGroup = "Shading";
+	string UIWidget = "FilePicker";
+	string ResourceName = "";
+	string UIName =  "Specular Map File";
+	string ResourceType = "2D";
+	int UIOrder = 35;
+	int UVEditorOrder = 2;
+>;
+
+uniform sampler2D _SpecTexSampler = sampler_state
+{
+	Texture = <_SpecTex>;
+	TEXTURE_MIN_FILTER = LINEAR;
+	TEXTURE_MAG_FILTER = LINEAR;
+	TEXTURE_WRAP_S = REPEAT;
+	TEXTURE_WRAP_T = REPEAT;
+	TEXTURE_WRAP_R = REPEAT;
+};
+
+
+/************* Shadow Maps *************/
+// Shadow Maps
+uniform Texture2D light0ShadowMap : SHADOWMAP
+<
+	string Object = "Light 0";	// UI Group for lights, auto-closed
+	string UIWidget = "None";
+	int UIOrder = 5010;
+>;
+
+uniform Texture2D light1ShadowMap : SHADOWMAP
+<
+	string Object = "Light 1";
+	string UIWidget = "None";
+	int UIOrder = 5020;
+>;
+
+uniform Texture2D light2ShadowMap : SHADOWMAP
+<
+	string Object = "Light 2";
+	string UIWidget = "None";
+	int UIOrder = 5030;
+>;
+
+uniform sampler2D light0ShadowMapSampler = sampler_state
+{
+	Texture = <light0ShadowMap>;
+	TEXTURE_MIN_FILTER = NEAREST;
+	TEXTURE_MAG_FILTER = NEAREST;
+	TEXTURE_WRAP_S = REPEAT;
+	TEXTURE_WRAP_T = REPEAT;
+	TEXTURE_WRAP_R = REPEAT;
+};
+
+uniform sampler2D light1ShadowMapSampler = sampler_state
+{
+	Texture = <light1ShadowMap>;
+	TEXTURE_MIN_FILTER = NEAREST;
+	TEXTURE_MAG_FILTER = NEAREST;
+	TEXTURE_WRAP_S = REPEAT;
+	TEXTURE_WRAP_T = REPEAT;
+	TEXTURE_WRAP_R = REPEAT;
+};
+
+uniform sampler2D light2ShadowMapSampler = sampler_state
+{
+	Texture = <light2ShadowMap>;
+	TEXTURE_MIN_FILTER = NEAREST;
+	TEXTURE_MAG_FILTER = NEAREST;
+	TEXTURE_WRAP_S = REPEAT;
+	TEXTURE_WRAP_T = REPEAT;
+	TEXTURE_WRAP_R = REPEAT;
+};
+
+//
+
+/************* Internal depth textures for Maya depth-peeling transparency *************/
+//TODO: CHECK HOW EXACTLY THESE WORK
+// uniform texture2D TransDepthTexture : transpdepthtexture
+// <
+// 	string ResourceName = "";
+// 	string UIName = "TransDepthTexture";
+// 	string ResourceType = "2D";
+// 	string UIWidget = "None";
+// >;
+
+// uniform texture2D OpaqueDepthTexture : opaquedepthtexture
+// <
+// 	string ResourceName = "";
+// 	string UIName = "OpaqueDepthTexture";
+// 	string ResourceType = "2D";
+// 	string UIWidget = "None";
+// >;
+
+// uniform sampler2D TransDepthTextureSampler = sampler_state
+// {
+// 	Texture = <TransDepthTexture>;
+// 	TEXTURE_MIN_FILTER = NEAREST;
+// 	TEXTURE_MAG_FILTER = NEAREST;
+// 	TEXTURE_WRAP_S = REPEAT;
+// 	TEXTURE_WRAP_T = REPEAT;
+// 	TEXTURE_WRAP_R = REPEAT;
+// };
+
+// uniform sampler2D OpaqueDepthTextureSampler = sampler_state
+// {
+// 	Texture = <OpaqueDepthTexture>;
+// 	TEXTURE_MIN_FILTER = NEAREST;
+// 	TEXTURE_MAG_FILTER = NEAREST;
+// 	TEXTURE_WRAP_S = REPEAT;
+// 	TEXTURE_WRAP_T = REPEAT;
+// 	TEXTURE_WRAP_R = REPEAT;
+// };
+
+
+
+/*******************************************************************************/
+//
+//  88888888888
+//  88
+//  88
+//  88aaaaa      8b,dPPYba,  ,adPPYYba,  88,dPYba,,adPYba,    ,adPPYba,
+//  88"""""      88P'   "Y8  ""     `Y8  88P'   "88"    "8a  a8P_____88
+//  88           88          ,adPPPPP88  88      88      88  8PP"""""""
+//  88           88          88,    ,88  88      88      88  "8b,   ,aa
+//  88           88          `"8bbdP"Y8  88      88      88   `"Ybbd8"'
+//
+/*******************************************************************************/
+// cbuffer UpdatePerFrame : register(b0) {
+	//MATRICES (provided by maya)
+	uniform mat4 VIEWINV 		: ViewInverse 			< string UIWidget = "None"; >;
+	uniform mat4 VIEW			: View					< string UIWidget = "None"; >;
+	uniform mat4 PRJ			: Projection			< string UIWidget = "None"; >;
+	uniform mat4 VIEWPRJ		: ViewProjection		< string UIWidget = "None"; >;
+	uniform vec2 gScreenSize      : ViewportPixelSize     < string UIWidget = "None"; >;
+
+	// If the user enables viewport gamma correction in Maya's global viewport rendering settings, the shader should not do gamma again
+	uniform bool MayaFullScreenGamma: MayaGammaCorrection < string UIWidget = "None"; > = false;
+	uniform bool IsSwatchRender : MayaSwatchRender <string UIWidget = "None"; > = false;
+	uniform float gTimer            : TIME < string UIWidget = "None"; >;
+
+	uniform vec3 _AtmosphereColor <
+		string UIGroup = "LOD";
+		string UIName =  "Atmosphere Color";
+		string UIWidget = "Color";
+		int UIOrder = 200;
+	> = {1.0f, 1.0f, 1.0f};
+
+	uniform float _RangeStart <
+		string UIGroup = "LOD";
+		string UIName =  "Atmosphere Start";
+		string UIWidget = "slider";
+		float UIMin = 1.0;
+		float UIMax = 50000.0;
+		float UIStep = 1.0;
+		int UIOrder = 205;
+	> = {50.0f};
+
+	uniform float _RangeEnd <
+		string UIGroup = "LOD";
+		string UIName =  "Atmosphere End";
+		string UIWidget = "slider";
+		float UIMin = 1.0;
+		float UIMax = 50000.0;
+		float UIStep = 1.0;
+		int UIOrder = 210;
+	> = {200.0f};
+
+
+
+/*******************************************************************************/
+//
+//    ,ad8888ba,    88              88
+//   d8"'    `"8b   88              ""                            ,d
+//  d8'        `8b  88                                            88
+//  88          88  88,dPPYba,      88   ,adPPYba,   ,adPPYba,  MM88MMM
+//  88          88  88P'    "8a     88  a8P_____88  a8"     ""    88
+//  Y8,        ,8P  88       d8     88  8PP"""""""  8b            88
+//   Y8a.    .a8P   88b,   ,a8"     88  "8b,   ,aa  "8a,   ,aa    88,
+//    `"Y8888Y"'    8Y"Ybbd8"'      88   `"Ybbd8"'   `"Ybbd8"'    "Y888
+//                                 ,88
+/*******************************************************************************/
+// cbuffer UpdatePerObject : register(b1) {
+	//MATRICES
+	uniform mat4 WORLD 		: World 					< string UIWidget = "None"; >;
+	uniform mat4 WORLDIT 	: WorldInverseTranspose 	< string UIWidget = "None"; >;
+	uniform mat4 WVP		: WorldViewProjection		< string UIWidget = "None"; >;
+
+    // CONTROL
+    uniform bool _UseControl < string UIWidget = "None"; > = true;
+
+
+
+	//             88                                88  88
+	//             88                                88  ""
+	//             88                                88
+	//  ,adPPYba,  88,dPPYba,   ,adPPYYba,   ,adPPYb,88  88  8b,dPPYba,    ,adPPYb,d8
+	//  I8[    ""  88P'    "8a  ""     `Y8  a8"    `Y88  88  88P'   `"8a  a8"    `Y88
+	//   `"Y8ba,   88       88  ,adPPPPP88  8b       88  88  88       88  8b       88
+	//  aa    ]8I  88       88  88,    ,88  "8a,   ,d88  88  88       88  "8a,   ,d88
+	//  `"YbbdP"'  88       88  `"8bbdP"Y8   `"8bbdP"Y8  88  88       88   `"YbbdP"Y8
+	//                                                                     aa,    ,88
+	//                                                                      "Y8bbdP"
+	// ---------------------------------------------
+	// Basic Shading Group
+	// ---------------------------------------------
+	uniform bool _UseColorTexture <
+		string UIGroup = "Shading";
+		string UIName = "Color Texture";
+		int UIOrder = 1;
+	> = false;
+
+	uniform vec3 _ColorTint : COLOR <
+		string UIGroup = "Shading";
+		string UIName =  "Color Tint";
+		string UIWidget = "Color";
+		int UIOrder = 10;
+	> = {1.0f, 1.0f, 1.0f};
+
+	// ---------------------------------------------
+	// Normal Group
+	// ---------------------------------------------
+	uniform bool _UseNormalTexture <
+		string UIGroup = "Shading";
+		string UIName = "Normal Map";
+		int UIOrder = 15;
+	> = false;
+
+    uniform bool _FlipU <
+        string UIGroup = "Shading";
+        string UIName = "Flip U";
+        int UIOrder = 23;
+    > = false;
+
+    uniform bool _FlipV <
+        string UIGroup = "Shading";
+        string UIName = "Flip V";
+        int UIOrder = 24;
+    > = false;
+
+	uniform float _BumpDepth <
+		string UIGroup = "Shading";
+		string UIName = "Bump Depth";
+		string UIWidget = "slider";
+		float UIMin = -2.0;
+		float UIMax = 2.0;
+		float UIStep = 0.1;
+		int UIOrder = 25;
+	> = {1.0f};
+
+	// ---------------------------------------------
+	// Specular GROUP
+	// ---------------------------------------------
+	uniform bool _UseSpecularTexture <
+		string UIGroup = "Shading";
+		string UIName = "Specular Map";
+		int UIOrder = 30;
+	> = false;
+
+	uniform float _Specular <
+		string UIGroup = "Shading";
+		string UIName =  "Specular Roll Off";
+		string UIWidget = "slider";
+		float UIMin = 0;
+		float UIMax = 1.0;
+		float UIStep = 0.05;
+		int UIOrder = 40;
+	> = {0.0f};
+
+	uniform float _SpecDiffusion <
+		string UIGroup = "Shading";
+		string UIName = "Specular Diffussion";
+		string UIWidget = "slider";
+		float UIMin = 0;
+		float UIMax = 0.99;
+		float UIStep = 0.05;
+		int UIOrder = 45;
+	> = {0.0f};
+
+	uniform float _SpecTransparency <
+		string UIGroup = "Shading";
+		string UIName = "Specular Transparency";
+		string UIWidget = "slider";
+		float UIMin = 0;
+		float UIMax = 1.0;
+		float UIStep = 0.05;
+		int UIOrder = 50;
+	> = {0.0f};
+
+
+
+	// ---------------------------------------------
+	// Shade GROUP
+	// ---------------------------------------------
+	uniform bool _UseShadows <
+		string UIGroup = "Shading";
+		string UIName = "Shadows";
+		int UIOrder = 60;
+	> = true;
+
+	// This offset allows you to fix any in-correct self shadowing caused by limited precision.
+	// This tends to get affected by scene scale and polygon count of the objects involved.
+	uniform float _ShadowDepthBias : ShadowMapBias <
+		string UIGroup = "Shading";
+		string UIWidget = "Slider";
+		float UIMin = 0.000;
+		float UISoftMax = 10.000;
+		float UIStep = 0.0001;
+		string UIName = "Shadow Bias";
+		int UIOrder = 65;
+	> = {0.001f};
+
+
+	//                           88                                                88
+	//                           ""                 ,d                             88
+	//                                              88                             88
+	//  8b,dPPYba,   ,adPPYYba,  88  8b,dPPYba,   MM88MMM   ,adPPYba,  8b,dPPYba,  88  8b       d8
+	//  88P'    "8a  ""     `Y8  88  88P'   `"8a    88     a8P_____88  88P'   "Y8  88  `8b     d8'
+	//  88       d8  ,adPPPPP88  88  88       88    88     8PP"""""""  88          88   `8b   d8'
+	//  88b,   ,a8"  88,    ,88  88  88       88    88,    "8b,   ,aa  88          88    `8b,d8'
+	//  88`YbbdP"'   `"8bbdP"Y8  88  88       88    "Y888   `"Ybbd8"'  88          88      Y88'
+	//  88                                                                                 d8'
+	//  88
+	// ---------------------------------------------
+	// Painterly shading GROUP
+	// ---------------------------------------------
+	uniform float _DiffuseFactor : DFACTOR <
+		string UIGroup = "Painterly Shading";
+		string UIName =  "Diffuse Factor";
+		string UIWidget = "slider";
+		float UIMin = 0.0;
+		float UIMax = 1.0;
+		float UIStep = 0.05;
+		int UIOrder = 100;
+	> = {0.2f};
+
+	uniform vec3 _ShadeColor <
+		string UIGroup = "Painterly Shading";
+		string UIName =  "Shade Color";
+		string UIWidget = "Color";
+		int UIOrder = 105;
+	> = {0.0f, 0.0f, 0.0f};
+
+	uniform float _ShadeWrap <
+		string UIGroup = "Painterly Shading";
+		string UIName =  "Shade Wrap";
+		string UIWidget = "slider";
+		float UIMin = 0.0;
+		float UIMax = 1.0;
+		float UIStep = 0.05;
+		int UIOrder = 110;
+	> = {0.0f};
+
+	uniform bool _UseOverrideShade <
+		string UIGroup = "Painterly Shading";
+		string UIName = "Shade Override";
+		int UIOrder = 115;
+	> = true;
+
+	uniform float _Dilute <
+		string UIGroup = "Painterly Shading";
+		string UIName =  "Dilute Paint";
+		string UIWidget = "slider";
+		float UIMin = 0.0;
+		float UIMax = 1.0;
+		float UIStep = 0.05;
+		int UIOrder = 120;
+	> = {0.8f};
+
+	uniform float _Cangiante <
+		string UIGroup = "Painterly Shading";
+		string UIName =  "Cangiante";
+		string UIWidget = "slider";
+		float UIMin = 0.0;
+		float UIMax = 1.0;
+		float UIStep = 0.05;
+		int UIOrder = 125;
+	> = {0.2f};
+
+	uniform float _DiluteArea <
+		string UIGroup = "Painterly Shading";
+		string UIName =  "Dilute Area";
+		string UIWidget = "slider";
+		float UIMin = 0.0;
+		float UIMax = 1.0;
+		float UIStep = 0.05;
+		int UIOrder = 130;
+	> = {1.0f};
+
+	uniform float _HighArea <
+		string UIGroup = "Painterly Shading";
+		string UIName =  "Highlight Area";
+		string UIWidget = "slider";
+		float UIMin = 0.0;
+		float UIMax = 0.5;
+		float UIStep = 0.05;
+		int UIOrder = 135;
+	> = {0.0f};
+
+	uniform float _HighTransparency <
+		string UIGroup = "Painterly Shading";
+		string UIName =  "Highlight Transparency";
+		string UIWidget = "slider";
+		float UIMin = 0.0;
+		float UIMax = 1.0;
+		float UIStep = 0.05;
+		int UIOrder = 140;
+	> = {0.0f};
+
+	//                             ,d
+	//                             88
+	//   ,adPPYba,  8b,     ,d8  MM88MMM  8b,dPPYba,  ,adPPYYba,
+	//  a8P_____88   `Y8, ,8P'     88     88P'   "Y8  ""     `Y8
+	//  8PP"""""""     )888(       88     88          ,adPPPPP88
+	//  "8b,   ,aa   ,d8" "8b,     88,    88          88,    ,88
+	//   `"Ybbd8"'  8P'     `Y8    "Y888  88          `"8bbdP"Y8
+	//
+	// ---------------------------------------------
+	// Additional Object-space effects
+	// ---------------------------------------------
+	uniform float _DarkEdges <
+		string Object = "Additional object-space effects";	// UI Group for auto-closed
+		string UIName =  "Darkened Edge";
+		string UIWidget = "slider";
+		float UIMin = 0.0;
+		float UIMax = 1.0;
+		float UIStep = 0.05;
+		int UIOrder = 300;
+	> = {0.0f};
+
+	// ---------------------------------------------
+	// Hand Tremor GROUP
+	// ---------------------------------------------
+	uniform float _Tremor <
+		bool SasUiVisible = false;
+	> = {4.0f};
+
+	uniform float _TremorFront <
+		bool SasUiVisible = false;
+	> = {0.4f};
+
+	uniform float _TremorSpeed <
+		bool SasUiVisible = false;
+	> = {10.0f};
+
+	uniform float _TremorFreq <
+		bool SasUiVisible = false;
+	> = {10.0f};
+
+	// ---------------------------------------------
+	// Paper Color
+	// ---------------------------------------------
+	uniform vec3 _PaperColor <
+		bool SasUiVisible = false;
+	> = {1.0f, 1.0f, 1.0f};
+
+	uniform float _BleedOffset <
+		bool SasUiVisible = false;
+	> = {0.5f};
+
+
+
+/*******************************************************************************/
+//
+//  88           88               88
+//  88           ""               88             ,d
+//  88                            88             88
+//  88           88   ,adPPYb,d8  88,dPPYba,   MM88MMM  ,adPPYba,
+//  88           88  a8"    `Y88  88P'    "8a    88     I8[    ""
+//  88           88  8b       88  88       88    88      `"Y8ba,
+//  88           88  "8a,   ,d88  88       88    88,    aa    ]8I
+//  88888888888  88   `"YbbdP"Y8  88       88    "Y888  `"YbbdP"'
+//                    aa,    ,88
+//                     "Y8bbdP"
+//
+/*******************************************************************************/
+// for auto-binding done in Maya
+// cbuffer UpdateLights : register(b2) {
+	// ---------------------------------------------
+	// Light 0 GROUP
+	// ---------------------------------------------
+	// This value is controlled by Maya to tell us if a light should be calculated
+	// For example the artist may disable a light in the scene, or choose to see only the selected light
+	// This flag allows Maya to tell our shader not to contribute this light into the lighting
+	uniform bool light0Enable : LIGHTENABLE <
+		string Object = "Light 0";	// UI Group for lights, auto-closed
+		string UIName = "Enable Light 0";
+		int UIOrder = 500;
+	> = false;	// maya manages lights itself and defaults to no lights
+
+	// follows LightParameterInfo::ELightType
+	// spot = 2, point = 3, directional = 4, ambient = 5,
+	uniform int light0Type : LIGHTTYPE <
+		string Object = "Light 0";
+		string UIName = "Light 0 Type";
+		string UIFieldNames ="None:Default:Spot:Point:Directional:Ambient";
+		int UIOrder = 501;
+		float UIMin = 0;
+		float UIMax = 5;
+		float UIStep = 1;
+	> = 2;	// default to spot so the cone angle etc work when "Use Shader Settings" option is used
+
+	uniform vec3 light0Pos : POSITION <
+		string Object = "Light 0";
+		string UIName = "Light 0 Position";
+		string Space = "World";
+		int UIOrder = 502;
+	> = {100.0f, 100.0f, 100.0f};
+
+	uniform vec3 light0Color : LIGHTCOLOR <
+		string Object = "Light 0";
+		string UIName = "Light 0 Color";
+		string UIWidget = "Color";
+		int UIOrder = 503;
+	> = { 1.0f, 1.0f, 1.0f};
+
+	uniform float light0Intensity : LIGHTINTENSITY <
+		string Object = "Light 0";
+		string UIName = "Light 0 Intensity";
+		float UIMin = 0.0;
+		float UIMax = SMAX;
+		float UIStep = 0.01;
+		int UIOrder = 504;
+	> = { 1.0f };
+
+	uniform vec3 light0Dir : DIRECTION <
+		string Object = "Light 0";
+		string UIName = "Light 0 Direction";
+		string Space = "World";
+		int UIOrder = 505;
+	> = {100.0f, 100.0f, 100.0f};
+
+	uniform float light0ConeAngle : HOTSPOT < // In radians
+		string Object = "Light 0";
+		string UIName = "Light 0 Cone Angle";
+		float UIMin = 0;
+		float UIMax = PI/2;
+		int UIOrder = 506;
+	> = { 0.46f };
+
+	uniform float light0FallOff : FALLOFF <// In radians. Sould be HIGHER then cone angle or lighted area will invert
+		string Object = "Light 0";
+		string UIName = "Light 0 Penumbra Angle";
+		float UIMin = 0;
+		float UIMax = PI/2;
+		int UIOrder = 507;
+	> = { 0.7f };
+
+	uniform float light0AttenScale : DECAYRATE <
+		string Object = "Light 0";
+		string UIName = "Light 0 Decay";
+		float UIMin = 0.0;
+		float UIMax = SMAX;
+		float UIStep = 0.01;
+		int UIOrder = 508;
+	> = {0.0};
+
+	uniform bool light0ShadowOn : SHADOWFLAG <
+		string Object = "Light 0";
+		string UIName = "Light 0 Casts Shadow";
+		string UIWidget = "None";
+		int UIOrder = 509;
+	> = true;
+
+	uniform bool light0Specular : LIGHTSPECULAR <
+		string Object = "Light 0";
+		string UIName = "Light 0 Specular";
+		int UIOrder = 510;
+	> = 1;
+
+	uniform mat4 light0Matrix : SHADOWMAPMATRIX	<
+		string Object = "Light 0";
+		string UIWidget = "None";
+		int UIOrder = 511;
+	>;
+
+
+// ---------------------------------------------
+	// Light 1 GROUP
+	// ---------------------------------------------
+	uniform bool light1Enable : LIGHTENABLE <
+		string Object = "Light 1";
+		string UIName = "Enable Light 1";
+		int UIOrder = 520;
+	> = false;
+
+	uniform int light1Type : LIGHTTYPE <
+		string Object = "Light 1";
+		string UIName = "Light 1 Type";
+		string UIFieldNames ="None:Default:Spot:Point:Directional:Ambient";
+		float UIMin = 0;
+		float UIMax = 5;
+		int UIOrder = 521;
+	> = 2;
+
+	uniform vec3 light1Pos : POSITION <
+		string Object = "Light 1";
+		string UIName = "Light 1 Position";
+		string Space = "World";
+		int UIOrder = 522;
+	> = {-100.0f, 100.0f, 100.0f};
+
+	uniform vec3 light1Color : LIGHTCOLOR <
+		string Object = "Light 1";
+		string UIName = "Light 1 Color";
+		string UIWidget = "Color";
+		int UIOrder = 523;
+	> = { 1.0f, 1.0f, 1.0f};
+
+	uniform float light1Intensity : LIGHTINTENSITY <
+			string Object = "Light 1";
+			string UIName = "Light 1 Intensity";
+			float UIMin = 0.0;
+			float UIMax = SMAX;
+			float UIStep = 0.01;
+			int UIOrder = 524;
+	> = { 1.0f };
+
+	uniform vec3 light1Dir : DIRECTION <
+		string Object = "Light 1";
+		string UIName = "Light 1 Direction";
+		string Space = "World";
+		int UIOrder = 525;
+	> = {100.0f, 100.0f, 100.0f};
+
+	uniform float light1ConeAngle : HOTSPOT <// In radians
+		string Object = "Light 1";
+		string UIName = "Light 1 Cone Angle";
+		float UIMin = 0;
+		float UIMax = PI/2;
+		int UIOrder = 526;
+	> = { 45.0f };
+
+
+	uniform float light1FallOff : FALLOFF <// In radians. Sould be HIGHER then cone angle or lighted area will invert
+		string Object = "Light 1";
+		string UIName = "Light 1 Penumbra Angle";
+		float UIMin = 0;
+		float UIMax = PI/2;
+		int UIOrder = 527;
+	> = { 0.0f };
+
+	uniform float light1AttenScale : DECAYRATE <
+		string Object = "Light 1";
+		string UIName = "Light 1 Decay";
+		float UIMin = 0.0;
+		float UIMax = SMAX;
+		float UIStep = 0.01;
+		int UIOrder = 528;
+	> = {0.0};
+
+	uniform bool light1ShadowOn : SHADOWFLAG <
+		string Object = "Light 1";
+		string UIName = "Light 1 Casts Shadow";
+		string UIWidget = "None";
+		int UIOrder = 529;
+	> = true;
+
+	uniform mat4 light1Matrix : SHADOWMAPMATRIX	<
+		string Object = "Light 1";
+		string UIWidget = "None";
+		int UIOrder = 530;
+	>;
+
+
+	// ---------------------------------------------
+	// Light 2 GROUP
+	// ---------------------------------------------
+	uniform bool light2Enable : LIGHTENABLE <
+		string Object = "Light 2";
+		string UIName = "Enable Light 2";
+		int UIOrder = 550;
+	> = false;
+
+	uniform int light2Type : LIGHTTYPE <
+		string Object = "Light 2";
+		string UIName = "Light 2 Type";
+		string UIFieldNames ="None:Default:Spot:Point:Directional:Ambient";
+		float UIMin = 0;
+		float UIMax = 5;
+		int UIOrder = 551;
+	> = 2;
+
+	uniform vec3 light2Pos : POSITION <
+		string Object = "Light 2";
+		string UIName = "Light 2 Position";
+		string Space = "World";
+		int UIOrder = 552;
+	> = {100.0f, 100.0f, -100.0f};
+
+	uniform vec3 light2Color : LIGHTCOLOR <
+		string Object = "Light 2";
+		string UIName = "Light 2 Color";
+		string UIWidget = "Color";
+		int UIOrder = 553;
+	> = { 1.0f, 1.0f, 1.0f};
+
+	uniform float light2Intensity : LIGHTINTENSITY <
+		string Object = "Light 2";
+		string UIName = "Light 2 Intensity";
+		float UIMin = 0.0;
+		float UIMax = SMAX;
+		float UIStep = 0.01;
+		int UIOrder = 554;
+	> = { 1.0f };
+
+	uniform vec3 light2Dir : DIRECTION <
+		string Object = "Light 2";
+		string UIName = "Light 2 Direction";
+		string Space = "World";
+		int UIOrder = 555;
+	> = {100.0f, 100.0f, 100.0f};
+
+	uniform float light2ConeAngle : HOTSPOT <// In radians
+		string Object = "Light 2";
+		string UIName = "Light 2 Cone Angle";
+		float UIMin = 0;
+		float UIMax = PI/2;
+		int UIOrder = 556;
+	> = { 45.0f };
+
+	uniform float light2FallOff : FALLOFF <// In radians. Sould be HIGHER then cone angle or lighted area will invert
+		string Object = "Light 2";
+		string UIName = "Light 2 Penumbra Angle";
+		float UIMin = 0;
+		float UIMax = PI/2;
+		int UIOrder = 557;
+	> = { 0.0f };
+
+	uniform float light2AttenScale : DECAYRATE <
+		string Object = "Light 2";
+		string UIName = "Light 2 Decay";
+		float UIMin = 0.0;
+		float UIMax = SMAX;
+		float UIStep = 0.01;
+		int UIOrder = 558;
+	> = {0.0};
+
+	uniform bool light2ShadowOn : SHADOWFLAG <
+		string Object = "Light 2";
+		string UIName = "Light 2 Casts Shadow";
+		string UIWidget = "None";
+		int UIOrder = 559;
+	> = true;
+
+	uniform mat4 light2Matrix : SHADOWMAPMATRIX	<
+		string Object = "Light 2";
+		string UIWidget = "None";
+		int UIOrder = 660;
+	>;
+
+
+
+/*******************************************************************************/
+//               ,d                                            ,d
+//               88                                            88
+//  ,adPPYba,  MM88MMM  8b,dPPYba,  88       88   ,adPPYba,  MM88MMM  ,adPPYba,
+//  I8[    ""    88     88P'   "Y8  88       88  a8"     ""    88     I8[    ""
+//   `"Y8ba,     88     88          88       88  8b            88      `"Y8ba,
+//  aa    ]8I    88,    88          "8a,   ,a88  "8a,   ,aa    88,    aa    ]8I
+//  `"YbbdP"'    "Y888  88           `"YbbdP'Y8   `"Ybbd8"'    "Y888  `"YbbdP"'
+//
+/*******************************************************************************/
+attribute appData {
+	vec3 vertex 		: POSITION;
+	vec2 texcoord 		: TEXCOORD0;
+	vec4 vColor0    	: COLOR0;
+	vec4 vColor1		: TEXCOORD1;
+	vec4 vColor2		: TEXCOORD2;
+    vec4 vColor3		: TEXCOORD3;
+	vec3 normal		  	: NORMAL;
+	vec3 binormal		: BINORMAL;
+	vec4 tangent		: TANGENT;
+};
+
+attribute vertexOutput {
+	vec4 vColor0 : COLOR0;
+	vec4 vColor1 : COLOR1;
+	vec4 vColor2 : COLOR2;
+	vec4 vPreviousScreenPosition : COLOR3;
+	vec3 posWorld : TEXCOORD0;
+	vec3 posObject : TEXCOORD1;
+	vec3 normalWorld : NORMAL;
+	vec3 tangentWorld : TANGENT;
+	vec3 binormalWorld : TEXCOORD1;
+	vec3 lightDir : TEXCOORD2;
+	vec3 viewDir : TEXCOORD3;
+	float3 velocityDepth : TEXCOORD4;
+	vec2 uv : TEXCOORD5;
+	float nDotV : TEXCOORD6;
+	vec4 pos : TEXCOORD7;
+};
+
+// Output to 4 diferent targets
+attribute pixelShaderOutput {
+	vec4 colorOutput: COLOR0;
+    vec4 diffuseOutput: COLOR1;
+    vec4 specularOutput : COLOR2;
+	vec4 pigmentCtrlOutput : COLOR3;
+    vec4 substrateCtrlOutput : COLOR4;
+    vec4 edgeCtrlOutput : COLOR5;
+    vec4 abstractionCtrlOutput : COLOR6;
+    vec2 velocityOutput : COLOR7;
+};
+
+
+/*******************************************************************************/
+//
+//  88  88               88                    88
+//  88  ""               88             ,d     ""
+//  88                   88             88
+//  88  88   ,adPPYb,d8  88,dPPYba,   MM88MMM  88  8b,dPPYba,    ,adPPYb,d8
+//  88  88  a8"    `Y88  88P'    "8a    88     88  88P'   `"8a  a8"    `Y88
+//  88  88  8b       88  88       88    88     88  88       88  8b       88
+//  88  88  "8a,   ,d88  88       88    88,    88  88       88  "8a,   ,d88
+//  88  88   `"YbbdP"Y8  88       88    "Y888  88  88       88   `"YbbdP"Y8
+//           aa,    ,88                                          aa,    ,88
+//            "Y8bbdP"                                            "Y8bbdP"
+/*******************************************************************************/
+
+/************* Constants *************/
+
+#define FLIP_TEXTURE_Y 1
+
+/************* Data Structures *************/
+
+struct POINT_LIGHT
+{
+    vec3 Position;
+    float LightRadius;
+    vec4 Color;
+};
+
+struct LIGHT_CONTRIBUTION_DATA
+{
+    vec4 Color;
+    vec3 Normal;
+    vec3 ViewDirection;
+    vec4 LightColor;
+    vec4 LightDirection;
+    vec4 SpecularColor;
+    float SpecularPower;
+};
+
+GLSLShader PixelShader_Funcs
+{
+/************* Utility Functions *************/
+
+vec3 get_vector_color_contribution(vec4 light, vec3 color)
+{
+    // Color (.rgb) * Intensity (.a)
+    return light.rgb * light.a * color;
+}
+
+vec3 get_scalar_color_contribution(vec4 light, float color)
+{
+    // Color (.rgb) * Intensity (.a)
+    return light.rgb * light.a * color;
+}
+
+vec4 get_light_data(vec3 lightPosition, vec3 worldPosition, float lightRadius)
+{
+    vec4 lightData;
+    vec3 lightDirection = lightPosition - worldPosition;
+
+    lightData.xyz = normalize(lightDirection);
+    lightData.w = saturate(1.0f - length(lightDirection) / lightRadius); // Attenuation
+
+    return lightData;
+}
+
+vec3 get_light_contribution(LIGHT_CONTRIBUTION_DATA IN)
+{
+    vec3 lightDirection = IN.LightDirection.xyz;
+    float n_dot_l = dot(IN.Normal, lightDirection);
+    vec3 halfVector = normalize(lightDirection + IN.ViewDirection);
+    float n_dot_h = dot(IN.Normal, halfVector);
+
+    vec4 lightCoefficients = lit(n_dot_l, n_dot_h, IN.SpecularPower);
+    vec3 diffuse = get_vector_color_contribution(IN.LightColor, lightCoefficients.y * IN.Color.rgb) * IN.LightDirection.w;
+    vec3 specular = get_scalar_color_contribution(IN.SpecularColor, min(lightCoefficients.z, IN.Color.w)) * IN.LightDirection.w * IN.LightColor.w;
+
+    return (diffuse + specular);
+}
+
+
+// Spot light cone
+float getLightConeAngle(float coneAngle, float coneFalloff, vec3 lightVec, vec3 lightDir)
+{
+	// the cone falloff should be equal or bigger then the coneAngle or the light inverts
+	// this is added to make manually tweaking the spot settings easier.
+	if (coneFalloff < coneAngle)
+		coneFalloff = coneAngle;
+
+	float LdotDir = dot(lightVec, lightDir);
+
+	// cheaper cone, no fall-off control would be:
+	// float cone = pow(saturate(LdotDir), 1 / coneAngle);
+
+	// higher quality cone (more expensive):
+	float cone = smoothstep( cos(coneFalloff), cos(coneAngle), LdotDir);
+
+	return cone;
+}
+
+// ---------------------------------------------
+// Shadows
+// ---------------------------------------------
+
+vec4 sampleFromShadowMap( int ActiveLightIndex, vec2 UVs)
+{
+	if (ActiveLightIndex == 0)
+		return textureLod(light0ShadowMapSampler, UVs, 0);
+	else if (ActiveLightIndex == 1)
+		return textureLod(light1ShadowMapSampler, UVs, 0);
+	else
+		return textureLod(light2ShadowMapSampler, UVs, 0);
+}
+
+// Percentage-Closer Filtering
+// taken from AutodeskUberShader
+float lightShadow(mat4 LightViewPrj, int ActiveLightIndex, vec3 VertexWorldPosition, float nDotL) {
+	float shadow = 1.0f;
+
+	vec4 Pndc = mul( vec4(VertexWorldPosition.xyz,1.0) ,  LightViewPrj);
+	Pndc.xyz /= Pndc.w; //divide by 1?
+	if ( Pndc.x > -1.0f && Pndc.x < 1.0f && Pndc.y  > -1.0f && Pndc.y <  1.0f && Pndc.z >  0.0f && Pndc.z <  1.0f ) {
+		vec2 uv = 0.5f * Pndc.xy + 0.5f; //normalize UV [0-1]
+		uv = vec2(uv.x,(1.0-uv.y));	// maya flip Y
+		float z = Pndc.z - _ShadowDepthBias / Pndc.w;
+
+		// we'll sample a bunch of times to smooth our shadow a little bit around the edges:
+		//shadow = 0.0f;
+		//for(int i=0; i<SHADOW_FILTER_TAPS_CNT; ++i) {
+			//vec2 suv = uv + (SuperFilterTaps[i] * shadowMapTexelSize);
+			//float val = z - ShadowMapTexture.SampleLevel(SamplerShadowDepth, suv, 0 ).x;
+			//shadow += (val >= 0.0f) ? 0.0f : (1.0f / SHADOW_FILTER_TAPS_CNT);
+		//}
+
+		// a single sample would be:
+		shadow = 1.0f;
+		float shadowMapZ = sampleFromShadowMap(ActiveLightIndex, uv).x;
+		float val = z - shadowMapZ;
+		//float val = z - ShadowMapTexture.SampleLevel(SamplerShadowDepth, uv, 0 ).x; //in case we use mip maps
+		shadow = (val >= 0.0f)? 0.0f : 1.0f; // 1 -> shadow
+		shadow = shadow + ceil(-nDotL);
+		//shadow = lerp(1.0f, shadow, _ShadowMultiplier);
+	}
+	return shadow;
+	//return Pndc.y;
+}
+
+
+// ---------------------------------------------
+// Lighting
+// ---------------------------------------------
+struct lightOut {
+	vec3 specular;
+	vec3 color;
+	vec3 dilute;
+	float shade;
+};
+
+lightOut calculateLight	(	bool lightEnable, int lightType, float lightAtten, vec3 lightPos, vec3 vertWorldPos,
+							vec3 lightColor, float lightIntensity, vec3 lightDir, float lightConeAngle, float lightFallOff, mat4 lightViewPrjMatrix,
+							int ActiveLightIndex, bool lightShadowOn, vec3 normalWorld, float diffuseArea, float diffuseFactor, float diluteArea,
+							float specular, float specDiffusion, float specTransparency, vec3 viewDir, float depth) {
+	lightOut L ;
+	L.specular = vec3(0.0);
+	L.color = vec3(0,0,0);
+	L.dilute = vec3(0.0);
+
+
+	if(lightEnable){
+		//for Maya, flip the lightDir (weird)
+		lightDir = -lightDir;
+		//spot = 2, point = 3, directional = 4, ambient = 5,
+
+		//ambient light
+		//-> no diffuse, specular or shadow casting
+		if (lightType == 5){
+			L.color = lightColor * lightIntensity;
+			return L;
+		}
+
+		//directional light -> no position
+		bool isDirectionalLight = (lightType == 4);
+		vec3 lightVec = lerp(lightPos - vertWorldPos, lightDir, isDirectionalLight ? 1 : 0);
+		vec3 nLightVec = normalize(lightVec); //normalized light vector
+
+		//diffuse
+		//dot product
+		float nDotL = dot(normalWorld, nLightVec);
+		//Wrapped Lambert
+		//Derived from half lambert, presents problems with shadow mapping
+		//float WL = diffuseArea + (1-diffuseArea) * nDotL;
+		float dotMask = saturate(nDotL);
+		float DF = lerp(1,dotMask, _DiffuseFactor); //diffuse factor
+		float SW = lerp(0,saturate(-nDotL), _ShadeWrap); //shade wrap
+		float CL = saturate(DF*(1-SW)); //custom lambert
+		vec3 diffuseColor = lightColor * lightIntensity * CL; //diffuse reflectance (lambert)
+
+		//dilute area
+		vec3 diluted = vec3(saturate((dotMask+(diluteArea-1))/diluteArea));
+
+		//specular (Phong)
+		vec3 specularColor = vec3(0);
+		if(_Specular>0){
+			float rDotV = dot(reflect(nLightVec, normalWorld),-viewDir);
+			float specularEdge = _DarkEdges * (saturate(((1-specular)-rDotV)*200/depth)-1); //darkened edge mask
+			specularColor = vec3(lerp(specularEdge,0,specDiffusion) + 2*saturate((max(1-specular, rDotV)-(1-specular))*pow((2-specDiffusion),10)))*(1-specTransparency);
+			specularColor *= saturate(dot(normalWorld, lightDir)*2);	// prevent spec leak on back side of model
+		}
+
+
+		//attenuation
+		if (!isDirectionalLight){
+			bool enableAttenuation = lightAtten > 0.0001f;
+			float attenuation = lerp(1.0, 1 / pow(length(lightVec), lightAtten), enableAttenuation);
+			//compensate diffuse and specular
+			diffuseColor *= attenuation;
+			specularColor *= attenuation;
+		}
+
+		// spot light Cone Angle
+		if (lightType == 2) {
+			float angle = getLightConeAngle(lightConeAngle, lightFallOff, nLightVec, lightDir);
+			diffuseColor *= angle;
+			specularColor *= angle;
+		}
+
+
+
+		// shadows
+		if (_UseShadows && lightShadowOn) {
+			float shadow = lightShadow(lightViewPrjMatrix, ActiveLightIndex, vertWorldPos, nDotL);
+			if(shadow<1){
+				diffuseColor =  lightColor * lightIntensity * (1-diffuseFactor);
+				L.shade = 1;
+			}
+			specularColor *= floor(shadow); //get rid of specular in the shade
+		}else{
+			L.shade = 0;
+		}
+
+
+		//L.dilute = nDotL.xxx;
+		//L.color = shadeColor;
+		L.color = diffuseColor;
+		L.specular = specularColor;
+		L.dilute = diluted;
+		//L.dilute = diffuseColor;
+	}
+
+	return L;
+}
+}
+
+GLSLShader VertexShader_Funcs
+{
+
+    vec2 get_corrected_texture_coordinate(vec2 textureCoordinate)
+    {
+        #if FLIP_TEXTURE_Y
+            return vec2(textureCoordinate.x, 1.0 - textureCoordinate.y);
+        #else
+            return textureCoordinate;
+        #endif
+    }
+
+    // velocity vector computation
+    vec2 calculateVelocity(in vec2 currentPos, in vec2 previousPos, in float zOverW) {
+        //if (zOverW == 1.0) {
+        //    return vec2(0.0, 0.0);
+        //}
+
+        // Use this frame's position and last frame's to compute the pixelvelocity.
+        vec2 velocity = (currentPos - previousPos) / 2.0;
+
+        return velocity;
+        // step(0, abs(velocity)) * velocity * 1000.0;
+    }
+
+}
+
+/*******************************************************************************/
+//
+//                                         ,d
+//                                         88
+//  8b       d8   ,adPPYba,  8b,dPPYba,  MM88MMM   ,adPPYba,  8b,     ,d8
+//  `8b     d8'  a8P_____88  88P'   "Y8    88     a8P_____88   `Y8, ,8P'
+//   `8b   d8'   8PP"""""""  88            88     8PP"""""""     )888(
+//    `8b,d8'    "8b,   ,aa  88            88,    "8b,   ,aa   ,d8" "8b,
+//      "8"       `"Ybbd8"'  88            "Y888   `"Ybbd8"'  8P'     `Y8
+//
+/*******************************************************************************/
+GLSLShader vs
+{
+	void main()
+	{
+        // vertex colors
+        if (_UseControl){
+            VS_OUT.vColor0 = vColor0;
+            VS_OUT.vColor1 = vColor1;
+            VS_OUT.vColor2 = vColor2;
+        } else {
+            VS_OUT.vColor0 = vec4(0,0,0,0);
+            VS_OUT.vColor1 = vec4(0,0,0,0);
+            VS_OUT.vColor2 = vec4(0,0,0,0);
+        }
+
+		VS_OUT.vPreviousScreenPosition = vColor3;
+
+		//TEXTURE
+		VS_OUT.uv = get_corrected_texture_coordinate(texcoord);
+
+		//world position
+		VS_OUT.posWorld = (WORLD * vec4(vertex.xyz,1)).xyz; //use non-jittered pos
+
+		//vectors from vertex
+		VS_OUT.normalWorld = normalize((WORLD * vec4(normal,0.0)).xyz);
+		VS_OUT.tangentWorld = normalize((WORLD * tangent).xyz);
+		VS_OUT.binormalWorld = normalize(cross(VS_OUT.normalWorld, VS_OUT.tangentWorld));
+
+		//view direction
+		VS_OUT.viewDir  = normalize(VIEWINV[3].xyz - VS_OUT.posWorld);
+		VS_OUT.nDotV = dot(VS_OUT.normalWorld, VS_OUT.viewDir);
+
+		//light direction
+		VS_OUT.lightDir = normalize(-light0Dir);
+
+		//z-depth
+		float depth = distance(VS_OUT.posWorld, VIEWINV[3].xyz);
+
+		//Return here if swatch render
+		if (IsSwatchRender == true){
+			VS_OUT.pos = WVP * vec4(vertex.xyz,1.0);
+			gl_Position = VS_OUT.pos;
+			return;
+		}
+
+		//////////////////////////////////////////////////////////////////////////
+		//VERTEX DEFORMATIONS
+		vec3 newPos = vertex.xyz;
+
+		//move vertex from bleed
+		newPos += VS_OUT.normalWorld*saturate(vColor2.a-0.7)*_BleedOffset;
+
+
+		//determine tremor angle
+		float angleTremor = min(saturate(VS_OUT.nDotV*1.2),(1-_TremorFront));
+		//hand tremor
+		vec4 pPos = WVP * vec4(newPos,1.0);
+		vec4 tremorPos = pPos+vec4(sin(gTimer * (_TremorSpeed*100)  + vertex.xy * (_TremorFreq*10)) * _Tremor / gScreenSize,0, 0);
+
+		//lerp tremor according to angle
+		VS_OUT.pos = lerp(tremorPos,pPos,angleTremor);
+
+		// velocity
+		vec2 velocity = calculateVelocity(VS_OUT.pos.xy / VS_OUT.pos.w, vColor3.xy, depth);
+		VS_OUT.velocityDepth = vec3(velocity, depth);
+
+		gl_Position = VS_OUT.pos;
+	}
+}
+
+
+
+
+
+/*******************************************************************************/
+//               88                           88
+//               ""                           88
+//                                            88
+//  8b,dPPYba,   88  8b,     ,d8   ,adPPYba,  88
+//  88P'    "8a  88   `Y8, ,8P'   a8P_____88  88
+//  88       d8  88     )888(     8PP"""""""  88
+//  88b,   ,a8"  88   ,d8" "8b,   "8b,   ,aa  88
+//  88`YbbdP"'   88  8P'     `Y8   `"Ybbd8"'  88
+//  88
+//  88
+/*******************************************************************************/
+
+GLSLShader psTextured
+{
+	void main()
+	{
+		vec3 pixel = vec3(0);
+		float transparency = 1.0f;
+
+		vec4 control1 = vec4(PS_IN.vColor0.rgb, transparency);
+		vec4 control2 = vec4(PS_IN.vColor1.rgb, transparency);
+		vec4 control3 = vec4(PS_IN.vColor2.rgb, transparency);
+		vec4 control4 = vec4(PS_IN.vColor0.a, PS_IN.vColor1.a, PS_IN.vColor2.a, transparency);
+
+
+		//normal
+		vec3 normalWorld = normalize(PS_IN.normalWorld);
+
+		//normal mapping
+		if (_UseNormalTexture) {
+			vec3 tangentWorld = normalize(PS_IN.tangentWorld);
+			vec3 binormalWorld = normalize(PS_IN.binormalWorld);
+			//Normal transpose matrix
+			mat3 local2WorldTranspose = mat3(tangentWorld, binormalWorld, normalWorld);
+			//Sample normal map
+			vec3 normalMap = texture2D(_NormalTexSampler, PS_IN.uv).xyz * 2 - 1; //to transform float values to -1...1
+			//adjust values
+	        if (_FlipU) {
+    	        normalMap.r = -normalMap.r; //normal X is on the red channel
+        	}
+        	if (_FlipV) {
+            	normalMap.g = -normalMap.g; //normal y is on the green channel
+        	}
+			//Calculate new normal direction
+			normalMap.rg *= _BumpDepth;
+			normalWorld = normalize(local2WorldTranspose * normalMap);
+		}
+
+		//specular mapping
+		vec4 specularMap = vec4(1.0f,1.0f,1.0f,1.0f);
+		if (_UseSpecularTexture) {
+			specularMap = texture2D(_SpecTexSampler, PS_IN.uv);
+		}
+
+		//texture mapping
+		vec3 tex = _ColorTint;
+		float grayscale = 1.0f;
+		if (_UseColorTexture) {
+			vec4 sampledPixel = texture2D(_MainTexSampler, PS_IN.uv);
+			tex *= sampledPixel.rgb;
+			transparency = sampledPixel.a;
+			grayscale = 0.2989 * tex.r + 0.5870 * tex.g + 0.1140 * tex.b;
+		}
+
+		//light calculations (Maya currently only supports 3 lights auto-bind, could expand this if necessary)
+		lightOut light0 = calculateLight(light0Enable, light0Type, light0AttenScale, light0Pos, PS_IN.posWorld.xyz,
+											light0Color, light0Intensity, light0Dir, light0ConeAngle, light0FallOff, light0Matrix,
+											0, light0ShadowOn, normalWorld, _ShadeWrap, _DiffuseFactor, _DiluteArea,
+											_Specular, _SpecDiffusion, _SpecTransparency, PS_IN.viewDir, PS_IN.velocityDepth.z);
+
+		lightOut light1 = calculateLight(light1Enable, light1Type, light1AttenScale, light1Pos, PS_IN.posWorld.xyz,
+											light1Color, light1Intensity, light1Dir, light1ConeAngle, light1FallOff, light1Matrix,
+											1, light1ShadowOn, normalWorld, _ShadeWrap, _DiffuseFactor, _DiluteArea,
+											_Specular, _SpecDiffusion, _SpecTransparency, PS_IN.viewDir, PS_IN.velocityDepth.z);
+
+		lightOut light2 = calculateLight(light2Enable, light2Type, light2AttenScale, light2Pos, PS_IN.posWorld.xyz,
+											light2Color, light2Intensity, light2Dir, light2ConeAngle, light2FallOff, light2Matrix,
+											2, light2ShadowOn, normalWorld, _ShadeWrap, _DiffuseFactor, _DiluteArea,
+											_Specular, _SpecDiffusion, _SpecTransparency, PS_IN.viewDir, PS_IN.velocityDepth.z);
+
+		vec3 lightTotal =  light0.color + light1.color + light2.color;
+		vec3 specTotal = light0.specular + light1.specular + light2.specular;
+		vec3 dilute = light0.dilute + light1.dilute + light2.dilute;
+		float shade = light0.shade + light1.shade + light2.shade;
+
+		if (!MayaFullScreenGamma) {
+			lightTotal = pow(lightTotal, vec3(1/2.2)); // gamma correct for screen
+		}
+		dilute = lerp(dilute, pow(dilute, vec3(2.2)), saturate(-1+_Dilute+_Cangiante));//soften gradation if dilute and cangiante are at the same time
+
+		// //if its not in shade
+		vec3 highlight = vec3(0.0f,0.0f,0.0f);
+		if (shade<1.0){
+			tex.rgb = tex.rgb + saturate(dilute*_Cangiante); //cangiante
+			tex.rgb = lerp(tex.rgb, _PaperColor, dilute*_Dilute); //dilute
+			if (_HighArea>0) {
+				highlight = (max(1-vec3(_HighArea), dilute)-(1-vec3(_HighArea)))*800/PS_IN.velocityDepth.z;
+				highlight = saturate(lerp(-highlight*_DarkEdges, highlight, trunc(highlight))); //highlight darkenedEdges
+			}
+		}
+
+
+		//diffuse calculations
+		vec3 watercolor = vec3(0,0,0);
+		if(_UseOverrideShade){
+			vec3 c = lerp(_ShadeColor, tex.rgb, saturate(lightTotal));
+			watercolor = c + (specTotal * specularMap.rgb) + highlight*(1-_HighTransparency);
+		} else {
+			vec3 c = lerp(_ShadeColor*grayscale, tex.rgb, saturate(lightTotal));
+			c = lerp(vec3(1-_DiffuseFactor), c, saturate(lightTotal));
+			watercolor = c + (specTotal * specularMap.rgb) + highlight*(1-_HighTransparency);
+		}
+
+		if(IsSwatchRender == true){
+			colorOutput = vec4(watercolor, transparency);
+			return;
+		}
+
+		//object-space darkened edges
+		vec3 wDarkenEdge = watercolor;
+		if (_DarkEdges>0) {
+			float dEdges = saturate(PS_IN.nDotV*max(3,20/PS_IN.velocityDepth.z));
+			float darkenedEdges = lerp(1, dEdges, _DarkEdges); //(1-_DarkEdges)+(_DarkEdges*(dEdges))
+			wDarkenEdge = lerp(watercolor*darkenedEdges, watercolor, saturate(dilute)+0.5);
+		}
+
+		vec3 controlledColor = wDarkenEdge;
+
+		// velocity
+		vec2 velocity = PS_IN.velocityDepth.xy;
+
+		//FADE
+		//pixel = lerp(wDarkenEdge, _AtmosphereColor.rgb, saturate((PS_IN.velocityDepth.z-_RangeStart)/_RangeEnd));
+		pixel = lerp(controlledColor, _AtmosphereColor.rgb, saturate((PS_IN.velocityDepth.z-_RangeStart)/_RangeEnd));
+		colorOutput = vec4(saturate(pixel), transparency);
+        pigmentCtrlOutput = vec4(control1.xyz, 1);
+        substrateCtrlOutput = vec4(control1.xyz, 1);
+        edgeCtrlOutput = vec4(control1.xyz, 1);
+        abstractionCtrlOutput = vec4(control1.xyz, 1);
+		velocityOutput = velocity;
+	}
+}
+
+
+
+// Pixel shader.
+GLSLShader vColorFrag
+{
+	void main()
+	{
+		vec4 correctedColor = saturate(PS_IN.vColor0);
+
+		// if (!MayaFullScreenGamma){
+		// 	correctedColor = pow(correctedColor, 1.0/2.2);
+		// }
+
+		colorOutput = vec4(correctedColor.a,correctedColor.a,correctedColor.a,0);
+	}
+}
+
+
+
+
+//------------------------------------
+// pixel shader for shadow map generation
+// Overrides Mayas internal shadow map pixel-shader
+//------------------------------------
+GLSLShader ShadowMapPS
+{
+	void main()
+	{
+		vec4 Pndc = VIEWPRJ * vec4(PS_IN.posWorld, 1.0f);
+
+		// divide Z and W component from clip space vertex position to get final depth per pixel
+		float retZ = Pndc.z / Pndc.w;
+
+		retZ += fwidth(retZ); //don't seem to require any softening
+		colorOutput = retZ.xxxx;
+	}
+}
+
+/*******************************************************************************/
+//                                   88                        88
+//    ,d                             88                        ""
+//    88                             88
+//  MM88MMM   ,adPPYba,   ,adPPYba,  88,dPPYba,   8b,dPPYba,   88   ,adPPYb,d8  88       88   ,adPPYba,  ,adPPYba,
+//    88     a8P_____88  a8"     ""  88P'    "8a  88P'   `"8a  88  a8"    `Y88  88       88  a8P_____88  I8[    ""
+//    88     8PP"""""""  8b          88       88  88       88  88  8b       88  88       88  8PP"""""""   `"Y8ba,
+//    88,    "8b,   ,aa  "8a,   ,aa  88       88  88       88  88  "8a    ,d88  "8a,   ,a88  "8b,   ,aa  aa    ]8I
+//    "Y888   `"Ybbd8"'   `"Ybbd8"'  88       88  88       88  88   `"YbbdP'88   `"YbbdP'Y8   `"Ybbd8"'  `"YbbdP"'
+//                                                                          88
+/*******************************************************************************/
+technique wTextured {
+	pass p0 {
+        VertexShader(in appData, out vertexOutput VS_OUT) = {VertexShader_Funcs, vs};
+        PixelShader(in vertexOutput PS_IN, out pixelShaderOutput) = {PixelShader_Funcs, psTextured};
+		// SetRasterizerState(DisableCulling);
+	}
+	//override maya shadow map
+	// pass pShadow < string drawContext = "shadowPass"; >	{// shadow pass
+	// 	VertexShader(in appData, out vertexOutput) = vs;
+	// 	PixelShader(in vertexOutput, out fragmentOutput) = ShadowMapPS;
+	// }
+}
+
+technique vColor {
+  pass p0 {// tell maya during what draw context this shader should be active, in this case 'Color'
+        VertexShader(in appData, out vertexOutput VS_OUT) = {VertexShader_Funcs, vs};
+        PixelShader(in vertexOutput PS_IN, out pixelShaderOutput) = {PixelShader_Funcs, vColorFrag};
+  }
+}

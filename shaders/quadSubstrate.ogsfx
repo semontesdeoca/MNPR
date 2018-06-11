@@ -1,0 +1,239 @@
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// quadSubstrate.ogsfx (GLSL)
+// Brief: Substrate operations for MNPR
+// Contributors: Santiago Montesdeoca, Amir Semmo
+////////////////////////////////////////////////////////////////////////////////////////////////////
+//              _         _             _
+//    ___ _   _| |__  ___| |_ _ __ __ _| |_ ___
+//   / __| | | | '_ \/ __| __| '__/ _` | __/ _ \
+//   \__ \ |_| | |_) \__ \ |_| | | (_| | ||  __/
+//   |___/\__,_|_.__/|___/\__|_|  \__,_|\__\___|
+//
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// This shader file provides algorithms for substrate-based effects in MNPR
+// 1.- Substrate lighting, adding an external lighting source to the render
+// 2.- Substrate distortion, emulating the substrate fingering happening on rough substrates
+////////////////////////////////////////////////////////////////////////////////////////////////////
+#include "include/quadCommon.ogsfh"
+
+// TEXTURES
+uniform Texture2D gSubstrateTex;
+uniform Texture2D gEdgeTex;
+uniform Texture2D gControlTex;
+uniform Texture2D gDepthTex;
+
+
+// VARIABLES
+uniform float gGamma = 1.0;
+uniform float gSubstrateLightDir = 0;
+uniform float gSubstrateLightTilt = 45;
+uniform float gSubstrateShading = 1.0;
+uniform float gSubstrateDistortion;
+
+uniform float gImpastoPhongSpecular = 0.6;
+uniform float gImpastoPhongShininess = 16.0;
+
+
+// SAMPLERS
+uniform sampler2D gSubstrateTexSampler = sampler_state {
+	Texture = <gSubstrateTex>;
+};
+uniform sampler2D gEdgeTexSampler = sampler_state {
+	Texture = <gEdgeTex>;
+};
+uniform sampler2D gControlTexSampler = sampler_state{
+    Texture = <gControlTex>;
+};
+uniform sampler2D gDepthSampler = sampler_state {
+	Texture = <gDepthTex>;
+};
+
+
+
+//    _ _       _     _   _
+//   | (_) __ _| |__ | |_(_)_ __   __ _
+//   | | |/ _` | '_ \| __| | '_ \ / _` |
+//   | | | (_| | | | | |_| | | | | (_| |
+//   |_|_|\__, |_| |_|\__|_|_| |_|\__, |
+//        |___/                   |___/
+
+// Contributor: Santiago Montesdeoca
+// Calculates the substrate lighting on top of the rendered imagery
+// -> Based on the external substrate lighting model by Montesdeoca et al. 2017
+//    [2017] Edge- and substrate-based effects for watercolor stylization
+GLSLShader deferredLightingFrag {
+	void main() {
+		ivec2 loc = ivec2(gl_FragCoord.xy);
+		vec4 renderTex = texelFetch(gSampler, loc, 0);  // equivalent to Load in HLSL
+		vec2 substrateNormalTex = texelFetch(gSubstrateTexSampler, loc, 0).rg - 0.5;  // bring normals to [-0.5 - 0.5]
+
+		// get light direction
+		float dirRadians = gSubstrateLightDir * PI / 180.0;
+		vec3 lightDir = vec3(sin(dirRadians), cos(dirRadians), (gSubstrateLightTilt / 89.0));
+
+		// calculate diffuse illumination
+		vec3 normals = vec3(-substrateNormalTex, 1.0);
+		float diffuse = dot(normals, lightDir);  // basic lambert
+		//diffuse = 1.0 - acos(diffuse)/PI;  // angular lambert
+		//diffuse = (1 + diffuse)*0.5;  // extended lambert
+
+		// modulate diffuse shading
+        diffuse = pow(1 - diffuse, 2);  // modify curve 
+        diffuse = 1 - (diffuse * gSubstrateShading);
+        if (gGamma < 1) {
+            diffuse = pow(diffuse, 1.0 / 2.2);  // perform gamma correction if not enabled in the viewport
+        }
+
+		result = vec4(renderTex.rgb * vec3(diffuse, diffuse, diffuse), renderTex.a);
+	}
+}
+
+
+// Contributor: Amir Semmo
+// Calculates the substrate lighting only on parts that have no paint applied (impasto would override any substrate structure)
+// -> Extended from the external substrate lighting model by Montesdeoca et al. 2017
+//    [2017] Edge- and substrate-based effects for watercolor stylization
+GLSLShader deferredImpastoLightingFrag {
+    // BLENDING
+    float blendOverlay(in float base, in float blend) {
+        return base < 0.5 ? (2.0*base*blend) : (1.0 - 2.0*(1.0 - base)*(1.0 - blend));
+    }
+
+    float blendLinearDodge(in float base, in float blend) {
+        return base + blend;
+    }
+
+    void main() {
+        ivec2 loc = ivec2(gl_FragCoord.xy);
+        vec4 renderTex = texelFetch(gSampler, loc, 0);  // equivalent to Load in HLSL
+        vec3 substrateNormalTex = vec3(clamp(texelFetch(gSubstrateTexSampler, loc, 0).rg - 0.5, -0.5, 0.5), 1.0);  // bring normals to [-0.5 - 0.5]
+
+        // get light direction
+        float dirRadians = gSubstrateLightDir * PI / 180.0;
+        vec3 lightDir = vec3(sin(dirRadians), cos(dirRadians), (gSubstrateLightTilt / 89.0));
+
+        // calculate diffuse illumination
+        vec3 normals = vec3(-substrateNormalTex.xy, 1.0);
+        float diffuse = dot(normals, lightDir);  // basic lambert
+        //diffuse = 1.0 - acos(diffuse)/PI;  // angular lambert
+        //diffuse = (1 + diffuse)*0.5;  // extended lambert
+        vec2 phong = clamp(vec2(diffuse, pow(diffuse, gImpastoPhongShininess) * gImpastoPhongSpecular),0,1);  // phong based
+
+        // modulate diffuse shading
+        diffuse = pow(1 - diffuse, 2);  // modify curve 
+        diffuse = 1 - (diffuse * gSubstrateShading);
+        if (gGamma < 1) {
+            diffuse = pow(diffuse, 1.0 / 2.2);  // perform gamma correction if not enabled in the viewport
+        }
+
+        vec3 substrateColor = mix(renderTex.rgb*diffuse, renderTex.rgb, renderTex.a);
+        vec3 impastoColor = vec3(blendOverlay(renderTex.r, phong.x), blendOverlay(renderTex.g, phong.x), blendOverlay(renderTex.b, phong.x)); // blend diffuse component
+        impastoColor = vec3(blendLinearDodge(phong.y, impastoColor.r), blendLinearDodge(phong.y, impastoColor.g), blendLinearDodge(phong.y, impastoColor.b));  // blend specular component
+
+        // linearly blend with the alpha mask
+        renderTex.rgb = mix(substrateColor, impastoColor, renderTex.a);
+
+        result = renderTex;
+    }
+}
+
+
+
+//        _ _     _             _   _             
+//     __| (_)___| |_ ___  _ __| |_(_) ___  _ __  
+//    / _` | / __| __/ _ \| '__| __| |/ _ \| '_ \ 
+//   | (_| | \__ \ || (_) | |  | |_| | (_) | | | |
+//    \__,_|_|___/\__\___/|_|   \__|_|\___/|_| |_|
+//                                                
+
+// Contributor: Santiago Montesdeoca
+// Calculates the substrate distortion generated by its roughness
+// -> Based on the paper distortion approach by Montesdeoca et al. 2017
+//    [2017] Art-directed watercolor stylization of 3D animations in real-time
+GLSLShader substrateDistortionFrag {
+    void main() {
+        ivec2 loc = ivec2(gl_FragCoord.xy);
+        vec2 gTexel = vec2(1.0f) / gScreenSize;
+
+        // get pixel values
+        vec2 normalTex = (texelFetch(gSubstrateTexSampler, loc, 0).rg * 2.0 - 1);  // to transform float values to -1...1
+        float distortCtrl = clamp((texelFetch(gControlTexSampler, loc, 0).r + 0.2), 0, 1.0);  // control parameters, substrate control target (r)
+        float linearDepth = texture2D(gDepthSampler, uv).r;;
+
+        // calculate uv offset
+        float controlledDistortion = lerp(0, gSubstrateDistortion, 5.0*distortCtrl);  // 0.2 is default
+        vec2 uvOffset = normalTex * (vec2(controlledDistortion) * gTexel);
+        
+        // check if destination is in front
+        float depthDest = texture2D(gDepthSampler, uv + uvOffset).r;
+        if ((linearDepth - depthDest) > 0.01f) {
+            uvOffset = vec2(0.0f, 0.0f);
+        }
+        
+        vec4 colorDest = texture2D(gSampler, uv + uvOffset);
+        result = colorDest;
+    }
+}
+
+// Contributor: Amir Semmo
+// Calculates the substrate distortion generated by its roughness only close to edges
+// -> Extended from the paper distortion approach by Montesdeoca et al. 2017
+//    [2017] Art-directed watercolor stylization of 3D animations in real-time
+GLSLShader substrateDistortionEdgesFrag {
+    void main() {
+        ivec2 loc = ivec2(gl_FragCoord.xy);
+        vec2 gTexel = vec2(1.0f) / gScreenSize;
+
+        // get pixel values
+        vec2 normalTex = (texelFetch(gSubstrateTexSampler, loc, 0).rg * 2.0 - 1);  // to transform float values to -1...1
+        float distortCtrl = clamp((texelFetch(gControlTexSampler, loc, 0).r + 0.2), 0, 1.0);  // control parameters, substrate control target (r)
+
+        // calculate uv offset
+        float controlledDistortion = lerp(0, gSubstrateDistortion, 5.0*distortCtrl);  // 0.2 is default
+        vec2 uvOffset = normalTex * (vec2(controlledDistortion) * gTexel);
+        vec4 colorDest = texture2D(gSampler, uv + uvOffset);
+
+        // only distort at edges
+        float e = texelFetch(gEdgeTexSampler, loc, 0).x;
+
+        result = mix(texture2D(gSampler, uv), colorDest, e);
+    }
+}
+
+
+
+//    _            _           _
+//   | |_ ___  ___| |__  _ __ (_) __ _ _   _  ___  ___
+//   | __/ _ \/ __| '_ \| '_ \| |/ _` | | | |/ _ \/ __|
+//   | ||  __/ (__| | | | | | | | (_| | |_| |  __/\__ \
+//    \__\___|\___|_| |_|_| |_|_|\__, |\__,_|\___||___/
+//                                  |_|
+// DEFERRED SUBSTRATE LIGHTING
+technique deferredLighting {
+	pass p0 {
+		VertexShader(in appData, out vertexOutput) = quadVert;
+		PixelShader(in vertexOutput, out fragmentOutput) = { deferredLightingFrag };
+	}
+}
+technique deferredImpastoLighting {
+    pass p0 {
+        VertexShader(in appData, out vertexOutput) = quadVert;
+        PixelShader(in vertexOutput, out fragmentOutput) = { deferredImpastoLightingFrag };
+    }
+}
+
+
+// SUBSTRATE DISTORTION
+technique substrateDistortion{
+    pass p0 {
+        VertexShader(in appDataSampler, out vertexOutputSampler) = quadVertSampler;
+        PixelShader(in vertexOutputSampler, out fragmentOutput) = { substrateDistortionFrag };
+    }
+}
+
+technique substrateDistortionEdges{
+    pass p0 {
+        VertexShader(in appDataSampler, out vertexOutputSampler) = quadVertSampler;
+        PixelShader(in vertexOutputSampler, out fragmentOutput) = { substrateDistortionEdgesFrag };
+    }
+}

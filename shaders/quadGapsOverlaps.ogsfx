@@ -1,0 +1,226 @@
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// quadGapsOverlaps.ogsfx (GLSL)
+// Brief: Creating gaps and overlaps at the edges of the rendered image
+// Contributors: Santiago Montesdeoca, Pierre Bénard
+////////////////////////////////////////////////////////////////////////////////////////////////////
+//                             _                        _                 
+//     __ _  __ _ _ __  ___   | |    _____   _____ _ __| | __ _ _ __  ___ 
+//    / _` |/ _` | '_ \/ __|  | |   / _ \ \ / / _ \ '__| |/ _` | '_ \/ __|
+//   | (_| | (_| | |_) \__ \  | |  | (_) \ V /  __/ |  | | (_| | |_) \__ \
+//    \__, |\__,_| .__/|___/  | |   \___/ \_/ \___|_|  |_|\__,_| .__/|___/
+//    |___/      |_|          |_|                              |_|        
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// This shader provides the algorithms to produce gaps and overlaps commonly found in illustrations
+////////////////////////////////////////////////////////////////////////////////////////////////////
+#include "include/quadCommon.ogsfh"
+#include "include/quadColorTransform.ogsfh"
+
+// TEXTURES
+uniform Texture2D gEdgeTex;
+uniform Texture2D gControlTex;
+uniform Texture2D gBlendingTex;
+
+// VARIABLES
+uniform vec3 gSubstrateColor = { 1.0, 1.0, 1.0 };
+uniform float gGORadius = 5;
+
+// MRT
+attribute fragmentMRTOutput {
+    vec4 colorOutput : COLOR0;
+    float alphaOutput : COLOR1;
+};
+
+// SAMPLERS
+uniform sampler2D gEdgeTexSampler = sampler_state{
+    Texture = <gEdgeTex>;
+};
+uniform sampler2D gControlTexSampler = sampler_state{
+    Texture = <gControlTex>;
+};
+uniform sampler2D gBlendingTexSampler = sampler_state{
+    Texture = <gBlendingTex>;
+};
+
+
+
+//     __                  _   _
+//    / _|_   _ _ __   ___| |_(_) ___  _ __  ___
+//   | |_| | | | '_ \ / __| __| |/ _ \| '_ \/ __|
+//   |  _| |_| | | | | (__| |_| | (_) | | | \__ \
+//   |_|  \__,_|_| |_|\___|\__|_|\___/|_| |_|___/
+//
+GLSLShader Pixel_Functions{
+
+
+// Contributor: Pierre Bénard
+// rgb (red, green, blue) to ryb (red, yellow, blue) color space transformation
+// -> Based on color mixing model by Chen et al. 2015
+//    [2015] Wetbrush: GPU-based 3D Painting Simulation at the Bristle Level
+vec3 mixRYB2(vec3 color1, vec3 color2) {
+    mat3 M = mat3(0.241, 0, 0, 0, 0.691, 0, 0, 0, 0.068); //luminance matrix
+    //measure RGB brightness of colors
+    float b1 = luminance(color1);
+    float b2 = luminance(color2);
+    //float b1 = pow(dot(color1, mul(M, color1)), 0.5);
+    //float b2 = pow(dot(color2, mul(M, color2)), 0.5);
+    float bAvg = 0.5*(b1 + b2);
+    //convert colors to RYB
+    vec3 ryb1 = rgb2ryb(color1);
+    vec3 ryb2 = rgb2ryb(color2);
+    //mix colors in RYB space
+    vec3 rybOut = 0.5*(ryb1 + ryb2);
+    //bring back to RGB to measure brightness
+    vec3 rgbOut = ryb2rgb(rybOut);
+    //measure brightness of result
+    //float b3 = pow(dot(rgbOut, mul(M, rgbOut)),0.5);
+    float b3 = luminance(rgbOut);
+    //modify ryb with brightness difference
+    rybOut *= (bAvg / b3) * 0.9;
+    //convert and send back
+    return ryb2rgb(rybOut);
+}
+}
+
+
+
+//                               ___                           _                 
+//     __ _  __ _ _ __  ___     ( _ )       _____   _____ _ __| | __ _ _ __  ___ 
+//    / _` |/ _` | '_ \/ __|    / _ \/\    / _ \ \ / / _ \ '__| |/ _` | '_ \/ __|
+//   | (_| | (_| | |_) \__ \   | (_>  <   | (_) \ V /  __/ |  | | (_| | |_) \__ \
+//    \__, |\__,_| .__/|___/    \___/\/    \___/ \_/ \___|_|  |_|\__,_| .__/|___/
+//    |___/      |_|                                                  |_|        
+// Contributor: Santiago Montesdeoca
+// Creates the gaps and overlaps for sketchy illustrated rendering
+// -> Based on the gaps & overlaps model by Montesdeoca et al. 2017
+//    [2017] Art-directed watercolor stylization of 3D animations in real-time
+GLSLShader gapsOverlapsFrag {
+    void main() {
+    ivec2 loc = ivec2(gl_FragCoord.xy); // coordinates for loading
+    
+    float eEdges = texelFetch(gEdgeTexSampler, loc, 0).b;
+    float gapsOverlaps = texelFetch(gControlTexSampler, loc, 0).b * gGORadius;  // edge control target fidelity (b)
+    float blending = texelFetch(gBlendingTexSampler, loc, 0).a;  // contains the blending mask    
+
+    vec4 outColor = texelFetch(gSampler, loc, 0);
+    float mask = outColor.a;
+    vec2 gTexel = vec2(1.0f) / gScreenSize;
+    float goThreshold = 1.0 / gGORadius;
+
+    // make sure we are not considering emptiness or blending
+    if (mask > 0.1 && blending < 0.01) {
+        // make sure we are at an edge
+        if (eEdges > 0.1) {
+
+
+            // OVERLAPS
+            if (gapsOverlaps > 0.1f) {
+
+                // get gradients
+                float right = texture2D(gEdgeTexSampler, uv + vec2(gTexel.x, 0)).b;
+                float left = texture2D(gEdgeTexSampler, uv + vec2(-gTexel.x, 0)).b;
+                float down = texture2D(gEdgeTexSampler, uv + vec2(0, gTexel.y)).b;
+                float up = texture2D(gEdgeTexSampler, uv + vec2(0, -gTexel.y)).b;
+
+                float topRight = texture2D(gEdgeTexSampler, uv + vec2(gTexel.x, -gTexel.y)).b;
+                float topLeft = texture2D(gEdgeTexSampler, uv + vec2(-gTexel.x, -gTexel.y)).b;
+                float downRight = texture2D(gEdgeTexSampler, uv + vec2(gTexel.x, gTexel.y)).b;
+                float downLeft = texture2D(gEdgeTexSampler, uv + vec2(-gTexel.x, gTexel.y)).b;
+
+                // could be optimized for lower end devices by using bilinear filtering
+                float uGradient = (right + 0.5*(topRight + downRight)) - (left + 0.5 * (topLeft + downLeft));
+                float vGradient = (down + 0.5*(downRight + downLeft)) - (up + 0.5*(topRight + topLeft));
+                vec2 gradient = vec2(uGradient, vGradient);
+                vec4 destColor = outColor;
+
+                gradient = normalize(gradient);
+
+                int o = 1;
+                // find vector of gradient (to get neighboring color)
+                for (o = 1; o < gGORadius; o++) {
+                    if (gapsOverlaps < o) {
+                        break;
+                    }
+                    destColor = texture2D(gSampler, uv + o*(gradient*gTexel));
+                    // check with destination color
+                    if (length(destColor - outColor) > 0.33) {
+                        // no overlap with substrateColor
+                        if (length(destColor.rgb - gSubstrateColor) < 0.1) {
+                            break;
+                        }
+                        outColor.rgb = mixRYB2(outColor.rgb, destColor.rgb);
+                        break;
+                    }
+                }
+                // check if loop reached the max
+                if (o == gGORadius) {
+                    // means that gradient was reversed
+                    //return vec4(1.0, 0, 0, 1.0);
+                    destColor = texture2D(gSampler, uv + (-gradient*gTexel));
+                    outColor.rgb = mixRYB2(outColor.rgb, destColor.rgb);
+                }
+            }
+
+
+            // GAPS
+            if (gapsOverlaps < -0.1f) {
+                // check if it is at an edge
+                if (eEdges > goThreshold * 2) {
+                    //return vec4(1.0, 0, 0, 1.0);
+                    colorOutput = vec4(gSubstrateColor, outColor.a);
+                    alphaOutput = 0.0;
+                    return;
+                }
+                //outColor.rgb = lerp(outColor.rgb, gSubstrateColor, saturate(edgeTex.b + 0.5));
+
+                //get gradients
+                float right = texture2D(gEdgeTexSampler, uv + vec2(gTexel.x, 0)).b;
+                float left = texture2D(gEdgeTexSampler, uv + vec2(-gTexel.x, 0)).b;
+                float down = texture2D(gEdgeTexSampler, uv + vec2(0, gTexel.y)).b;
+                float up = texture2D(gEdgeTexSampler, uv + vec2(0, -gTexel.y)).b;
+
+                float topRight = texture2D(gEdgeTexSampler, uv + vec2(gTexel.x, -gTexel.y)).b;
+                float topLeft = texture2D(gEdgeTexSampler, uv + vec2(-gTexel.x, -gTexel.y)).b;
+                float downRight = texture2D(gEdgeTexSampler, uv + vec2(gTexel.x, gTexel.y)).b;
+                float downLeft = texture2D(gEdgeTexSampler, uv + vec2(-gTexel.x, gTexel.y)).b;
+
+                float uGradient = (right + 0.5*(topRight + downRight)) - (left + 0.5 * (topLeft + downLeft));
+                float vGradient = (down + 0.5*(downRight + downLeft)) - (up + 0.5*(topRight + topLeft));
+                vec2 gradient = vec2(uGradient, vGradient);
+
+                // normalize gradient to check neighboring pixels
+                gradient = normalize(gradient);
+                for (int o = 1; o < gGORadius; o++) {
+                    if (abs(gapsOverlaps) < o / gGORadius) {
+                        break;
+                    }
+                    float destEdges = texture2D(gEdgeTexSampler, uv + o*(gradient*gTexel)).b;
+                    // check destination edge
+                    if (destEdges > goThreshold) {
+                        outColor.rgb = gSubstrateColor;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    colorOutput = vec4(outColor);
+    alphaOutput = outColor.a;
+    }
+}
+
+
+
+//    _            _           _
+//   | |_ ___  ___| |__  _ __ (_) __ _ _   _  ___  ___
+//   | __/ _ \/ __| '_ \| '_ \| |/ _` | | | |/ _ \/ __|
+//   | ||  __/ (__| | | | | | | | (_| | |_| |  __/\__ \
+//    \__\___|\___|_| |_|_| |_|_|\__, |\__,_|\___||___/
+//                                  |_|
+// GAPS AND OVERLAPS FOR SKETCHIER RENDERING
+technique gapsOverlaps {
+    pass p0 {
+    VertexShader(in appDataSampler, out vertexOutputSampler) = quadVertSampler;
+    PixelShader(in vertexOutputSampler, out fragmentMRTOutput) = { Common_Pixel_Functions, Color_Transform_Functions, Pixel_Functions, gapsOverlapsFrag };
+    }
+}

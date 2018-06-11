@@ -1,0 +1,49 @@
+{
+    "textures": {
+        "Alpha_Texture_File": null
+    }, 
+    "name": "_proxy", 
+    "screenshot": "D:\\Dropbox\\DEV\\MNPR-framework\\matPresets\\_proxy.jpg", 
+    "settings": {
+        "vtxControls": false
+    }, 
+    "graph": "mnpr_geoproxy", 
+    "procSettings": {
+        "Blending_3D_MNPR": true, 
+        "Shape_3D_MNPR": true, 
+        "Application_Procedural_MNPR": false, 
+        "Shape_Procedural_MNPR": false, 
+        "Edge_3D_MNPR": true, 
+        "vIncline_Procedural_MNPR": false, 
+        "Edge_Procedural_MNPR": false, 
+        "Density_3D_MNPR": true, 
+        "Variation_3D_MNPR": true, 
+        "Detail_3D_MNPR": true, 
+        "uIncline_3D_MNPR": true, 
+        "Detail_Procedural_MNPR": false, 
+        "vIncline_3D_MNPR": true, 
+        "uIncline_Procedural_MNPR": false, 
+        "Transition_3D_MNPR": true, 
+        "Variation_Procedural_MNPR": false, 
+        "Density_Procedural_MNPR": false, 
+        "Application_3D_MNPR": true, 
+        "Transition_Procedural_MNPR": false, 
+        "Blending_Procedural_MNPR": false, 
+        "Distortion_Procedural_MNPR": false, 
+        "Distortion_3D_MNPR": true
+    }, 
+    "attributes": {
+        "Color_TintG": 1.0, 
+        "Color_TintB": 1.0, 
+        "Color_TintR": 1.0, 
+        "Color_Tint": [
+            [
+                1.0, 
+                1.0, 
+                1.0
+            ]
+        ], 
+        "Cookie_Mask": false
+    }, 
+    "type": "ShaderfxShader"
+}

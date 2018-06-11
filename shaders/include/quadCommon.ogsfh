@@ -1,0 +1,108 @@
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// quadCommon.ogsfh (GLSL)
+// Brief: Common utility shader elements for MNPR
+// Contributors: Santiago Montesdeoca
+////////////////////////////////////////////////////////////////////////////////////////////////////
+//                          _
+//     __ _ _   _  __ _  __| |       ___ ___  _ __ ___  _ __ ___   ___  _ __
+//    / _` | | | |/ _` |/ _` |_____ / __/ _ \| '_ ` _ \| '_ ` _ \ / _ \| '_ \
+//   | (_| | |_| | (_| | (_| |_____| (_| (_) | | | | | | | | | | | (_) | | | |
+//    \__, |\__,_|\__,_|\__,_|      \___\___/|_| |_| |_|_| |_| |_|\___/|_| |_|
+//       |_|
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// This shader file provides utility variables, structs, vertex shader and functions to aid
+// the development of quad operations in MNPR
+////////////////////////////////////////////////////////////////////////////////////////////////////
+#ifndef _QUADCOMMON_OGSFH_
+#define _QUADCOMMON_OGSFH_
+#define PI 3.1415926
+
+
+// COMMON MAYA VARIABLES
+uniform mat4  gWVP : WorldViewProjection;      // world-view-projection transformation
+uniform vec2 gScreenSize : ViewportPixelSize;  // screen size, in pixels
+
+
+// COMMON TEXTURES
+uniform Texture2D gColorTex;  // color target
+
+
+// COMMON VARIABLES
+uniform vec3 luminanceCoeff = {0.241, 0.691, 0.068};
+
+
+// SAMPLERS
+uniform sampler2D gSampler = sampler_state{
+	Texture = <gColorTex>;
+};
+
+
+//        _                   _
+//    ___| |_ _ __ _   _  ___| |_ ___
+//   / __| __| '__| | | |/ __| __/ __|
+//   \__ \ |_| |  | |_| | (__| |_\__ \
+//   |___/\__|_|   \__,_|\___|\__|___/
+//
+// base input structs
+attribute appData {
+	vec3 vertex : POSITION;
+};
+attribute appDataSampler {
+	vec3 vertex : POSITION;
+	vec2 texcoord : TEXCOORD0;
+};
+attribute vertexOutput { };
+attribute vertexOutputSampler {
+	vec2 uv : TEXCOORD0;
+};
+// Output to one target
+attribute fragmentOutput {
+	vec4 result : COLOR0;
+};
+
+
+//                   _                    _               _
+//   __   _____ _ __| |_ _____  __    ___| |__   __ _  __| | ___ _ __ ___
+//   \ \ / / _ \ '__| __/ _ \ \/ /   / __| '_ \ / _` |/ _` |/ _ \ '__/ __|
+//    \ V /  __/ |  | ||  __/>  <    \__ \ | | | (_| | (_| |  __/ |  \__ \
+//     \_/ \___|_|   \__\___/_/\_\   |___/_| |_|\__,_|\__,_|\___|_|  |___/
+//
+// VERTEX SHADER
+GLSLShader quadVert {
+	void main() {
+		gl_Position = gWVP * vec4(vertex, 1.0f);
+	}
+}
+
+// VERTEX SHADER (with uvs)
+GLSLShader quadVertSampler {
+	void main() {
+		uv = texcoord;
+		gl_Position = gWVP * vec4(vertex, 1.0f);
+	}
+}
+
+
+
+//     __                  _   _
+//    / _|_   _ _ __   ___| |_(_) ___  _ __  ___
+//   | |_| | | | '_ \ / __| __| |/ _ \| '_ \/ __|
+//   |  _| |_| | | | | (__| |_| | (_) | | | \__ \
+//   |_|  \__,_|_| |_|\___|\__|_|\___/|_| |_|___/
+//
+GLSLShader Common_Pixel_Functions {
+
+	float luminance(vec3 color) {
+		return dot(color.rgb, luminanceCoeff);
+	}
+
+	vec4 unpremultiply(vec4 color) {
+		if (color.a > 0) {
+			color.rgb /= color.a;
+		}
+		return color;
+	}
+
+}
+
+#endif // _QUADCOMMON_OGSFH_

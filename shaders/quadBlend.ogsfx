@@ -1,0 +1,66 @@
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// quadBlend.ogsfx (GLSL)
+// Brief: Blending algorithms
+// Contributors: Santiago Montesdeoca
+////////////////////////////////////////////////////////////////////////////////////////////////////
+//    _     _                _ _             
+//   | |__ | | ___ _ __   __| (_)_ __   __ _ 
+//   | '_ \| |/ _ \ '_ \ / _` | | '_ \ / _` |
+//   | |_) | |  __/ | | | (_| | | | | | (_| |
+//   |_.__/|_|\___|_| |_|\__,_|_|_| |_|\__, |
+//                                     |___/ 
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// This shader provides alorithms for blending images such as:
+// 1.- Blending from alpha of the blend texture
+////////////////////////////////////////////////////////////////////////////////////////////////////
+#include "include/quadCommon.ogsfh"
+
+// TEXTURES
+uniform Texture2D gBlendTex;
+
+// SAMPLERS
+uniform sampler2D gBlendSampler = sampler_state{
+    Texture = <gBlendTex>;
+};
+
+
+//    _     _                _      __                               _       _           
+//   | |__ | | ___ _ __   __| |    / _|_ __ ___  _ __ ___       __ _| |_ __ | |__   __ _ 
+//   | '_ \| |/ _ \ '_ \ / _` |   | |_| '__/ _ \| '_ ` _ \     / _` | | '_ \| '_ \ / _` |
+//   | |_) | |  __/ | | | (_| |   |  _| | | (_) | | | | | |   | (_| | | |_) | | | | (_| |
+//   |_.__/|_|\___|_| |_|\__,_|   |_| |_|  \___/|_| |_| |_|    \__,_|_| .__/|_| |_|\__,_|
+//                                                                    |_|                
+
+// Contributor: Santiago Montesdeoca
+// Blend image from alpha channel of blend texture
+GLSLShader blendCtrlAlphaFrag {
+    void main() {
+    ivec2 loc = ivec2(gl_FragCoord.xy); // coordinates for loading
+
+    // get pixel values
+    vec4 renderTex = texelFetch(gSampler, loc, 0);  // equivalent to Load in HLSL
+    vec4 blendTex = texelFetch(gBlendSampler, loc, 0); 
+    float blendCtrl = clamp(blendTex.a*5.0, 0 , 1);
+
+    // blend colors
+    vec3 blendColor = lerp(renderTex.rgb, blendTex.rgb, vec3(blendCtrl, blendCtrl, blendCtrl));
+
+    result = vec4(blendColor, renderTex.a);
+    }
+}
+
+
+
+//    _            _           _                       
+//   | |_ ___  ___| |__  _ __ (_) __ _ _   _  ___  ___ 
+//   | __/ _ \/ __| '_ \| '_ \| |/ _` | | | |/ _ \/ __|
+//   | ||  __/ (__| | | | | | | | (_| | |_| |  __/\__ \
+//    \__\___|\___|_| |_|_| |_|_|\__, |\__,_|\___||___/
+//                                  |_|                
+// BLEND FROM ALPHA OF gBlendTex
+technique blendFromAlpha {
+	pass p0 {
+    VertexShader(in appData, out vertexOutput) = quadVert;
+    PixelShader(in vertexOutput, out fragmentOutput) = { blendCtrlAlphaFrag };
+	}
+}

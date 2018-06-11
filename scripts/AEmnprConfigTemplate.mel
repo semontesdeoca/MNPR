@@ -1,0 +1,182 @@
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// MEL: configNode attribute editor template
+// Original author: Santiago Montesdeoca
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// This template modifies the way node attributes are displayed in Maya's attribute editor
+////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                ____             __ _           _                       _       _
+//    _ __ ___  _ __  _ __  _ __ / ___|___  _ __  / _(_) __ _    | |_ ___ _ __ ___  _ __ | | __ _| |_ ___
+//   | '_ ` _ \| '_ \| '_ \| '__| |   / _ \| '_ \| |_| |/ _` |   | __/ _ \ '_ ` _ \| '_ \| |/ _` | __/ _ \
+//   | | | | | | | | | |_) | |  | |__| (_) | | | |  _| | (_| |   | ||  __/ | | | | | |_) | | (_| | ||  __/
+//   |_| |_| |_|_| |_| .__/|_|   \____\___/|_| |_|_| |_|\__, |    \__\___|_| |_| |_| .__/|_|\__,_|\__\___|
+//                   |_|                                |___/                      |_|
+//
+global proc AEmnprConfigTemplate ( string $nodeName ) {
+	editorTemplate -beginScrollLayout; // create scrollable layout field
+
+	// mnpr quality
+	editorTemplate -beginLayout "Engine Settings" -collapse false;
+        editorTemplate -ann "Change stylization" -addControl "style";
+        editorTemplate -ann "Set the color bit-depth of the render targets" -addControl "colorDepth";
+        editorTemplate -ann "Size of the render targets" -addControl "renderScale";
+				editorTemplate -ann "Antialiasing" -addControl "antialiasing";
+        editorTemplate -ann "Range of linear depth target" -addControl "depthRange";
+        editorTemplate -ann "Enable/disable velocity per vertex computation" -addControl "velocityPV";
+        editorTemplate -addSeparator;
+        editorTemplate -ann "Atmospheric color tint at distance" -addControl "atmosphereTint";
+        editorTemplate -ann "Distance range at which the atmospheric tint will take effect (min and max in maya units)" -addControl "atmosphereRange";
+	editorTemplate -endLayout;
+
+	// get npr type
+	int $numLetters = size($nodeName);
+    string $style = `mnpr -style 1 -q`;
+	editorTemplate -beginLayout $style -collapse false;
+		editorTemplate -ann "Set the pigment density" -addControl "pigmentDensity";
+		editorTemplate -ann "Set the edge darkening intensity" -addControl "edgeDarkeningIntensity";
+		editorTemplate -ann "Set the edge darkening width" -addControl "edgeDarkeningWidth";
+		editorTemplate -addSeparator;
+        editorTemplate -ann "Set the bleeding radius" -addControl "bleedingRadius";
+		editorTemplate -ann "Set the bleeding threshold" -addControl "bleedingThreshold";
+		editorTemplate -ann "Set the drybrush threshold" -addControl "drybrushThreshold";
+		editorTemplate -ann "Set the maximum width for gaps and overlaps" -addControl "maxGapsOverlapsWidth";
+		editorTemplate -addExtraControls -extraControlsLabel "";  // leave this to include all non-specified additional node attributes
+	editorTemplate -endLayout;
+
+	// render substrate
+	editorTemplate -beginLayout "Substrate" -collapse false;
+		editorTemplate -callCustom "AEsubstrateTextureNew" "AEsubstrateTextureReplace" "substrateTexture";
+		editorTemplate -ann "Set the substrate color" -addControl "substrateColor";
+		editorTemplate -ann "Set substrate shading" - addControl "substrateShading";
+		editorTemplate -ann "Set the light direction" -addControl "substrateLightDir";
+		editorTemplate -ann "Set the light tilt" -addControl "substrateLightTilt";
+		editorTemplate - addSeparator;
+		editorTemplate -ann "Controls the substrate scale" -addControl "substrateScale";
+		editorTemplate -ann "Update substrate X times per second" - addDynamicControl "substrateUpdate";
+		editorTemplate -ann "Controls the substrate roughness" -addDynamicControl "substrateRoughness";
+		editorTemplate -ann "Controls the distortion created by the substrate" -addControl "substrateDistortion";
+	editorTemplate -endLayout;
+
+	// object-space hand tremors
+	editorTemplate -beginLayout "Post-processing" -collapse false;
+		editorTemplate -ann "Control the global saturation" -addControl "saturation";
+		editorTemplate -ann "Control the global contrast" -addControl "contrast";
+		editorTemplate -ann "Control the global brightness" -addControl "brightness";
+	editorTemplate -endLayout;
+
+	// don't show the following attributes
+	editorTemplate -suppress "caching";
+	editorTemplate -suppress "nodeState";
+	editorTemplate -suppress "frozen";
+
+	editorTemplate -endScrollLayout;
+}
+
+
+//    _____         _
+//   |_   _|____  _| |_ _   _ _ __ ___
+//     | |/ _ \ \/ / __| | | | '__/ _ \
+//     | |  __/>  <| |_| |_| | | |  __/
+//     |_|\___/_/\_\\__|\__,_|_|  \___|
+//
+// create new UI element to select texture image file
+global proc  AEsubstrateTextureNew(string $nodeAttr) {
+	setUITemplate -pst attributeEditorTemplate;  // push template into the UI stack
+
+	string $attrValue = `getAttr $nodeAttr`;
+
+	// define column sizes in relation to size of other widgets
+	// get Maya global widths
+	global int $gTextColumnWidthIndex;      // Maya attribute text width
+	global int $gAEMapButtonIndex;          // Maya mapping button width
+	global int $gAESingleWidgetWidthIndex;  // Maya single widget width
+
+	int $col1Size = $gTextColumnWidthIndex;
+	int $col2Size = 3 * $gAESingleWidgetWidthIndex;
+	int $col3Size = $gAESingleWidgetWidthIndex;
+
+	// create layout
+	rowLayout -nc 3 -columnWidth3 $col1Size $col2Size $col3Size;
+	// insert layout elements
+	text -label "Substrate texture" substrateTextureLabel;
+	textField -text $attrValue -ann "Texture filename" -ed 0 -cc("") substrateTextureText; // -cc ("npr -sT surfaceTextureText")
+	button -w $col3Size -label "select" -c("AEsubstrateTextureSelect " + $nodeAttr + " substrateTextureText");
+
+	setParent ..;
+
+	setUITemplate -ppt;  //pop template from UI stack
+}
+
+
+// replace textField with attribute in another node (if selection changed)
+global proc AEsubstrateTextureReplace(string $nodeAttr) {
+	string $attrValue = `getAttr $nodeAttr`;
+	textField -e -text $attrValue -cc("AEsubstrateTextureSetValue " + $nodeAttr + " substrateTextureText") substrateTextureText;
+}
+
+
+// set value of textfield in the attribute
+global proc AEsubstrateTextureSetValue(string $nodeAttr, string $textField) {
+	string	$value = `textField - q - text $textField`;
+	setAttr -type "string" $nodeAttr $value;
+}
+
+
+
+//    _____ _ _        ____       _           _
+//   |  ___(_) | ___  / ___|  ___| | ___  ___| |_
+//   | |_  | | |/ _ \ \___ \ / _ \ |/ _ \/ __| __|
+//   |  _| | | |  __/  ___) |  __/ |  __/ (__| |_
+//   |_|   |_|_|\___| |____/ \___|_|\___|\___|\__|
+//
+// file dialog to select substrate texture
+global proc AEsubstrateTextureSelect(string $nodeAttr, string $textField) {
+	// file dialog
+	string $fileFilter = "Image Files .DDS .jpg .png (*.DDS *.jpg *.png)";
+	string $dialogTitle = "Select texture file";
+	string $startDir = `mnpr - env 1`;
+		$startDir += "textures";
+	string $caption = "select";
+	string $result[] = `fileDialog2 - fileFilter $fileFilter
+		-fileMode 1 -dialogStyle 2 -startingDirectory $startDir -okCaption $caption
+		-caption $dialogTitle`;
+
+	// check and filter file dialog
+	if (size($result)>0) {
+		string $fileName = $result[0];
+		//print ($fileName);
+		//python is clearly more suitable to do this
+		python("import os.path");
+		$fileName = python("os.path.abspath(r'" + $fileName + "')");
+		//print "Normalized paths are:\n";
+		//print ($fileName + "\n");
+		$startDir = python("os.path.abspath(r'" + $startDir + "')");
+		//print ($startDir + "\n");
+		string $pathCheck[] = python("r'" + $fileName + "'" + ".split(r'" + $startDir + "')");
+		//print $pathCheck;
+		int $unitTest = size($pathCheck);
+		//print $unitTest; print "\n";
+		if ($unitTest == 2) {
+			// change attribute with selected file name
+			int $numLetters = size($pathCheck[1]);
+			string $fName = `substring $pathCheck[1] 2 ($numLetters)`;
+				print($fName + "\n");
+			textField -e -text $fName $textField;
+			setAttr -type "string" $nodeAttr $fName;
+			// change through command
+			//string $buffer[];
+			//tokenize $nodeAttr "." $buffer;
+			//print $buffer;
+			//if ($buffer[1] == "substrateTexture") {
+				//print "Should change texture";
+				//mnpr -sT $fName;
+			//}
+		}
+		else {
+			string $messagePrompt = "Substrate texture must be placed in:\n" + $startDir;
+			confirmDialog -title "Warning" -message $messagePrompt -button "Alright!" -icn "warning";
+		}
+	}
+	else {
+		print "selection canceled";
+	}
+}

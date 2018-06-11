@@ -1,0 +1,58 @@
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// quadRgb2Lab10.ogsfx (GLSL)
+// Brief: Color space transformations
+// Contributors: Amir Semmo
+////////////////////////////////////////////////////////////////////////////////////////////////////
+//              _              _                        __                            _   _             
+//     ___ ___ | | ___  _ __  | |_ _ __ __ _ _ __  ___ / _| ___  _ __ _ __ ___   __ _| |_(_) ___  _ __  
+//    / __/ _ \| |/ _ \| '__| | __| '__/ _` | '_ \/ __| |_ / _ \| '__| '_ ` _ \ / _` | __| |/ _ \| '_ \ 
+//   | (_| (_) | | (_) | |    | |_| | | (_| | | | \__ \  _| (_) | |  | | | | | | (_| | |_| | (_) | | | |
+//    \___\___/|_|\___/|_|     \__|_|  \__,_|_| |_|___/_|  \___/|_|  |_| |_| |_|\__,_|\__|_|\___/|_| |_|
+//      
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// This shader file provides techniques for color space transformations in MNPR
+// 1.- RGB -> LAB
+////////////////////////////////////////////////////////////////////////////////////////////////////
+#include "include/quadCommon.ogsfh"
+#include "include/quadColorTransform.ogsfh"
+
+// TEXTURES
+
+
+// VARIABLES
+
+
+
+//              _    ____  _       _     
+//    _ __ __ _| |__|___ \| | __ _| |__  
+//   | '__/ _` | '_ \ __) | |/ _` | '_ \ 
+//   | | | (_| | |_) / __/| | (_| | |_) |
+//   |_|  \__, |_.__/_____|_|\__,_|_.__/ 
+//        |___/                          
+
+// Contributor: Amir Semmo
+// Color transformation
+GLSLShader rgb2labFrag {
+	void main() {
+		vec4 c_rgb = texture(gSampler, uv);
+		vec4 c_lab = vec4(rgb2lab(c_rgb.rgb), c_rgb.a);
+
+		result = c_lab;
+	}
+}
+
+
+
+//    _            _           _                       
+//   | |_ ___  ___| |__  _ __ (_) __ _ _   _  ___  ___ 
+//   | __/ _ \/ __| '_ \| '_ \| |/ _` | | | |/ _ \/ __|
+//   | ||  __/ (__| | | | | | | | (_| | |_| |  __/\__ \
+//    \__\___|\___|_| |_|_| |_|_|\__, |\__,_|\___||___/
+//                                  |_|                
+// RGB2LAB COLOR TRANSFORMATION
+technique rgb2labTransform {
+	pass p0 {
+		VertexShader(in appDataSampler, out vertexOutputSampler) = quadVertSampler;
+		PixelShader(in vertexOutputSampler, out fragmentOutput) = { Pixel_Functions, rgb2labFrag };
+	}
+}

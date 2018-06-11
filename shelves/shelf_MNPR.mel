@@ -1,0 +1,478 @@
+global proc shelf_MNPR () {
+    global string $gBuffStr;
+    global string $gBuffStr0;
+    global string $gBuffStr1;
+
+
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Open browser with information regarding the system"
+        -enableBackground 0
+        -highlightColor 0.321569 0.521569 0.65098
+        -align "center"
+        -label "prepare"
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.5
+        -image "mnpr_info.png"
+        -image1 "mnpr_info.png"
+        -style "iconOnly"
+        -marginWidth 1
+        -marginHeight 1
+        -command "import coopLib\ncoopLib.openUrl('https://mnpr.artineering.io/')"
+        -sourceType "python"
+        -commandRepeatable 1
+        -flat 1
+        -mi "Update assets to MNPR" ( "import mnpr_FX\nmnpr_FX.update2MNPR()" )
+        -mip 0
+        -mi "Check for MNPR updates" ( "import mnpr_runner\nmnpr_runner.updateMNPR()" )
+        -mip 1
+        -mi "Download MNPR substrates" ("import mnpr_runner\nmnpr_runner.downloadSubstrates()")
+        -mip 2
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Show stylization presets"
+        -enableBackground 0
+        -highlightColor 0.321569 0.521569 0.65098
+        -align "center"
+        -label "paint"
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.5
+        -image "mnpr_style.png"
+        -image1 "mnpr_style.png"
+        -style "iconOnly"
+        -marginWidth 1
+        -marginHeight 1
+        -command "import mnpr_runner\nmnpr_runner.openPresets()"
+        -sourceType "python"
+        -doubleClickCommand "import mnpr_runner\nmnpr_runner.openPresets(rebuild=True)"
+        -commandRepeatable 1
+        -flat 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Select NPR configuration node"
+        -enableBackground 0
+        -highlightColor 0.321569 0.521569 0.65098
+        -align "center"
+        -label "config"
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.5
+        -image "mnpr_conf.png"
+        -image1 "mnpr_conf.png"
+        -style "iconOnly"
+        -marginWidth 1
+        -marginHeight 1
+        -command "import mnpr_system\nmnpr_system.selectConfig()"
+        -sourceType "python"
+        -doubleClickCommand "maya.mel.eval('source \"AEmnprConfigTemplate.mel\";refreshEditorTemplates;')"
+        -commandRepeatable 1
+        -flat 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Show MNPR material presets"
+        -enableBackground 0
+        -highlightColor 0.321569 0.521569 0.65098
+        -align "center"
+        -label "prepare"
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.5
+        -image "mnpr_matPresets.png"
+        -image1 "mnpr_matPresets.png"
+        -style "iconOnly"
+        -marginWidth 1
+        -marginHeight 1
+        -command "import mnpr_runner\nmnpr_runner.openMaterialPresets()"
+        -sourceType "python"
+        -doubleClickCommand "import mnpr_runner\nmnpr_runner.openMaterialPresets(rebuild=True)"
+        -commandRepeatable 1
+        -flat 1
+        -mi "Refresh DX11 shaders" ( "import mnpr_system\nmnpr_system.refreshShaders()" )
+        -mip 0
+        -mi "Update ShaderFX materials" ( "import mnpr_system\nmnpr_system.updateShaderFX()" )
+        -mip 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Edit Material Attributes: Show shading group Attribute Editor"
+        -enableBackground 0
+        -highlightColor 0.321569 0.521569 0.65098
+        -align "center"
+        -label "Edit Material Attributes"
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.5
+        -image "mnpr_material.png"
+        -image1 "mnpr_material.png"
+        -style "iconOnly"
+        -marginWidth 1
+        -marginHeight 1
+        -command "import mnpr_system\nmnpr_system.showShaderAttr()"
+        -sourceType "python"
+        -doubleClickCommand "maya.mel.eval('source \"AEShaderfxShaderTemplate.mel\";refreshEditorTemplates;')"
+        -commandRepeatable 1
+        -flat 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Open noiseFX"
+        -enableBackground 0
+        -highlightColor 0.321569 0.521569 0.65098
+        -align "center"
+        -label "paint"
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.5
+        -image "mnpr_nFx.png"
+        -image1 "mnpr_nFx.png"
+        -style "iconOnly"
+        -marginWidth 1
+        -marginHeight 1
+        -command "import mnpr_runner\nmnpr_runner.openNoiseFX()"
+        -sourceType "python"
+        -doubleClickCommand "import mnpr_runner\nmnpr_runner.openNoiseFX(rebuild=True)"
+        -commandRepeatable 1
+        -flat 1
+        -mi "Open docked noiseFX" ( "import mnpr_runner\nmnpr_runner.openNoiseFX(dock=True)" )
+        -mip 0
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Open paintFX"
+        -enableBackground 0
+        -highlightColor 0.321569 0.521569 0.65098
+        -align "center"
+        -label "paint"
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.5
+        -image "mnpr_pFx.png"
+        -image1 "mnpr_pFx.png"
+        -style "iconOnly"
+        -marginWidth 1
+        -marginHeight 1
+        -command "import mnpr_runner\nmnpr_runner.openPaintFX()"
+        -sourceType "python"
+        -doubleClickCommand "import mnpr_runner\nmnpr_runner.openPaintFX(rebuild=True)"
+        -commandRepeatable 1
+        -flat 1
+        -mi "Open docked paintFX" ( "import mnpr_runner\nmnpr_runner.openPaintFX(dock=True)" )
+        -mip 0
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Open Viewport Render UI"
+        -enableBackground 0
+        -highlightColor 0.321569 0.521569 0.65098
+        -align "center"
+        -label "paint"
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.5
+        -image "mnpr_render.png"
+        -image1 "mnpr_render.png"
+        -style "iconOnly"
+        -marginWidth 1
+        -marginHeight 1
+        -command "import mnpr_runner\nmnpr_runner.openViewportRenderer()"
+        -sourceType "python"
+        -doubleClickCommand "import mnpr_runner\nmnpr_runner.openViewportRenderer(rebuild=True)"
+        -commandRepeatable 1
+        -flat 1
+    ;
+    separator
+        -enable 1
+        -width 34
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -enableBackground 0
+        -highlightColor 0.321569 0.521569 0.65098
+        -style "shelf"
+        -horizontal 0
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Ambient Light: Create an ambient light on the grid or live surface"
+        -enableBackground 0
+        -highlightColor 0.321569 0.521569 0.65098
+        -align "center"
+        -label "Ambient Light"
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.5
+        -image "ambientlight.png"
+        -image1 "ambientlight.png"
+        -style "iconOnly"
+        -marginWidth 1
+        -marginHeight 1
+        -command "CreateAmbientLight"
+        -sourceType "mel"
+        -doubleClickCommand "CreateAmbientLightOptions"
+        -commandRepeatable 1
+        -flat 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Directional Light: Create a directional light on the grid or live surface"
+        -enableBackground 0
+        -highlightColor 0.321569 0.521569 0.65098
+        -align "center"
+        -label "Directional Light"
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.5
+        -image "directionallight.png"
+        -image1 "directionallight.png"
+        -style "iconOnly"
+        -marginWidth 1
+        -marginHeight 1
+        -command "CreateDirectionalLight"
+        -sourceType "mel"
+        -doubleClickCommand "CreateDirectionalLightOptions"
+        -commandRepeatable 1
+        -flat 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Spot Light: Create a spot light on the grid or live surface"
+        -enableBackground 0
+        -highlightColor 0.321569 0.521569 0.65098
+        -align "center"
+        -label "Spot Light"
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.5
+        -image "spotlight.png"
+        -image1 "spotlight.png"
+        -style "iconOnly"
+        -marginWidth 1
+        -marginHeight 1
+        -command "CreateSpotLight"
+        -sourceType "mel"
+        -doubleClickCommand "CreateSpotLightOptions"
+        -commandRepeatable 1
+        -flat 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Create test scene"
+        -enableBackground 0
+        -highlightColor 0.321569 0.521569 0.65098
+        -align "center"
+        -label "scene"
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.5
+        -image "mnpr_testScene.png"
+        -image1 "mnpr_testScene.png"
+        -style "iconOnly"
+        -marginWidth 1
+        -marginHeight 1
+        -command "import mnpr_runner\nmnpr_runner.testScene()"
+        -sourceType "python"
+        -commandRepeatable 1
+        -flat 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Open Renderer Settings"
+        -enableBackground 0
+        -highlightColor 0.321569 0.521569 0.65098
+        -align "center"
+        -label "paint"
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.5
+        -image "mnpr_pass.png"
+        -image1 "mnpr_pass.png"
+        -style "iconOnly"
+        -marginWidth 1
+        -marginHeight 1
+        -command "import mnpr_runner\nmnpr_runner.openOverrideSettings()"
+        -sourceType "python"
+        -doubleClickCommand "import mnpr_runner\nmnpr_runner.openOverrideSettings(rebuild=True)"
+        -commandRepeatable 1
+        -flat 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Open browser to give feedback on the system"
+        -enableBackground 0
+        -highlightColor 0.321569 0.521569 0.65098
+        -align "center"
+        -label "feedback"
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.5
+        -image "coop_feedback.png"
+        -image1 "coop_feedback.png"
+        -style "iconOnly"
+        -marginWidth 1
+        -marginHeight 1
+        -command "import coopLib\ncoopLib.openUrl('https://github.com/semontesdeoca/MNPR/issues')"
+        -sourceType "python"
+        -commandRepeatable 1
+        -flat 1
+    ;
+}

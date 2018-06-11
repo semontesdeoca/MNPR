@@ -1,0 +1,171 @@
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// quadOffsetBlend.ogsfx (GLSL)
+// Brief: Blurring operations for offset target
+// Contributors: Yee Xin Chiew, Santiago Montesdeoca
+////////////////////////////////////////////////////////////////////////////////////////////////////
+//    _     _                _ _             
+//   | |__ | | ___ _ __   __| (_)_ __   __ _ 
+//   | '_ \| |/ _ \ '_ \ / _` | | '_ \ / _` |
+//   | |_) | |  __/ | | | (_| | | | | | (_| |
+//   |_.__/|_|\___|_| |_|\__,_|_|_| |_|\__, |
+//                                     |___/ 
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// Blurring operations for the offset target to create the mixing effect in charcoal stylization.
+////////////////////////////////////////////////////////////////////////////////////////////////////
+#include "../include/quadCommon.ogsfh"
+
+// TEXTURES
+uniform Texture2D gDepthTex;
+uniform Texture2D gControlTex;
+uniform Texture2D gOffsetTex;
+
+
+// SAMPLERS
+uniform sampler2D gDepthTexSampler = sampler_state {
+    Texture = <gDepthTex>;
+};
+
+uniform sampler2D gControlTexSampler = sampler_state {
+    Texture = <gControlTex>;
+};
+
+uniform sampler2D gOffsetTexSampler = sampler_state {
+    Texture = <gOffsetTex>;
+};
+
+
+// VARIABLES
+// Discrete gaussian weights calculated with sigma 40.0
+uniform float gaussianWeights[41] = {0.014481,	0.014477,	0.014463,	0.014441,	0.014409,	0.014369,	0.014319,	0.014261,	0.014195,	0.014119,	0.014036,	0.013944,	0.013844,	0.013736,	0.013621,	0.013498,	0.013368,	0.013231,	0.013087,	0.012936,	0.01278,0.012617,	0.012449,	0.012275,	0.012096,	0.011912,	0.011724,	0.011531,	0.011335,	0.011135,	0.010931,	0.010725,	0.010516,	0.010304,	0.010091,	0.009876,	0.009659,	0.009441,	0.009222,	0.009003,	0.008784};
+
+
+
+//     __                  _   _                 
+//    / _|_   _ _ __   ___| |_(_) ___  _ __  ___ 
+//   | |_| | | | '_ \ / __| __| |/ _ \| '_ \/ __|
+//   |  _| |_| | | | | (__| |_| | (_) | | | \__ \
+//   |_|  \__,_|_| |_|\___|\__|_|\___/|_| |_|___/
+//
+GLSLShader Shared_functions {
+
+	// GAUSSIAN WEIGHT
+	float gaussianWeight(float x, float sigma) {
+		float weight = 0.15915*exp(-0.5*x*x / (sigma*sigma)) / sigma;
+		//float weight = pow((6.283185*sigma*sigma), -0.5) * exp((-0.5*x*x) / (sigma*sigma));
+		return weight;
+	}
+
+
+	// BLENDING
+	// Contributors: Yee Xin Chiew
+	// Operation for blurring the offset target (referenced from watercolor stylization)
+	vec4 offsetBlend(vec2 uv, vec2 dir) {
+
+		vec4 offsetTex = texture(gOffsetTexSampler,uv);
+
+		float depth = texture(gDepthTexSampler,uv).r;
+		float ctrlAbs = 0;
+		if (dir.y > 0) {
+			ctrlAbs = offsetTex.r;
+		} else {
+			ctrlAbs = texture(gControlTexSampler,uv).b; // controlTargetSubstrate		
+		}
+		//int kernelRadius = (dir.y > 0) ? ((1 + ctrlAbs) * 30) : (2-depth) * 30;
+		int kernelRadius = int((1 + ctrlAbs) * 30); // for performance
+		float sigma = kernelRadius / 2.0;
+		float normalizer = 1.0 / kernelRadius;
+		
+		vec4 offsetTexResult = vec4(0,0,0,0);
+		float normDivisor = 0;
+		bool blend = false;
+		
+		//[unroll(100)] for (int k = -kernelRadius; k < kernelRadius + 1; k++) {
+		kernelRadius = 40;
+		vec2 gTexel = vec2(1.0f) / gScreenSize;
+		for (int k = -kernelRadius; k < kernelRadius + 1; k++) {
+			vec2 destUV = clamp(uv + vec2(k*gTexel*dir),0,1);
+			vec4 destOffsetTex = texture(gOffsetTexSampler, destUV);
+
+			float destDepth = texture(gDepthTexSampler, destUV).r;
+
+			float destCtrlAbs = 0;
+			if (dir.y > 0) {
+				destCtrlAbs = destOffsetTex.r;
+			} else {
+				destCtrlAbs = texture(gControlTexSampler, destUV).b; // controlTargetSubstrate
+			}
+			bool destIsFront = false;
+
+			if (depth > destDepth) { // destination pixel is nearer to the camera
+				destIsFront = true;
+			}
+			if (destCtrlAbs > 0 && destIsFront || ctrlAbs > 0 && !destIsFront) {
+				blend = true;
+			}
+			
+			float weight = gaussianWeight(abs(k), sigma);
+			// Handle blurring differently for offsetTex
+			if (blend) {
+				offsetTexResult += destOffsetTex * weight;
+			}
+			else {
+				offsetTexResult += offsetTex * weight;
+			}
+			normDivisor += weight;
+		}
+		offsetTexResult = offsetTexResult / normDivisor;
+		return vec4(offsetTexResult.xy, offsetTex.b, offsetTexResult.a);
+	}
+}
+
+
+
+//    _                _                _        _ 
+//   | |__   ___  _ __(_)_______  _ __ | |_ __ _| |
+//   | '_ \ / _ \| '__| |_  / _ \| '_ \| __/ _` | |
+//   | | | | (_) | |  | |/ / (_) | | | | || (_| | |
+//   |_| |_|\___/|_|  |_/___\___/|_| |_|\__\__,_|_|
+//                                                 
+GLSLShader offsetHorizontal {
+	void main() {
+		result = offsetBlend(uv, vec2(1, 0));
+	}
+}
+
+
+
+//                   _   _           _ 
+//   __   _____ _ __| |_(_) ___ __ _| |
+//   \ \ / / _ \ '__| __| |/ __/ _` | |
+//    \ V /  __/ |  | |_| | (_| (_| | |
+//     \_/ \___|_|   \__|_|\___\__,_|_|
+//                                     
+GLSLShader offsetVertical {
+	void main() {
+		result = offsetBlend(uv, vec2(0, 1));
+	}
+}
+
+
+
+//    _            _           _                       
+//   | |_ ___  ___| |__  _ __ (_) __ _ _   _  ___  ___ 
+//   | __/ _ \/ __| '_ \| '_ \| |/ _` | | | |/ _ \/ __|
+//   | ||  __/ (__| | | | | | | | (_| | |_| |  __/\__ \
+//    \__\___|\___|_| |_|_| |_|_|\__, |\__,_|\___||___/
+//                                  |_|                
+// HORIZONTAL BLUR
+technique offsetH {
+	pass p0 {
+        VertexShader(in appDataSampler, out vertexOutputSampler) = quadVertSampler;
+        PixelShader(in vertexOutputSampler, out fragmentOutput) = { Shared_functions, offsetHorizontal };
+  }
+}
+
+// VERTICAL BLUR
+technique offsetV {
+	pass p0 {
+        VertexShader(in appDataSampler, out vertexOutputSampler) = quadVertSampler;
+        PixelShader(in vertexOutputSampler, out fragmentOutput) = { Shared_functions, offsetVertical };
+  }
+}
