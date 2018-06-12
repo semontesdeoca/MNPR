@@ -36,26 +36,25 @@ _If you've never built anything with CMAKE, please consider watching Chad Vernon
 ```
 cd %MNPR_LOCATION%/plugins/build/
 cmake ../ -G "Visual Studio 15 2017 Win64" -DMAYA_VERSION=%YEAR%
-cmake --build . --config Debug
+cmake --build . --config Release
 ```
 You need to replace _%MNPR_LOCATION%_ and _%YEAR%_ with the location of MNPR on your computer and the Maya version year, respectively.
-Note: When building with Release configuration, the \*.mll file is moved to the _dist_ folder
 
 
 ### MacOS
 ```
-cd %MNPR-LOCATION%/dist/build/
+cd %MNPR-LOCATION%/build/build/
 cmake -G "Unix Makefiles" -DMAYA_VERSION=%YEAR% %MNPR-LOCATION%/plugins
-cmake --build . --config Release --target install
+cmake --build . --config Release
 ```
 You need to replace _%MNPR_LOCATION%_ and _%YEAR%_ with the location of MNPR on your computer and the Maya version year, respectively.
 
 
 ### Linux
 ```
-cd %MNPR-LOCATION%/dist/build/
+cd %MNPR-LOCATION%/build/build/
 cmake -G "Unix Makefiles" -DMAYA_VERSION=%YEAR% %MNPR-LOCATION%/plugins
-cmake --build . --config Release --target install
+cmake --build . --config Release
 ```
 You need to replace _%MNPR_LOCATION%_ and _%YEAR%_ with the location of MNPR on your computer and the Maya version year, respectively.
 
