@@ -1,5 +1,5 @@
 # MNPR
-MNPR is an expressive non-photorealistic rendering framework for real-time, filter-based stylization pipelines within Maya. It extends the Maya API and simplifies the creation of Viewport 2.0 render overrides, while still preserving all the low-level options that the Maya API provides.
+MNPR is an expressive non-photorealistic rendering framework for real-time, filter-based stylization pipelines within Maya (2016.5+). It extends the Maya API and simplifies the creation of Viewport 2.0 render overrides, while still preserving all the low-level options that the Maya API provides.
 
 The framework was originally created by [Santiago E. Montesdeoca](http://artineering.io/) during his PhD studies at the [Nanyang Technological University](http://www.ntu.edu.sg) (Singapore), as a product of his conducted research in:
 
@@ -15,6 +15,7 @@ Valuable contributions coding MNPR were given by:
 * Pierre Bénard
 * Amir Semmo
 * Yee Xin Chiew
+
 
 ## Downloading MNPR
 The latest stable release of MNPR can be found here:
@@ -39,14 +40,15 @@ cmake ../ -G "Visual Studio 15 2017 Win64" -DMAYA_VERSION=%YEAR%
 cmake --build . --config Debug
 ```
 You need to replace _%MNPR_LOCATION%_ and _%YEAR%_ with the location of MNPR on your computer and the Maya version year, respectively.
-Note: When building with Release configuration, the \*.mll file is moved to the _dist_ folder
+
+Note: When building with _Release_ configuration, the shaders need to be built, as well. Run or refer to the _\_compileHLSL.bat_ to compile the HLSL shaders.
 
 
 ### MacOS
 ```
 cd %MNPR-LOCATION%/dist/build/
 cmake -G "Unix Makefiles" -DMAYA_VERSION=%YEAR% %MNPR-LOCATION%/plugins
-cmake --build . --config Release --target install
+cmake --build . --config Release
 ```
 You need to replace _%MNPR_LOCATION%_ and _%YEAR%_ with the location of MNPR on your computer and the Maya version year, respectively.
 
@@ -55,7 +57,7 @@ You need to replace _%MNPR_LOCATION%_ and _%YEAR%_ with the location of MNPR on 
 ```
 cd %MNPR-LOCATION%/dist/build/
 cmake -G "Unix Makefiles" -DMAYA_VERSION=%YEAR% %MNPR-LOCATION%/plugins
-cmake --build . --config Release --target install
+cmake --build . --config Release
 ```
 You need to replace _%MNPR_LOCATION%_ and _%YEAR%_ with the location of MNPR on your computer and the Maya version year, respectively.
 
