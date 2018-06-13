@@ -12,6 +12,7 @@
 ///////////////////////////////////////////////////////////////////////////////////
 #include "mnpr_hudRender.h"
 #include "MOperationShader.h"
+#include <cstring>
 
 
 HUDOperation::HUDOperation(MRenderTargetList* t_targetList, const MString& t_rendererName) : mRendererName(t_rendererName) {
