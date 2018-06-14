@@ -10,11 +10,22 @@
 @summary:       Maya cooperative python library
 @run:           import coopLib as lib (suggested)
 """
+from __future__ import print_function
 import os, sys, subprocess, shutil, logging, json, math, traceback
 from functools import wraps
 import maya.mel as mel
 import maya.cmds as cmds
 import maya.api.OpenMaya as om  # python api 2.0
+
+try:
+    basestring           # Python 2
+except NameError:
+    basestring = (str,)  # Python 3
+
+try:
+    xrange               # Python 2
+except NameError:
+    xrange = range       # Python 3
 
 # LOGGING
 logging.basicConfig()  # errors and everything else (2 separate log groups)
@@ -148,7 +159,7 @@ def restartMaya(brute=True):
         if cmds.about(nt=True, q=True):
             mayaPyDir += ".exe"
         scriptDir = os.path.join(os.path.dirname(os.path.realpath(__file__)), "coopRestart.py")
-        print scriptDir
+        print(scriptDir)
         subprocess.Popen([mayaPyDir, scriptDir])
         cmds.quit(force=True)
     else:
@@ -214,7 +225,7 @@ def detachShelf():
         files = os.listdir(shelfPath)
         if shelfFile in files:
             shelfFilePath = os.path.join(shelfPath, shelfFile)
-    print shelfFilePath
+    print(shelfFilePath)
 
 
 def deleteShelves(shelvesDict=None):
@@ -373,7 +384,7 @@ def setAttr(obj, attr, value, silent=False):
         silent (bool): if the function is silent when errors occur
     """
     try:
-        if isinstance(value, unicode) or isinstance(value, str):
+        if isinstance(value, basestring):
             cmds.setAttr("{0}.{1}".format(obj, attr), value, type="string")
         elif isinstance(value, list) or isinstance(value, tuple):
             if len(value) == 3:
@@ -449,13 +460,13 @@ def snap(source='', targets=[], type="translation"):
         for target in targets:
             cmds.xform('{0}'.format(target), worldSpace=True,
                        t=(worldTranslateXform[0], worldTranslateXform[1], worldTranslateXform[2]))
-        print "Translation snapped",
+        print("Translation snapped", end=' ')
 
     if type == "rotation":
         sourceXform = cmds.xform('{0}'.format(source), q=True, worldSpace=True, ro=True)
         for target in targets:
             cmds.xform('{0}'.format(target), worldSpace=True, ro=(sourceXform[0], sourceXform[1], sourceXform[2]))
-        print "Rotation snapped",
+        print("Rotation snapped", end=' ')
 
     if type == "position":
         sourcePos = cmds.xform('{0}'.format(source), q=True, worldSpace=True, piv=True)  # list with 6 elements
@@ -463,7 +474,7 @@ def snap(source='', targets=[], type="translation"):
         for target in targets:
             cmds.xform('{0}'.format(target), worldSpace=True, t=(sourcePos[0], sourcePos[1], sourcePos[2]))
             cmds.xform('{0}'.format(target), worldSpace=True, ro=(sourceRot[0], sourceRot[1], sourceRot[2]))
-        print "Position snapped",
+        print("Position snapped", end=' ')
 
 
 ######################################################################################
@@ -550,7 +561,7 @@ def screenshot(fileDir, width, height, format=".jpg", override="", ogs=True):
     cmds.setAttr("defaultRenderGlobals.imageFormat", prevFormat)
     cmds.setAttr("hardwareRenderingGlobals.renderOverrideName", prevOverride, type="string")
 
-    print "Image saved successfully in {0}".format(fileDir),
+    print("Image saved successfully in {0}".format(fileDir), end=' ')
     return fileDir
 
 
@@ -576,7 +587,7 @@ def exportVertexColors(objs, path):
     shapeDict = {}
     shapes = getShapes(objs)
     for shape in shapes:
-        print "Extracting vertex colors from {0}".format(shape)
+        print("Extracting vertex colors from {0}".format(shape))
         shapeName = "{0}".format(shape)
 
         # check for namespaces
@@ -612,7 +623,7 @@ def exportVertexColors(objs, path):
     with open(path, 'w') as f:
         json.dump(shapeDict, f, separators=(',', ':'), indent=2)
 
-    print "Vertex colors successfully exported",
+    print("Vertex colors successfully exported", end=' ')
 
 
 def importVertexColors(path):
@@ -631,7 +642,7 @@ def importVertexColors(path):
 
     # assign vertex color parameters on each shape
     for shape in shapeDict:
-        print "Importing parameters to {0}".format(shape)
+        print("Importing parameters to {0}".format(shape))
         shapeName = "{0}".format(shape)
         if namespace:
             shapeName = "{0}:{1}".format(namespace, shapeName)
@@ -664,7 +675,7 @@ def importVertexColors(path):
                 fnMesh.setVertexColors(oVertexColorArray, vertexIndexArray)
         else:
             logger.debug("No {0} shape exists in the scene".format(shapeName))
-    print "Vertex colors successfully exported from {0}".format(os.path.basename(path)),
+    print("Vertex colors successfully exported from {0}".format(os.path.basename(path)), end=' ')
 
 
 #    __  __                           _    ____ ___     ____    ___

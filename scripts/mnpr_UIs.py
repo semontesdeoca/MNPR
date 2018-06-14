@@ -9,6 +9,7 @@
                  |_|
 @summary:       Contains the pass breakdown and MNPR viewport renderer interfaces
 """
+from __future__ import print_function
 import os
 from PySide2 import QtCore, QtWidgets
 import maya.cmds as cmds
@@ -144,18 +145,18 @@ class BreakdownUI(qt.CoopMayaUI):
             if cmds.mnpr(renderOperation=index) != prev:
                 changedOperation = index
         # give back information as to what the toggle is doing with mnpr
-        print "mnpr -renderOperation {0} -s {1};".format(changedOperation, int(self.sender().isChecked()))
+        print("mnpr -renderOperation {0} -s {1};".format(changedOperation, int(self.sender().isChecked())))
 
     def reloadOperationShaders(self):
         """ Reload shader of operation """
         operationIndex = self.sender().property("operationIndex")
         cmds.mnpr(rOS=operationIndex)
-        print "mnpr -rOS {0};".format(operationIndex)
+        print("mnpr -rOS {0};".format(operationIndex))
 
     def targetChanged(self):
         """ Change and visualize render target """
         cmds.mnpr(renderTarget=self.targetCoBox.currentIndex())
-        print "mnpr -renderTarget {0};".format(self.targetCoBox.currentIndex())
+        print("mnpr -renderTarget {0};".format(self.targetCoBox.currentIndex()))
 
     def channelsChanged(self):
         """ Enable/disable RGBA channels """
@@ -195,9 +196,9 @@ class BreakdownUI(qt.CoopMayaUI):
                 b = self.cChannels[2]
         cmds.mnpr(ch=(r * neg, g * neg, b * neg, a * neg))
         if not a:
-            print "mnpr -ch {0} {1} {2} {3}".format(r * neg, g * neg, b * neg, a * neg)
+            print("mnpr -ch {0} {1} {2} {3}".format(r * neg, g * neg, b * neg, a * neg))
         else:
-            print "mnpr -ch 0 0 0 {0}".format(a * neg)
+            print("mnpr -ch 0 0 0 {0}".format(a * neg))
 
     def colorTransformChanged(self, obj=0):
         """
@@ -211,7 +212,7 @@ class BreakdownUI(qt.CoopMayaUI):
         elif obj == self.colorTransform2:
             colorTransformMode = 2
         cmds.mnpr(ct=(colorTransformMode))
-        print "mnpr -ct {0};".format(colorTransformMode)
+        print("mnpr -ct {0};".format(colorTransformMode))
 
 
 #                       _
@@ -387,5 +388,5 @@ class ViewportRendererUI(qt.CoopMayaUI):
         if self.supersamplePlbChBox.isChecked():
             renderSize = 2
         # playblast timeline using npr system
-        print renderSize
+        print(renderSize)
         mnpr_system.playblast(saveDir, width, height, renderCamera, modelPanel, renderSize)
