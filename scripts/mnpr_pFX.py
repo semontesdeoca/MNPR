@@ -483,7 +483,7 @@ def polyColorPerVertexNodes(objs, colorSet=""):
         return nodes
 
 
-def paint(RGBA, paintType, cClamp=["both", 0, 1], aClamp=["none", 0, 1], colorSet="controlSetA"):
+def paint(RGBA, paintType, cClamp=["none", 0, 1], aClamp=["none", 0, 1], colorSet="controlSetA"):
     """
     Set artisan context with painting and brush parameters for artAttrPaintVertexCtx
     Args:
