@@ -15,6 +15,7 @@ from shiboken2 import wrapInstance
 import maya.OpenMayaUI as omUI
 import maya.cmds as cmds
 import maya.mel as mel
+import coopLib as lib
 import mnpr_presets
 import mnpr_matPresets
 import mnpr_system
@@ -153,7 +154,7 @@ def testScene(prototype="shaderFX"):
     testSphere = cmds.ls(sl=True)
     mnpr_matPresets.createMaterial(testSphere, prototype=prototype)
     mnpr_matPresets.defaultLighting()
-    print("Default scene created", end=' ')
+    lib.printInfo("Default scene created")
 
 
 def downloadSubstrates():

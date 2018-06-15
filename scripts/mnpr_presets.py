@@ -180,7 +180,7 @@ class AttributeSetsLibrary(dict):
                 if "NPRConfig" in splitter[0]:
                     splitter[0] = "mnprConfig"
                 lib.setAttr(splitter[0], splitter[1], attrs[attr])
-        print("Attributes set successfully", end=' ')
+        lib.printInfo("Attributes set successfully")
 
     def loadStyle(self, attrs):
         if cmds.objExists(mnpr_info.configNode):
@@ -188,7 +188,7 @@ class AttributeSetsLibrary(dict):
             for attr in attrs:
                 splitter = attr.split('.')
                 lib.setAttr(splitter[0], splitter[1], attrs[attr], True)
-            print("\nStyle changed and attributes set successfully", end=' ')
+            lib.printInfo("Style changed and attributes set successfully")
 
     def saveScreenshot(self, name, directory):
         """

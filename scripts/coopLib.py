@@ -460,13 +460,13 @@ def snap(source='', targets=[], type="translation"):
         for target in targets:
             cmds.xform('{0}'.format(target), worldSpace=True,
                        t=(worldTranslateXform[0], worldTranslateXform[1], worldTranslateXform[2]))
-        print("Translation snapped", end=' ')
+        printInfo("Translation snapped")
 
     if type == "rotation":
         sourceXform = cmds.xform('{0}'.format(source), q=True, worldSpace=True, ro=True)
         for target in targets:
             cmds.xform('{0}'.format(target), worldSpace=True, ro=(sourceXform[0], sourceXform[1], sourceXform[2]))
-        print("Rotation snapped", end=' ')
+        printInfo("Rotation snapped")
 
     if type == "position":
         sourcePos = cmds.xform('{0}'.format(source), q=True, worldSpace=True, piv=True)  # list with 6 elements
@@ -474,7 +474,7 @@ def snap(source='', targets=[], type="translation"):
         for target in targets:
             cmds.xform('{0}'.format(target), worldSpace=True, t=(sourcePos[0], sourcePos[1], sourcePos[2]))
             cmds.xform('{0}'.format(target), worldSpace=True, ro=(sourceRot[0], sourceRot[1], sourceRot[2]))
-        print("Position snapped", end=' ')
+        printInfo("Position snapped")
 
 
 ######################################################################################
@@ -561,7 +561,7 @@ def screenshot(fileDir, width, height, format=".jpg", override="", ogs=True):
     cmds.setAttr("defaultRenderGlobals.imageFormat", prevFormat)
     cmds.setAttr("hardwareRenderingGlobals.renderOverrideName", prevOverride, type="string")
 
-    print("Image saved successfully in {0}".format(fileDir), end=' ')
+    printInfo("Image saved successfully in {0}".format(fileDir))
     return fileDir
 
 
@@ -623,7 +623,7 @@ def exportVertexColors(objs, path):
     with open(path, 'w') as f:
         json.dump(shapeDict, f, separators=(',', ':'), indent=2)
 
-    print("Vertex colors successfully exported", end=' ')
+    printInfo("Vertex colors successfully exported")
 
 
 def importVertexColors(path):
@@ -675,7 +675,7 @@ def importVertexColors(path):
                 fnMesh.setVertexColors(oVertexColorArray, vertexIndexArray)
         else:
             logger.debug("No {0} shape exists in the scene".format(shapeName))
-    print("Vertex colors successfully exported from {0}".format(os.path.basename(path)), end=' ')
+    printInfo("Vertex colors successfully exported from {0}".format(os.path.basename(path)))
 
 
 #    __  __                           _    ____ ___     ____    ___
@@ -697,6 +697,15 @@ def getMObject(node):
     oNode = selectionList.getDependNode(0)
     # print "APItype of {0} is {1}".format(node, oNode.apiTypeStr)
     return oNode
+
+
+def printInfo(info):
+    """
+    Prints the information statement in the command response (to the right of the command line)
+    Args:
+        info (str): Information to be displayed
+    """
+    om.MGlobal.displayInfo(info)
 
 
 #                _   _

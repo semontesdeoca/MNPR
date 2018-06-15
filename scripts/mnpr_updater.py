@@ -65,7 +65,7 @@ def updateMNPR(directory, files2Update, files2Delete):
         except:
             print("Couldn't remove {0}".format(filePath))
 
-    print("Update completed.", end=' ')
+    lib.printInfo("Update completed.")
     return True
 
 
@@ -97,7 +97,7 @@ def createVersion(directory):
     # write and save json info
     with open(path, 'w') as f:
         json.dump(mnpr, f, indent=4)
-    print("MNPR version created successfully", end=' ')
+    lib.printInfo("MNPR version created successfully")
 
 
 def checkUpdates(directory):
@@ -119,7 +119,7 @@ def checkUpdates(directory):
     try:
         downloader.retrieve(onlinePath, tempPath)
     except IOError:
-        print("Maya can't connect to the internet.", end=' ')
+        lib.printInfo("Maya can't connect to the internet.")
         return
     with open(tempPath, 'r') as f:
         onlineMNPR = json.load(f)
@@ -216,7 +216,7 @@ def checkUpdates(directory):
     reply = cmds.confirmDialog(title='Update is available', message=mString, button=['Yes', 'No'], defaultButton='Yes', cancelButton='No', dismissString='No', icn="information")
     # don't do anything
     if reply == "No":
-        print("Nothing has been updated", end=' ')
+        lib.printInfo("Nothing has been updated")
         return
 
     if restartMaya:
@@ -224,7 +224,7 @@ def checkUpdates(directory):
         mString += "No scenes/preferences will be saved upon closure, do you still wish to proceed?"
         reply = cmds.confirmDialog(title='Shelf update', message=mString, button=['Yes', 'No'], defaultButton='Yes', cancelButton='No', dismissString='No', icn="warning")
         if reply == "No":
-            print("Nothing has been updated", end=' ')
+            lib.printInfo("Nothing has been updated")
             return
 
     if updateMNPR(directory, files2Update, files2Delete):

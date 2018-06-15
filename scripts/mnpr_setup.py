@@ -98,7 +98,7 @@ def run(root):
     # get plugin for os
     getPlugin(variables)
 
-    print("-> Installation complete", end=' ')
+    lib.printInfo("-> Installation complete")
 
     # restart maya
     cmds.confirmDialog(title='Restart Maya',
@@ -172,7 +172,7 @@ def installationCheck(variables, envVariables):
         reply = cmds.confirmDialog(title='Overriding existing installation', message=mString, button=['Yes', 'No'], defaultButton='Yes', cancelButton='No', dismissString='No', icn="warning")
         # don't do anything
         if reply == "No":
-            print("-> Nothing was done to your current installation", end=' ')
+            lib.printInfo("-> Nothing was done to your current installation")
             return False
         # delete mnpr paths
         previousPath = "{0}".format(envVariables[mnprVariable][0])
@@ -256,7 +256,7 @@ def getPlugin(variables):
 
         # get plugin file online
         print("Getting plugin from: {0}".format(pluginURL))
-        print("Downloading plugin...", end=' ')
+        lib.printInfo("Downloading plugin...")
         downloader = urllib.URLopener()
         downloader.retrieve(pluginURL, os.path.join(pluginDir, pluginName))
 
@@ -273,7 +273,7 @@ def getSubstrates():
             lib.openUrl(url)
             return
         else:
-            print("No substrates will be downloaded.", end=' ')
+            lib.printInfo("No substrates will be downloaded.")
             return
     # windows and linux
     import zipfile
@@ -283,7 +283,7 @@ def getSubstrates():
         lib.openUrl(url)
         return
     elif result == "Close":
-        print("No substrates will be downloaded.", end=' ')
+        lib.printInfo("No substrates will be downloaded.")
         return
     else:
         p = lib.Path(lib.getLibDir())
@@ -295,7 +295,7 @@ def getSubstrates():
             zip.extractall(p.path)
             zip.close()
             os.remove(dest)
-            print("MNPR substrates installed successfully", end=' ')
+            lib.printInfo("MNPR substrates installed successfully")
             cmds.confirmDialog(t="Download successful", m="The substrates downloaded successfully", b="Yay!", icn="information")
         else:
             cmds.warning("Problem downloading substrates, please download and install manually")

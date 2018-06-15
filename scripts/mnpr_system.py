@@ -81,7 +81,7 @@ def check():
         selectConfig()
         cmds.select(selected, r=True)
 
-    print("-> SYSTEM CHECK SUCCESSFUL\n", end=' ')
+    lib.printInfo("-> SYSTEM CHECK SUCCESSFUL")
 
 
 def changeStyle():
@@ -115,7 +115,7 @@ def changeStyle():
     if cmds.window(mnpr_FX.MNPR_FX_UI.windowTitle, exists=True):
         mnpr_runner.openPaintFX(rebuild=True)
 
-    print("Style changed", end=' ')
+    lib.printInfo("Style changed")
 
 
 def togglePlugin(force=""):
@@ -149,7 +149,7 @@ def unloadPlugin(plugin):
             cmds.delete(mnpr_info.configNode)  # delete config node
         cmds.flushUndo()  # clear undo queue
         cmds.unloadPlugin(plugin)  # unload plugin
-        print("->PLUGIN SUCCESSFULLY UNLOADED\n", end=' ')
+        lib.printInfo("->PLUGIN SUCCESSFULLY UNLOADED")
 
 
 def showShaderAttr():
@@ -176,7 +176,7 @@ def refreshShaders():
 
     for shader in shaders:
         cmds.setAttr("{0}.shader".format(shader), shaderFile, type="string")
-    print('Shaders refreshed', end=' ')
+    lib.printInfo('Shaders refreshed')
     return True
 
 
@@ -202,7 +202,7 @@ def updateShaderFX():
         print("{0} has been updated to the latest version".format(mat))
         print("{0}/{1} materials updated".format(counter, len(materials)))
 
-    print('Shaders updated', end=' ')
+    lib.printInfo('Shaders updated')
 
 
 def dx112glsl():
@@ -348,11 +348,11 @@ def selectConfig():
 
         cmds.connectAttr("{0}.evaluate".format(mnpr_info.configNode), "persp.visibility", f=True)
         mel.eval("AttributeEditor")
-        print("-> CONFIG NODE CREATED AND CONNECTED\n", end=' ')
+        lib.printInfo("-> CONFIG NODE CREATED AND CONNECTED")
     else:
         cmds.select(mnpr_info.configNode)
         mel.eval("AttributeEditor")
-        print("Selected {0} configuration node\n".format(mnpr_info.prototype), end=' ')
+        lib.printInfo("Selected {0} configuration node".format(mnpr_info.prototype))
 
 
 def optimizePerformance():
@@ -468,7 +468,7 @@ def playblast(saveDir, width, height, renderCamera, modelPanel, renderSize=1):
     cmds.mnpr(g=False)
     cmds.refresh()
 
-    print("Video has been successfully playblasted to: {0}".format(saveDir), end=' ')
+    lib.printInfo("Video has been successfully playblasted to: {0}".format(saveDir))
 
 
 def resolutionCheck(width, height, renderSize=1.0):
