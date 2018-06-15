@@ -9,6 +9,7 @@
                  |_|                 |___/
 @summary:       MNPR related functions
 """
+from __future__ import print_function
 import os
 import traceback
 import maya.cmds as cmds
@@ -53,7 +54,7 @@ dx2sfxAttr = {"xUseColorTexture": "Albedo_Texture",
 
 def check():
     """Makes sure everything is running right"""
-    print "SYSTEM CHECK FOR {0}".format(mnpr_info.prototype)
+    print("SYSTEM CHECK FOR {0}".format(mnpr_info.prototype))
     # check viewport
     viewport = lib.getActiveModelPanel()
     cmds.modelEditor(viewport, dtx=True, e=True)  # display textures
@@ -80,7 +81,7 @@ def check():
         selectConfig()
         cmds.select(selected, r=True)
 
-    print "-> SYSTEM CHECK SUCCESSFUL\n",
+    lib.printInfo("-> SYSTEM CHECK SUCCESSFUL")
 
 
 def changeStyle():
@@ -93,7 +94,7 @@ def changeStyle():
         cmds.delete(mnpr_info.configNode)
     # flush undo
     cmds.flushUndo()
-    print "style deleted"
+    print("style deleted")
     # deregister node
     cmds.mnpr(rn=False)
     # register node
@@ -114,7 +115,7 @@ def changeStyle():
     if cmds.window(mnpr_FX.MNPR_FX_UI.windowTitle, exists=True):
         mnpr_runner.openPaintFX(rebuild=True)
 
-    print "Style changed",
+    lib.printInfo("Style changed")
 
 
 def togglePlugin(force=""):
@@ -148,7 +149,7 @@ def unloadPlugin(plugin):
             cmds.delete(mnpr_info.configNode)  # delete config node
         cmds.flushUndo()  # clear undo queue
         cmds.unloadPlugin(plugin)  # unload plugin
-        print "->PLUGIN SUCCESSFULLY UNLOADED\n",
+        lib.printInfo("->PLUGIN SUCCESSFULLY UNLOADED")
 
 
 def showShaderAttr():
@@ -175,7 +176,7 @@ def refreshShaders():
 
     for shader in shaders:
         cmds.setAttr("{0}.shader".format(shader), shaderFile, type="string")
-    print 'Shaders refreshed',
+    lib.printInfo('Shaders refreshed')
     return True
 
 
@@ -198,40 +199,40 @@ def updateShaderFX():
         # set attributes
         mnpr_matPresets.setMaterialAttrs(mat, matAttrs)
 
-        print "{0} has been updated to the latest version".format(mat)
-        print "{0}/{1} materials updated".format(counter, len(materials))
+        print("{0} has been updated to the latest version".format(mat))
+        print("{0}/{1} materials updated".format(counter, len(materials)))
 
-    print 'Shaders updated',
+    lib.printInfo('Shaders updated')
 
 
 def dx112glsl():
     """ Converts dx11 materials to glsl materials """
     check()
     dx11Shaders = cmds.ls(type="dx11Shader")
-    print dx11Shaders
+    print(dx11Shaders)
     for dx11Shader in dx11Shaders:
-        print "Transfering {0} shader".format(dx11Shader)
+        print("Transfering {0} shader".format(dx11Shader))
         # get all attributes
         attributes = cmds.listAttr(dx11Shader, ud=True, st="x*", k=True)
-        print attributes
+        print(attributes)
         # get all connected nodes
         connectedNodes = cmds.listConnections(dx11Shader, t="file", c=True, p=True)
-        print connectedNodes
+        print(connectedNodes)
         # get all shapes
         cmds.select(dx11Shader, r=True)
         cmds.hyperShade(objects="")
         shapes = cmds.ls(sl=True)
-        print shapes
+        print(shapes)
     
         # create glsl shader
         shader = cmds.shadingNode('GLSLShader', asShader=True, n="{0}_GL".format(dx11Shader))
         cmds.select(shapes, r=True)
         cmds.hyperShade(assign=shader)
-        print ">>> Shader {0} created".format(shader)
+        print(">>> Shader {0} created".format(shader))
         # assign attributes
         shaderFile = os.path.join(mnpr_info.environment,"shaders","PrototypeC.ogsfx")
         cmds.setAttr("{0}.shader".format(shader), shaderFile, type="string")
-        print "Setting attributes for {0}".format(shader)
+        print("Setting attributes for {0}".format(shader))
         for attr in attributes:
             value = cmds.getAttr("{0}.{1}".format(dx11Shader, attr))
             try:
@@ -240,7 +241,7 @@ def dx112glsl():
                 else:
                     cmds.setAttr("{0}.{1}".format(shader, attr), value)
             except:
-                print "Found problemt when setting {0}.{1}, skipping for now".format(shader, attr)
+                print("Found problemt when setting {0}.{1}, skipping for now".format(shader, attr))
         # connect nodes
         if connectedNodes:
             for i in range(0, len(connectedNodes), 2):
@@ -272,18 +273,18 @@ def dx112sfx(graph="mnpr_uber"):
             continue
         prototypeCNodes.append(dx11Shader)
 
-        print "Converting {0} shader".format(dx11Shader)
+        print("Converting {0} shader".format(dx11Shader))
         # get all attributes
         attributes = cmds.listAttr(dx11Shader, ud=True, st="x*", k=True)
-        print attributes
+        print(attributes)
         # get all connected nodes
         connectedNodes = cmds.listConnections(dx11Shader, t="file", c=True)
-        print connectedNodes
+        print(connectedNodes)
         # get all shapes
         cmds.select(dx11Shader, r=True)
         cmds.hyperShade(objects="")
         shapes = cmds.ls(sl=True)
-        print shapes
+        print(shapes)
 
         # create shaderFX shader
         shader = cmds.shadingNode('ShaderfxShader', asShader=True, name="{0}".format(dx11Shader.replace("_WC", "_SFX")))
@@ -291,7 +292,7 @@ def dx112sfx(graph="mnpr_uber"):
         cmds.hyperShade(assign=shader)
         shaderFile = os.path.join(mnpr_info.environment, "shaders", "{0}.sfx".format(graph))
         cmds.shaderfx(sfxnode=shader, loadGraph=shaderFile)
-        print ">>> Shader {0} created".format(shader)
+        print(">>> Shader {0} created".format(shader))
         # assign settings
         vtxControl = bool(cmds.getAttr("{0}.{1}".format(dx11Shader, "xUseControl")))
         if vtxControl:
@@ -306,7 +307,7 @@ def dx112sfx(graph="mnpr_uber"):
             nodeId = cmds.shaderfx(sfxnode=shader, getNodeIDByName="Specularity")
             cmds.shaderfx(sfxnode=shader, edit_bool=(nodeId, "value", specularity))
         # assign attributes
-        print "Setting attributes for {0}".format(shader)
+        print("Setting attributes for {0}".format(shader))
         for attr in attributes:
             value = cmds.getAttr("{0}.{1}".format(dx11Shader, attr))
             if attr in dx2sfxAttr:
@@ -342,16 +343,16 @@ def selectConfig():
         cmds.delete("NPRConfig")
 
     if not cmds.objExists(mnpr_info.configNode):
-        print mnpr_info.configNode
+        print(mnpr_info.configNode)
         cmds.createNode("mnprConfig", n=mnpr_info.configNode)
 
         cmds.connectAttr("{0}.evaluate".format(mnpr_info.configNode), "persp.visibility", f=True)
         mel.eval("AttributeEditor")
-        print "-> CONFIG NODE CREATED AND CONNECTED\n",
+        lib.printInfo("-> CONFIG NODE CREATED AND CONNECTED")
     else:
         cmds.select(mnpr_info.configNode)
         mel.eval("AttributeEditor")
-        print "Selected {0} configuration node\n".format(mnpr_info.prototype),
+        lib.printInfo("Selected {0} configuration node".format(mnpr_info.prototype))
 
 
 def optimizePerformance():
@@ -393,7 +394,7 @@ def renderFrame(saveDir, width, height, renderSize=1, imgFormat=".jpg", override
     try:
         screenshotPath = lib.screenshot(saveDir, width, height, format=imgFormat, override=override)  # render the frame
     except WindowsError:
-        print "Screenshot saving has been canceled"
+        print("Screenshot saving has been canceled")
     except:
         traceback.print_exc()
 
@@ -467,7 +468,7 @@ def playblast(saveDir, width, height, renderCamera, modelPanel, renderSize=1):
     cmds.mnpr(g=False)
     cmds.refresh()
 
-    print "Video has been successfully playblasted to: {0}".format(saveDir),
+    lib.printInfo("Video has been successfully playblasted to: {0}".format(saveDir))
 
 
 def resolutionCheck(width, height, renderSize=1.0):

@@ -9,6 +9,7 @@
                  |_|                  |_|
 @summary:       MNPR's automatic updated (beta)
 """
+from __future__ import print_function
 import maya.cmds as cmds
 import os, urllib, pprint, json
 import coopLib as lib
@@ -29,9 +30,9 @@ def updateMNPR(directory, files2Update, files2Delete):
     Returns:
         True if update successful
     """
-    print "\nUpdating files at {0}".format(directory)
-    print "Files to update: {0}".format(files2Update)
-    print "Files to delete: {0}".format(files2Delete)
+    print("\nUpdating files at {0}".format(directory))
+    print("Files to update: {0}".format(files2Update))
+    print("Files to delete: {0}".format(files2Delete))
 
     # unload MNPR
     mnpr_system.unloadPlugin(mnpr_info.prototype)
@@ -40,12 +41,12 @@ def updateMNPR(directory, files2Update, files2Delete):
     downloader = urllib.URLopener()
     for f in files2Update:
         onlineURL = "{0}{1}".format(distURL, f)
-        print "Downloading {0}".format(onlineURL)
+        print("Downloading {0}".format(onlineURL))
         filePath = os.path.abspath(os.path.join(directory, f.lstrip('/')))
         try:
             downloader.retrieve(onlineURL, filePath)
         except IOError:
-            print "Error: Couldn't download {0} into {1}".format(onlineURL, filePath)
+            print("Error: Couldn't download {0} into {1}".format(onlineURL, filePath))
             continue
         # after download, reload modules
         try:
@@ -53,18 +54,18 @@ def updateMNPR(directory, files2Update, files2Delete):
             exec("reload({0})".format(module))
         except NameError:
             pass
-        print "Download successful"
+        print("Download successful")
 
     # delete deprecated files
     for f in files2Delete:
         filePath = os.path.abspath(os.path.join(directory, f.lstrip('/')))
-        print "Deleting {0}".format(filePath)
+        print("Deleting {0}".format(filePath))
         try:
             os.remove(filePath)
         except:
-            print "Couldn't remove {0}".format(filePath)
+            print("Couldn't remove {0}".format(filePath))
 
-    print "Update completed.",
+    lib.printInfo("Update completed.")
     return True
 
 
@@ -96,7 +97,7 @@ def createVersion(directory):
     # write and save json info
     with open(path, 'w') as f:
         json.dump(mnpr, f, indent=4)
-    print "MNPR version created successfully",
+    lib.printInfo("MNPR version created successfully")
 
 
 def checkUpdates(directory):
@@ -105,7 +106,7 @@ def checkUpdates(directory):
     Args:
         directory (str): Directory of installed MNPR
     """
-    print "Checking for updates..."
+    print("Checking for updates...")
     # get local mnpr version
     localPath = os.path.join(directory, "version.json")
     with open(localPath, 'r') as f:
@@ -118,7 +119,7 @@ def checkUpdates(directory):
     try:
         downloader.retrieve(onlinePath, tempPath)
     except IOError:
-        print "Maya can't connect to the internet.",
+        lib.printInfo("Maya can't connect to the internet.")
         return
     with open(tempPath, 'r') as f:
         onlineMNPR = json.load(f)
@@ -158,9 +159,9 @@ def checkUpdates(directory):
     for key in keys2Delete:
         onlineMNPR.pop(key)
 
-    print "LOCAL"
+    print("LOCAL")
     pprint.pprint(localMNPR)
-    print "\nONLINE"
+    print("\nONLINE")
     pprint.pprint(onlineMNPR)
 
     # compare the two versions
@@ -215,7 +216,7 @@ def checkUpdates(directory):
     reply = cmds.confirmDialog(title='Update is available', message=mString, button=['Yes', 'No'], defaultButton='Yes', cancelButton='No', dismissString='No', icn="information")
     # don't do anything
     if reply == "No":
-        print "Nothing has been updated",
+        lib.printInfo("Nothing has been updated")
         return
 
     if restartMaya:
@@ -223,7 +224,7 @@ def checkUpdates(directory):
         mString += "No scenes/preferences will be saved upon closure, do you still wish to proceed?"
         reply = cmds.confirmDialog(title='Shelf update', message=mString, button=['Yes', 'No'], defaultButton='Yes', cancelButton='No', dismissString='No', icn="warning")
         if reply == "No":
-            print "Nothing has been updated",
+            lib.printInfo("Nothing has been updated")
             return
 
     if updateMNPR(directory, files2Update, files2Delete):

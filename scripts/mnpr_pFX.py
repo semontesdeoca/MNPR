@@ -11,6 +11,7 @@
                 PaintFX is responsible for the mapped effect control
 
 """
+from __future__ import print_function
 import os, math, logging
 import maya.cmds as cmds
 import maya.mel as mel
@@ -18,6 +19,11 @@ import maya.api.OpenMaya as om  # python api 2.0
 import coopLib as lib
 import mnpr_system
 import mnpr_info
+
+try:
+    xrange          # Python 2
+except NameError:
+    xrange = range  # Python 3
 
 logging.basicConfig()  # errors and everything else (2 separate log groups)
 logger = logging.getLogger("pFX")  # create a logger for this file
@@ -115,7 +121,7 @@ def defaultVertexColors(shape):
         oVertexColorArray[vertex].a = 0.0
     fnMesh.setCurrentColorSetName('controlSetC')
     fnMesh.setVertexColors(oVertexColorArray, vertexIndexArray)
-    print "vertex colors should have been set"
+    print("vertex colors should have been set")
 
 
 @lib.timer
@@ -247,7 +253,7 @@ def translateVtxCtrl(shape):
             oVertexColorArrayC[vertex].a = max((blue - 0.5) * 2.0, 0.0)
         fnMesh.setCurrentColorSetName('controlSetC')
         fnMesh.setVertexColors(oVertexColorArrayC, vertexIndexArray)
-        print "Control parameters changed in shape: {0}".format(shape)
+        print("Control parameters changed in shape: {0}".format(shape))
     else:
         logger.info("{0} has not been prepped, skipping.".format(shape))
 

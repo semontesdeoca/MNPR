@@ -9,6 +9,7 @@
                                             |_|
 @summary:       MNPR's material presets interface and implementation
 """
+from __future__ import print_function
 import os, json, logging, pprint, operator, traceback
 from PySide2 import QtWidgets, QtCore, QtGui
 import maya.cmds as cmds
@@ -275,7 +276,7 @@ def setMaterialAttrs(mat, matAttrs, options={}):
                 cmds.shaderfx(sfxnode=mat, edit_bool=(nodeId, "value", procSettings[setting]))
             except RuntimeError:
                 #traceback.print_exc()
-                print "Setting of {0} procedural node has failed".format(setting)
+                print("Setting of {0} procedural node has failed".format(setting))
                 continue
     # set all attributes
     if mnpr_system.updateAE():
@@ -316,7 +317,7 @@ class MnprMaterialLibrary(dict):
 
         # get material from selection
         mat, xforms = getMaterial(selection)
-        print mat, xforms
+        print(mat, xforms)
 
         cmds.select(xforms, r=True)
 
@@ -451,7 +452,7 @@ class MnprMaterialLibrary(dict):
             setMaterialAttrs(mat, self[name], options)
         else:
             # set attributes in material
-            print "->{0} will be replaced".format(mat)
+            print("->{0} will be replaced".format(mat))
             attrs = self[name]['attributes']
             for attr in attrs:
                 lib.setAttr(mat, attr, attrs[attr])
@@ -606,7 +607,7 @@ class MnprMaterialPresetsUI(qt.CoopMayaUI):
             return
 
         name = currentItem.text()
-        print name
+        print(name)
         options = {"newMaterial": self.newMaterialCBox.isChecked(),
                    "textures": self.withTexturesCBox.isChecked(),
                    "noiseFX": self.withNoiseFXCBox.isChecked()}

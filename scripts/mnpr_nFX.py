@@ -10,6 +10,7 @@
 @summary:       NoiseFX classes and functions
                 NoiseFX is responsible for the material effect control
 """
+from __future__ import print_function
 import maya.cmds as cmds
 import coopLib as lib
 
@@ -221,15 +222,15 @@ def noiseTypeClicked(fx):
     # get node names of operation
     sfxNodes = getNodeNames(fx, 0)
 
-    print "Recompiling material",
+    lib.printInfo("Recompiling material")
     typeId = getId(materials[0], sfxNodes.typeNodeName)  # base toggle on first material state
     state = cmds.shaderfx(sfxnode=materials[0], getPropertyValue=(typeId, "value"))
     for mat in materials:
         cmds.shaderfx(sfxnode=mat, edit_bool=(typeId, "value", not state))
     if state:
-        print "\nNoiseFX for {0} is now in 2D".format(fx.description),
+        lib.printInfo("NoiseFX for {0} is now in 2D".format(fx.description))
     else:
-        print "\nNoiseFX for {0} is now in 3D".format(fx.description),
+        lib.printInfo("NoiseFX for {0} is now in 3D".format(fx.description))
 
 
 def noiseToggleClicked(fx):
@@ -243,16 +244,16 @@ def noiseToggleClicked(fx):
     # get node names of operation
     sfxNodes = getNodeNames(fx, 0)
 
-    print "Recompiling material",
+    lib.printInfo("Recompiling material")
     stateId = getId(materials[0], sfxNodes.stateNodeName)  # base toggle on first material state
     state = cmds.shaderfx(sfxnode=materials[0], getPropertyValue=(stateId, "value"))
     for mat in materials:
         stateId = getId(mat, sfxNodes.stateNodeName)
         cmds.shaderfx(sfxnode=mat, edit_bool=(stateId, "value", not state))
     if state:
-        print "\nNoiseFX for {0} is off".format(fx.description),
+        lib.printInfo("NoiseFX for {0} is off".format(fx.description))
     else:
-        print "\nNoiseFX for {0} is on".format(fx.description),
+        lib.printInfo("NoiseFX for {0} is on".format(fx.description))
 
 
 def noiseSlide(fx, widget):
@@ -283,7 +284,7 @@ def noiseSlide(fx, widget):
         # turn on procedural noise if turned off
         stateId = getId(mat, sfxNodes.stateNodeName)
         if not cmds.shaderfx(sfxnode=mat, getPropertyValue=(stateId, "value")):
-            print "Recompiling material",
+            lib.printInfo("Recompiling material")
             cmds.shaderfx(sfxnode=mat, edit_bool=(stateId, "value", True))
 
         # get attribute name
@@ -337,7 +338,7 @@ def noiseReset(fx):
     # get node names of operation
     sfxNodes = getNodeNames(fx, 0)
 
-    print "Recompiling material",
+    lib.printInfo("Recompiling material")
 
     # reset each material
     materials = getMaterials()
@@ -354,4 +355,4 @@ def noiseReset(fx):
         cmds.shaderfx(sfxnode=mat, edit_float=(sfxNodes.shift, "value", 0.0))
         cmds.shaderfx(sfxnode=mat, edit_bool=(sfxNodes.scale, "value", True))
 
-    print "{0} procedural control has been reset".format(fx.description),
+    lib.printInfo("{0} procedural control has been reset".format(fx.description))

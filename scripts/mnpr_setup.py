@@ -9,6 +9,7 @@
                  |_|                               |_|
 @summary:       This file installs MNPR by adding the required file directories into the Maya.env file
 """
+from __future__ import print_function
 import os, shutil, urllib, pprint
 import maya.cmds as cmds
 import maya.mel as mel
@@ -40,7 +41,7 @@ if localOS == "linux":
 
 # SETTLE OS DEPENDENT DIRECTORIES
 pluginDir = "plugins/{0}/{1}/".format(mayaV, localOS)
-print pluginDir
+print(pluginDir)
 
 
 def run(root):
@@ -49,7 +50,7 @@ def run(root):
     Args:
         root: root directory of MNPR
     """
-    print "-> Installing MNPR"
+    print("-> Installing MNPR")
     variables = {'MAYA_SHELF_PATH': [os.path.abspath(os.path.join(root, "shelves/"))],
                  'MAYA_SCRIPT_PATH': [os.path.abspath(os.path.join(root, "scripts/"))],
                  'PYTHONPATH': [os.path.abspath(os.path.join(root, "scripts/"))],
@@ -69,7 +70,7 @@ def run(root):
 
     # get Maya environment variables
     envVariables = getEnvironmentVariables(mayaEnvFilePath)
-    print "ENVIRONMENT VARIABLES:"
+    print("ENVIRONMENT VARIABLES:")
     pprint.pprint(envVariables)
 
     # check if MNPR is already installed
@@ -78,7 +79,7 @@ def run(root):
 
     # merge mnpr variables
     envVariables = mergeVariables(variables, envVariables)
-    print "MODIFIED VARIABLES:"
+    print("MODIFIED VARIABLES:")
     pprint.pprint(envVariables)
 
     # write environment variables
@@ -97,7 +98,7 @@ def run(root):
     # get plugin for os
     getPlugin(variables)
 
-    print "-> Installation complete",
+    lib.printInfo("-> Installation complete")
 
     # restart maya
     cmds.confirmDialog(title='Restart Maya',
@@ -171,11 +172,11 @@ def installationCheck(variables, envVariables):
         reply = cmds.confirmDialog(title='Overriding existing installation', message=mString, button=['Yes', 'No'], defaultButton='Yes', cancelButton='No', dismissString='No', icn="warning")
         # don't do anything
         if reply == "No":
-            print "-> Nothing was done to your current installation",
+            lib.printInfo("-> Nothing was done to your current installation")
             return False
         # delete mnpr paths
         previousPath = "{0}".format(envVariables[mnprVariable][0])
-        print "Deleting previous MNPR installation at : {0}".format(previousPath)
+        print("Deleting previous MNPR installation at : {0}".format(previousPath))
         for key in envVariables:
             for value in envVariables[key]:
                 if previousPath in str(value):
@@ -192,7 +193,7 @@ def mergeVariables(variables, envVariables):
     Returns:
         envVariables (dict)
     """
-    print ""
+    print("")
     for var in variables:
         if var not in envVariables:
             # no variable existed, add
@@ -202,12 +203,12 @@ def mergeVariables(variables, envVariables):
             for varValue in variables[var]:
                 # for each variable value to add
                 if varValue in envVariables[var]:
-                    print "{0}={1} is already set as an environment variable.".format(var, varValue)
+                    print("{0}={1} is already set as an environment variable.".format(var, varValue))
                 else:
                     # variable did not exist, insert in front
                     envVariables[var].insert(0, varValue)
                     # (optional) check for clashes of files with other variables
-    print "Variables successfully updated.\n"
+    print("Variables successfully updated.\n")
     return envVariables
 
 
@@ -254,8 +255,8 @@ def getPlugin(variables):
         pluginURL += "/{0}".format(pluginName)  # add plugin name
 
         # get plugin file online
-        print "Getting plugin from: {0}".format(pluginURL)
-        print "Downloading plugin...",
+        print("Getting plugin from: {0}".format(pluginURL))
+        lib.printInfo("Downloading plugin...")
         downloader = urllib.URLopener()
         downloader.retrieve(pluginURL, os.path.join(pluginDir, pluginName))
 
@@ -272,7 +273,7 @@ def getSubstrates():
             lib.openUrl(url)
             return
         else:
-            print "No substrates will be downloaded.",
+            lib.printInfo("No substrates will be downloaded.")
             return
     # windows and linux
     import zipfile
@@ -282,19 +283,19 @@ def getSubstrates():
         lib.openUrl(url)
         return
     elif result == "Close":
-        print "No substrates will be downloaded.",
+        lib.printInfo("No substrates will be downloaded.")
         return
     else:
         p = lib.Path(lib.getLibDir())
         p.parent().child("textures")
         dest = os.path.join(p.path, "seamless_textures_light.zip")
         if lib.downloader(url, dest):
-            print "Substrates downloaded, extracting..."
+            print("Substrates downloaded, extracting...")
             zip = zipfile.ZipFile(dest, 'r')
             zip.extractall(p.path)
             zip.close()
             os.remove(dest)
-            print "MNPR substrates installed successfully",
+            lib.printInfo("MNPR substrates installed successfully")
             cmds.confirmDialog(t="Download successful", m="The substrates downloaded successfully", b="Yay!", icn="information")
         else:
             cmds.warning("Problem downloading substrates, please download and install manually")

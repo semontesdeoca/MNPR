@@ -10,12 +10,18 @@
 @summary:       Maya cooperative qt library
 @run:           import coopQt as qt (suggested)
 """
+from __future__ import print_function
 import logging, time, threading
 import maya.mel as mel
 import maya.cmds as cmds
 import maya.OpenMayaUI as omUI
 from PySide2 import QtCore, QtGui, QtWidgets
 from shiboken2 import wrapInstance
+
+try:
+    long        # Python 2
+except NameError:
+    long = int  # Python 3
 
 # LOGGING
 logging.basicConfig()  # errors and everything else (2 separate log groups)
@@ -111,7 +117,7 @@ class CoopMayaUI(QtWidgets.QDialog):
 
         # check if the ui is dockable
         if cmds.dockControl(title, query=True, exists=True):
-            print "dock under this name exists"
+            print("dock under this name exists")
             cmds.deleteUI("watercolorFX", ctl=True)
             cmds.deleteUI("watercolorFX", lay=True)
         if dock:

@@ -10,6 +10,7 @@
 @summary:       MNPR's style presets interface and implementation
 @adapted from:  coopAttrManager.py (https://github.com/semontesdeoca/maya-coop)
 """
+from __future__ import print_function
 import os, json, logging, pprint, operator, traceback, functools
 from PySide2 import QtWidgets, QtCore, QtGui
 import maya.cmds as cmds
@@ -179,7 +180,7 @@ class AttributeSetsLibrary(dict):
                 if "NPRConfig" in splitter[0]:
                     splitter[0] = "mnprConfig"
                 lib.setAttr(splitter[0], splitter[1], attrs[attr])
-        print "Attributes set successfully",
+        lib.printInfo("Attributes set successfully")
 
     def loadStyle(self, attrs):
         if cmds.objExists(mnpr_info.configNode):
@@ -187,7 +188,7 @@ class AttributeSetsLibrary(dict):
             for attr in attrs:
                 splitter = attr.split('.')
                 lib.setAttr(splitter[0], splitter[1], attrs[attr], True)
-            print "\nStyle changed and attributes set successfully",
+            lib.printInfo("Style changed and attributes set successfully")
 
     def saveScreenshot(self, name, directory):
         """

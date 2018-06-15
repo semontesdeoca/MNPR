@@ -9,17 +9,29 @@
                  |_|
 @summary:   A centralized file to run functions from the shelf
 """
+from __future__ import print_function
 from PySide2 import QtWidgets
 from shiboken2 import wrapInstance
 import maya.OpenMayaUI as omUI
 import maya.cmds as cmds
 import maya.mel as mel
+import coopLib as lib
 import mnpr_presets
 import mnpr_matPresets
 import mnpr_system
 import mnpr_info
 import mnpr_UIs
 import mnpr_FX
+
+try:
+    reload         # Python 2
+except NameError:  # Python 3
+    from importlib import reload
+
+try:
+    long           # Python 2
+except NameError:
+    long = int     # Python 3
 
 
 def openPresets(rebuild=True):
@@ -65,7 +77,7 @@ def openNoiseFX(dock=False, rebuild=False):
     """
     fxType = "material-space"
     mnpr_system.check()
-    print "Opening noiseFX with dock = {0}".format(dock)
+    print("Opening noiseFX with dock = {0}".format(dock))
     windowObj = mnpr_FX.MNPR_FX_UI(dock=dock, rebuild=rebuild, tab=fxType)
 
     # change tab
@@ -86,7 +98,7 @@ def openPaintFX(dock=False, rebuild=False):
     # temporary workaround to painting ceasing to work correctly
     if rebuild:
         reload(mnpr_FX)
-    print "Opening paintFX with dock = {0}".format(dock)
+    print("Opening paintFX with dock = {0}".format(dock))
     windowObj = mnpr_FX.MNPR_FX_UI(dock=dock, rebuild=rebuild, tab=fxType)
 
     # change tab
@@ -142,7 +154,7 @@ def testScene(prototype="shaderFX"):
     testSphere = cmds.ls(sl=True)
     mnpr_matPresets.createMaterial(testSphere, prototype=prototype)
     mnpr_matPresets.defaultLighting()
-    print "Default scene created",
+    lib.printInfo("Default scene created")
 
 
 def downloadSubstrates():
