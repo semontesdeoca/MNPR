@@ -70,7 +70,14 @@ def mayaVersion():
     """
     Returns the current Maya version (E.g. 2017, 2018, 2019, etc)
     """
-    version = os.path.basename(os.path.dirname(os.path.dirname(cmds.internalVar(usd=True))))
+    scriptsDir = cmds.internalVar(usd=True)
+
+    if cmds.about(uiLanguage=True) == u"en_US":
+        version = os.path.basename(os.path.dirname(os.path.dirname(scriptsDir)))
+    else:
+        # non-English Maya puts an extra subdirectory
+        version = os.path.basename(os.path.dirname(os.path.dirname(os.path.dirname(scriptsDir))))
+
     vYear = version.split('-')[0]
     return float(vYear)
 
