@@ -19,9 +19,7 @@ Valuable contributions coding MNPR were given by:
 
 ## Downloading MNPR
 The latest stable release of MNPR can be found here:
-* MNPR 1.0 (coming soon)
-
-Version changes can be found in the release log (coming soon).
+* [MNPR 1.0](https://github.com/semontesdeoca/MNPR/releases/latest)
 
 
 ## Building from source
