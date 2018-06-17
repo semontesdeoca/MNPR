@@ -68,11 +68,16 @@ def checkAboveVersion(year):
 
 def mayaVersion():
     """
-    Returns the current Maya version (E.g. 2017, 2018, 2019, etc)
+    Returns the current Maya version (E.g. 2017.0, 2018.0, 2019.0, etc)
     """
-    version = os.path.basename(os.path.dirname(os.path.dirname(cmds.internalVar(usd=True))))
-    vYear = version.split('-')[0]
-    return float(vYear)
+    p = Path(cmds.internalVar(usd=True)).parent()
+    parent = Path(p.path).parent()
+    if parent.basename() == "maya":
+        version = p.basename()
+    else:
+        # foreign language versions
+        version = parent.basename()
+    return float(version.split('-')[0])  # for older versions that might present 2016-x64
 
 
 def localOS():
@@ -742,6 +747,11 @@ class Path(object):
             os.mkdir(self.path)
         return self
 
+    def basename(self):
+        """
+        Returns the basename of the path
+        """
+        return os.path.basename(self.path)
 
 #        _        _
 #    ___| |_ _ __(_)_ __   __ _
