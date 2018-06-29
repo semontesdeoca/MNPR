@@ -359,9 +359,7 @@ float4 FXAAFrag(vertexOutputSampler i) : SV_Target
 	}
 
 	// read the color at the new uv coordinates and use it
-	float4 finalColor = gColorTex.SampleLevel(gSampler, finalUV, 0.0);
-	float4 color = float4(finalColor.rgb, lumCenter);
-	return color;
+	return gColorTex.SampleLevel(gSampler, finalUV, 0.0);
 }
 
 

@@ -34,7 +34,7 @@ global proc shelf_MNPR () {
         -sourceType "python"
         -commandRepeatable 1
         -flat 1
-        -mi "Update assets to MNPR" ( "import mnpr_FX\nmnpr_FX.update2MNPR()" )
+        -mi "Update assets to MNPR" ( "import mnpr_pFX\nmnpr_pFX.update2MNPR()" )
         -mip 0
         -mi "Check for MNPR updates" ( "import mnpr_runner\nmnpr_runner.updateMNPR()" )
         -mip 1
