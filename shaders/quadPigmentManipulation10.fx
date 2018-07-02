@@ -55,11 +55,11 @@ float4 pigmentDensityWCFrag(vertexOutput i) : SV_Target {
     float control = gControlTex.Load(loc).b;  // pigment control target (b)
 
     // calculate density
-    float density = lerp(1.0, 2.0, control);
+    float density = control + 1.0;
 
     // modify color
     float3 colorOutput = pow(abs(renderTex.rgb), density);  // color transmittance modification model
-    colorOutput = lerp(gSubstrateColor, colorOutput, saturate(1 + control));  // pigment turbulence model
+    colorOutput = lerp(gSubstrateColor, colorOutput, saturate(density));  // low density towards substrate color
 
     return float4(colorOutput, renderTex.a);
 }

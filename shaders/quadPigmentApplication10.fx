@@ -3,12 +3,12 @@
 // Brief: Defining how pigments are applied
 // Contributors: Santiago Montesdeoca, Amir Semmo
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-//          _                            _                         _ _           _   _             
-//    _ __ (_) __ _ _ __ ___   ___ _ __ | |_      __ _ _ __  _ __ | (_) ___ __ _| |_(_) ___  _ __  
-//   | '_ \| |/ _` | '_ ` _ \ / _ \ '_ \| __|    / _` | '_ \| '_ \| | |/ __/ _` | __| |/ _ \| '_ \ 
+//          _                            _                         _ _           _   _
+//    _ __ (_) __ _ _ __ ___   ___ _ __ | |_      __ _ _ __  _ __ | (_) ___ __ _| |_(_) ___  _ __
+//   | '_ \| |/ _` | '_ ` _ \ / _ \ '_ \| __|    / _` | '_ \| '_ \| | |/ __/ _` | __| |/ _ \| '_ \
 //   | |_) | | (_| | | | | | |  __/ | | | |_    | (_| | |_) | |_) | | | (_| (_| | |_| | (_) | | | |
 //   | .__/|_|\__, |_| |_| |_|\___|_| |_|\__|    \__,_| .__/| .__/|_|_|\___\__,_|\__|_|\___/|_| |_|
-//   |_|      |___/                                   |_|   |_|                                    
+//   |_|      |___/                                   |_|   |_|
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 // This shader file provides different algorithms for pigment application in different media
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -34,12 +34,12 @@ struct fragmentOutput {
 
 
 
-//                 _                            _         _                  _                    _     
-//   __      _____| |_           __ _ _ __   __| |     __| |_ __ _   _      | |__  _ __ _   _ ___| |__  
-//   \ \ /\ / / _ \ __|____     / _` | '_ \ / _` |    / _` | '__| | | |_____| '_ \| '__| | | / __| '_ \ 
+//                 _                            _         _                  _                    _
+//   __      _____| |_           __ _ _ __   __| |     __| |_ __ _   _      | |__  _ __ _   _ ___| |__
+//   \ \ /\ / / _ \ __|____     / _` | '_ \ / _` |    / _` | '__| | | |_____| '_ \| '__| | | / __| '_ \
 //    \ V  V /  __/ ||_____|   | (_| | | | | (_| |   | (_| | |  | |_| |_____| |_) | |  | |_| \__ \ | | |
 //     \_/\_/ \___|\__|         \__,_|_| |_|\__,_|    \__,_|_|   \__, |     |_.__/|_|   \__,_|___/_| |_|
-//                                                               |___/                                  
+//                                                               |___/
 // Contributor: Santiago Montesdeoca
 // [WC] - Defines how watercolor is applied:
 // - Wet, accumulating pigments at the valleys of the paper (aka substrate granulation)
@@ -60,23 +60,23 @@ float4 pigmentApplicationWCFrag(vertexOutput i) : SV_Target {
     }
 
     //calculate drybrush
-    float dryBrush = -application;
-    float dryDiff = heightMap - dryBrush;
+    float dryDiff = heightMap + application;
     if (dryDiff < 0) {
         return lerp(renderTex, float4(gSubstrateColor, renderTex.a), saturate(abs(dryDiff)*gDryBrushThreshold));
     } else {
-        // calculate density accumulation (-1 granulate, 0 default)
-        dryBrush = (abs(dryBrush) + 0.2);  // default is granulated (// 1.2 granulate, 0.2 default)
-        
-        //more accumulation on brighter areas
-        dryBrush = lerp(dryBrush, dryBrush * 5, luminance(renderTex.rgb));
+        // calculate density accumulation (1 granulate, 0 default)
+        application = (abs(application) + 0.2);  // default is granulated (// 1.2 granulate, 0.2 default)
 
-        //modulate heightmap to be between 0.8-1.0 (for montesdeoca et al.)
-        heightMap = (heightMap * 0.2) + 0.8;
+        //more accumulation on brighter areas
+        application = lerp(application, application * 5, luminance(renderTex.rgb));  // deprecated
+        //application = lerp(application, application * 4, luminance(renderTex.rgb));  // new approach
+
+        //modulate heightmap to be between 0.8-1.0 (for montesdeoca et al. 2016)
+        heightMap = (heightMap * 0.2) + 0.8;  // deprecated
     }
 
     //montesdeoca et al.
-    float accumulation = 1 + (dryBrush * (1 - (heightMap)) * gPigmentDensity);
+    float accumulation = 1 + (gPigmentDensity * application * (1 - (heightMap)));
 
     //calculate denser color output
     float3 colorOut = pow(abs(renderTex.rgb), accumulation);
@@ -89,14 +89,14 @@ float4 pigmentApplicationWCFrag(vertexOutput i) : SV_Target {
 
 
 
-//        _              _                    _     
-//     __| |_ __ _   _  | |__  _ __ _   _ ___| |__  
-//    / _` | '__| | | | | '_ \| '__| | | / __| '_ \ 
+//        _              _                    _
+//     __| |_ __ _   _  | |__  _ __ _   _ ___| |__
+//    / _` | '__| | | | | '_ \| '__| | | / __| '_ \
 //   | (_| | |  | |_| | | |_) | |  | |_| \__ \ | | |
 //    \__,_|_|   \__, | |_.__/|_|   \__,_|___/_| |_|
-//               |___/                              
+//               |___/
 // [OP] - Defines how oil is applied:
-// - Thick, accumulating pigments at the valleys of the paper 
+// - Thick, accumulating pigments at the valleys of the paper
 // - Dry, showing pigments that have only been applied at the peaks of the paper
 // -> Based on the watercolor dry brush, from the pigment application model by Montesdeoca et al. 2017
 //    [2017] Edge- and substrate-based effects for watercolor stylization
