@@ -1,4 +1,6 @@
-For a production-ready version of MNPR, please refer to [MNPRX](https://artineering.io/projects/MNPRX/)
+**For a production-ready version of MNPR, please refer to [MNPRX](https://artineering.io/projects/MNPRX/)**
+
+---------------
 
 # MNPR
 MNPR is an expressive non-photorealistic rendering framework for real-time, filter-based stylization pipelines within Maya (2016.5+). It extends the Maya API and simplifies the creation of Viewport 2.0 render overrides, while still preserving all the low-level options that the Maya API provides.
@@ -20,10 +22,11 @@ Valuable contributions coding MNPR were given by:
 
 
 ## Downloading MNPR
-The latest stable release of the MNPR prototype can be found here:
+For animated projects, please refer to the actively maintained [MNPRX](https://artineering.io/projects/MNPRX/).
+
+The latest stable release of the MNPR prototype can be found here (Maya 2017 and 2018):
 * [MNPR 1.0](https://github.com/semontesdeoca/MNPR/releases/latest)
 
-For production needs, please refer to [MNPRX](https://artineering.io/projects/MNPRX/).
 
 ## Building from source
 The easiest way to build MNPR is using [CMake](https://cmake.org/), just make sure _cmake_ is added to the system PATH.
