@@ -154,10 +154,10 @@ MStatus Cmd::doIt(const MArgList& args) {
             bool opState;
             argData.getFlagArgument(stateSN, 0, opState);
             // set operation state
-            MNPR->mOperations[renderOp]->setEnabled(opState);
+            MNPR->mRenderOperations[renderOp]->setEnabled(opState);
         }
         // get render operation state
-        setResult(MNPR->mOperations[renderOp]->enabled());
+        setResult(MNPR->mRenderOperations[renderOp]->enabled());
     }
     // check if operation shaders need to be refreshed
     if (argData.isFlagSet(reloadOpShadersSN)) {

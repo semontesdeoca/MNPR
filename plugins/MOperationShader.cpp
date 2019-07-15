@@ -47,10 +47,16 @@ void MOperationShader::setShaderInstance() {
         // if no extension, "10.fx" for HLSL or ".cgfx" for GLSL will be directly assigned by Maya
         mShaderInstance = shaderMgr->getEffectsFileShader(shaderName(), mTechnique, 0, 0, true);
         if (mShaderInstance) {
-            for (std::map<std::string, std::shared_ptr<MOperationShader::QuadTexture>>::iterator iter = textureParameters.begin(); iter != textureParameters.end(); ++iter) {
-                iter->second->setShaderInstance(mShaderInstance);  // shader instance where QuadTexture is assigned
-                iter->second->setParams();
-            }
+			// set textures
+			for (std::map<std::string, std::shared_ptr<MOperationShader::QuadTexture>>::iterator iter = textureParameters.begin(); iter != textureParameters.end(); ++iter) {
+				iter->second->setShaderInstance(mShaderInstance);  // shader instance where QuadTexture is assigned
+				iter->second->setParams();
+			}
+			// set sampler states
+			for (std::map<std::string, MHWRender::MSamplerStateDesc>::iterator iter = samplerStateDescriptions.begin(); iter != samplerStateDescriptions.end(); ++iter) {
+				mSamplerState = MHWRender::MStateManager::acquireSamplerState(iter->second);
+				mShaderInstance->setParameter(iter->first.c_str(), *mSamplerState);
+			}
         }
     }
 }
@@ -76,6 +82,10 @@ void MOperationShader::addParameter(const MString& paramName, std::vector<float>
     uniformParameters[paramName.asChar()] = &value;
 }
 
+// adds a float array parameter
+void MOperationShader::addArrayParameter(const MString& paramName, std::vector<float>& values) {
+	uniformArrayParameters[paramName.asChar()] = &values;
+}
 
 // adds a matrix parameter
 void MOperationShader::addMatrixParameter(const MString& paramName, MMatrix& value) {
@@ -93,6 +103,7 @@ void MOperationShader::addTargetParameter(const MString& paramName, MHWRender::M
 void MOperationShader::addTextureParameter(const MString& paramName, MString& textureFileName) {
     std::shared_ptr<QuadTexture> newTexture(new QuadTexture(paramName, textureFileName, mShaderInstance));
     textureParameters[paramName.asChar()] = newTexture;
+	newTexture->setParams();
 }
 
 
@@ -101,10 +112,15 @@ void MOperationShader::addSamplerState(const MString& paramName, MHWRender::MSam
     mSamplerDesc.addressU = mSamplerDesc.addressV = mSamplerDesc.addressW = addressingMode;
     mSamplerDesc.filter = filteringMode;
     mSamplerState = MHWRender::MStateManager::acquireSamplerState(mSamplerDesc);
-    if (mShaderInstance){
+	samplerStateDescriptions[paramName.asChar()] = mSamplerDesc;
+	if (mShaderInstance){
         mShaderInstance->setParameter(paramName, *mSamplerState);
-    }
+    } else {
+		cout << "ERROR: Shader Instance not found while setting Sampler State " << paramName << " in " << mShaderName << endl;
+	}
 }
+
+
 
 
 
@@ -162,6 +178,7 @@ MOperationShader::QuadTexture::QuadTexture(const MString& paramName, MString& te
     mTexScale = 1.0;
     mTexUVOffset[0] = 0.0;
     mTexUVOffset[1] = 0.0;
+	mTex = nullptr;
     loadTexture(textureFileName);
 }
 
@@ -176,7 +193,12 @@ MOperationShader::QuadTexture::~QuadTexture() {
 
 // loads the MTexture and gets its dimensions
 void MOperationShader::QuadTexture::loadTexture(MString& newTexture) {
-    mTexPath = mTexDir + newTexture;
+	// release texture
+	if (mTex != nullptr) {
+		texManager->releaseTexture(mTex);
+	}
+	// get new texture
+	mTexPath = mTexDir + newTexture;
     mTex = texManager->acquireTexture(mTexPath, mTexPath);
     if (mTex) {
         mTex->textureDescription(mTexDesc);

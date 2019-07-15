@@ -38,6 +38,13 @@ file( GLOB_RECURSE SHADERS_GLSL RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} ../shaders/
 # TODO: CMAKE only supports .hlsl suffixes. We have to override the tool. However, this way the shader type and model will be ignored.
 #set_source_files_properties( ${SHADERS_HLSL} PROPERTIES VS_TOOL_OVERRIDE FXCompile VS_SHADER_TYPE Effect VS_SHADER_MODEL 5.0 )
 
+# Set platform-specific sources
+if(WIN32)
+	file( GLOB PLATFORM_SRCS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} platform/win32/*.cpp)
+else()
+	# TODO I guess
+endif()
+
 set( SRCS ${SRCS} ${HEADERS} ${SCRIPTS} ${SHADERS_HLSL} ${SHADERS_GLSL} )
 
 # Use utility function to group source files

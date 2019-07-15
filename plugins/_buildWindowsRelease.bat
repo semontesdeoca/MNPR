@@ -1,4 +1,5 @@
 @echo %off
+if exist %~dp0%build rmdir /s /q build
 if not exist %~dp0%build md build
 cd %~dp0%build
 set /p M_YEAR=Maya version (year): 

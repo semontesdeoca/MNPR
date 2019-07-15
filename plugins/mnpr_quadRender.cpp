@@ -46,6 +46,11 @@ const MHWRender::MShaderInstance* QuadRender::shader() {
         for (std::map<std::string, MMatrix*>::iterator iter = mOpShader->matrixParameters.begin(); iter != mOpShader->matrixParameters.end(); ++iter) {
             status = mShaderInstance->setParameter(iter->first.c_str(), *iter->second);
         }
+
+		// uniforms should ideally only be refreshed if they are changed in the config node (only affects performance if they would be a lot of them)
+		for (auto iter = mOpShader->uniformArrayParameters.begin(); iter != mOpShader->uniformArrayParameters.end(); ++iter) {
+			status = mShaderInstance->setArrayParameter(iter->first.c_str(), iter->second->data(), (unsigned int)iter->second->size());
+		}
     }
     return mShaderInstance;
 }

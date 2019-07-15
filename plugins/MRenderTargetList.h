@@ -140,7 +140,7 @@ struct MRenderTargetList {
             textureDesc.fHeight = targetDesc.height();
             textureDesc.fDepth = 1;
             textureDesc.fBytesPerRow = rowPitch;
-            textureDesc.fBytesPerSlice = slicePitch;
+            textureDesc.fBytesPerSlice = (unsigned int)slicePitch;
             textureDesc.fMipmaps = 1;
             textureDesc.fArraySlices = targetDesc.arraySliceCount();
             textureDesc.fFormat = targetDesc.rasterFormat();

@@ -37,7 +37,7 @@ namespace ch {
     }
 
 
-    void addOperations(MHWRender::MRenderOperationList &mOperations, MRenderTargetList &mRenderTargets,
+    void addOperations(MHWRender::MRenderOperationList &mRenderOperations, MRenderTargetList &mRenderTargets,
         EngineSettings &mEngSettings, FXParameters &mFxParams) {
         MString opName = "";
 
@@ -49,7 +49,7 @@ namespace ch {
             MHWRender::MClearOperation::kClearNone,
             mRenderTargets,
             *opShader);
-        mOperations.append(quadOp);
+        mRenderOperations.append(quadOp);
         mRenderTargets.setOperationOutputs(opName, { "offsetTarget" });
         
 
@@ -63,7 +63,7 @@ namespace ch {
             MHWRender::MClearOperation::kClearNone,
             mRenderTargets,
             *opShader);
-        mOperations.append(quadOp);
+        mRenderOperations.append(quadOp);
         mRenderTargets.setOperationOutputs(opName, { "offsetTarget" });
 
         opName = "[quad] offset V";
@@ -76,7 +76,7 @@ namespace ch {
             MHWRender::MClearOperation::kClearNone,
             mRenderTargets,
             *opShader);
-        mOperations.append(quadOp);
+        mRenderOperations.append(quadOp);
         mRenderTargets.setOperationOutputs(opName, { "offsetTarget" });
 
         opName = "[quad] blur H";
@@ -89,7 +89,7 @@ namespace ch {
             MHWRender::MClearOperation::kClearNone,
             mRenderTargets,
             *opShader);
-        mOperations.append(quadOp);
+        mRenderOperations.append(quadOp);
         mRenderTargets.setOperationOutputs(opName, { "blendTarget" });
 
 
@@ -103,7 +103,7 @@ namespace ch {
             MHWRender::MClearOperation::kClearNone,
             mRenderTargets,
             *opShader);
-        mOperations.append(quadOp);
+        mRenderOperations.append(quadOp);
         mRenderTargets.setOperationOutputs(opName, { "blendTarget" });
 
         opName = "[quad] mixing";
@@ -117,7 +117,7 @@ namespace ch {
             MHWRender::MClearOperation::kClearNone,
             mRenderTargets,
             *opShader);
-        mOperations.append(quadOp);
+        mRenderOperations.append(quadOp);
         mRenderTargets.setOperationOutputs(opName, { "stylizationTarget" });
 
         opName = "[quad] edge blur H";
@@ -131,7 +131,7 @@ namespace ch {
             MHWRender::MClearOperation::kClearNone,
             mRenderTargets,
             *opShader);
-        mOperations.append(quadOp);
+        mRenderOperations.append(quadOp);
         mRenderTargets.setOperationOutputs(opName, { "edgeBlurTarget", "edgeBlurControl" });
 
         opName = "[quad] edge blur V";
@@ -145,7 +145,7 @@ namespace ch {
             MHWRender::MClearOperation::kClearNone,
             mRenderTargets,
             *opShader);
-        mOperations.append(quadOp);
+        mRenderOperations.append(quadOp);
         mRenderTargets.setOperationOutputs(opName, { "edgeBlurTarget", "edgeBlurControl" });
 
         opName = "[quad] edge filter";
@@ -157,7 +157,7 @@ namespace ch {
             MHWRender::MClearOperation::kClearNone,
             mRenderTargets,
             *opShader);
-        mOperations.append(quadOp);
+        mRenderOperations.append(quadOp);
         mRenderTargets.setOperationOutputs(opName, { "stylizationTarget" });
 
         // charcoal
@@ -174,7 +174,7 @@ namespace ch {
             MHWRender::MClearOperation::kClearNone,
             mRenderTargets,
             *opShader);
-        mOperations.append(quadOp);
+        mRenderOperations.append(quadOp);
         mRenderTargets.setOperationOutputs(opName, { "stylizationTarget" });
 
 
@@ -189,7 +189,7 @@ namespace ch {
             MHWRender::MClearOperation::kClearNone,
             mRenderTargets,
             *opShader);
-        mOperations.append(quadOp);
+        mRenderOperations.append(quadOp);
         mRenderTargets.setOperationOutputs(opName, { "stylizationTarget" });
 
 
@@ -201,7 +201,7 @@ namespace ch {
             MHWRender::MClearOperation::kClearNone,
             mRenderTargets,
             *opShader);
-        mOperations.append(quadOp);
+        mRenderOperations.append(quadOp);
         mRenderTargets.setOperationOutputs(opName, { "stylizationTarget" });
     }
 

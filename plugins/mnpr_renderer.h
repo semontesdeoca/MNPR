@@ -134,6 +134,9 @@ struct FXParameters {
     std::vector<float> opBrushMicro = std::vector<float>{ 2.0f };
     // charcoal parameters
     std::vector<float> dryMediaThreshold = std::vector<float>{ 0.5f };
+	// sandbox parameters
+	std::vector<float> awesomeParameter = std::vector<float>{ 1.0f };
+
 
     /// print fx parameters (DEBUG)
     void dPrint() {
@@ -193,9 +196,9 @@ public:
     MHWRender::DrawAPI supportedDrawAPIs() const;      ///< sets the supported graphics API
 
     // additional methods that could be overriden
-    //virtual bool startOperationIterator();                   ///< starts operations
-    //virtual MHWRender::MRenderOperation* renderOperation();  ///< gets current render operation
-    //virtual bool nextRenderOperation();                      ///< increases the render operation
+    virtual bool startOperationIterator();                   ///< starts operations
+    virtual MHWRender::MRenderOperation* renderOperation();  ///< gets current render operation
+    virtual bool nextRenderOperation();                      ///< increases the render operation
 
     // GET
     FXParameters* effectParams();												///< get fx parameters
@@ -207,7 +210,7 @@ public:
     // CUSTOM
     virtual void initializeMNPR();                                    ///< MNPR initializer
     virtual MStatus addCustomTargets();                               ///< adds custom render targets to MNPR
-    virtual MStatus addCustomOperations();                            ///< adds custom render operations to MNPR
+    virtual MStatus addCustomRenderOperations();                            ///< adds custom render operations to MNPR
     virtual void resetShaderInstances(int operationIndex = -1);       ///< reset shader instances (reload)
     virtual void changeColorDepth();								  ///< change color depth of render targets
     virtual void changeAntialiasingEffect();						  ///< change antialiasing quality of targets
@@ -244,7 +247,9 @@ protected:
     MObject mPlugin;
     MString mRendererName;			   ///< renderer name (in renderer menu in the viewport panel)
     MString mnprInfo;				   ///< MNPR information
-    MRenderTargetList mRenderTargets;  ///< render target list
+	int mCurRenderOperation;		   ///< current render operations
+	MHWRender::MRenderOperationList mRenderOperations;	///< render operations
+	MRenderTargetList mRenderTargets;  ///< render target list
     FXParameters mFxParams;                ///< fx attributes
     EngineSettings mEngSettings;		   ///< engine settings
     bool mTargetUpdate = true;		   ///< force target update

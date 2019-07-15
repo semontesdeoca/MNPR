@@ -61,9 +61,12 @@ public:
 
     /// parameter lists
     std::map<std::string, std::vector<float>*> uniformParameters;
-    std::map<std::string, MMatrix*> matrixParameters;
+	std::map<std::string, std::vector<float>*> uniformArrayParameters;
+	std::map<std::string, MMatrix*> matrixParameters;
     std::map<std::string, MHWRender::MRenderTarget*> targetParameters;
     std::map<std::string, std::shared_ptr<QuadTexture>> textureParameters;
+	std::map<std::string, MHWRender::MSamplerStateDesc> samplerStateDescriptions;
+
 
     /// constructor and destructor
     MOperationShader(const MString& shaderName, const MString& technique);
@@ -75,6 +78,9 @@ public:
 
     /// adds a float parameter
     void addParameter(const MString& paramName, std::vector<float>& value);
+
+	/// adds an array parameter
+	void addArrayParameter(const MString& paramName, std::vector<float>& values);
 
     /// adds a matrix parameter
     void addMatrixParameter(const MString& paramName, MMatrix& value);

@@ -24,6 +24,7 @@
 #include "style_watercolor.hpp"
 #include "style_oilpaint.hpp"
 #include "style_charcoal.hpp"
+#include "style_sandbox.hpp"
 #include <chrono>
 
 
@@ -31,7 +32,7 @@ const MString PLUGIN_NAME = "MNPR";                  // the same name as your pl
 const MString RENDERER_NAME = "MNPR";               // name in the renderer to appear in the Maya viewport
 const MString AUTHOR_NAME = "Santiago Montesdeoca";  // name of the author of the override
 const MString PURPOSE = "Research";                  // purpose of plugin ("Research" or "Client")
-const std::vector<MString> STYLES = { "Framework", "Watercolor", "Charcoal" };  // supported styles
+const std::vector<MString> STYLES = { "Framework", "Watercolor", "Charcoal", "Sandbox" };  // supported styles
 
 MHWRender::MRasterFormat MNPROverride::colorDepths[3] = { MHWRender::kR8G8B8A8_SNORM, MHWRender::kR16G16B16A16_SNORM, MHWRender::kR32G32B32A32_FLOAT };
 
@@ -47,21 +48,27 @@ MStatus MNPROverride::addCustomTargets() {
     else if (mEngSettings.style == "Charcoal") {
         ch::addTargets(mRenderTargets);
     }
+	else if (mEngSettings.style == "Sandbox") {
+		sb::addTargets(mRenderTargets);
+	}
     return MS::kSuccess;
 }
 
 
-MStatus MNPROverride::addCustomOperations() {
+MStatus MNPROverride::addCustomRenderOperations() {
     // STYLIZATION OPERATIONS
     if (mEngSettings.style == "Watercolor") {
-        wc::addOperations(mOperations, mRenderTargets, mEngSettings, mFxParams);
+        wc::addOperations(mRenderOperations, mRenderTargets, mEngSettings, mFxParams);
     }
     else if (mEngSettings.style == "Oil") {
-        op::addOperations(mOperations, mRenderTargets, mEngSettings, mFxParams);
+        op::addOperations(mRenderOperations, mRenderTargets, mEngSettings, mFxParams);
     }
     else if (mEngSettings.style == "Charcoal") {
-        ch::addOperations(mOperations, mRenderTargets, mEngSettings, mFxParams);
+        ch::addOperations(mRenderOperations, mRenderTargets, mEngSettings, mFxParams);
     }
+	else if (mEngSettings.style == "Sandbox") {
+		sb::addOperations(mRenderOperations, mRenderTargets, mEngSettings, mFxParams);
+	}
     return MS::kSuccess;
 }
 
@@ -136,7 +143,7 @@ void MNPROverride::initializeMNPR() {
                               MHWRender::MSceneRender::kRenderShadedItems,  // filter
                               MHWRender::MClearOperation::kClearAll,        // clear mask
                               mRenderTargets);                              // render targets
-    mOperations.append(sceneOp);
+    mRenderOperations.append(sceneOp);
     std::vector<MString> mnprTargetNames = { "colorTarget", "depthTarget", "diffuseTarget", "specularTarget",
                                              "pigmentCtrlTarget", "substrateCtrlTarget", "edgeCtrlTarget", "abstractCtrlTarget", "velocity" };
     mRenderTargets.setOperationOutputs(opName, mnprTargetNames);
@@ -166,7 +173,7 @@ void MNPROverride::initializeMNPR() {
                             MHWRender::MClearOperation::kClearNone,
                             mRenderTargets,
                             *opShader);
-    mOperations.append(quadOp);
+    mRenderOperations.append(quadOp);
     std::vector<MString> pTargets = { "stylizationTarget", "substrateTarget", "linearDepth", "velocity" };
     mRenderTargets.setOperationOutputs(opName, pTargets);
 
@@ -179,12 +186,12 @@ void MNPROverride::initializeMNPR() {
         MHWRender::MClearOperation::kClearNone,
         mRenderTargets,
         *opShader);
-    mOperations.append(quadOp);
+    mRenderOperations.append(quadOp);
     mRenderTargets.setOperationOutputs(opName, { "edgeTarget" });
 
 
     // STYLIZATION OPERATIONS
-    addCustomOperations();
+    addCustomRenderOperations();
 
 
     // antialiasing
@@ -197,7 +204,7 @@ void MNPROverride::initializeMNPR() {
         MHWRender::MClearOperation::kClearNone,
         mRenderTargets,
         *opShader);
-    mOperations.append(quadOp);
+    mRenderOperations.append(quadOp);
     mRenderTargets.setOperationOutputs(opName, { "outputTarget" });
     
     // deferred substrate lighting
@@ -217,7 +224,7 @@ void MNPROverride::initializeMNPR() {
         MHWRender::MClearOperation::kClearNone,
         mRenderTargets,
         *opShader);
-    mOperations.append(quadOp);
+    mRenderOperations.append(quadOp);
     mRenderTargets.setOperationOutputs(opName, { "outputTarget" });
 
     // present quad operation (with debugging information)
@@ -231,7 +238,7 @@ void MNPROverride::initializeMNPR() {
         MHWRender::MClearOperation::kClearNone,
         mRenderTargets,
         *opShader);
-    mOperations.append(quadOp);
+    mRenderOperations.append(quadOp);
     mRenderTargets.setOperationOutputs(opName, { "presentTarget" });
 
     // normal Maya UI render
@@ -240,28 +247,28 @@ void MNPROverride::initializeMNPR() {
         MHWRender::MSceneRender::kRenderUIItems,  // filter
         (unsigned int)(MHWRender::MClearOperation::kClearNone),
         mRenderTargets);  // don't clear anything
-    mOperations.append(sceneOp);
+    mRenderOperations.append(sceneOp);
     mRenderTargets.setOperationOutputs(opName, { "presentTarget", "depthTarget" });
 
     // HUD render
     MString mnprAPI = MGlobal::executeCommandStringResult("optionVar -q vp2RenderingEngine");
     mnprInfo = RENDERER_NAME + " " + mEngSettings.style + "     (" + mnprAPI + ")";
     auto hudOp = new HUDOperation(&mRenderTargets, mnprInfo);
-    mOperations.append(hudOp);
+    mRenderOperations.append(hudOp);
 
     // present
     opName = "[present]";
     auto presentOp = new PresentTarget(opName, &mRenderTargets);
-    mOperations.append(presentOp);
+    mRenderOperations.append(presentOp);
 
-    // dPrintOperations(mOperations);  // print all operations to debug
+    // dPrintOperations(mRenderOperations);  // print all operations to debug
 }
 
 // renderer destructor
 MNPROverride::~MNPROverride() {
     cout << "~MNPROverride()" << endl;
 
-    mOperations.clear();     // clear all operations
+    mRenderOperations.clear();     // clear all operations
     mRenderTargets.clear();  // clear all targets
 
     cleanup();  // end of frame cleanup
@@ -277,7 +284,6 @@ MStatus MNPROverride::setup(const MString & destPanel) {
 // end of frame cleanup
 MStatus MNPROverride::cleanup() {
     MHWRender::MRenderer::setLightsAndShadowsDirty();
-    //texManager->
 
     return MStatus::kSuccess;
 }
@@ -290,6 +296,27 @@ MString MNPROverride::uiName() const {
 // sets the supported graphics API
 MHWRender::DrawAPI MNPROverride::supportedDrawAPIs() const {
     return (MHWRender::kDirectX11 | MHWRender::kOpenGLCoreProfile);
+}
+
+// additional methods that could be overriden
+bool MNPROverride::startOperationIterator() {
+	if (mRenderOperations.length() > 0) {
+		mCurRenderOperation = 0;
+		return true;
+	}
+	return false;
+}
+
+MHWRender::MRenderOperation* MNPROverride::renderOperation() {
+	return mRenderOperations[mCurRenderOperation];
+}
+
+bool MNPROverride::nextRenderOperation() {
+	mCurRenderOperation++;
+	if (mCurRenderOperation < mRenderOperations.length()) {
+		return true;
+	}
+	return false;
 }
 
 
@@ -318,18 +345,19 @@ MStringArray MNPROverride::renderTargets() {
 // get operation names
 MStringArray MNPROverride::renderOperations() {
     MStringArray operationNames;
-    for (int i = 0; i < mOperations.length()-1; i++) {
-        operationNames.append(mOperations[i]->name());
+    for (int i = 0; i < mRenderOperations.length()-1; i++) {
+        operationNames.append(mRenderOperations[i]->name());
     }
     return operationNames;
 }
 // get individual operation
 MHWRender::MRenderOperation* MNPROverride::renderOperation(MString t_operationName) {
-    int idx = mOperations.indexOf(t_operationName);
+    int idx = mRenderOperations.indexOf(t_operationName);
     if (idx < 0) {
         cout << "ERROR: Operation was not found" << endl;
+		idx = 0;  // dummy operation to avoid a Maya crash
     }
-    return mOperations[idx];
+    return mRenderOperations[idx];
 }
 
 
@@ -343,7 +371,7 @@ MHWRender::MRenderOperation* MNPROverride::renderOperation(MString t_operationNa
 void MNPROverride::resetStylization() {
     cout << "RESETTING STYLIZATION" << endl;
     cleanup();
-    mOperations.clear();     // clear all operations
+    mRenderOperations.clear();     // clear all operations
     mRenderTargets.clear();  // clear all targets
     initializeMNPR();  // initialize MNPR
 }
@@ -355,16 +383,16 @@ void MNPROverride::resetShaderInstances(int operationIndex) {
     QuadRender* quadOp;
     //SceneRender* sceneOp;
 
-    for (int i = 0; i < mOperations.length(); i++) {
-        if ((operationIndex == -1 || operationIndex == i) && mOperations[i]->operationType() == MHWRender::MRenderOperation::kQuadRender) {
-            cout << "-> Resetting shader instance of " << mOperations[i]->name() << " (QuadRender)" << endl;
-            quadOp = (QuadRender *)mOperations[i];
+    for (int i = 0; i < mRenderOperations.length(); i++) {
+        if ((operationIndex == -1 || operationIndex == i) && mRenderOperations[i]->operationType() == MHWRender::MRenderOperation::kQuadRender) {
+            cout << "-> Resetting shader instance of " << mRenderOperations[i]->name() << " (QuadRender)" << endl;
+            quadOp = (QuadRender *)mRenderOperations[i];
             opShader = quadOp->getOperationShader();
             opShader->resetShaderInstance();
             continue;
         }
-        if ((operationIndex == -1 || operationIndex == i) && mOperations[i]->operationType() == MHWRender::MRenderOperation::kSceneRender) {
-            cout << "-> Resetting shader instance of "  << mOperations[i]->name() << " (SceneRender)" << endl;
+        if ((operationIndex == -1 || operationIndex == i) && mRenderOperations[i]->operationType() == MHWRender::MRenderOperation::kSceneRender) {
+            cout << "-> Resetting shader instance of "  << mRenderOperations[i]->name() << " (SceneRender)" << endl;
             // scene renders can also present shader overrides, implement a reset shader instance when necessary
             continue;
         }
@@ -544,11 +572,14 @@ MStatus MNPROverride::mUpdateRenderer() {
         }
     }
 
+
+	auto renderer = MHWRender::MRenderer::theRenderer();
+	renderer->getRenderTargetManager()->releaseRenderTarget(colorTarget);
+
     // update targets with new descriptions
     if (mTargetUpdate) {
-        for (int i = 0; i < mRenderTargets.length(); i++) {
-            mRenderTargets.target(i)->updateDescription(*(mRenderTargets[i]));
-        }
+		mRenderTargets.updateTargetDescriptions();
+		cout << "Current GPU memory used (MB): " << (float)renderer->GPUUsedMemorySize(MHWRender::MRenderer::kMemAll) / 1000000.0 << endl;
         mTargetUpdate = false;
     }
 
@@ -566,7 +597,7 @@ MStatus MNPROverride::mUpdateRenderer() {
 void MNPROverride::dPrintOperations(MHWRender::MRenderOperationList& opsList) {
     cout << "DEBUG: PRINTING OPERATIONS" << endl;
     unsigned int mayaOperations = opsList.length();
-    cout << "Total of mOperations: " << mayaOperations << endl;
+    cout << "Total of mRenderOperations: " << mayaOperations << endl;
     for (unsigned int i = 0; i < mayaOperations; i++) {
         cout << "-> " << opsList[i]->name() << endl;
         cout << "OperationType: " << opsList[i]->operationType() << endl;

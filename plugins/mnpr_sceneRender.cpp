@@ -87,7 +87,7 @@ MObject SceneRender::getSourceNodeConnectedTo(const MObject& node, const MString
 {
     MStatus status;
     MFnDependencyNode dgFn(node);
-    MPlug plug = dgFn.findPlug(attribute, &status);
+    MPlug plug = dgFn.findPlug(attribute, true, &status);
     if (status == MS::kSuccess && plug.isConnected())
     {
         // Get the connection - there can be at most one input to a plug
@@ -182,7 +182,7 @@ void SceneRender::postRender() {
         // attach a function set for a dag node to the
         // object. Rather than access data directly, 
         // we access it via the function set. 
-        MObject obj = it.item();
+        MObject obj = it.currentItem();
         MFnMesh fnMesh(obj);
 
         // Get the current path
@@ -230,13 +230,13 @@ void SceneRender::postRender() {
         MFnMatrixData worldMatrixData(worldMatrixObj);
         MMatrix worldMatrix = worldMatrixData.matrix();
 
-        MFnDagNode objFn(it.item());
+        MFnDagNode objFn(it.currentItem());
 
         bool worldMatrixChanged = false;
 
         // add world matrix as attribute
         if (objFn.hasAttribute("WorldPreviousMatrix")) {
-            MPlug pAttr = objFn.findPlug("WorldPreviousMatrix");
+            MPlug pAttr = objFn.findPlug("WorldPreviousMatrix", true);
             MObject pObj;
             pAttr.getValue(pObj);
             MFnMatrixData fnMat(pObj);

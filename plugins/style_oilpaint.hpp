@@ -40,7 +40,7 @@ namespace op {
     }
 
 
-    void addOperations(MHWRender::MRenderOperationList &mOperations, MRenderTargetList &mRenderTargets,
+    void addOperations(MHWRender::MRenderOperationList &mRenderOperations, MRenderTargetList &mRenderTargets,
         EngineSettings &mEngSettings, FXParameters &mFxParams) {
         MString opName = "";
 
@@ -58,7 +58,7 @@ namespace op {
             MHWRender::MClearOperation::kClearNone,
             mRenderTargets,
             *opShader);
-        mOperations.append(quadOp);
+        mRenderOperations.append(quadOp);
         mRenderTargets.setOperationOutputs(opName, { "stylizationTarget", "filterTarget" });
 
         opName = "[quad] pigment density";
@@ -71,7 +71,7 @@ namespace op {
             MHWRender::MClearOperation::kClearNone,
             mRenderTargets,
             *opShader);
-        mOperations.append(quadOp);
+        mRenderOperations.append(quadOp);
         mRenderTargets.setOperationOutputs(opName, { "stylizationTarget", "filterTarget" });
 
         opName = "[quad] color smoothing pass #0";
@@ -84,7 +84,7 @@ namespace op {
             MHWRender::MClearOperation::kClearNone,
             mRenderTargets,
             *opShader);
-        mOperations.append(quadOp);
+        mRenderOperations.append(quadOp);
         mRenderTargets.setOperationOutputs(opName, { "stylizationTarget" });
 
         opName = "[quad] color smoothing pass #1";
@@ -97,7 +97,7 @@ namespace op {
             MHWRender::MClearOperation::kClearNone,
             mRenderTargets,
             *opShader);
-        mOperations.append(quadOp);
+        mRenderOperations.append(quadOp);
         mRenderTargets.setOperationOutputs(opName, { "stylizationTarget" });
 
         opName = "[quad] rgb2lab color transform";
@@ -107,7 +107,7 @@ namespace op {
             MHWRender::MClearOperation::kClearNone,
             mRenderTargets,
             *opShader);
-        mOperations.append(quadOp);
+        mRenderOperations.append(quadOp);
         mRenderTargets.setOperationOutputs(opName, { "labTarget" });
 
         opName = "[quad] structure tensor";
@@ -118,7 +118,7 @@ namespace op {
             MHWRender::MClearOperation::kClearNone,
             mRenderTargets,
             *opShader);
-        mOperations.append(quadOp);
+        mRenderOperations.append(quadOp);
         mRenderTargets.setOperationOutputs(opName, { "structureTensorTarget" });
 
         opName = "[quad] smoothing structure tensor";
@@ -131,7 +131,7 @@ namespace op {
             MHWRender::MClearOperation::kClearNone,
             mRenderTargets,
             *opShader);
-        mOperations.append(quadOp);
+        mRenderOperations.append(quadOp);
         mRenderTargets.setOperationOutputs(opName, { "tangentFlowMapTarget" });
 
         opName = "[quad] tangent flow map synthesis";
@@ -141,7 +141,7 @@ namespace op {
             MHWRender::MClearOperation::kClearNone,
             mRenderTargets,
             *opShader);
-        mOperations.append(quadOp);
+        mRenderOperations.append(quadOp);
         mRenderTargets.setOperationOutputs(opName, { "tangentFlowMapTarget" });
 
         opName = "[quad] edge flow-aligned smoothing";
@@ -155,7 +155,7 @@ namespace op {
             MHWRender::MClearOperation::kClearNone,
             mRenderTargets,
             *opShader);
-        mOperations.append(quadOp);
+        mRenderOperations.append(quadOp);
         mRenderTargets.setOperationOutputs(opName, { "edgeTarget" });
 
         opName = "[quad] structure tensor adapted smoothing #0";
@@ -172,7 +172,7 @@ namespace op {
             MHWRender::MClearOperation::kClearNone,
             mRenderTargets,
             *opShader);
-        mOperations.append(quadOp);
+        mRenderOperations.append(quadOp);
         mRenderTargets.setOperationOutputs(opName, { "structureTensorTarget" });
 
         opName = "[quad] structure tensor adapted smoothing #1";
@@ -189,7 +189,7 @@ namespace op {
             MHWRender::MClearOperation::kClearNone,
             mRenderTargets,
             *opShader);
-        mOperations.append(quadOp);
+        mRenderOperations.append(quadOp);
         mRenderTargets.setOperationOutputs(opName, { "structureTensorTarget" });
 
         opName = "[quad] tangent flow map adaptive synthesis";
@@ -199,7 +199,7 @@ namespace op {
             MHWRender::MClearOperation::kClearNone,
             mRenderTargets,
             *opShader);
-        mOperations.append(quadOp);
+        mRenderOperations.append(quadOp);
         mRenderTargets.setOperationOutputs(opName, { "tangentFlowMapTarget" });
 
         opName = "[quad] noise synthesis";
@@ -214,7 +214,7 @@ namespace op {
             MHWRender::MClearOperation::kClearNone,
             mRenderTargets,
             *opShader);
-        mOperations.append(quadOp);
+        mRenderOperations.append(quadOp);
         opShader->addParameter("gScale", mFxParams.opBrushScale);
         opShader->addParameter("gMicro", mFxParams.opBrushMicro);
         opShader->addParameter("gTime", mEngSettings.time);
@@ -231,7 +231,7 @@ namespace op {
             MHWRender::MClearOperation::kClearNone,
             mRenderTargets,
             *opShader);
-        mOperations.append(quadOp);
+        mRenderOperations.append(quadOp);
         mRenderTargets.setOperationOutputs(opName, { "noiseTarget" });
 
         opName = "[quad] noise advection (coherent noise)";
@@ -246,7 +246,7 @@ namespace op {
             MHWRender::MClearOperation::kClearNone,
             mRenderTargets,
             *opShader);
-        mOperations.append(quadOp);
+        mRenderOperations.append(quadOp);
         opShader->addParameter("gScale", mFxParams.opBrushScale);
         opShader->addParameter("gMicro", mFxParams.opBrushMicro);
         opShader->addParameter("gTime", mEngSettings.time);
@@ -263,7 +263,7 @@ namespace op {
             MHWRender::MClearOperation::kClearNone,
             mRenderTargets,
             *opShader);
-        mOperations.append(quadOp);
+        mRenderOperations.append(quadOp);
         mRenderTargets.setOperationOutputs(opName, { "noiseTarget" });
         */
 
@@ -280,7 +280,7 @@ namespace op {
             MHWRender::MClearOperation::kClearNone,
             mRenderTargets,
             *opShader);
-        mOperations.append(quadOp);
+        mRenderOperations.append(quadOp);
         mRenderTargets.setOperationOutputs(opName, { "stylizationTarget", "filterTarget" });
 
         opName = "[quad] noise and color (packed) flow-aligned smoothing";
@@ -296,7 +296,7 @@ namespace op {
             MHWRender::MClearOperation::kClearNone,
             mRenderTargets,
             *opShader);
-        mOperations.append(quadOp);
+        mRenderOperations.append(quadOp);
         mRenderTargets.setOperationOutputs(opName, { "stylizationTarget", "noiseSmoothedTarget" });
 
         opName = "[quad] noise texture shading";
@@ -313,7 +313,7 @@ namespace op {
             MHWRender::MClearOperation::kClearNone,
             mRenderTargets,
             *opShader);
-        mOperations.append(quadOp);
+        mRenderOperations.append(quadOp);
         mRenderTargets.setOperationOutputs(opName, { "substrateTarget" });
 
         opName = "[quad] oil compose";
@@ -324,7 +324,7 @@ namespace op {
             MHWRender::MClearOperation::kClearNone,
             mRenderTargets,
             *opShader);
-        mOperations.append(quadOp);
+        mRenderOperations.append(quadOp);
         mRenderTargets.setOperationOutputs(opName, { "stylizationTarget" });
 
         opName = "[quad] substrate distortion";
@@ -338,7 +338,7 @@ namespace op {
             MHWRender::MClearOperation::kClearNone,
             mRenderTargets,
             *opShader);
-        mOperations.append(quadOp);
+        mRenderOperations.append(quadOp);
         mRenderTargets.setOperationOutputs(opName, { "stylizationTarget" });
     }
 };

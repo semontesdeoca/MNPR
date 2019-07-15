@@ -32,7 +32,7 @@ namespace wc {
     }
 
 
-    void addOperations(MHWRender::MRenderOperationList &mOperations, MRenderTargetList &mRenderTargets,
+    void addOperations(MHWRender::MRenderOperationList &mRenderOperations, MRenderTargetList &mRenderTargets,
         EngineSettings &mEngSettings, FXParameters &mFxParams) {
         MString opName = "";
 
@@ -45,7 +45,7 @@ namespace wc {
             MHWRender::MClearOperation::kClearNone,
             mRenderTargets,
             *opShader);
-        mOperations.append(quadOp);
+        mRenderOperations.append(quadOp);
         mRenderTargets.setOperationOutputs(opName, { "stylizationTarget" });
 
         opName = "[quad] separable H";
@@ -64,7 +64,7 @@ namespace wc {
             MHWRender::MClearOperation::kClearNone,
             mRenderTargets,
             *opShader);
-        mOperations.append(quadOp);
+        mRenderOperations.append(quadOp);
         mRenderTargets.setOperationOutputs(opName, { "bleedingTarget", "edgeTarget" });
 
 
@@ -84,7 +84,7 @@ namespace wc {
             MHWRender::MClearOperation::kClearNone,
             mRenderTargets,
             *opShader);
-        mOperations.append(quadOp);
+        mRenderOperations.append(quadOp);
         mRenderTargets.setOperationOutputs(opName, { "bleedingTarget", "edgeTarget" });
 
 
@@ -96,7 +96,7 @@ namespace wc {
             MHWRender::MClearOperation::kClearNone,
             mRenderTargets,
             *opShader);
-        mOperations.append(quadOp);
+        mRenderOperations.append(quadOp);
         mRenderTargets.setOperationOutputs(opName, { "stylizationTarget" });
 
 
@@ -111,7 +111,7 @@ namespace wc {
             MHWRender::MClearOperation::kClearNone,
             mRenderTargets,
             *opShader);
-        mOperations.append(quadOp);
+        mRenderOperations.append(quadOp);
         mRenderTargets.setOperationOutputs(opName, { "stylizationTarget" });
 
 
@@ -127,7 +127,7 @@ namespace wc {
             MHWRender::MClearOperation::kClearNone,
             mRenderTargets,
             *opShader);
-        mOperations.append(quadOp);
+        mRenderOperations.append(quadOp);
         mRenderTargets.setOperationOutputs(opName, { "stylizationTarget" });
 
 
@@ -143,7 +143,7 @@ namespace wc {
             MHWRender::MClearOperation::kClearNone,
             mRenderTargets,
             *opShader);
-        mOperations.append(quadOp);
+        mRenderOperations.append(quadOp);
         mRenderTargets.setOperationOutputs(opName, { "stylizationTarget" });
 
 
@@ -159,7 +159,7 @@ namespace wc {
             MHWRender::MClearOperation::kClearNone,
             mRenderTargets,
             *opShader);
-        mOperations.append(quadOp);
+        mRenderOperations.append(quadOp);
         mRenderTargets.setOperationOutputs(opName, { "stylizationTarget" });
     }
 

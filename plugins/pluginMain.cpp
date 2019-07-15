@@ -13,6 +13,7 @@
 #include "mnpr_nodes.h"
 #include "mnpr_renderer.h"
 #include <maya/MFnPlugin.h>
+#include <maya/MStreamUtils.h>
 
 
 static MNPROverride* MNPROverrideInstance = NULL;  // render override instance
@@ -21,16 +22,12 @@ static MNPROverride* MNPROverrideInstance = NULL;  // render override instance
 /// initialize and register all plugin elements
 MStatus initializePlugin(MObject obj) {
     MStatus status;
-    cout.rdbuf(cerr.rdbuf());  // hack to get error messages out in Maya 2016.5+ when compiling with VS 2015+
-    
-    /*
-    // timed "license"
-    time_t expiry;
-    time(&expiry);
-    if (expiry > 1528156800) {
-        MGlobal::displayError("License has expired (5th of JUNE), please renew your License -> artineering.io");
-        return MS::kFailure;
-    }*/
+	#if defined(NT_PLUGIN)
+		//cout.rdbuf(cerr.rdbuf());  // hack to get error messages out in Maya 2016.5+ when compiling with VS 2015+
+		std::cout.set_rdbuf(MStreamUtils::stdOutStream().rdbuf());
+		std::cerr.set_rdbuf(MStreamUtils::stdErrorStream().rdbuf());
+	#endif
+
 
     // create and register override
     MHWRender::MRenderer* theRenderer = MHWRender::MRenderer::theRenderer();
