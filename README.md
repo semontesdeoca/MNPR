@@ -1,15 +1,17 @@
+For a production-ready version of MNPR, please refer to [MNPRX](https://artineering.io/projects/MNPRX/)
+
 # MNPR
 MNPR is an expressive non-photorealistic rendering framework for real-time, filter-based stylization pipelines within Maya (2016.5+). It extends the Maya API and simplifies the creation of Viewport 2.0 render overrides, while still preserving all the low-level options that the Maya API provides.
 
 The framework was originally created by [Santiago E. Montesdeoca](http://artineering.io/) during his PhD studies at the [Nanyang Technological University](http://www.ntu.edu.sg) (Singapore), as a product of his conducted research in:
 
-* _Real-Time Watercolor Rendering of 3D Objects and Animation with Enhanced Control_.
+* [_Real-Time Watercolor Rendering of 3D Objects and Animation with Enhanced Control_](https://artineering.io/research/Real-time-watercolor-rendering-of-3D-objects-and-animation-with-enhanced-control/).
 
 His research was supervised in Singapore by Hock Soon Seah, Hans-Martin Rall and Davide Benvenuti, joined later with supervision in France from Joëlle Thollot, Pierre Bénard and Romain Vergne.
 
 MNPR is now open-sourced under the MIT-license through the publication:
 
-* _MNPR: A Framework for Real-Time Expressive Non-Photorealistic Rendering of 3D Computer Graphics_ (in press)
+* [_MNPR: A Framework for Real-Time Expressive Non-Photorealistic Rendering of 3D Computer Graphics_](https://artineering.io/research/MNPR/)
 
 Valuable contributions coding MNPR were given by:
 * Pierre Bénard
@@ -18,9 +20,10 @@ Valuable contributions coding MNPR were given by:
 
 
 ## Downloading MNPR
-The latest stable release of MNPR can be found here:
+The latest stable release of the MNPR prototype can be found here:
 * [MNPR 1.0](https://github.com/semontesdeoca/MNPR/releases/latest)
 
+For production needs, please refer to [MNPRX](https://artineering.io/projects/MNPRX/).
 
 ## Building from source
 The easiest way to build MNPR is using [CMake](https://cmake.org/), just make sure _cmake_ is added to the system PATH.
@@ -143,7 +146,7 @@ Creating your own stylization pipeline is quite straightforward, but it's best t
 3. Parse command in _doIt()_
 
 #### Create your custom quad shaders
-1. Copy and rename a shader file (e.g., quadBlend.fx -> quadHatch.fx)
+1. Copy and rename a shader file (e.g., quadBlend10.fx -> quadHatch10.fx)
 2. Write your fragment shader
 3. Create a technique that uses your fragment shader
 
