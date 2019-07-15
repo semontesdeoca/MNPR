@@ -162,3 +162,12 @@ def downloadSubstrates():
     import thread
     import mnpr_setup
     thread.start_new_thread(mnpr_setup.getSubstrates, ())
+
+
+def charcoalContrast():
+    """ Modifies ShaderFX materials to generate contrast from lightness """
+    materials = cmds.ls(type="ShaderfxShader")
+    for mat in materials:
+        lib.setAttr(mat, "Shade_Override", 0)
+        lib.setAttr(mat, "Diffuse_Factor", 0.8)
+    lib.printInfo("ShaderFX materials changed for charcoal stylization")

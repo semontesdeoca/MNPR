@@ -11,7 +11,7 @@
 @run:           import coopLib as lib (suggested)
 """
 from __future__ import print_function
-import os, sys, subprocess, shutil, logging, json, math, traceback
+import os, sys, subprocess, shutil, re, logging, json, math, traceback
 from functools import wraps
 import maya.mel as mel
 import maya.cmds as cmds
@@ -48,6 +48,110 @@ Raises:
 """
 
 
+#        _                          _
+#     __| | ___  ___ ___  _ __ __ _| |_ ___  _ __ ___
+#    / _` |/ _ \/ __/ _ \| '__/ _` | __/ _ \| '__/ __|
+#   | (_| |  __/ (_| (_) | | | (_| | || (_) | |  \__ \
+#    \__,_|\___|\___\___/|_|  \__,_|\__\___/|_|  |___/
+#
+def timer(f):
+    """
+    Decorator to time functions
+    Args:
+        f: function to be timed
+
+    Returns:
+        wrapped function with a timer
+    """
+    @wraps(f)  # timer = wraps(timer) | helps wrap the docstring of original function
+    def wrapper(*args, **kwargs):
+        import time
+        timeStart = time.time()
+        try:
+            return f(*args, **kwargs)
+        except:
+            traceback.print_exc()
+        finally:
+            timeEnd = time.time()
+            logger.debug("[Time elapsed at {0}:    {1:.4f} sec]".format(f.__name__, timeEnd-timeStart))
+    return wrapper
+
+
+def undo(f):
+    """
+    Puts the wrapped `func` into a single Maya Undo action
+    Args:
+        f: function to be undone
+
+    Returns:
+        wrapped function within an undo chunk
+    """
+    @wraps(f)
+    def undoWrapper(*args, **kwargs):
+        try:
+            # start an undo chunk
+            cmds.undoInfo(openChunk=True, cn="{0}".format(f))
+            return f(*args, **kwargs)
+        except:
+            traceback.print_exc()
+        finally:
+            # after calling the func, end the undo chunk
+            cmds.undoInfo(closeChunk=True, cn="{0}".format(f))
+    return undoWrapper
+
+
+
+#    _     _     _   _   _ _   _ _
+#   | |   (_)___| |_| | | | |_(_) |___
+#   | |   | / __| __| | | | __| | / __|
+#   | |___| \__ \ |_| |_| | |_| | \__ \
+#   |_____|_|___/\__|\___/ \__|_|_|___/
+#
+# List utilities within a helper class to work with lists.
+class ListUtils(object):
+    @staticmethod
+    def removeDuplicates(objList):
+        """
+        Remove duplicate entries in lists
+        Args:
+            lst (list): List to remove duplicate entries from
+
+        Returns:
+            New List
+        """
+        if not objList:
+            objList = []
+        newList = []
+        newSet = set()  # working with sets speeds up the workflow
+        for obj in objList:
+            if obj not in newSet:
+                newSet.add(obj)
+                newList.append(obj)
+        return newList
+
+    @staticmethod
+    def add(objList, obj):
+        """
+        Adds object if it didn't exist before
+        Args:
+            obj (str): object to be added
+        """
+        if obj not in objList:
+            objList.append(obj)
+
+    @staticmethod
+    def update(objList, updateList):
+        """
+        Adds each object within a list if it didn't exist before
+        Args:
+            objList (list): list of objects to be added
+        """
+        for obj in updateList:
+            ListUtils.add(objList, obj)
+
+
+
+
 ######################################################################################
 # GENERAL UTILITIES
 ######################################################################################
@@ -70,14 +174,8 @@ def mayaVersion():
     """
     Returns the current Maya version (E.g. 2017.0, 2018.0, 2019.0, etc)
     """
-    p = Path(cmds.internalVar(usd=True)).parent()
-    parent = Path(p.path).parent()
-    if parent.basename() == "maya":
-        version = p.basename()
-    else:
-        # foreign language versions
-        version = parent.basename()
-    return float(version.split('-')[0])  # for older versions that might present 2016-x64
+    return mel.eval("getApplicationVersionAsFloat")
+
 
 
 def localOS():
@@ -202,6 +300,24 @@ def createEmptyNode(inputName):
         cmds.setAttr('{0}.{1}'.format(nodeName[0], attribute), l=True, k=False)
 
 
+def purgeMissing(objects):
+    """
+    Deletes non-existing objects within a list of objects
+    Args:
+        objects []: List of objects to check
+    Returns:
+        List of existing objects
+    """
+    objs = []
+    for obj in objects:
+        if isinstance(obj, list) or isinstance(obj, tuple):
+            objs.extend(purgeMissing(obj))
+        else:
+            if cmds.objExists(obj):
+                objs.append(obj)
+    return objs
+
+
 def getActiveModelPanel():
     """
     Get the active model editor panel
@@ -292,22 +408,38 @@ def restoreShelves():
     restartDialog()
 
 
-def getShapes(objects):
+def getShapes(objects, l=False, quiet=False):
     """
     Get shapes of objects/components
     Args:
         objects (list): List of objects or components
+        fp (bool): If full path is desired or not
     """
+    # transform string input (if any) to a list
+    if isinstance(objects, basestring):
+        objects = [objects]
+
     objs = set()
     for comp in objects:
         objs.add(comp.split(".")[0])  # to also work with components of multiple objects
     if not objs:
-        cmds.error("Please select a mesh or component to extract the shape from")
-    shapes = cmds.listRelatives(list(objs), shapes=True, noIntermediate=True, path=True)
-    if shapes:
-        return shapes
-    else:
-        cmds.error("{0} has no shape nodes".format(objs))
+        printError("Please select a mesh or component to extract the shape from")
+
+    objs = purgeMissing(objs)  # make sure all objects exist
+
+    shapes = []
+    for obj in objs:
+        # check if its a mesh object
+        if cmds.objectType(obj) == "mesh":
+            shapes.extend(cmds.ls(obj, l=l))  # there might be more objects with the same name
+        else:
+            shp = cmds.listRelatives(obj, shapes=True, noIntermediate=True, path=True, fullPath=l) or []
+            shapes.extend(shp)
+
+    if not shapes and not quiet:
+        printWarning("No shape nodes found in {0}".format(objects))
+
+    return shapes
 
 
 def getTransforms(objects, fullPath=False):
@@ -485,8 +617,9 @@ def snap(source='', targets=[], type="translation"):
 ######################################################################################
 # RENDERING UTILITIES
 ######################################################################################
-IMGFORMATS = {".jpg": 8, '.png': 32, ".tiff": 3, ".tga": 19, ".exr": 40}
-
+IMGFORMATS = {'.jpg': 8, '.png': 32, '.tif': 3, '.exr': 40, '.iff': 7}
+IMGFORMATS_ORDER = ['.png', '.jpg', '.exr', '.tif', '.iff']
+QUALITIES_ORDER = {'Standard', 'FXAA', '4x SSAA', 'TAA'}
 
 def getMaterials(objects):
     """
@@ -498,31 +631,77 @@ def getMaterials(objects):
     """
     materials = cmds.ls(objects, l=True, mat=True)
     transforms = cmds.ls(objects, l=True, et="transform")
-    shapes = cmds.ls(objects, l=True, s=True)
-
-    # initialize sets
-    matSet = set(materials)
-    xfmSet = set(transforms)
-    shpSet = set(shapes)
+    shapes = cmds.ls(objects, l=True, s=True, noIntermediate=True)
 
     # get shapes from transforms
-    if xfmSet:
-        shapes = cmds.ls(list(xfmSet), o=True, dag=True, s=True)
-        for shape in shapes:
-            shpSet.add(shape)
+    if transforms:
+        ListUtils.update(shapes, cmds.ls(transforms, o=True, dag=True, s=True, noIntermediate=True))
 
-    # get materials from shapes
-    if shpSet:
-        shadingEngines = cmds.listConnections(list(shpSet), type="shadingEngine")
-        for material in cmds.ls(cmds.listConnections(shadingEngines), mat=True):
-            matSet.add(material)
+    if shapes:
+        # get materials from shading engines
+        cleanShadingEngines(shapes)
+        shadingEngines = ListUtils.removeDuplicates(cmds.listConnections(shapes, type="shadingEngine"))
+        for se in shadingEngines:
+            mats = cmds.ls(cmds.listConnections(se), mat=True)
+            if not mats:
+                # connect the default material to the shading engine
+                defaultMat = "lambert1"
+                logger.info("No material connected to {0}. Connecting default material".format(se))
+                cmds.connectAttr("{0}.outColor".format(defaultMat), "{0}.surfaceShader".format(se), f=True)
+            ListUtils.update(materials, mats)
 
-    return list(matSet)
+    return materials
 
 
-def getShaders(objects):
-    """ DEPRECATED, use getMaterials(objects) instead """
-    return getMaterials(objects)
+def cleanShadingEngines(objs):
+    """
+    Makes sure the shading engines are clean
+    Args:
+        objs (list): Objects to clean shading engines from
+    """
+    shapes = getShapes(objs, l=True)
+    for shape in shapes:
+        shadingEngines = ListUtils.removeDuplicates(cmds.listConnections(shape, type="shadingEngine"))
+        if len(shadingEngines) > 1:
+            logger.warning("Two shading engines in {0}".format(shape))
+            # remove initialShadingGroup if still available
+            if "initialShadingGroup" in shadingEngines:
+                shadingEngines.remove("initialShadingGroup")
+                destinations = cmds.listConnections(shape, t='shadingEngine', plugs=True)
+                for dest in destinations:
+                    if "initialShadingGroup" in dest:
+                        try:
+                            source = cmds.listConnections(dest, s=True, plugs=True)[0]
+                            cmds.disconnectAttr(source, dest)
+                            logger.debug("initialShadingGroup has been removed from {0}".format(shape))
+                            break
+                        except RuntimeError:
+                            logger.warning("Couldn't disconnect {0} from {1}".format(shape, dest))
+
+
+def getAssignedMeshes(materials, shapes=True, l=False):
+    """
+    Get the assigned meshes (shapes) out of a material
+    Args:
+        material (str): Material name to get meshes from
+        shapes (bool): Return shapes or transform node names [Defailt=True]
+    Returns:
+        List of meshes
+    """
+    meshes = []
+    # get shading engines
+    if isinstance(materials, basestring):
+        materials = [materials]
+    shadingEngines = cmds.listConnections(materials, type="shadingEngine")
+    if shadingEngines:
+        for shadingEngine in shadingEngines:
+            m = cmds.sets(shadingEngine, q=True) or []  # shapes
+            m = cmds.ls(m, l=l)
+            if m:
+                if not shapes:
+                    m = cmds.listRelatives(m, parent=True, fullPath=l)  # transforms
+                meshes.extend(m)
+    return meshes
 
 
 def changeTexturePath(path):
@@ -666,6 +845,8 @@ def importVertexColors(path):
             oShape = getMObject(shapeName)  # grabs the MObject of the shape
             fnMesh = om.MFnMesh(oShape)  # access mesh data (oShape can also be replaced by MDagPath)
             colorSets = cmds.polyColorSet(shapeName, query=True, allColorSets=True)
+            if colorSets == None:
+                colorSets = []
             for colorSet in shapeDict[shape]:
                 if colorSet not in colorSets:
                     cmds.polyColorSet(shapeName, newColorSet=colorSet)
@@ -713,6 +894,24 @@ def printInfo(info):
     om.MGlobal.displayInfo(info)
 
 
+def printWarning(warning):
+    """
+    Prints the warning statement in the command response (to the right of the command line)
+    Args:
+        warning (str): Warning to be displayed
+    """
+    om.MGlobal.displayWarning(warning)
+
+
+def printError(error):
+    """
+    Prints the error statement in the command response (to the right of the command line)
+    Args:
+        error (str): Warning to be displayed
+    """
+    om.MGlobal.displayError(error)
+
+
 #                _   _
 #    _ __   __ _| |_| |__
 #   | '_ \ / _` | __| '_ \
@@ -744,14 +943,39 @@ class Path(object):
         Creates the directory of the path, if it doesn't exist already
         """
         if not os.path.exists(self.path):
-            os.mkdir(self.path)
+            os.makedirs(self.path)
         return self
+
+    def delete(self):
+        """
+        Deletes all contents of current Path
+        Returns:
+            Path (obj): parent of current path
+        """
+        if self.exists():
+            import shutil
+            try:
+                shutil.rmtree(self.path)
+            except:
+                # it is most likely a file
+                os.remove(self.path)
+        return self.parent()
 
     def basename(self):
         """
         Returns the basename of the path
         """
         return os.path.basename(self.path)
+
+    def exists(self):
+        """
+        Returns if current path exists or not
+        Returns:
+            bool
+        """
+        return os.path.exists(self.path)
+
+
 
 #        _        _
 #    ___| |_ _ __(_)_ __   __ _
@@ -761,7 +985,7 @@ class Path(object):
 #                         |___/
 def toCamelCase(text):
     """
-    Converts text to camel case, e.g. ("the came is huge" => "theCamelIsHuge")
+    Converts text to camel case, e.g. ("the camel is huge" => "theCamelIsHuge")
     Args:
         text (string): Text to be camel-cased
     """
@@ -772,6 +996,16 @@ def toCamelCase(text):
         for index in xrange(1, len(splitter)):
             camelCaseText += splitter[index].capitalize()
     return camelCaseText
+
+
+def deCamelize(text):
+    """
+    Converts camel case to normal case, e.g. ("theCamelIsHuge" => "the came is huge")
+    Args:
+        text (string): Text to be decamelized
+    """
+    s1 = re.sub('(.)([A-Z][a-z]+)', r'\1 \2', text)
+    return re.sub('([a-z0-9])([A-Z])', r'\1 \2', s1).title()
 
 
 #                    _   _
@@ -865,28 +1099,88 @@ def remap(value, oldMin, oldMax, newMin, newMax):
 
 
 
-
-
-#        _                          _
-#     __| | ___  ___ ___  _ __ __ _| |_ ___  _ __ ___
-#    / _` |/ _ \/ __/ _ \| '__/ _` | __/ _ \| '__/ __|
-#   | (_| |  __/ (_| (_) | | | (_| | || (_) | |  \__ \
-#    \__,_|\___|\___\___/|_|  \__,_|\__\___/|_|  |___/
 #
-def timer(f):
+#    _ __   __ _ _ __ ___   ___  ___ _ __   __ _  ___ ___  ___
+#   | '_ \ / _` | '_ ` _ \ / _ \/ __| '_ \ / _` |/ __/ _ \/ __|
+#   | | | | (_| | | | | | |  __/\__ \ |_) | (_| | (_|  __/\__ \
+#   |_| |_|\__,_|_| |_| |_|\___||___/ .__/ \__,_|\___\___||___/
+#                                   |_|
+def getNamespaces(objects=[]):
     """
-    Decorator to time functions
+    Get a list of all namespaces within objects or of the entire scene
     Args:
-        f: function to be timed
+        objects (list): List of objects to get namespaces from
 
     Returns:
-        wrapped function with a timer
+        List of namespaces
     """
-    @wraps(f)  # timer = wraps(timer) | helps wrap the docstring of original function
-    def wrapper(*args, **kwargs):
-        import time
-        timeStart = time.time()
-        f(*args, **kwargs)
-        timeEnd = time.time()
-        logger.debug("[Time elapsed at {0}:    {1:.4f} sec]".format(f.__name__, timeEnd-timeStart))
-    return wrapper
+    # if no objects were specified
+    if not objects:
+        # get all namespaces in the scene
+        namespaces = cmds.namespaceInfo(listOnlyNamespaces=True, recurse=True)
+        try:
+            namespaces.remove('UI')
+        except ValueError:
+            pass
+        try:
+            namespaces.remove('shared')
+        except ValueError:
+            pass
+    else:
+        # in case a string is passed as argument, enlist it
+        if isinstance(objects, basestring):
+            objects = [objects]
+
+        # get namespaces of objects
+        namespaces = []
+        for obj in objects:
+            namespace = obj.rpartition(':')[0]
+            if namespace:
+                namespaces.append(namespace)
+
+    namespaces = set(namespaces)  # make sure only one entry in list
+
+    return list(namespaces)
+
+
+def changeNamespace(objectName, changeDict):
+    """
+    Changes the namespaces of the object
+    Args:
+        objectName (str): Name to change namespace
+        changeDict (dict): Dictionary of keys {str), values (str) to change namespaces to (key->value)
+
+    Returns:
+        String with the namespaces changed
+    """
+    namespace = getNamespaces(objectName)
+    if namespace:
+        namespace = namespace[0] + ":"
+        if namespace in changeDict:
+            objectName = objectName.replace(namespace, changeDict[namespace])
+    return objectName
+
+
+def removeNamespaceFromString(objectName):
+    """
+    Removes the namespace from string
+    Args:
+        objectName (str): Object name to remove namespace from
+
+    Returns:
+        String: New name without namespaces
+    """
+    if len(objectName) == 1:
+        objectName = objectName[0]
+
+    if isinstance(objectName, basestring):
+        parts = objectName.split(':')
+        if len(parts) > 1:
+            return parts[-1]
+        return parts[-1]
+    else:
+        printWarning("No string found in {0}".format(objectName))
+        return ""
+
+
+

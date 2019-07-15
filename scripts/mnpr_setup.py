@@ -1,6 +1,7 @@
 """
 @license:       MIT
 @repository:    https://github.com/semontesdeoca/MNPR
+@credits:       Updated by Artineering (https://artineering.io) to match MNPRX setup method
                                           _
   _ __ ___  _ __  _ __  _ __     ___  ___| |_ _   _ _ __
  | '_ ` _ \| '_ \| '_ \| '__|   / __|/ _ \ __| | | | '_ \
@@ -51,13 +52,9 @@ def run(root):
         root: root directory of MNPR
     """
     print("-> Installing MNPR")
-    variables = {'MAYA_SHELF_PATH': [os.path.abspath(os.path.join(root, "shelves/"))],
-                 'MAYA_SCRIPT_PATH': [os.path.abspath(os.path.join(root, "scripts/"))],
-                 'PYTHONPATH': [os.path.abspath(os.path.join(root, "scripts/"))],
-                 'MAYA_PLUG_IN_PATH': [os.path.abspath(os.path.join(root, pluginDir))],
-                 'XBMLANGPATH': [os.path.abspath(os.path.join(root, "icons/{0}".format(iconPathEnd)))],
-                 'MAYA_VP2_USE_GPU_MAX_TARGET_SIZE': [1],
-                 'MNPR_PATH': [os.path.abspath(root)]
+    variables = {'MNPR_PATH': [os.path.abspath(root)],
+                 'MAYA_MODULE_PATH': [os.path.abspath(root)],
+                 'MAYA_VP2_USE_GPU_MAX_TARGET_SIZE': [1]
                  }
 
     # get Maya.env file
@@ -69,12 +66,12 @@ def run(root):
             tmp.write("")
 
     # get Maya environment variables
-    envVariables = getEnvironmentVariables(mayaEnvFilePath)
+    envVariables, envVariablesOrder = getEnvironmentVariables(mayaEnvFilePath)
     print("ENVIRONMENT VARIABLES:")
     pprint.pprint(envVariables)
 
     # check if MNPR is already installed
-    if not installationCheck(variables, envVariables):
+    if installationCheck(variables, envVariables):
         return
 
     # merge mnpr variables
@@ -84,7 +81,7 @@ def run(root):
 
     # write environment variables
     tempFilePath = os.path.join(os.path.dirname(mayaEnvFilePath), "maya.tmp")
-    writeVariables(tempFilePath, envVariables)
+    writeVariables(tempFilePath, envVariables, envVariablesOrder)
 
     # replace environment file
     shutil.move(tempFilePath, mayaEnvFilePath)
@@ -94,9 +91,6 @@ def run(root):
         mel.eval('setRenderingEngineInModelPanel "DirectX11"')
     else:
         mel.eval('setRenderingEngineInModelPanel "OpenGLCoreProfileCompat"')
-
-    # get plugin for os
-    getPlugin(variables)
 
     lib.printInfo("-> Installation complete")
 
@@ -116,6 +110,7 @@ def getEnvironmentVariables(mayaEnvFilePath):
     """
     # read Maya environment variables
     envVariables = dict()
+    envVariablesOrder = []
     with open(mayaEnvFilePath, 'rb') as f:
         for line in f:
             # get rid of new line chars
@@ -145,8 +140,9 @@ def getEnvironmentVariables(mayaEnvFilePath):
             # get variable name and save
             varName = breakdown[0].strip(' ')
             envVariables[varName] = values
+            envVariablesOrder.append(varName)
 
-    return envVariables
+    return envVariables, envVariablesOrder
 
 
 def installationCheck(variables, envVariables):
@@ -157,31 +153,72 @@ def installationCheck(variables, envVariables):
         envVariables (dict): existing environment variables
 
     Returns:
-        Bool: True -> proceed with installation, False -> do not install
+        Bool: False -> proceed with installation, True -> do not install
     """
+    # check for installation
     mnprVariable = 'MNPR_PATH'
     if mnprVariable in envVariables:
-        mnprPath = variables[mnprVariable][0]
+        # previous installation exists
+        MNPRPath = "{0}".format(envVariables[mnprVariable][0])  # previous MNPR path
+        iCheck = True  # integrity check starts True
+        newMNPRPath = variables[mnprVariable][0]  # new MNPR path
         # if installing from the existing MNPR path
-        if envVariables[mnprVariable][0] == mnprPath:
-            message = 'MNPR has already been installed from here:\n    "{0}"\n\nPlease restart Maya to show any performed changes.'.format(mnprPath)
-            cmds.confirmDialog(m=message, title="MNPR already installed", b="Sure thing!", icn="information")
-            return False
+        if MNPRPath == newMNPRPath:
+            # integrity check
+            iCheck = integrityCheck(variables, envVariables)
+            # if integrity check passed, MNPR
+            if iCheck:
+                message = 'MNPR has already been installed from here:\n    "{0}"\n\nPlease restart Maya to show any performed changes.'.format(newMNPRPath)
+                cmds.confirmDialog(m=message, title="MNPR already installed", b="Sure thing!", icn="information")
+                return True
         # MNPR has been previously installed, what now?
         mString = "MNPR has been previously installed at:\n    {0}\n\nDo you wish to override the existing installation (files won't be deleted).".format(envVariables[mnprVariable][0])
+        if not iCheck:
+            mString = "MNPR has been previously installed but needs to update for it to work\n\nDo you wish to update the existing installation (files won't be deleted)."
         reply = cmds.confirmDialog(title='Overriding existing installation', message=mString, button=['Yes', 'No'], defaultButton='Yes', cancelButton='No', dismissString='No', icn="warning")
         # don't do anything
         if reply == "No":
             lib.printInfo("-> Nothing was done to your current installation")
+            return True
+
+        # delete MNPR paths from environment variables
+        deleteMNPRVariables(envVariables, MNPRPath)
+    return False
+
+
+def integrityCheck(variables, envVariables):
+    """
+    Checks each variable and its values with the environment variables
+    Args:
+        variables: new environment variables
+        envVariables: existing environment variables
+
+    Returns:
+        Bool: True -> integrity check successful, False -> integrity check unsuccessful
+    """
+    # integrity check
+    for var in variables:
+        if var not in envVariables:
             return False
-        # delete mnpr paths
-        previousPath = "{0}".format(envVariables[mnprVariable][0])
-        print("Deleting previous MNPR installation at : {0}".format(previousPath))
-        for key in envVariables:
-            for value in envVariables[key]:
-                if previousPath in str(value):
-                    envVariables[key].remove(value)
+        else:
+            for value in variables[var]:
+                if value not in envVariables[var]:
+                    return False
     return True
+
+
+def deleteMNPRVariables(envVariables, MNPRPath):
+    """
+    Delete all environment variables containing the MNPR path
+    Args:
+        envVariables (dict): all environment variables of the Maya.env file
+        MNPRPath (str): the string of the MNPR path
+    """
+    print("Deleting previous MNPR installation at : {0}".format(MNPRPath))
+    for key in envVariables:
+        for value in envVariables[key]:
+            if MNPRPath in str(value):
+                envVariables[key].remove(value)
 
 
 def mergeVariables(variables, envVariables):
@@ -212,7 +249,7 @@ def mergeVariables(variables, envVariables):
     return envVariables
 
 
-def writeVariables(filePath, variables):
+def writeVariables(filePath, variables, sortedVariables):
     """
     Write environment variables to file path
     Args:
@@ -223,42 +260,29 @@ def writeVariables(filePath, variables):
         # the shelf environment variable must be the first
         shelfVariable = "MAYA_SHELF_PATH"
         if shelfVariable in variables:
-            outLine = "{0}=".format(shelfVariable)
-            for v in variables.pop(shelfVariable, None):
-                outLine += "{0}{1}".format(v, sep)
-            tmp.write(outLine + "\n")
-        # write the rest of the variables
+            # make sure that we are not saving an empty variable
+            if variables[shelfVariable]:
+                if shelfVariable in sortedVariables:
+                    sortedVariables.remove(shelfVariable)
+                outLine = "{0}=".format(shelfVariable)
+                for v in variables.pop(shelfVariable, None):
+                    outLine += "{0}{1}".format(v, sep)
+                tmp.write(outLine + "\n")
+        # add new variables in sortedVariables
         for var in variables:
-            outLine = "{0}=".format(var)
-            for v in variables[var]:
-                outLine += "{0}{1}".format(v, sep)
-            tmp.write(outLine + "\n")
+            if var not in sortedVariables:
+                sortedVariables.append(var)
+        # write the variables in a sorted fashion
+        for var in sortedVariables:
+            # check if no sorted variables have been deleted
+            if var in variables:
+                # make sure that we are not saving an empty variable
+                if variables[var]:
+                    outLine = "{0}=".format(var)
+                    for v in variables[var]:
+                        outLine += "{0}{1}".format(v, sep)
+                    tmp.write(outLine + "\n")
 
-
-def getPlugin(variables):
-    """
-    Gets the plugin locally or online
-    Args:
-        variables (dict): environment variables
-    """
-    pluginName = "MNPR{0}".format(ext)
-
-    # check if plugin is available, otherwise, download
-    pluginDir = variables["MAYA_PLUG_IN_PATH"][0]
-    lib.createDirectory(pluginDir)
-    filesInDir = os.listdir(pluginDir)
-    if not filesInDir:
-        # download the right plugin for the OS and Maya version
-        pluginURL = "{0}/plugins".format(distURL)
-        pluginURL += "/{0}".format(mayaV)  # add Maya version
-        pluginURL += "/{0}".format(lib.localOS())  # add OS
-        pluginURL += "/{0}".format(pluginName)  # add plugin name
-
-        # get plugin file online
-        print("Getting plugin from: {0}".format(pluginURL))
-        lib.printInfo("Downloading plugin...")
-        downloader = urllib.URLopener()
-        downloader.retrieve(pluginURL, os.path.join(pluginDir, pluginName))
 
 
 def getSubstrates():
@@ -303,32 +327,3 @@ def getSubstrates():
             if result == "Download":
                 lib.openUrl("https://doi.org/10.21979/N9/HI7GT7")
                 lib.openUrl(url)
-
-
-""" 
-@TODO
-def checkForFileClashes(path, envPaths):
-    #Check for file clashes when different versions of the same script file exist in Maya
-    #Args:
-    #    path (str): path to check for file clashes
-    #    envPaths (list): other environment paths
-    # get files in path
-    files = os.listdir(path)
-    # check for each path
-    for envPath in envPaths:
-        # get files in path
-        filesInPath = os.listdir(envPath)
-        for file in files:
-            if file in filesInPath:
-                # file exists in another path, check which file is newer
-                filePath = os.path.join(path, file)
-                envFilePath = os.path.join(envPath, file)
-                fileMod = os.path.getmtime(filePath)
-                envFileMod = os.path.getmtime(envFilePath)
-                if fileMod > envFileMod:
-                    
-                    # ask what to do, we have a newer file here
-                else:
-                    # we probably don't need the mnpr file
-                # choose what to do with this clash and future clashes
-"""

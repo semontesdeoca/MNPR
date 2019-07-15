@@ -57,15 +57,15 @@ GLSLShader resampleFrag {
 //    [2009] FXAA
 GLSLShader FXAA {
     // Computations in FXAA rely on luminosity of pixels read from the main render target,
-    // expressed as grey levels between 0 -> 1. 
+    // expressed as grey levels between 0 -> 1.
 	float rgb2lum(vec3 rgb)
 	{
 		//// use the green channel as a proxy for luminance when in non-linear space
 		//return rgb.y;
 
-		// by Timothy (NVIDIA) 
+		// by Timothy (NVIDIA)
 		// actually need to ensure render target is tonemapped before applying
-		return sqrt(dot(rgb, vec3(0.299, 0.587, 0.114)));	
+		return sqrt(dot(rgb, vec3(0.299, 0.587, 0.114)));
 
 		//// by Bart Wronski (Ubisoft)
 		//return rgb.y * (0.587 / 0.299) + rgb.x;
@@ -117,7 +117,7 @@ GLSLShader FXAA {
 			float lumS = rgb2lum(colorS);
 			float lumE = rgb2lum(colorE);
 			float lumW = rgb2lum(colorW);
-		
+
 			// find the maximum and minumum luminance around the current fragments through the use of the NSEW lums
 			float lumRangeMin = min(lumCenter, min(min(lumS, lumE), min(lumS, lumW)));
 			float lumRangeMax = max(lumCenter, max(max(lumS, lumE), max(lumS, lumW)));
@@ -125,19 +125,18 @@ GLSLShader FXAA {
 			// compute the luminosity range delta between max and min
     		float lumRange = lumRangeMax - lumRangeMin;
 
-			// if the luminosity variation is lower than that a threshold (or if we are in a really dark area), 
+			// if the luminosity variation is lower than that a threshold (or if we are in a really dark area),
 			// we are definitely NOT on an edge, do not apply AA.
 			if (lumRange < max(EDGE_THRESHOLD_MIN, lumRangeMax * EDGE_THRESHOLD_MAX))
 			{
-				outputColor = vec4(colorCenter.xyz, 1.0);
-				result = outputColor;
+				result = texture2D(gSampler, uv);
 			}
-			else 
+			else
 			{
 				/*----------------------------------------------------------------------------
 									CHOOSE VERTICAL OR HORIZONTAL SEARCH
-					Estimating gradient and choosing edge direction for each 
-					pixel detected as being part of an edge, check if the edge is 
+					Estimating gradient and choosing edge direction for each
+					pixel detected as being part of an edge, check if the edge is
 					vertical or horizontal.
 				------------------------------------------------------------------------------*/
 				vec3 colorNW = texOffset(gSampler, uv, vec2(-1.0, 1.0) * offsetScale).rgb;
@@ -170,14 +169,14 @@ GLSLShader FXAA {
 					abs(-2.0 * lumN + lumNCorners) +
 					abs(-2.0 * lumCenter + lumEW) * 2.0 +
 					abs(-2.0 * lumS + lumSCorners);
-		
+
 				//result = vec4(edgeHorizontal, edgeVertical, 0, 1.0);
 
 				/*----------------------------------------------------------------------------
 										CHOOSING THE EDGE ORIENTATION
-					the current pixel is not necessarily exactly on the edge, so we need 
-					to determine in which orientation, orthogonal to the edge direction is 
-					the real edge border. the gradient on each side of the current pixel 
+					the current pixel is not necessarily exactly on the edge, so we need
+					to determine in which orientation, orthogonal to the edge direction is
+					the real edge border. the gradient on each side of the current pixel
 					is computed, where it is the steepest probably lies at the edge border.
 				------------------------------------------------------------------------------*/
 				// is the local edge horizontal or vertical?
@@ -197,7 +196,7 @@ GLSLShader FXAA {
 
 				// choose the step size (one pixel per step) according to the edge direction
 				float stepSize = bIsHorizontal ? inverseScreenSize.y : inverseScreenSize.x;
-			
+
 				// average luminance in the correct direction
 				float lumLocalAvg = 0.0;
 				if (bIsLum1Steepest)
@@ -224,11 +223,11 @@ GLSLShader FXAA {
 
 				/*----------------------------------------------------------------------------
 									FIRST ITERATION EXPLORATION
-				explore along the main axis of the edge, step one pixel in both 
-				direction & query the luminance at the new coordinates. then compute 
-				the variation of the luminance with respect to the average luminance 
-				from the previous step. if the variation is greater than the local 
-				gradient, we have reached the end of the edge in this direction and we 
+				explore along the main axis of the edge, step one pixel in both
+				direction & query the luminance at the new coordinates. then compute
+				the variation of the luminance with respect to the average luminance
+				from the previous step. if the variation is greater than the local
+				gradient, we have reached the end of the edge in this direction and we
 				should stop. otherwise, keep increase UV offset by one px.
 				------------------------------------------------------------------------------*/
 				// compute offset (for each iteration step) in the right direction
@@ -331,9 +330,9 @@ GLSLShader FXAA {
 				// (same variation)
 				// (in the direction of the closer side of the edge)
 				bool bCorrectVariation = ((bIsDirection1 ? lumEnd1 : lumEnd2) < 0.0) != bIsLumCenterSmaller;
-			
+
 				//if (bCorrectVariation)
-				//{	
+				//{
 				//    outputColor = vec4(0.0, 0.0, 1.0, 1.0);
 				//    result = outputColor;
 				//}
@@ -348,7 +347,7 @@ GLSLShader FXAA {
 				// full weighted average of the luminance over the 3x3 neighbourhood
 				float lumAverage = (1.0 / 12.0) * (2.0 * (lumNS + lumEW) + lumWCorners + lumECorners);
 
-				// ratio of the delta between the global average and the center luminance, 
+				// ratio of the delta between the global average and the center luminance,
 				// over the luminance range in the 3x3 neighborhood.
 				float subPixelOffset1 = clamp(abs(lumAverage - lumCenter) / lumRange, 0.0, 1.0);
 				float subPixelOffset2 = (-2.0 * subPixelOffset1 + 3.0) * subPixelOffset1 * subPixelOffset1;
@@ -374,7 +373,7 @@ GLSLShader FXAA {
 				}
 
 				// read the color at the new uv coordinates and use it
-				vec4 finalColor = texture2D(gSampler, finalUV, lumCenter);
+				vec4 finalColor = texture2D(gSampler, finalUV);
 				result = finalColor;
 			 }
 		 }
@@ -404,4 +403,3 @@ technique FXAA {
 		PixelShader(in vertexOutputSampler, out fragmentOutput) = { FXAA };
 	}
 }
-

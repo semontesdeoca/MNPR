@@ -96,7 +96,7 @@ class MayaUI(QtWidgets.QDialog):
 
 class CoopMayaUI(QtWidgets.QDialog):
 
-    def __init__(self, title, dock=False, rebuild=False, brand="studio.coop", tooltip="", parent=getMayaWindow()):
+    def __init__(self, title, dock=False, rebuild=False, brand="studio.coop", tooltip="", show=True, parent=getMayaWindow()):
 
         super(CoopMayaUI, self).__init__(parent)
         # check if window exists
@@ -142,7 +142,7 @@ class CoopMayaUI(QtWidgets.QDialog):
 
         self.buildUI()
         self.populateUI()
-        if not dock:
+        if not dock and show:
             self.show()
             #parent.show()
 
@@ -332,7 +332,7 @@ class WidgetGroup(QtWidgets.QWidget):
     Simple widget group class object with embedded layout and batch widget assignment
     """
 
-    def __init__(self, qWidgets=[], qLayout=None, parent=None):
+    def __init__(self, qWidgets=[], qLayout=None, parent=None, margins=0):
         """
         Widget Group constructor
         Args:
@@ -345,7 +345,7 @@ class WidgetGroup(QtWidgets.QWidget):
             qLayout = QtWidgets.QVBoxLayout()
         self.groupLayout = qLayout
         self.setLayout(self.groupLayout)
-        self.groupLayout.setContentsMargins(0, 0, 0, 0)
+        self.groupLayout.setContentsMargins(margins, margins, margins, margins)
         for widget in qWidgets:
             self.groupLayout.addWidget(widget)
 
